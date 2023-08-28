@@ -3,7 +3,7 @@ import Bear from '../../../Assests/Animation/Lottie_animation.json'
 import Lottie from 'lottie-react'
 const Banner = () => {
   return (
-    <div className="banner-background">
+    <div className="banner-background md:border-black  md:border-b-2 ">
       <div className="card p-5 px-12 py-5 lg:card-side flex">
         <div className="card-body pt-12 p-0 flex-grow">
           <h1
