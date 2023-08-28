@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillFire } from "react-icons/ai";
 const Trending = () => {
   return (
-    <div className="pt-10 px-12">
+    <div className="pt-10 mb-12 px-12">
       <h5 className="flex gap-1  font-bold items-center">
         <AiFillFire /> Hottest Articles Now
       </h5>
