@@ -10,8 +10,8 @@ const Header = () => {
   };
 
   return (
-    <div className="mb-24 ">
-      <nav className=" navbar-container  p-5 shadow-md md:border-b-2 md:border-black nav-background">
+    <div>
+      <nav className=" navbar-container py-5 px-12 shadow-md md:border-b-2 md:border-black banner-background">
         <div className="container mx-auto flex justify-between items-center">
           <Link
             to="/"

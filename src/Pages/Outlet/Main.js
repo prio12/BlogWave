@@ -6,7 +6,9 @@ const Main = () => {
     return (
         <div>
             <Header/>
+            <div style={{paddingTop:"80px"}}>
             <Outlet/>
+            </div>
         </div>
     );
 };

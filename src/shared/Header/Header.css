@@ -1,10 +1,19 @@
 .navbar-container {
+    height: 80px;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1; /* Adjust as needed */
+    z-index: 9999; /* Adjust as needed */
   }
 
-  .nav-background {
-    background-color: rgb(224, 179, 16);
+  .banner-background {
+    background-color: rgba(224, 179, 16);
   }
+
+  /* .banner-background {
+    background: linear-gradient(to right bottom, rgb(224, 179, 16), rgba(255, 255, 255, 0.5));
+  } */
+  
+.banner-background {
+  background: linear-gradient(rgb(224, 179, 16), rgba(224, 179, 16,0.8));
+}
