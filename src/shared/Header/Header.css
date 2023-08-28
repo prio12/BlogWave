@@ -7,13 +7,32 @@
   }
 
   .banner-background {
-    background-color: rgba(224, 179, 16);
+    background-color: rgb(224, 179, 16);
   }
 
-  /* .banner-background {
-    background: linear-gradient(to right bottom, rgb(224, 179, 16), rgba(255, 255, 255, 0.5));
-  } */
-  
 .banner-background {
   background: linear-gradient(rgb(224, 179, 16), rgba(224, 179, 16,0.8));
+}
+
+.nav-btn {
+  background-color: black;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-family: "'Roboto Slab', serif";
+  color: white;
+  border: none;
+}
+
+.scrolled-navbar {
+  background-color: #ffffff; 
+  
+}
+
+.scrolled-button {
+  background-color: rgb(44, 148, 44);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-family: "'Roboto Slab', serif";
+  color: white;
+  border: none;
 }
