@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react'; 
 
-
 const allTopics = [
     "Technology",
     "Science",
@@ -77,34 +76,34 @@ const UserTopics = () => {
 
   const visibleTopics = allTopics.slice(startIndex, startIndex + topicsPerPage);
     return (
-        <div className="slider-container flex gap-5 px-12">
-      <div>
-        <button
-          className={`slider-button prev ${startIndex === 0 ? 'hidden' : ''}`}
-          onClick={goToPrevSlide}
-        >
-          &#8249;
-        </button>
-      </div>
+        <div className="slider-container  relative flex w-3/4  px-12">
+  <button
+    className={`slider-button prev absolute left-0 ${startIndex === 0 ? 'hidden' : ''}`}
+    onClick={goToPrevSlide}
+  >
+    &#8249;
+  </button>
 
-      <div className="topics flex gap-5">
-        {visibleTopics.map((topic, index) => (
-          <div className="topic" key={index}>
-            {topic}
-          </div>
-        ))}
-      </div>
-      <div>
-        <button
-          className={`slider-button next ${
-            startIndex + topicsPerPage >= allTopics.length ? 'hidden' : ''
-          }`}
-          onClick={goToNextSlide}
-        >
-          &#8250;
-        </button>
-      </div>
+  <div className="topics-container" style={{ width: `${topicsPerPage * 100}px` }}>
+    <div className="topics flex gap-5">
+      {visibleTopics.map((topic, index) => (
+        <div className="topic" key={index}>
+          {topic}
+        </div>
+      ))}
     </div>
+  </div>
+
+  <button
+    className={`slider-button next absolute right-0 ${
+      startIndex + topicsPerPage >= allTopics.length ? 'hidden' : ''
+    }`}
+    onClick={goToNextSlide}
+  >
+    &#8250;
+  </button>
+</div>
+
     );
 };
 
