@@ -1,0 +1,41 @@
+/* .slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px; 
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .topics {
+    display: flex;
+    overflow: hidden;
+  }
+  
+  .topic {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+  }
+  
+  .slider-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .prev {
+    left: 0;
+  }
+  
+  .next {
+    right: 0;
+  }
+   */

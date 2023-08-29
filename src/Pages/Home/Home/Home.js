@@ -4,6 +4,8 @@ import Blogs from '../../../components/blog/Blogs';
 import Trending from '../Trending/Trending';
 import BlogTopics from '../BlogTopics/BlogTopics';
 import SearchBar from '../usersHomePage/searchBar/SearchBar';
+import UserTopics from '../userTopics/UserTopics';
+
 
 const Home = () => {
     return (
@@ -19,6 +21,7 @@ const Home = () => {
             </div>
             </div>
             <SearchBar/>
+            <UserTopics/>
         </div>
     );
 };
