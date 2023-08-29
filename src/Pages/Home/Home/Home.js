@@ -3,6 +3,7 @@ import Banner from '../Banner/Banner';
 import Blogs from '../../../components/blog/Blogs';
 import Trending from '../Trending/Trending';
 import BlogTopics from '../BlogTopics/BlogTopics';
+import SearchBar from '../usersHomePage/searchBar/SearchBar';
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
             <BlogTopics/>
             </div>
             </div>
+            <SearchBar/>
         </div>
     );
 };

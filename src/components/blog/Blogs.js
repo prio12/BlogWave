@@ -2,8 +2,7 @@ import React from "react";
 
 const Blogs = () => {
   return (
-    <div>
-      <div className="flex flex-row justify-between items-center">
+    <div className="flex flex-row justify-between items-center">
   {/* blog details div */}
   <div className="mb-4 md:mb-0 md:w-2/3 pr-6">
     <div className="flex items-center gap-2">
@@ -30,8 +29,8 @@ const Blogs = () => {
       alt=""
     />
   </div>
+ {/* remove static data */}
 </div>
-    </div>
 
   );
 };
