@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState,useEffect } from 'react'; 
 
 
 const allTopics = [
@@ -13,14 +13,37 @@ const allTopics = [
     "Music",
     "Books",
   ]; // Your array of topics
-  const topicsPerPage = 6; // Number of topics to show at a time
+  const topicsPerPageLarge = 6;
+  const topicsPerPageSmall = 3; // Number of topics to show at a time
+
+  
   
 
 const UserTopics = () => {
 
 
     // const [startIndex, setStartIndex] = useState(0);
-    const [startIndex,setStartIndex] = useState([0])
+    const [startIndex,setStartIndex] = useState(0)
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+
+    useEffect(() => {
+        const handleResize = () => {
+          setIsSmallScreen(window.innerWidth <= 768);
+        };
+    
+        // Initial check
+        handleResize();
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+
+
+  const topicsPerPage = isSmallScreen ? topicsPerPageSmall : topicsPerPageLarge;
 
   const goToNextSlide = () => {
     setStartIndex(Math.min(startIndex + 1, allTopics.length - topicsPerPage));
@@ -55,13 +78,13 @@ const UserTopics = () => {
   const visibleTopics = allTopics.slice(startIndex, startIndex + topicsPerPage);
     return (
         <div className="slider-container flex gap-5 px-12">
-            <div>
-      <button
-        className={`slider-button prev ${startIndex === 0 ? "hidden" : ""}`}
-        onClick={goToPrevSlide}
-      >
-        &#8249;
-      </button>
+      <div>
+        <button
+          className={`slider-button prev ${startIndex === 0 ? 'hidden' : ''}`}
+          onClick={goToPrevSlide}
+        >
+          &#8249;
+        </button>
       </div>
 
       <div className="topics flex gap-5">
@@ -72,16 +95,16 @@ const UserTopics = () => {
         ))}
       </div>
       <div>
-      <button
-        className={`slider-button next ${
-          startIndex + topicsPerPage >= allTopics.length ? "hidden" : ""
-        }`}
-        onClick={goToNextSlide}
-      >
-        &#8250;
-      </button>
+        <button
+          className={`slider-button next ${
+            startIndex + topicsPerPage >= allTopics.length ? 'hidden' : ''
+          }`}
+          onClick={goToNextSlide}
+        >
+          &#8250;
+        </button>
       </div>
-        </div>
+    </div>
     );
 };
 
