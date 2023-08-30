@@ -66,25 +66,25 @@ const UserTopics = () => {
 
     // const goToNextSlide = () => {
     //   // Calculate the index for the next slide
-    //   const nextIndex = startIndex + 1;
+    //   const prvIndex = startIndex -1 ;
     //   // Don't go past the end of the list
-    //   const maxIndex = allTopics.length - topicsPerPage;
+    //   const minIndex = 0;
     //   // Set the index to either nextIndex or maxIndex (whichever is smaller)
-    //   setStartIndex(Math.min(nextIndex, maxIndex));
+    //   setStartIndex(Math.max(prvIndex, 0));
     // };
   };
 
   const visibleTopics = allTopics.slice(startIndex, startIndex + topicsPerPage);
     return (
-        <div className="slider-container  relative flex w-3/4  px-12">
+        <div className="  relative flex w-full md:w-3/4  px-12">
   <button
-    className={`slider-button prev absolute left-0 ${startIndex === 0 ? 'hidden' : ''}`}
+    className={`  absolute left-0 ${startIndex === 0 ? 'hidden' : ''}`}
     onClick={goToPrevSlide}
   >
     &#8249;
   </button>
 
-  <div className="topics-container" style={{ width: `${topicsPerPage * 100}px` }}>
+  <div>
     <div className="topics flex gap-5">
       {visibleTopics.map((topic, index) => (
         <div className="topic" key={index}>
@@ -95,7 +95,7 @@ const UserTopics = () => {
   </div>
 
   <button
-    className={`slider-button next absolute right-0 ${
+    className={`absolute right-0 ${
       startIndex + topicsPerPage >= allTopics.length ? 'hidden' : ''
     }`}
     onClick={goToNextSlide}
