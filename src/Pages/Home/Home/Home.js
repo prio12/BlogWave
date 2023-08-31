@@ -5,6 +5,7 @@ import Trending from "../Trending/Trending";
 import BlogTopics from "../BlogTopics/BlogTopics";
 import SearchBar from "../usersHomePage/searchBar/SearchBar";
 import UserTopics from "../userTopics/UserTopics";
+import StaffPicks from "../usersHomePage/staffPicksBlogs/StaffPicks";
 
 const Home = () => {
   return (
@@ -28,7 +29,7 @@ const Home = () => {
           <Blogs/>
         </div>
         <div style={{gridTemplateColumns:"1fr"}}>
-            <h2 className="text-5xl">Right part</h2>
+            <StaffPicks/>
         </div>
       </div>
     </div>
