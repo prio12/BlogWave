@@ -6,9 +6,9 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
 
   const handleScroll = () => {
     const scrolledPosition = window.scrollY;
@@ -47,7 +47,7 @@ const Header = () => {
             BlogWave
           </Link>
           <div className="md:hidden ">
-          <Link to="/signUp">
+          <Link to="//signUpMethods">
               <button className={scrolled ? "scrolled-button" : "nav-btn"}>
                 Get Started
               </button>
@@ -73,7 +73,7 @@ const Header = () => {
             <Link to="/story" className="text-sm font-semibold">
               Our Story
             </Link>
-            <Link to="/signUp">
+            <Link to="/signUpMethods">
               <button className={scrolled ? "scrolled-button" : "nav-btn"}>
                 Get Started
               </button>
