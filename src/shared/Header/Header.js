@@ -47,7 +47,7 @@ const Header = () => {
             BlogWave
           </Link>
           <div className="md:hidden ">
-          <Link to="//signUpMethods">
+          <Link to="/signUpMethods">
               <button className={scrolled ? "scrolled-button" : "nav-btn"}>
                 Get Started
               </button>
