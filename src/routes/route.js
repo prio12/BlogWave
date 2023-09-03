@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home/Home";
 import OurStory from "../Pages/ourStory/OurStory";
 import SignUpMethods from "../Pages/SignUp/SignUpMethods";
 import SignUp from "../Pages/SignUp/SignUp";
+import SignIn from "../Pages/signIn/signIn/SignIn";
 
 export const router = createBrowserRouter([
   {
@@ -27,5 +28,9 @@ export const router = createBrowserRouter([
   {
     path:'/signUp',
     element:<SignUp/>
+  },
+  {
+    path:'/signIn',
+    element:<SignIn/>
   },
 ]);
