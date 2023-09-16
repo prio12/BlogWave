@@ -5,7 +5,7 @@ const BlogTopics = () => {
     return (
         <div>
             <h5 className='font-bold mb-4'>Discover more of what matters to you</h5>
-            <div className='grid mb-4 px-5 grid-cols-2 md:grid-cols-3'>
+            <div className="grid mb-4 px-5 grid-cols-2 md:grid-cols-3">
                 <p>Programming</p>
                 <p>Writing</p>
                 <p>Technology</p>
