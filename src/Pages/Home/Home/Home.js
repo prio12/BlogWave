@@ -6,8 +6,11 @@ import BlogTopics from "../BlogTopics/BlogTopics";
 import SearchBar from "../usersHomePage/searchBar/SearchBar";
 import UserTopics from "../userTopics/UserTopics";
 import StaffPicks from "../usersHomePage/staffPicksBlogs/StaffPicks";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const state = useSelector((state) => state);
+  console.log(state);
   return (
     <div>
       <Banner />
