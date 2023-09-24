@@ -1,8 +1,16 @@
+import { CREATE_USER_WITH_EMAIL_PASS } from "../actionTypes/actionTypes";
+
 const initialState = {
     user: null,
-    fruit:"mango"
 }
 
 export const createUserReducer = (state= initialState, action) =>{
-    return state;
+    switch (action.type) {
+        case CREATE_USER_WITH_EMAIL_PASS:
+            return {
+                ...state,
+                user:action.payload,
+            }    
+        default: return state;
+    }
 }

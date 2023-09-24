@@ -3,17 +3,27 @@ import { RxCross2 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import {BsChevronLeft} from "react-icons/bs"
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { createUserWithEmailAndPass } from "../../redux/thunk/userAuth";
 
 const SignUp = () => {
     const navigate = useNavigate();
     const {handleSubmit,register} = useForm();
+    const dispatch = useDispatch();
 
     const handleCrossNavigate = () => {
         navigate('/')
     }
 
     const submit = (data) =>{
-      console.log(data);
+
+      const user = {
+        name: data.fullName,
+        email: data.email,
+        password:data.password
+      }
+      
+      dispatch(createUserWithEmailAndPass(user))
     }
 
   return (

@@ -17,20 +17,20 @@ export const router = createBrowserRouter([
       },
       {
         path: "/story",
-        element:<OurStory/>,
-      }
+        element: <OurStory />,
+      },
     ],
   },
   {
-    path:'/signUpMethods',
-    element:<SignUpMethods/>
+    path: "/signUpMethods",
+    element: <SignUpMethods />,
   },
   {
-    path:'/signUp',
-    element:<SignUp/>
+    path: "/signUp",
+    element: <SignUp />,
   },
   {
-    path:'/signIn',
-    element:<SignIn/>
+    path: "/signIn",
+    element: <SignIn />,
   },
 ]);
