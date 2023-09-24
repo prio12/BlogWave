@@ -1,4 +1,16 @@
-import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS } from "../actionTypes/actionTypes"
+import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes"
+
+
+export const startLoading = () =>{
+    return {
+        type:START_LOADING,
+    }
+}
+export const stopLoading = () =>{
+    return {
+        type:STOP_LOADING,
+    }
+}
 
 export const createUserWithEmailPass = (user) =>{
     return {
