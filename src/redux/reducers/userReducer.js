@@ -1,4 +1,4 @@
-import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, START_LOADING, STOP_LOADING,  } from "../actionTypes/actionTypes";
+import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, SIGN_OUT, START_LOADING, STOP_LOADING,  } from "../actionTypes/actionTypes";
 
 const initialState = {
     user: null,
@@ -27,6 +27,11 @@ export const createUserReducer = (state= initialState, action) =>{
                 ...state,
                 user:action.payload,
             };
+            case SIGN_OUT:
+      return {
+        ...state,
+        user: null, // Reset user state when signing out
+      };
             
         default: return state;
     }

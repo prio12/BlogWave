@@ -1,6 +1,6 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
-import { createUserWithEmailPass, setAuthUser, startLoading, stopLoading } from "../actions/userAuthActions";
+import { createUserWithEmailPass, logOut, setAuthUser, signOut, startLoading, stopLoading } from "../actions/userAuthActions";
 
 export const createUserWithEmailAndPass = (user) => {
   return async (dispatch) => {
@@ -41,3 +41,28 @@ export const observeAuthState = () =>{
        return unsubscribe;
     }
 }
+
+// export const logOutUser = () =>{
+//     return async (dispatch) =>{
+//         try {
+//             dispatch(startLoading())
+//            await signOut(auth)
+//            dispatch(stopLoading())
+//             dispatch(logOut)
+//         } catch (error) {
+//          console.log(error);   
+//         }
+//     }
+// }
+export const signOutUser = () => {
+    return async (dispatch) => {
+    //   const auth = getAuth();
+      try {
+        await firebaseSignOut(auth);
+        dispatch(signOut());
+      } catch (error) {
+        // Handle any errors
+        console.error('Error signing out:', error);
+      }
+    };
+  }

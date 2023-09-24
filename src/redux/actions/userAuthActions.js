@@ -1,4 +1,4 @@
-import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes"
+import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, SIGN_OUT, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes"
 
 
 export const startLoading = () =>{
@@ -25,3 +25,7 @@ export const setAuthUser = (user) =>{
         payload:user,
     }
 }
+
+export const signOut = () => ({
+    type: SIGN_OUT,
+  });

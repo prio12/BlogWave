@@ -2,9 +2,12 @@ import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
 import "./Header.css";
+import { useDispatch } from "react-redux";
+import { signOutUser } from "../../redux/thunk/userAuth";
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const dispatch = useDispatch();
 
   // const toggleDropdown = () => {
   //   setIsDropdownOpen(!isDropdownOpen);
@@ -26,6 +29,11 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleSignOut = () => {
+    console.log("Sign out button clicked"); // Add this line for debugging
+    dispatch(signOutUser());
+  };
 
   return (
     <div>
@@ -78,6 +86,9 @@ const Header = () => {
             <Link to="/signIn" className="text-sm font-semibold">
               Sign In
             </Link>
+            <button onClick={handleSignOut} className={scrolled ? "scrolled-button" : "nav-btn"}>
+                Log out
+              </button>
             <Link to="/signUpMethods">
               <button className={scrolled ? "scrolled-button" : "nav-btn"}>
                 Get Started
