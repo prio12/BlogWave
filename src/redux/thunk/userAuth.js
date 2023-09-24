@@ -5,14 +5,16 @@ import { createUserWithEmailPass, setAuthUser, startLoading, stopLoading } from 
 export const createUserWithEmailAndPass = (user) => {
   return async (dispatch) => {
     try {
+        console.log("startLoading by observer");
         dispatch(startLoading())
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password
       );
-      if (userCredential) {
+      console.log("stopLoading by observer");
         dispatch(stopLoading())
+      if (userCredential) {
         const user = userCredential.user;
         console.log(user);
         dispatch(createUserWithEmailPass(user));
@@ -26,10 +28,12 @@ export const createUserWithEmailAndPass = (user) => {
 
 export const observeAuthState = () =>{
     return  (dispatch) =>{
+        // console.log("startLoading by observer");
         dispatch(startLoading())
        const unsubscribe = onAuthStateChanged(auth, (user) =>{
+        // console.log("stopLoading by observer");
+        dispatch(stopLoading()) 
         if (user) {
-            dispatch(stopLoading())
             dispatch(setAuthUser(user))
         }
 
