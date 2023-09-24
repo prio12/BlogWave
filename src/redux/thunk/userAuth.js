@@ -1,6 +1,6 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
-import { createUserWithEmailPass } from "../actions/userAuthActions";
+import { createUserWithEmailPass, setAuthUser } from "../actions/userAuthActions";
 
 export const createUserWithEmailAndPass = (user) => {
   return async (dispatch) => {
@@ -21,3 +21,15 @@ export const createUserWithEmailAndPass = (user) => {
     }
   };
 };
+
+export const observeAuthState = () =>{
+    return  (dispatch) =>{
+       const unsubscribe = onAuthStateChanged(auth, (user) =>{
+        if (user) {
+            dispatch(setAuthUser(user))
+        }
+
+       })
+       return unsubscribe;
+    }
+}

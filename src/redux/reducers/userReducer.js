@@ -1,4 +1,4 @@
-import { CREATE_USER_WITH_EMAIL_PASS } from "../actionTypes/actionTypes";
+import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS } from "../actionTypes/actionTypes";
 
 const initialState = {
     user: null,
@@ -10,7 +10,13 @@ export const createUserReducer = (state= initialState, action) =>{
             return {
                 ...state,
                 user:action.payload,
-            }    
+            };
+        case AUTH_STATUS_OBSERVER:
+            return {
+                ...state,
+                user:action.payload,
+            };
+            
         default: return state;
     }
 }
