@@ -1,18 +1,23 @@
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
 import {
   createUserWithEmailPass,
+  logInWithGoogle,
   logOutUser,
   setAuthUser,
   signInWithEmail,
   startLoading,
   stopLoading,
 } from "../actions/userAuthActions";
+
+const provider = new GoogleAuthProvider();
 
 export const createUserWithEmailAndPass = (user) => {
   return async (dispatch) => {
@@ -63,6 +68,23 @@ export const signInWithEmailPass = (user) =>{
         const user = userCredential.user;
         dispatch(signInWithEmail(user))
         alert("Welcome Back!!")
+      }
+    } catch (error) {
+      
+    }
+  }
+}
+
+export const signInWithGoogleProvider = () =>{
+  return async (dispatch) =>{
+    dispatch(startLoading())
+    try {
+      const credential = await signInWithPopup(auth,provider);
+      dispatch(stopLoading());
+      if (credential) {
+        const user = credential.user;
+        dispatch(logInWithGoogle(user))
+        alert("userCreated!")
       }
     } catch (error) {
       

@@ -1,4 +1,4 @@
-import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, SIGN_IN_WITH_EMAIL_PASS, SIGN_OUT, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes"
+import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, SIGN_IN_WITH_EMAIL_PASS, SIGN_IN_WITH_GOOGLE, SIGN_OUT, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes"
 
 
 export const startLoading = () =>{
@@ -30,6 +30,13 @@ export const signInWithEmail = (user) =>{
     return {
         type:SIGN_IN_WITH_EMAIL_PASS,
         payload:user,
+    }
+}
+
+export const logInWithGoogle =(user) =>{
+    return {
+        type:SIGN_IN_WITH_GOOGLE,
+        payload:user
     }
 }
 export const logOutUser = () =>{

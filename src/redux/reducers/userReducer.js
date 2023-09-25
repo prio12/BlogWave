@@ -2,6 +2,7 @@ import {
   AUTH_STATUS_OBSERVER,
   CREATE_USER_WITH_EMAIL_PASS,
   SIGN_IN_WITH_EMAIL_PASS,
+  SIGN_IN_WITH_GOOGLE,
   SIGN_OUT,
   START_LOADING,
   STOP_LOADING,
@@ -35,6 +36,11 @@ export const createUserReducer = (state = initialState, action) => {
         user: action.payload,
       };
       case SIGN_IN_WITH_EMAIL_PASS:
+        return {
+            ...state,
+            user:action.payload,
+        }
+      case SIGN_IN_WITH_GOOGLE:
         return {
             ...state,
             user:action.payload,

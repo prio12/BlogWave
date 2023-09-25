@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { RxCross2 } from 'react-icons/rx';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailPass } from '../../../redux/thunk/userAuth';
+import { signInWithEmailPass, signInWithGoogleProvider } from '../../../redux/thunk/userAuth';
 
 const SignIn = () => {
 
@@ -23,6 +23,10 @@ const SignIn = () => {
         password:data.password,
       }
       dispatch(signInWithEmailPass(user))
+    }
+
+    const handleGoogleSignIn = () =>{
+      dispatch(signInWithGoogleProvider())
     }
     return (
         <div className="mt-16 w-full py-24 relative  md:w-1/2 md:mx-auto  border-[1px]">
@@ -48,6 +52,7 @@ const SignIn = () => {
        </form>
        <div className='flex justify-center'>
        <button
+       onClick={handleGoogleSignIn}
             className="btn my-3  flex justify-between border border-black font-semibold rounded-full "
           >
             <FcGoogle className="text-xl " />
