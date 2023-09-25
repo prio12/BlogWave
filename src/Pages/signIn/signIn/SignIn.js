@@ -3,19 +3,26 @@ import { useForm } from 'react-hook-form';
 import { BsGithub } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import { RxCross2 } from 'react-icons/rx';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { signInWithEmailPass } from '../../../redux/thunk/userAuth';
 
 const SignIn = () => {
 
     const navigate = useNavigate();
     const {handleSubmit,register} = useForm()
+    const dispatch = useDispatch();
 
     const handleCrossNavigate = () =>{
         navigate('/')
     }
 
     const submit = (data) =>{
-      console.log(data);
+      const user = {
+        email: data.email,
+        password:data.password,
+      }
+      dispatch(signInWithEmailPass(user))
     }
     return (
         <div className="mt-16 w-full py-24 relative  md:w-1/2 md:mx-auto  border-[1px]">
