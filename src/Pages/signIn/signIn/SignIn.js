@@ -1,11 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { BsGithub } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
+import {FaGithub} from 'react-icons/fa'
 import { RxCross2 } from 'react-icons/rx';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailPass, signInWithGoogleProvider } from '../../../redux/thunk/userAuth';
+import { signInWithEmailPass, signInWithGithubProvider, signInWithGoogleProvider, signInWithTwitterProvider } from '../../../redux/thunk/userAuth';
 
 const SignIn = () => {
 
@@ -27,6 +27,9 @@ const SignIn = () => {
 
     const handleGoogleSignIn = () =>{
       dispatch(signInWithGoogleProvider())
+    }
+    const handleGithubSignIn = () =>{
+      dispatch(signInWithGithubProvider())
     }
     return (
         <div className="mt-16 w-full py-24 relative  md:w-1/2 md:mx-auto  border-[1px]">
@@ -56,15 +59,16 @@ const SignIn = () => {
             className="btn my-3  flex justify-between border border-black font-semibold rounded-full "
           >
             <FcGoogle className="text-xl " />
-            <span className="px-12">Sign Up With Google</span>
+            <span className="px-12">Sign In With Google</span>
           </button>
        </div>
           <div className='flex justify-center'>
           <button
+          onClick={handleGithubSignIn}
             className="btn my-3 flex justify-between border border-black font-semibold rounded-full "
           >
-            <BsGithub className="text-xl" />
-            <span className="px-12">Sign Up With Github</span>
+            <FaGithub className="text-xl" />
+            <span className="px-12">Sign In With Github</span>
           </button>
           </div>
         </div>

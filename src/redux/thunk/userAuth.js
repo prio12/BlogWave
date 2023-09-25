@@ -1,4 +1,5 @@
 import {
+  GithubAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -9,6 +10,7 @@ import {
 import { auth } from "../../firebase/firebase.config";
 import {
   createUserWithEmailPass,
+  logInWithGithub,
   logInWithGoogle,
   logOutUser,
   setAuthUser,
@@ -17,7 +19,8 @@ import {
   stopLoading,
 } from "../actions/userAuthActions";
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 export const createUserWithEmailAndPass = (user) => {
   return async (dispatch) => {
@@ -79,7 +82,7 @@ export const signInWithGoogleProvider = () =>{
   return async (dispatch) =>{
     dispatch(startLoading())
     try {
-      const credential = await signInWithPopup(auth,provider);
+      const credential = await signInWithPopup(auth,googleProvider);
       dispatch(stopLoading());
       if (credential) {
         const user = credential.user;
@@ -87,7 +90,24 @@ export const signInWithGoogleProvider = () =>{
         alert("userCreated!")
       }
     } catch (error) {
-      
+      console.log(error);
+    }
+  }
+}
+
+export const signInWithGithubProvider = () =>{
+  return async (dispatch) =>{
+    dispatch(startLoading())
+    try {
+      const credential = await signInWithPopup(auth,githubProvider);
+      dispatch(stopLoading());
+      if (credential) {
+        const user = credential.user;
+        dispatch(logInWithGithub(user))
+        alert("UserCreated!")
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 }

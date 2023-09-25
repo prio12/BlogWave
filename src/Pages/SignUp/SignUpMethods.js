@@ -1,10 +1,11 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { BsGithub, BsEnvelope } from "react-icons/bs";
+import {FaGithub} from 'react-icons/fa'
+import { BsEnvelope } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signInWithGoogleProvider } from "../../redux/thunk/userAuth";
+import { signInWithGithubProvider, signInWithGoogleProvider } from "../../redux/thunk/userAuth";
 const SignUpMethods = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -14,6 +15,9 @@ const SignUpMethods = () => {
   };
   const handleGoogleSignIn = () =>{
       dispatch(signInWithGoogleProvider())
+  }
+  const handleGithubSignIn = () =>{
+    dispatch(signInWithGithubProvider())
   }
   return (
     <div className="mt-16 py-24 relative m-5 md:w-1/2 md:mx-auto  border-[1px]">
@@ -29,9 +33,9 @@ const SignUpMethods = () => {
           </button>
         </div>
         <div>
-          <button className="btn my-3 flex justify-between border border-black font-semibold rounded-full ">
-            <BsGithub className="text-xl" />
-            <span className="px-12">Sign Up With Github</span>
+          <button onClick={handleGithubSignIn} className="btn my-3 flex justify-between border border-black font-semibold rounded-full ">
+            <FaGithub className="text-xl" />
+            <span className="px-12">Sign Up With GitHub</span>
           </button>
         </div>
         <Link to="/signUp">
