@@ -26,6 +26,11 @@ export const setAuthUser = (user) =>{
     }
 }
 
-export const signOut = () => ({
-    type: SIGN_OUT,
-  });
+// export const signOut = () => ({
+//     type: SIGN_OUT,
+//   });
+export const logOutUser = () =>{
+    return {
+        type:SIGN_OUT,
+    }
+}

@@ -31,7 +31,7 @@ const Header = () => {
   }, []);
 
   const handleSignOut = () => {
-    console.log("Sign out button clicked"); // Add this line for debugging
+    // console.log("Sign out button clicked"); // Add this line for debugging
     dispatch(signOutUser());
   };
 
