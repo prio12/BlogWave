@@ -50,13 +50,11 @@ const Header = () => {
         }}
       >
         <div className="container mx-auto flex justify-between items-center">
-          <Link
-            to="/"
-            style={{ fontFamily: "'Roboto Slab', serif" }}
-            className=" text-4xl  font-extrabold"
-          >
-            BlogWave
-          </Link>
+        <Link to="/" className="font-serif inline-block no-underline    hover:scale-110 transition-transform duration-700">
+  <span className="text-2xl font-semibold  "><span></span>Blog</span>
+  <span className="text-2xl  font-semibold "><span className="text-5xl">W</span>ave</span>
+</Link>
+
           <div className="md:hidden ">
             <Link>
             </Link>
