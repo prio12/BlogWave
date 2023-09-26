@@ -4,7 +4,7 @@ import "./SearchBar.css";
 
 const SearchBar = () => {
   return (
-    <div className="px-12 my-12">
+    <div>
       <div className="flex gap-2 items-center">
         <BsSearch />
         <input
