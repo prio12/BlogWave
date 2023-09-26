@@ -25,7 +25,7 @@ const Home = () => {
       </div>
       {/* for logged in user */}
 
-      <div className="grid px-12 grid-cols-1 md:grid-cols-2">
+      {/* <div className="grid px-12 grid-cols-1 md:grid-cols-2">
         <div style={{gridTemplateColumns:"3fr"}}>
           <SearchBar />
           <UserTopics />
@@ -34,7 +34,7 @@ const Home = () => {
         <div style={{gridTemplateColumns:"1fr"}}>
             <StaffPicks/>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
