@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createUserWithEmailAndPass } from "../../redux/thunk/userAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const { handleSubmit, register } = useForm();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state?.user?.user?.uid);
+
 
   const handleCrossNavigate = () => {
     navigate("/");
@@ -24,6 +26,12 @@ const SignUp = () => {
 
     dispatch(createUserWithEmailAndPass(user));
   };
+
+  useEffect(() =>{
+    if (user) {
+      navigate(-1)
+    }
+  },[user,navigate])
 
   return (
     <div className="mt-16 w-full py-24 relative md:w-1/2 md:mx-auto border-[1px]">

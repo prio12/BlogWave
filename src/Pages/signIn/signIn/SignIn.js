@@ -3,15 +3,19 @@ import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import {FaGithub} from 'react-icons/fa'
 import { RxCross2 } from 'react-icons/rx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailPass, signInWithGithubProvider, signInWithGoogleProvider, signInWithTwitterProvider } from '../../../redux/thunk/userAuth';
+import { useEffect } from 'react';
 
 const SignIn = () => {
 
     const navigate = useNavigate();
     const {handleSubmit,register} = useForm()
     const dispatch = useDispatch();
+    const user = useSelector((state) => state?.user?.user?.uid);
+
+    console.log(user);
 
     const handleCrossNavigate = () =>{
         navigate('/')
@@ -31,6 +35,13 @@ const SignIn = () => {
     const handleGithubSignIn = () =>{
       dispatch(signInWithGithubProvider())
     }
+
+    useEffect(() =>{
+      if (user) {
+        navigate(-1)
+      }
+    },[user,navigate])
+
     return (
         <div className="mt-16 w-full py-24 relative  md:w-1/2 md:mx-auto  border-[1px]">
         <div className="absolute top-5 text-xl right-5">
