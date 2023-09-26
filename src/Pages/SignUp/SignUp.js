@@ -11,6 +11,8 @@ const SignUp = () => {
   const { handleSubmit, register } = useForm();
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.user?.uid);
+  const error = useSelector((state) => state?.user?.errorMessage?.signUp)
+  console.log(error);
 
 
   const handleCrossNavigate = () => {
@@ -67,6 +69,9 @@ const SignUp = () => {
             className="w-full md:w-1/2 my-5 text-sm border-b-2 border-black focus:outline-none"
             required
           />
+          {
+            error && <p className="text-red-500 my-2"><small>{error}</small></p>
+          }
           <button className="p-2 w-full md:w-2/4 my-8 rounded-full bg-black text-white">
             Sign Up
           </button>

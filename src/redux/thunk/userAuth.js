@@ -10,6 +10,7 @@ import {
 import { auth } from "../../firebase/firebase.config";
 import {
   createUserWithEmailPass,
+  logInError,
   logInWithGithub,
   logInWithGoogle,
   logOutUser,
@@ -41,7 +42,10 @@ export const createUserWithEmailAndPass = (user) => {
         alert("User Created!!");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      dispatch(startLoading())
+      dispatch(logInError({signUp:error.message}))
+      dispatch(stopLoading())
     }
   };
 };
@@ -73,7 +77,9 @@ export const signInWithEmailPass = (user) =>{
         alert("Welcome Back!!")
       }
     } catch (error) {
-      
+      dispatch(startLoading())
+      dispatch(logInError({signIn:error.message}))
+      dispatch(stopLoading())
     }
   }
 }
@@ -90,7 +96,9 @@ export const signInWithGoogleProvider = () =>{
         alert("userCreated!")
       }
     } catch (error) {
-      console.log(error);
+      dispatch(startLoading())
+      dispatch(logInError({signIn:error.message}))
+      dispatch(stopLoading())
     }
   }
 }
@@ -107,7 +115,9 @@ export const signInWithGithubProvider = () =>{
         alert("UserCreated!")
       }
     } catch (error) {
-      console.log(error);
+      dispatch(startLoading())
+      dispatch(logInError({signIn:error.message}))
+      dispatch(stopLoading())
     }
   }
 }

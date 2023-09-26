@@ -1,10 +1,10 @@
 import {
   AUTH_STATUS_OBSERVER,
   CREATE_USER_WITH_EMAIL_PASS,
+  LOGIN_FAILURE,
   SIGN_IN_WITH_EMAIL_PASS,
   SIGN_IN_WITH_GITHUB,
   SIGN_IN_WITH_GOOGLE,
-  SIGN_IN_WITH_TWITTER,
   SIGN_OUT,
   START_LOADING,
   STOP_LOADING,
@@ -13,6 +13,7 @@ import {
 const initialState = {
   user: null,
   isLoading: false,
+  errorMessage: {}, 
 };
 
 export const createUserReducer = (state = initialState, action) => {
@@ -56,6 +57,11 @@ export const createUserReducer = (state = initialState, action) => {
       return {
         ...state,
         user: null, // Reset user state when signing out
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        errorMessage:action.payload, // Reset user state when signing out
       };
 
     default:

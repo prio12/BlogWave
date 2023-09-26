@@ -1,4 +1,4 @@
-import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, SIGN_IN_WITH_EMAIL_PASS, SIGN_IN_WITH_GITHUB, SIGN_IN_WITH_GOOGLE, SIGN_IN_WITH_TWITTER, SIGN_OUT, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes"
+import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, LOGIN_FAILURE, SIGN_IN_WITH_EMAIL_PASS, SIGN_IN_WITH_GITHUB, SIGN_IN_WITH_GOOGLE, SIGN_IN_WITH_TWITTER, SIGN_OUT, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes"
 
 
 export const startLoading = () =>{
@@ -50,3 +50,11 @@ export const logOutUser = () =>{
         type:SIGN_OUT,
     }
 }
+
+export const logInError = (errorMessage) =>{
+    console.log(errorMessage);
+ return {
+    type:LOGIN_FAILURE,
+    payload:errorMessage
+ }
+} 
