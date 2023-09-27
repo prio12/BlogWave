@@ -5,6 +5,7 @@ import OurStory from "../Pages/ourStory/OurStory";
 import SignUpMethods from "../Pages/SignUp/SignUpMethods";
 import SignUp from "../Pages/SignUp/SignUp";
 import SignIn from "../Pages/signIn/signIn/SignIn";
+import WriteBlog from "../Pages/write/WriteBlog";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: "/story",
         element: <OurStory />,
+      },
+      {
+        path: "/writeBlog",
+        element: <WriteBlog/>,
       },
     ],
   },

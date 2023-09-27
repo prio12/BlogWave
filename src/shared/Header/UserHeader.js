@@ -5,7 +5,7 @@ import { BsPencilSquare } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
 import { PiBookmarksLight, PiSignOutThin } from "react-icons/pi";
 import { FiUser } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../../redux/thunk/userAuth";
 
@@ -22,22 +22,27 @@ const UserHeader = () => {
     dispatch(signOutUser())
   };
 
+  const {pathname} = useLocation();
+  const isWriterBlogPage = pathname === "/writeBlog"
+
   return (
     <div className="w-full flex items-center justify-between ps-0 pr-3 md:px-4">
       <div className="flex gap-3 items-center">
-        <img className="w-32 " src={Logo} alt="" />
+        <Link to='/'><img className="w-32 " src={Logo} alt="" /></Link>
         <div className="hidden md:flex">
           <SearchBar />
         </div>
         <AiOutlineSearch className="flex items-center md:hidden" />
       </div>
       <div className="flex items-center gap-3">
-        <Link className="flex items-center gap-3">
+        {
+          !isWriterBlogPage && <Link to='/writeBlog' className="flex items-center gap-3">
           <BsPencilSquare />
           <p>
             <small>Write</small>
           </p>
         </Link>
+        }
         <div className="relative inline-block text-left">
           <button
             onClick={handleToggle}
