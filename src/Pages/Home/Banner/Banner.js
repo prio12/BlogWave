@@ -1,6 +1,7 @@
 import React from "react";
 import Bear from '../../../Assests/Animation/Lottie_animation.json'
 import Lottie from 'lottie-react'
+import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <div className="banner-background md:border-black  md:border-b-2 ">
@@ -15,6 +16,7 @@ const Banner = () => {
           <h5 className="text-xl font-semibold my-5">
             Explore insights, ideas, and perspectives shared by diverse minds.
           </h5>
+          <Link to='/signUpMethods'>
           <button
             className="btn mt-5 btn-wide"
             style={{
@@ -28,6 +30,7 @@ const Banner = () => {
           >
             Start reading
           </button>
+          </Link>
         </div>
         <div className="hidden md:block" style={{width:"28%"}}>
             <Lottie animationData={Bear} />

@@ -3,7 +3,7 @@ import { AiFillFire } from "react-icons/ai";
 const Trending = () => {
   return (
     <div className="pt-10 mb-12 px-12">
-      <h5 className="flex gap-1  font-bold items-center">
+      <h5 style={{fontSize:"13px"}} className="flex gap-1  font-bold items-center">
         <AiFillFire /> Hottest Articles Now
       </h5>
 
@@ -12,12 +12,12 @@ const Trending = () => {
           <div className="flex  items-center gap-2">
             <img
               alt=""
-              className="w-8 h-8 border rounded-full dark:bg-gray-500 dark:border-gray-700"
+              className="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-700"
               src="https://img.freepik.com/premium-vector/cute-bear-cartoon-vector-icon-illustration-animal-icon-concept-isolated-vector-flat-cartoon-style_627305-346.jpg?w=2000"
             />
-            <h5 className="text-sm font-semibold">The Bold Italic</h5>
+            <h5 style={{fontSize:"12px"}} className="font-semibold">The Bold Italic</h5>
           </div>
-          <h4 className="font-extrabold mt-2">
+          <h4 style={{fontSize:"14px"}} className="font-extrabold mt-2">
             Why I’m breaking up with Burning Man
           </h4>
           <p className="text-sm mt-2">
