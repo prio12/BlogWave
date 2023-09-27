@@ -1,46 +1,39 @@
-import React, { useState,useEffect } from 'react'; 
+import React, { useState, useEffect } from "react";
 
 const allTopics = [
-    "Technology",
-    "Science",
-    "Art",
-    "Health",
-    "Travel",
-    "Food",
-    "Fashion",
-    "Sports",
-    "Music",
-    "Books",
-  ]; // Your array of topics
-  const topicsPerPageLarge = 6;
-  const topicsPerPageSmall = 3; // Number of topics to show at a time
-
-  
-  
+  "Technology",
+  "Science",
+  "Art",
+  "Health",
+  "Travel",
+  "Food",
+  "Fashion",
+  "Sports",
+  "Music",
+  "Books",
+]; // Your array of topics
+const topicsPerPageLarge = 6;
+const topicsPerPageSmall = 3; // Number of topics to show at a time
 
 const UserTopics = () => {
+  // const [startIndex, setStartIndex] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 768);
+    };
 
-    // const [startIndex, setStartIndex] = useState(0);
-    const [startIndex,setStartIndex] = useState(0)
-    const [isSmallScreen, setIsSmallScreen] = useState(false);
+    // Initial check
+    handleResize();
 
+    window.addEventListener("resize", handleResize);
 
-    useEffect(() => {
-        const handleResize = () => {
-          setIsSmallScreen(window.innerWidth <= 768);
-        };
-    
-        // Initial check
-        handleResize();
-    
-        window.addEventListener('resize', handleResize);
-    
-        return () => {
-          window.removeEventListener('resize', handleResize);
-        };
-      }, []);
-
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const topicsPerPage = isSmallScreen ? topicsPerPageSmall : topicsPerPageLarge;
 
@@ -75,36 +68,54 @@ const UserTopics = () => {
   };
 
   const visibleTopics = allTopics.slice(startIndex, startIndex + topicsPerPage);
-    return (
-        <div className="  relative flex w-full md:w-3/4  px-12">
-  <button
-    className={`  absolute left-0 ${startIndex === 0 ? 'hidden' : ''}`}
-    onClick={goToPrevSlide}
-  >
-    &#8249;
-  </button>
+  return (
+    //         <div className="  relative flex w-full md:w-2/4 px-3 md:px-12">
+    // <button
+    //   className={`  absolute left-0 ${startIndex === 0 ? 'hidden' : ''}`}
+    //   onClick={goToPrevSlide}
+    // >
+    //   &#8249;
+    // </button>
 
-  <div>
-    <div className="topics flex gap-5">
-      {visibleTopics.map((topic, index) => (
-        <div className="topic" key={index}>
-          {topic}
+      // <div>
+      //   <div className="topics flex gap-5">
+      //     {visibleTopics.map((topic, index) => (
+      //       <div className="topic text-sm" key={index}>
+      //         {topic}
+      //       </div>
+      //     ))}
+      //   </div>
+      // </div>
+
+      // <button
+        // className={`absolute right-0 ${
+        //   startIndex + topicsPerPage >= allTopics.length ? 'hidden' : ''
+        // }`}
+      //   onClick={goToNextSlide}
+      // >
+      //   &#8250;
+      // </button>
+    // </div>
+    <div className=" relative flex items-center gap-2">
+      <button className={` ${startIndex === 0 ? 'hidden' : ''}`} onClick={goToPrevSlide}>
+        &#8249;
+      </button>
+      <div>
+        <div className="topics flex gap-5">
+          {visibleTopics.map((topic, index) => (
+            <div className="topic text-sm" key={index}>
+              {topic}
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
+      <button    className={`${
+          startIndex + topicsPerPage >= allTopics.length ? 'hidden' : ''
+        }`}  onClick={goToNextSlide}>
+        &#8250;
+      </button>
     </div>
-  </div>
-
-  <button
-    className={`absolute right-0 ${
-      startIndex + topicsPerPage >= allTopics.length ? 'hidden' : ''
-    }`}
-    onClick={goToNextSlide}
-  >
-    &#8250;
-  </button>
-</div>
-
-    );
+  );
 };
 
 export default UserTopics;

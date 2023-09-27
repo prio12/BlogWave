@@ -55,7 +55,7 @@ const SignIn = () => {
         <RxCross2 className="cursor-pointer" onClick={handleCrossNavigate} />
       </div>
       <div>
-        <h3 className="text-2xl text-center font-semibold my-12">
+        <h3 className="text-2xl text-center font-semibold mt-12">
           Welcome Back!
         </h3>
         <form
@@ -83,10 +83,10 @@ const SignIn = () => {
             error && <p className="text-red-500 my-2"><small>{error}</small></p>
           }
         </form>
-        <div className="flex justify-center">
+        <div className="flex  justify-center">
           <button
             onClick={handleGoogleSignIn}
-            className="btn my-3  flex justify-between border border-black font-semibold rounded-full "
+            className="btn mt-2  flex justify-between border border-black font-semibold rounded-full "
           >
             <FcGoogle className="text-xl " />
             <span className="px-12">Sign In With Google</span>
@@ -95,7 +95,7 @@ const SignIn = () => {
         <div className="flex justify-center">
           <button
             onClick={handleGithubSignIn}
-            className="btn my-3 flex justify-between border border-black font-semibold rounded-full "
+            className="btn mt-2 flex justify-between border border-black font-semibold rounded-full "
           >
             <FaGithub className="text-xl" />
             <span className="px-12">Sign In With Github</span>

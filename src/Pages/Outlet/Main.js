@@ -18,9 +18,10 @@ const Main = () => {
       ) : (
         <Header />
       )}
-      <div style={{ paddingTop: "80px" }}>
+      <div className={user ? 'pt-0' : 'pt-[80px]'}>
         <Outlet />
       </div>
+    
     </div>
   );
 };
