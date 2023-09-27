@@ -23,7 +23,7 @@ const Blogs = () => {
     </p>
   </div>
   {/* blog image div */}
-  <div className="w-full md:w-1/2">
+  <div className="w-full md:w-1/3">
     <img
       style={{ width: "100%" }}
       src="https://cdn.pixabay.com/photo/2015/11/06/13/25/blog-1027861_640.jpg"

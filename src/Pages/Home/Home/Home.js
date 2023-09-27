@@ -14,19 +14,25 @@ const Home = () => {
   return (
     <div>
      {
-      user? <div className="md:px-16 px-5 w-full grid grid-cols-1 md:grid-cols-2">
-        <div style={{gridTemplateColumns:"3fr"}}>
-        <UserTopics/>
-        <Blogs/>
+      user? <div className="md:px-16 px-5 w-full grid grid-cols-1 md:grid-cols-3">
+      <div className="col-span-2">
+        <div className="grid grid-cols-1">
+          <div className="hidden md:block">
+            <UserTopics />
+          </div>
+          <div className="hidden md:block">
+            <Blogs />
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-[1fr]">
-  {/* For small screens (hidden) */}
-  <div className="hidden md:block">
-    <StaffPicks />
-  </div>
-</div>
-
-      </div> : 
+      </div>
+      <div className="col-span-1">
+        <div className="hidden md:block">
+          <StaffPicks />
+        </div>
+      </div>
+    </div>
+    
+     : 
       <div>
      <Banner />
       <Trending />
