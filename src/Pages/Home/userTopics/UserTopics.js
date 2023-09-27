@@ -96,14 +96,14 @@ const UserTopics = () => {
       //   &#8250;
       // </button>
     // </div>
-    <div className=" relative flex items-center gap-2">
+    <div className=" relative flex mb-5 items-center gap-2">
       <button className={` ${startIndex === 0 ? 'hidden' : ''}`} onClick={goToPrevSlide}>
         &#8249;
       </button>
       <div>
         <div className="topics flex gap-5">
           {visibleTopics.map((topic, index) => (
-            <div className="topic text-sm" key={index}>
+            <div style={{fontSize:"12px"}} className="topic" key={index}>
               {topic}
             </div>
           ))}

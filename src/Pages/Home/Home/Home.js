@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div>
      {
-      user? <div className="md:px-16 px-5 w-full grid px-12 grid-cols-1 md:grid-cols-2">
+      user? <div className="md:px-16 px-5 w-full grid grid-cols-1 md:grid-cols-2">
         <div style={{gridTemplateColumns:"3fr"}}>
         <UserTopics/>
         <Blogs/>
