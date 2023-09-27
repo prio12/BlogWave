@@ -17,10 +17,10 @@ const Home = () => {
       user? <div className="md:px-16 px-5 w-full grid grid-cols-1 md:grid-cols-3">
       <div className="col-span-2">
         <div className="grid grid-cols-1">
-          <div className="hidden md:block">
+          <div>
             <UserTopics />
           </div>
-          <div className="hidden md:block">
+          <div>
             <Blogs />
           </div>
         </div>
