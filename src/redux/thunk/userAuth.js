@@ -51,7 +51,8 @@ export const createUserWithEmailAndPass = (user) => {
         const userDetails = {
           name: user.name,
           email:user.email,
-          password:user.password
+          password:user.password,
+          profilePic:null,
         }
       // console.log("stopLoading by observer");
       dispatch(stopLoading());
@@ -93,7 +94,8 @@ export const signInWithEmailPass = (user) => {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         user.email,
-        user.password
+        user.password,
+        
       );
       dispatch(stopLoading());
       if (userCredential) {
@@ -117,7 +119,16 @@ export const signInWithGoogleProvider = () => {
       dispatch(stopLoading());
       if (credential) {
         const user = credential.user;
+        //userDetails for database
+        const useDetails = {
+          name:user.displayName,
+          email:user.email,
+          password:null,
+          profilePic:user.photoURL,
+        }
+        console.log(user);
         dispatch(logInWithGoogle(user));
+        postUserDetails(useDetails)
         alert("userCreated!");
       }
     } catch (error) {
