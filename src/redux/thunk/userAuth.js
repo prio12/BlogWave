@@ -25,20 +25,26 @@ const githubProvider = new GithubAuthProvider();
 
 //Sending useDetails to the database using this function
 
-const postUserDetails = async (useDetails) =>{
-  const response = await fetch("http://localhost:5000/users", {
+const postUserDetails = async (userDetails) =>{
+  try {
+    const response = await fetch("http://localhost:5000/users", {
     method: "POST",
-    body: JSON.stringify(useDetails),
+    body: JSON.stringify(userDetails),
     headers: {
       "Content-Type": "application/json",
     },
   });
   const result = await response.json();
   console.log(result);
+  } catch (error) {
+    // console.log(error);
+  }
 }
 
 export const createUserWithEmailAndPass = (user) => {
+  
   return async (dispatch) => {
+    const inputName = user.name;
     try {
       console.log("startLoading by observer");
       dispatch(startLoading());
@@ -48,17 +54,18 @@ export const createUserWithEmailAndPass = (user) => {
         user.password
       );
       //useDetails for database
-        const userDetails = {
-          name: user.name,
-          email:user.email,
-          password:user.password,
-          profilePic:null,
-        }
+        
       // console.log("stopLoading by observer");
       dispatch(stopLoading());
       if (userCredential) {
         const user = userCredential.user;
-        // console.log(user);
+        const userDetails = {
+          name: inputName,
+          email:user.email,
+          profilePic:null,
+          uid:user.uid,
+        }
+        console.log(user);
         dispatch(createUserWithEmailPass(user));
         postUserDetails(userDetails)
         alert("User Created!!");
@@ -123,8 +130,8 @@ export const signInWithGoogleProvider = () => {
         const useDetails = {
           name:user.displayName,
           email:user.email,
-          password:null,
           profilePic:user.photoURL,
+          uid:user.uid
         }
         console.log(user);
         dispatch(logInWithGoogle(user));
@@ -147,6 +154,15 @@ export const signInWithGithubProvider = () => {
       dispatch(stopLoading());
       if (credential) {
         const user = credential.user;
+        console.log(user);
+        //userDetails for database
+        const userDetails = {
+          name: user.displayName,
+          email:user.email,
+          profilePic:user.photoURL,
+          uid:user.uid,
+        }
+        postUserDetails(userDetails)
         dispatch(logInWithGithub(user));
         alert("UserCreated!");
       }
