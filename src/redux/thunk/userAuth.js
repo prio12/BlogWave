@@ -33,19 +33,36 @@ export const createUserWithEmailAndPass = (user) => {
         user.email,
         user.password
       );
+      //useDetails for database
+        const useDetails = {
+          name: user.name,
+          email:user.email,
+          password:user.password
+        }
+
       // console.log("stopLoading by observer");
       dispatch(stopLoading());
       if (userCredential) {
         const user = userCredential.user;
-        console.log(user);
+        // console.log(user);
         dispatch(createUserWithEmailPass(user));
         alert("User Created!!");
+        const response = await fetch("http://localhost:5000/users", {
+          method: "POST",
+          body: JSON.stringify(useDetails),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const result = await response.json();
+        console.log(result);
       }
     } catch (error) {
       // console.log(error);
-      dispatch(startLoading())
-      dispatch(logInError({signUp:error.message}))
-      dispatch(stopLoading())
+      dispatch(startLoading());
+      dispatch(logInError({ signUp: error.message }));
+      dispatch(stopLoading());
     }
   };
 };
@@ -65,62 +82,66 @@ export const observeAuthState = () => {
   };
 };
 
-export const signInWithEmailPass = (user) =>{
-  return async (dispatch) =>{
-    dispatch(startLoading())
+export const signInWithEmailPass = (user) => {
+  return async (dispatch) => {
+    dispatch(startLoading());
     try {
-      const userCredential = await signInWithEmailAndPassword(auth,user.email,user.password);
-      dispatch(stopLoading())
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
+      dispatch(stopLoading());
       if (userCredential) {
         const user = userCredential.user;
-        dispatch(signInWithEmail(user))
-        alert("Welcome Back!!")
+        dispatch(signInWithEmail(user));
+        alert("Welcome Back!!");
       }
     } catch (error) {
-      dispatch(startLoading())
-      dispatch(logInError({signIn:error.message}))
-      dispatch(stopLoading())
+      dispatch(startLoading());
+      dispatch(logInError({ signIn: error.message }));
+      dispatch(stopLoading());
     }
-  }
-}
+  };
+};
 
-export const signInWithGoogleProvider = () =>{
-  return async (dispatch) =>{
-    dispatch(startLoading())
+export const signInWithGoogleProvider = () => {
+  return async (dispatch) => {
+    dispatch(startLoading());
     try {
-      const credential = await signInWithPopup(auth,googleProvider);
+      const credential = await signInWithPopup(auth, googleProvider);
       dispatch(stopLoading());
       if (credential) {
         const user = credential.user;
-        dispatch(logInWithGoogle(user))
-        alert("userCreated!")
+        dispatch(logInWithGoogle(user));
+        alert("userCreated!");
       }
     } catch (error) {
-      dispatch(startLoading())
-      dispatch(logInError({signIn:error.message}))
-      dispatch(stopLoading())
+      dispatch(startLoading());
+      dispatch(logInError({ signIn: error.message }));
+      dispatch(stopLoading());
     }
-  }
-}
+  };
+};
 
-export const signInWithGithubProvider = () =>{
-  return async (dispatch) =>{
-    dispatch(startLoading())
+export const signInWithGithubProvider = () => {
+  return async (dispatch) => {
+    dispatch(startLoading());
     try {
-      const credential = await signInWithPopup(auth,githubProvider);
+      const credential = await signInWithPopup(auth, githubProvider);
       dispatch(stopLoading());
       if (credential) {
         const user = credential.user;
-        dispatch(logInWithGithub(user))
-        alert("UserCreated!")
+        dispatch(logInWithGithub(user));
+        alert("UserCreated!");
       }
     } catch (error) {
-      dispatch(startLoading())
-      dispatch(logInError({signIn:error.message}))
-      dispatch(stopLoading())
+      dispatch(startLoading());
+      dispatch(logInError({ signIn: error.message }));
+      dispatch(stopLoading());
     }
-  }
-}
+  };
+};
 
 export const signOutUser = () => {
   return async (dispatch) => {
