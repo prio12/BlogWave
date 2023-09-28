@@ -9,6 +9,7 @@ const WriteBlog = () => {
     return (
         <div className='w-full md:w-1/2 p-5 m-auto'>
         <form onSubmit={handleSubmit(submit)} className=' items-center'>
+          <div>
           <input
           {...register("title")}
             type="text"
@@ -16,6 +17,14 @@ const WriteBlog = () => {
             placeholder='Title'
             required
           />
+          <input 
+           {...register("category")}
+           type="text"
+           placeholder='Category'
+           className=' mb-3 font-mono focus:outline-none'
+           required
+           />
+          </div>
           <textarea
           {...register("description")}
             className='focus:outline-none font-mono'
