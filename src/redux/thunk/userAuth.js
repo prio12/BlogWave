@@ -23,6 +23,20 @@ import {
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
+//Sending useDetails to the database using this function
+
+const postUserDetails = async (useDetails) =>{
+  const response = await fetch("http://localhost:5000/users", {
+    method: "POST",
+    body: JSON.stringify(useDetails),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  console.log(result);
+}
+
 export const createUserWithEmailAndPass = (user) => {
   return async (dispatch) => {
     try {
@@ -34,29 +48,19 @@ export const createUserWithEmailAndPass = (user) => {
         user.password
       );
       //useDetails for database
-        const useDetails = {
+        const userDetails = {
           name: user.name,
           email:user.email,
           password:user.password
         }
-
       // console.log("stopLoading by observer");
       dispatch(stopLoading());
       if (userCredential) {
         const user = userCredential.user;
         // console.log(user);
         dispatch(createUserWithEmailPass(user));
+        postUserDetails(userDetails)
         alert("User Created!!");
-        const response = await fetch("http://localhost:5000/users", {
-          method: "POST",
-          body: JSON.stringify(useDetails),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const result = await response.json();
-        console.log(result);
       }
     } catch (error) {
       // console.log(error);
