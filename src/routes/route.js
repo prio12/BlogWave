@@ -6,6 +6,7 @@ import SignUpMethods from "../Pages/SignUp/SignUpMethods";
 import SignUp from "../Pages/SignUp/SignUp";
 import SignIn from "../Pages/signIn/signIn/SignIn";
 import WriteBlog from "../Pages/write/WriteBlog";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/writeBlog",
-        element: <WriteBlog/>,
+        element: <PrivateRoute><WriteBlog/></PrivateRoute>,
       },
     ],
   },
