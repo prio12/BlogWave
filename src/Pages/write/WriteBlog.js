@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 const WriteBlog = () => {
     
     const {handleSubmit,register} = useForm();
+    const textareaRef = useRef();
     const submit = (data) =>{
-        console.log(data);
+
+        // console.log(data);
+        const textAreaValue = textareaRef.current.value;
+        const postDetails = {
+          title:data.title,
+          category:data.category,
+          description:textAreaValue,
+          image:data.image[0]
+        }
+        console.log(postDetails);
     }
     return (
         <div className='w-full md:w-1/2 p-5 m-auto'>
@@ -26,9 +36,9 @@ const WriteBlog = () => {
            />
           </div>
           <textarea
-          {...register("description")}
+            ref={textareaRef}
             className='focus:outline-none font-mono'
-            name="textarea"
+            name=""
             id=""
             required
             placeholder='Tell your story...'
