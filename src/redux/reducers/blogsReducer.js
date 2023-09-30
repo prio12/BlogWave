@@ -1,4 +1,4 @@
-import { CREATE_BLOG_SUCCESS, POST_BLOGS, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes";
+import { CREATE_BLOG_SUCCESS, LOAD_BLOGS, POST_BLOGS, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes";
 
 const initialState = {
     blogs: [],
@@ -27,6 +27,11 @@ export const blogReducer = (state = initialState, action) =>{
             return {
                 ...state,
                 createdBlogId:action.payload,
+            }
+        case LOAD_BLOGS:
+            return {
+                ...state,
+                blogs:action.payload,
             }
     
         default:

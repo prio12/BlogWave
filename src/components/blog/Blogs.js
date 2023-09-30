@@ -1,6 +1,7 @@
 import React from "react";
 
-const Blogs = () => {
+const Blogs = ({blog}) => {
+  console.log(blog);
   return (
     <div className="flex flex-row justify-between items-center">
   {/* blog details div */}
@@ -12,15 +13,15 @@ const Blogs = () => {
         className="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-700"
         src="https://img.freepik.com/premium-vector/cute-bear-cartoon-vector-icon-illustration-animal-icon-concept-isolated-vector-flat-cartoon-style_627305-346.jpg?w=2000"
       />
-      <h5 style={{fontSize:"12px"}}>Kim Witten, PhD</h5>
+      <h5 style={{fontSize:"12px"}}>AuthorName</h5>
     </div>
     <h4 className="font-bold mt-2">
-      Why I’m breaking up with Burning Man
+      {blog?.title}
     </h4>
-    <p style={{fontSize:"12px"}}>Removing affirmative action is only another way to keep the status quo. — The function of education is to teach one to think intensively and to</p>
+    <p style={{fontSize:"12px"}}>{blog?.description}</p>
     <p className="text-sm mt-2">
-      <small>Aug 23 · 7 min read . <span className="ms-5">Topic</span></small>
-    </p>
+  <small>{blog ? new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ""} · 7 min read . <span className="ms-5">{blog?.category}</span></small>
+</p>
   </div>
   {/* blog image div */}
   <div className="w-full md:w-1/3">

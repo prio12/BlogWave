@@ -13,3 +13,4 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const POST_BLOGS = "POST_BLOGS";
 export const CREATE_BLOG_SUCCESS = "CREATE_BLOG_SUCCESS";
+export const LOAD_BLOGS = "LOAD_BLOGS";

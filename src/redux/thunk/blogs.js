@@ -1,4 +1,4 @@
-import { createBlogStatus, postBlog } from "../actions/blogActions"
+import { createBlogStatus, loadBlogs, postBlog } from "../actions/blogActions"
 import { startLoading, stopLoading } from "../actions/userAuthActions"
 
 export const addBlogPost = (post) =>{
@@ -24,6 +24,17 @@ export const addBlogPost = (post) =>{
             
         } catch (error) {
             console.log(error);
+        }
+    }
+}
+
+export const fetchProductsData = () =>{
+    return async (dispatch) =>{
+        const res = await fetch("http://localhost:5000/blogs");
+        const data = await res.json();
+
+        if (data) {
+            dispatch(loadBlogs(data))
         }
     }
 }

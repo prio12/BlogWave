@@ -8,6 +8,7 @@ import UserTopics from "../userTopics/UserTopics";
 import StaffPicks from "../usersHomePage/staffPicksBlogs/StaffPicks";
 import { useSelector } from "react-redux";
 import Loader from "../../../loading/Loader";
+import UsersHome from "../usersHomePage/usersHomePage/UsersHome";
 
 const Home = () => {
     const user = useSelector((state) => state?.user?.user?.uid);
@@ -23,7 +24,8 @@ const Home = () => {
               <UserTopics />
             </div>
             <div>
-              <Blogs />
+              {/* <Blogs /> */}
+              <UsersHome/>
             </div>
           </div>
         </div>
