@@ -12,3 +12,4 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 //blogs action types
 
 export const POST_BLOGS = "POST_BLOGS";
+export const CREATE_BLOG_SUCCESS = "CREATE_BLOG_SUCCESS";

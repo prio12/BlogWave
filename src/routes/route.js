@@ -7,6 +7,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import SignIn from "../Pages/signIn/signIn/SignIn";
 import WriteBlog from "../Pages/write/WriteBlog";
 import PrivateRoute from "./PrivateRoute";
+import Profile from "../Pages/userDashboard/profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/writeBlog",
         element: <PrivateRoute><WriteBlog/></PrivateRoute>,
+      },
+      {
+        path: "/profile",
+        element: <PrivateRoute><Profile/></PrivateRoute>,
       },
     ],
   },

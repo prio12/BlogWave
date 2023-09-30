@@ -1,4 +1,4 @@
-import { postBlog } from "../actions/blogActions"
+import { createBlogStatus, postBlog } from "../actions/blogActions"
 import { startLoading, stopLoading } from "../actions/userAuthActions"
 
 export const addBlogPost = (post) =>{
@@ -18,6 +18,7 @@ export const addBlogPost = (post) =>{
                     _id:data.insertedId,
                     ...post
                 }))
+                dispatch(createBlogStatus({postId:data.insertedId}))
                 dispatch(stopLoading())
             }
             

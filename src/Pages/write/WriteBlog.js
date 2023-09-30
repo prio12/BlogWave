@@ -2,12 +2,15 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addBlogPost } from "../../redux/thunk/blogs";
+import { useNavigate } from "react-router-dom";
 const WriteBlog = () => {
   const { handleSubmit, register } = useForm();
   const textareaRef = useRef();
   const userUid = useSelector((state) => state?.user?.user?.uid);
-  console.log(userUid);
+  const createdBlogId = useSelector((state) => state?.blogs?.createdBlogId);
+  console.log(createdBlogId);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const submit = (data) => {
     // console.log(data);
     const textAreaValue = textareaRef.current.value;
@@ -34,6 +37,8 @@ const WriteBlog = () => {
             date:Date(),
           };
           dispatch(addBlogPost(postDetails))
+          navigate('/profile')
+          
         }
       });
   };
