@@ -9,7 +9,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.user?.uid)
-  console.log(user);
+  // console.log(user);
 
   // const toggleDropdown = () => {
   //   setIsDropdownOpen(!isDropdownOpen);

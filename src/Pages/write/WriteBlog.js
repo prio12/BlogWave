@@ -1,17 +1,16 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { addBlogPost } from "../../redux/thunk/blogs";
 const WriteBlog = () => {
   const { handleSubmit, register } = useForm();
   const textareaRef = useRef();
+  const userUid = useSelector((state) => state?.user?.user?.uid);
+  console.log(userUid);
+  const dispatch = useDispatch();
   const submit = (data) => {
     // console.log(data);
     const textAreaValue = textareaRef.current.value;
-    // const postDetails = {
-    //   title:data.title,
-    //   category:data.category,
-    //   description:textAreaValue,
-    //   image:data.image[0]
-    // }
     const imageData = data.image[0];
     const formData = new FormData();
     formData.append("image", imageData);
@@ -27,12 +26,14 @@ const WriteBlog = () => {
         if (imgData.success) {
           console.log(imgData);
           const postDetails = {
+            userUid:userUid,
             title: data.title,
             category:data.category,
             description:textAreaValue,
             image:imgData.data.url,
+            date:Date(),
           };
-          console.log(postDetails);
+          dispatch(addBlogPost(postDetails))
         }
       });
   };
