@@ -1,4 +1,4 @@
-import { CREATE_BLOG_SUCCESS, LOAD_BLOGS, POST_BLOGS, START_LOADING, STOP_LOADING } from "../actionTypes/actionTypes";
+import { CREATE_BLOG_SUCCESS, LOAD_BLOGS, POST_BLOGS, START_LOADING_FOR_BLOGS, STOP_LOADING_FOR_BLOGS } from "../actionTypes/actionTypes";
 
 const initialState = {
     blogs: [],
@@ -8,12 +8,12 @@ const initialState = {
 
 export const blogReducer = (state = initialState, action) =>{
     switch (action.type) {
-        case START_LOADING:
+        case START_LOADING_FOR_BLOGS:
             return {
                 ...state,
                 isLoading:true,
             };
-        case STOP_LOADING:
+        case STOP_LOADING_FOR_BLOGS:
             return {
                 ...state,
                 isLoading:false,
