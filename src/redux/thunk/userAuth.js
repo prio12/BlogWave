@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
 import {
@@ -18,6 +19,8 @@ import {
   signInWithEmail,
   startLoading,
   stopLoading,
+  updateUserName,
+  updateUserPic,
 } from "../actions/userAuthActions";
 
 const googleProvider = new GoogleAuthProvider();
@@ -173,6 +176,35 @@ export const signInWithGithubProvider = () => {
     }
   };
 };
+
+export const updateUserProfile = ({photoURL,displayName}) =>{
+  // console.log(imageUrl);
+  return async (dispatch) =>{
+    try {
+      const profileUpdateData = {};
+
+      if (photoURL) {
+        profileUpdateData.photoURL = photoURL;
+      }
+      if (displayName) {
+        profileUpdateData.displayName = displayName;
+      }
+      
+      await updateProfile(auth.currentUser, {
+        profileUpdateData
+      })
+
+      if (photoURL) {
+        dispatch(updateUserPic(photoURL))
+      }
+      if (displayName) {
+        dispatch(updateUserName(displayName))
+      }
+    } catch (error) {
+      
+    }
+  }
+}
 
 export const signOutUser = () => {
   return async (dispatch) => {

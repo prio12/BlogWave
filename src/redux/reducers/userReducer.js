@@ -8,6 +8,8 @@ import {
   SIGN_OUT,
   START_LOADING,
   STOP_LOADING,
+  UPDATE_USER_NAME,
+  UPDATE_USER_PHOTOURL,
 } from "../actionTypes/actionTypes";
 
 const initialState = {
@@ -53,6 +55,22 @@ export const createUserReducer = (state = initialState, action) => {
             ...state,
             user:action.payload,
         }
+      case UPDATE_USER_PHOTOURL:
+        return {
+            ...state,
+            user:{
+              ...state.user,
+              photoURL: action.payload,
+            }
+        }
+        case UPDATE_USER_NAME:
+          return {
+            ...state,
+            user:{
+              ...state.user,
+              displayName:action.payload
+            }
+          }
     case SIGN_OUT:
       return {
         ...state,
