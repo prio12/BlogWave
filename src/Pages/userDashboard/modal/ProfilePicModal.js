@@ -1,20 +1,51 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const ProfilePicModal = () => {
+  const { handleSubmit, register } = useForm();
+
+  const submit = (data) => {
+    const imageData = data.profilePic[0];
+    console.log(imageData);
+    const formData = new FormData();
+    formData.append("image", imageData);
+    fetch(
+      "https://api.imgbb.com/1/upload?&key=78c93d71ed75d250027e69675b3934bb",
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          console.log(imgData);
+          alert('image uploaded successfully!')
+        }
+      });
+  };
   return (
     <div>
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
-      {/* <button
-        className="btn"
-        onClick={() => document.getElementById("profile_pic_modal").showModal()}
+      <dialog
+        id="profile_pic_modal"
+        className="modal modal-bottom sm:modal-middle"
       >
-        open modal
-      </button> */}
-      <dialog id="profile_pic_modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Upload your Profile Pic!</h3>
-          <form className="mt-5" action="">
-            <input type="file" />
+          <form onSubmit={handleSubmit(submit)} className="mt-5" action="">
+            <input {...register("profilePic")} required type="file" />
+            <input
+              style={{
+                backgroundColor: "black",
+                borderRadius: "20px",
+                padding: "10px 20px",
+                fontFamily: "'Roboto Slab', serif",
+                color: "white",
+                border: "none",
+              }}
+              type="submit"
+              className="btn block my-5"
+            />
           </form>
           <div className="modal-action">
             <form method="dialog">
