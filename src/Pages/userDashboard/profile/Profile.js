@@ -1,7 +1,11 @@
 import React from 'react';
 import {MdEdit} from 'react-icons/md'
+import ProfilePicModal from '../modal/ProfilePicModal';
 
 const Profile = () => {
+    const openModal = () =>{
+        document.getElementById("profile_pic_modal").showModal()
+    }
     return (
         <div className=' flex md:flex-row flex-col-reverse  md:justify-evenly p-5 md:px-12 '>
            <div>
@@ -16,12 +20,13 @@ const Profile = () => {
            </div>
            <div className='flex md:block gap-3 items-center'>
            <div className='mb-3 flex items-center'>
-           <img title='Tap on to change your profile pic!' alt="" className="w-16 h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700" src="https://i.ibb.co/V2vmZf3/wallpaperflare-com-wallpaper-1.jpg" />
+           <img  onClick={openModal} title='Tap on to change your profile pic!' alt="" className="w-16 h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700" src="https://i.ibb.co/V2vmZf3/wallpaperflare-com-wallpaper-1.jpg" />
            </div>
            <div className='flex gap-2 items-center'>
             <p className='font-bold'>Maksudur Rahman prio</p>
             <MdEdit/>
            </div>
+           <ProfilePicModal/>
            </div>
         </div>
     );
