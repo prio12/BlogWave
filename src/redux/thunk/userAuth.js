@@ -194,6 +194,21 @@ export const updateUserProfile = ({photoURL,displayName}) =>{
         profileUpdateData
       })
 
+      const userId = auth.currentUser.uid;
+      //updating the Name and photo of the user in db
+
+      const response = await fetch(`http://localhost:5000/users/${userId}`,{
+        method:"PUT",
+        body:JSON.stringify(profileUpdateData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+      const data = await response.json();
+      if (data.modifiedCount > 0 ) {
+        alert("Updated!!")
+      }
+
       if (photoURL) {
         dispatch(updateUserPic(photoURL))
       }

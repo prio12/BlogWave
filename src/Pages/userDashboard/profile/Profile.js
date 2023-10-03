@@ -18,9 +18,11 @@ const Profile = () => {
   return (
     <div className=" flex md:flex-row flex-col-reverse  md:justify-evenly p-5 md:px-12 ">
       <div>
+        <div>
         <h3 className="text-4xl hidden md:block font-bold">
          {name}
         </h3>
+        </div>
         <div style={{ fontSize: "12px" }} className="flex my-7 gap-7">
           <p>Home</p>
           <p>About</p>

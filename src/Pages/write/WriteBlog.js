@@ -8,6 +8,8 @@ const WriteBlog = () => {
   const textareaRef = useRef();
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const createdBlogId = useSelector((state) => state?.blogs?.createdBlogId);
+  const authorImage = useSelector((state) => state?.user?.user?.photoURL);
+  const author = useSelector((state) => state?.user?.user?.displayName);
   console.log(createdBlogId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,6 +36,8 @@ const WriteBlog = () => {
             category:data.category,
             description:textAreaValue,
             image:imgData.data.url,
+            author,
+            authorImage,
             date:Date(),
           };
           dispatch(addBlogPost(postDetails))

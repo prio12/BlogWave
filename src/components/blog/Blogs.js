@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Blogs = ({blog}) => {
   return (
@@ -10,9 +11,9 @@ const Blogs = ({blog}) => {
       <img
         alt=""
         className="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-700"
-        src="https://img.freepik.com/premium-vector/cute-bear-cartoon-vector-icon-illustration-animal-icon-concept-isolated-vector-flat-cartoon-style_627305-346.jpg?w=2000"
+        src={blog?.authorImage}
       />
-      <h5 style={{fontSize:"12px"}}>AuthorName</h5>
+      <h5 style={{fontSize:"12px"}}>{blog?.author}</h5>
     </div>
     <h4 className="font-bold mt-2">
       {blog?.title}
