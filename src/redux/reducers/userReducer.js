@@ -8,6 +8,7 @@ import {
   SIGN_OUT,
   START_LOADING,
   STOP_LOADING,
+  UPDATE_USER_ABOUT,
   UPDATE_USER_NAME,
   UPDATE_USER_PHOTOURL,
 } from "../actionTypes/actionTypes";
@@ -19,6 +20,7 @@ const initialState = {
 };
 
 export const createUserReducer = (state = initialState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case START_LOADING:
       return {
@@ -69,6 +71,14 @@ export const createUserReducer = (state = initialState, action) => {
             user:{
               ...state.user,
               displayName:action.payload
+            }
+          }
+        case UPDATE_USER_ABOUT:
+          return {
+            ...state,
+            user:{
+              ...state.user,
+              about:action.payload
             }
           }
     case SIGN_OUT:

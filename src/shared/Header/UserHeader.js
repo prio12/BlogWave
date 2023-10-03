@@ -12,6 +12,8 @@ import { signOutUser } from "../../redux/thunk/userAuth";
 const UserHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const userEmail = useSelector((state) => state?.user?.user?.email);
+  const userImage = useSelector((state) => state?.user?.user?.photoURL);
+  // const name = useSelector((state) => state?.user?.user?.displayName);
   const dispatch = useDispatch();
 
   const handleToggle = () => {
@@ -49,7 +51,7 @@ const UserHeader = () => {
             className="flex text-gray-600 hover:text-gray-800 focus:outline-none"
           >
             <img
-              src="https://source.unsplash.com/40x40/?portrait?4"
+              src={userImage}
               alt=""
               className="w-8 h-8 rounded-full cursor-pointer"
             />

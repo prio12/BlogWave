@@ -19,6 +19,7 @@ import {
   signInWithEmail,
   startLoading,
   stopLoading,
+  updateUserAbout,
   updateUserName,
   updateUserPic,
 } from "../actions/userAuthActions";
@@ -177,7 +178,7 @@ export const signInWithGithubProvider = () => {
   };
 };
 
-export const updateUserProfile = ({photoURL,displayName}) =>{
+export const updateUserProfile = ({photoURL,displayName,about}) =>{
   // console.log(imageUrl);
   return async (dispatch) =>{
     try {
@@ -188,6 +189,9 @@ export const updateUserProfile = ({photoURL,displayName}) =>{
       }
       if (displayName) {
         profileUpdateData.displayName = displayName;
+      }
+      if (about) {
+        profileUpdateData.about = about;
       }
       
       await updateProfile(auth.currentUser, {
@@ -214,6 +218,9 @@ export const updateUserProfile = ({photoURL,displayName}) =>{
       }
       if (displayName) {
         dispatch(updateUserName(displayName))
+      }
+      if (about) {
+        dispatch(updateUserAbout(about))
       }
     } catch (error) {
       
