@@ -1,4 +1,4 @@
-import { CREATE_BLOG_SUCCESS, LOAD_BLOGS, POST_BLOGS, START_LOADING_FOR_BLOGS, STOP_LOADING_FOR_BLOGS } from "../actionTypes/actionTypes"
+import { CREATE_BLOG_SUCCESS, FETCH_SINGLE_BLOG, LOAD_BLOGS, POST_BLOGS, START_LOADING_FOR_BLOGS, STOP_LOADING_FOR_BLOGS } from "../actionTypes/actionTypes"
 
 export const postBlog = (post) =>{
     return {
@@ -29,5 +29,12 @@ export const startLoadingBlogs = () =>{
 export const stopLoadingBlogs = () =>{
     return {
         type:STOP_LOADING_FOR_BLOGS
+    }
+}
+
+export const blogDetails = (details) =>{
+    return {
+        type:FETCH_SINGLE_BLOG,
+        payload:details,
     }
 }

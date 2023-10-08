@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductsData } from '../../../../redux/thunk/blogs';
 import Blogs from '../../../../components/blog/Blogs';
 import Loader from '../../../../loading/Loader';
+import { fetchAllBlogs } from '../../../../redux/thunk/blogs';
 
 const UsersHome = () => {
     const dispatch = useDispatch();
     const blogs = useSelector((state) => state?.blogs?.blogs)
     const isLoading = useSelector((state) => state?.blogs?.isLoading)
-    console.log(isLoading);
 
 
     useEffect(() =>{
-        dispatch(fetchProductsData())
+        dispatch(fetchAllBlogs())
     },[dispatch])
 
     let content;

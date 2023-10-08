@@ -28,7 +28,7 @@ export const addBlogPost = (post) =>{
     }
 }
 
-export const fetchProductsData = () =>{
+export const fetchAllBlogs = () =>{
     return async (dispatch) =>{
         dispatch(startLoadingBlogs())
         const res = await fetch("http://localhost:5000/blogs");
@@ -39,5 +39,21 @@ export const fetchProductsData = () =>{
             dispatch(loadBlogs(data))
         }
         dispatch(stopLoadingBlogs())
+    }
+}
+
+export const fetchBlogDetails = (id) =>{
+    return async (dispatch) =>{
+        try {
+            dispatch(startLoadingBlogs())
+           const  response = await fetch(`http://localhost:5000/blogs/${id}`);
+           const data = await response.json()
+           if (data) {
+            dispatch(stopLoadingBlogs())
+            console.log(data);
+           }
+        } catch (error) {
+            console.log(error);
+        }
     }
 }

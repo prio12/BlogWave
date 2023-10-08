@@ -8,6 +8,7 @@ import SignIn from "../Pages/signIn/signIn/SignIn";
 import WriteBlog from "../Pages/write/WriteBlog";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../Pages/userDashboard/profile/Profile";
+import BlogDetails from "../components/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         element: <PrivateRoute><Profile/></PrivateRoute>,
+      },
+      {
+        path: "/blogDetails/:id",
+        element: <PrivateRoute><BlogDetails/></PrivateRoute>,
       },
     ],
   },
