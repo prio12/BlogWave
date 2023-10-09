@@ -49,6 +49,34 @@ const BlogDetails = () => {
   return (
     <div className="p-5">
       {/* sidebar */}
+      <div className="drawer drawer-end">
+        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content">
+          {/* Page content here */}
+          {/* <label
+            htmlFor="my-drawer-4"
+            className="drawer-button btn btn-primary"
+          >
+            Open drawer
+          </label> */}
+        </div>
+        <div className="drawer-side">
+          <label
+            htmlFor="my-drawer-4"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+            {/* Sidebar content here */}
+            <li>
+              <a>Sidebar Item 1</a>
+            </li>
+            <li>
+              <a>Sidebar Item 2</a>
+            </li>
+          </ul>
+        </div>
+      </div>
       {/* sideBar */}
       <div className="w-full md:w-1/2 mx-auto">
         <h2 className="text-4xl font-extrabold my-3">{title}</h2>
@@ -91,13 +119,13 @@ const BlogDetails = () => {
                   style={{ fontSize: "10px" }}
                   className="absolute z-10 right-5 bg-white border shadow-lg  p-5 w-32"
                 >
-                  {/* <label
+                  <label
                     style={{ fontSize: "10px" }}
                     htmlFor="my-drawer-4"
                     className="drawer-button btn btn-sm"
                   >
                     Edit Story
-                  </label> */}
+                  </label>
                   <button
                     style={{ fontSize: "10px" }}
                     className="btn btn-sm my-2"
