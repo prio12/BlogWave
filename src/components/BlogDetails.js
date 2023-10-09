@@ -5,7 +5,8 @@ import Loader from "../loading/Loader";
 import {PiHandsClappingLight} from 'react-icons/pi'
 import {FaRegComment} from 'react-icons/fa'
 import {MdOutlineBookmarkAdd} from "react-icons/md"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {GrLinkPrevious} from 'react-icons/gr'
 
 const BlogDetails = () => {
   const dispatch  = useDispatch();
@@ -16,10 +17,14 @@ const BlogDetails = () => {
 
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
+  const navigate = useNavigate();
   if (!selectedBlogData || isLoading) {
     return <Loader/>
   }
   const {author,authorImage,title,description,category,date,image} = selectedBlogData;
+  const handleNavigate = () =>{
+    navigate(-1)
+  }
   return (
     <div className="p-5">
       <div className="w-full md:w-1/2 mx-auto">
@@ -33,13 +38,23 @@ const BlogDetails = () => {
             </div>
         </div>
         <div className="flex my-3 justify-between items-center">
-            <div  className="flex text-xs items-center gap-3">
-                <PiHandsClappingLight className="cursor:pointer"/> <span>143</span>
-                <FaRegComment/> <span>5</span>
+            <div  className="flex text-xs items-center gap-5">
+                {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
+                <div className="flex  items-center gap-1">
+                  <PiHandsClappingLight className="cursor-pointer"/>
+                  <span>143</span>
+                </div>
+                {/* <FaRegComment/><span>5</span> */}
+                <div className="flex items-center gap-1">
+                  <FaRegComment className="cursor-pointer"/>
+                  <span>5</span> 
+                </div>
             </div>
             <MdOutlineBookmarkAdd/>
         </div>
         <img src={image} style={{ height: "50%" }} alt="" />
+        <p className="my-5 border border-dark p-2">{description}</p>
+        <GrLinkPrevious className="cursor-pointer" onClick={handleNavigate} title="See more blogs"/>
       </div>
     </div>
   );
