@@ -1,13 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { GET_BLOG_ID } from "../../redux/actionTypes/actionTypes";
 
 const Blogs = ({ blog }) => {
  
-  const dispatch = useDispatch();
   return (
-    <div className="flex flex-row justify-between items-center">
+    <div className="flex flex-row justify-between gap-3 mb-5 items-center">
       {/* blog details div */}
       <div className="mb-4 md:mb-0 md:w-2/3 pr-6">
         <div className="flex items-center gap-2">
@@ -19,7 +16,7 @@ const Blogs = ({ blog }) => {
           />
           <h5 style={{ fontSize: "12px" }}>{blog?.author}</h5>
         </div>
-        <Link onClick={() => dispatch({type:GET_BLOG_ID, payload:blog?._id})} to={`/blogDetails/${blog?._id}`}>
+        <Link  to={`/blogDetails/${blog?._id}`}>
         <h4 className="font-bold mt-2">{blog?.title}</h4>
         <p style={{ fontSize: "12px" }}>{blog?.description?.slice(0,200)+"..."}</p>
         <p className="text-sm mt-2">
@@ -39,8 +36,8 @@ const Blogs = ({ blog }) => {
       {/* blog image div */}
       <div className="w-full md:w-1/3">
         <img
-          style={{ width: "100%" }}
-          src="https://cdn.pixabay.com/photo/2015/11/06/13/25/blog-1027861_640.jpg"
+          style={{ width: "100%", height:"120px" }}
+          src={blog?.image}
           alt=""
         />
       </div>

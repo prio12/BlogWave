@@ -1,19 +1,17 @@
 import {
   CREATE_BLOG_SUCCESS,
-  FETCH_SINGLE_BLOG,
-  GET_BLOG_ID,
   LOAD_BLOGS,
   POST_BLOGS,
+  SELECT_BLOG,
   START_LOADING_FOR_BLOGS,
   STOP_LOADING_FOR_BLOGS,
 } from "../actionTypes/actionTypes";
 
 const initialState = {
   blogs: [],
-  blogDetails: null,
   createdBlogId: null,
   isLoading: false,
-  singleBLogId: null,
+  selectedBlog:null
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -43,16 +41,12 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         blogs: action.payload,
       };
-    case FETCH_SINGLE_BLOG:
-      return {
-        ...state,
-        blogDetails: action.payload,
-      };
-    case GET_BLOG_ID:
-      return {
-        ...state,
-        singleBLogId: action.payload,
-      };
+      case SELECT_BLOG:
+        return {
+          ...state,
+          selectedBlog:action.payload
+        }
+    
 
     default:
       return state;
