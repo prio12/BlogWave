@@ -10,16 +10,22 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../loading/Loader";
 import UsersHome from "../usersHomePage/usersHomePage/UsersHome";
 import { fetchUserUpdatedData } from "../../../redux/thunk/userAuth";
+import { fetchAllBlogs } from "../../../redux/thunk/blogs";
 
 const Home = () => {
     const user = useSelector((state) => state?.user?.user?.uid);
   const loading = useSelector((state) => state?.user?.isLoading);
+  const blogs = useSelector((state) => state?.blogs?.blogs)
+  console.log(blogs);
   const dispatch = useDispatch()
   useEffect(() =>{
     dispatch(fetchUserUpdatedData(user))
   },[dispatch,user])
 
- 
+  useEffect(() =>{
+    dispatch(fetchAllBlogs())
+},[dispatch])
+
   return (
     <div>
       {
@@ -47,7 +53,11 @@ const Home = () => {
        <Trending />
        <div className="flex md:flex-row flex-col-reverse gap-12 px-12 justify-between items-center">
          <div className="md:w-2/4">
-           <Blogs />
+          {
+            blogs.map((blog) => (
+              <Blogs key={blog?._id} blog={blog}/>
+            ))
+          }
          </div>
          <div className="md:w-1/3">
            <BlogTopics />

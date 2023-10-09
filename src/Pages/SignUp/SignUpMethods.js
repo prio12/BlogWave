@@ -13,7 +13,7 @@ const SignUpMethods = () => {
 
 
   const handleGoBack = () => {
-    navigate(-1); // This will take you back to the previous page.
+    navigate('/'); // This will take you back to the previous page.
   };
   const handleGoogleSignIn = () =>{
       dispatch(signInWithGoogleProvider())

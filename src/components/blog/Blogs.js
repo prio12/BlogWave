@@ -1,10 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const Blogs = ({ blog }) => {
+  const user = useSelector((state) => state?.user?.user?.uid);
+  const navigate = useNavigate();
+  const handleGuestUser = () =>{
+    if (!user) {
+      navigate("/signUpMethods")
+    }
+  }
  
   return (
-    <div className="flex flex-row justify-between gap-3 mb-5 items-center">
+    <div onClick={handleGuestUser} className="cursor-pointer">
+      <div className="flex flex-row justify-between gap-3 mb-5 items-center">
       {/* blog details div */}
       <div className="mb-4 md:mb-0 md:w-2/3 pr-6">
         <div className="flex items-center gap-2">
@@ -41,6 +50,7 @@ const Blogs = ({ blog }) => {
           alt=""
         />
       </div>
+    </div>
     </div>
   );
 };
