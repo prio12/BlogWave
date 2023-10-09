@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {fetchSelectedBLogData} from '../redux/thunk/blogs'
 import Loader from "../loading/Loader";
@@ -7,6 +7,7 @@ import {FaRegComment} from 'react-icons/fa'
 import {MdOutlineBookmarkAdd} from "react-icons/md"
 import { useNavigate, useParams } from "react-router-dom";
 import {GrLinkPrevious} from 'react-icons/gr'
+import {FiMoreHorizontal} from 'react-icons/fi'
 
 const BlogDetails = () => {
   const dispatch  = useDispatch();
@@ -16,15 +17,22 @@ const BlogDetails = () => {
   },[dispatch,id])
 
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
+  const user = useSelector((state) => state?.user?.user?.uid);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
+  const [isOpen, setIsOpen] = useState(false)
+  const handleMoreOptionModal = (data) =>{
+    setIsOpen(!isOpen)
+  }
+  console.log(isOpen);
   const navigate = useNavigate();
   if (!selectedBlogData || isLoading) {
     return <Loader/>
   }
-  const {author,authorImage,title,description,category,date,image} = selectedBlogData;
+  const {author,authorImage,title,description,category,date,image,userUid} = selectedBlogData;
   const handleNavigate = () =>{
     navigate(-1)
   }
+  
   return (
     <div className="p-5">
       <div className="w-full md:w-1/2 mx-auto">
@@ -50,7 +58,22 @@ const BlogDetails = () => {
                   <span>5</span> 
                 </div>
             </div>
-            <MdOutlineBookmarkAdd/>
+           <div className="flex items-center gap-3">
+           <div className="relative">
+            {
+              user === userUid && <FiMoreHorizontal onClick={handleMoreOptionModal} title="More" className="cursor-pointer"/>
+            }
+            {
+            isOpen && <div style={{fontSize:"10px"}} className="absolute z-10 right-5 bg-white border shadow-lg  p-5 w-32">
+              <p className="my-2">Edit Picture</p>
+              <p className="my-2">Edit title</p>
+              <p className="my-2">Edit Description</p>
+              <p className="my-2">Delete Blog</p>
+            </div>
+           }
+            </div>
+            <MdOutlineBookmarkAdd title="Add to bookmark" className="cursor-pointer"/>
+           </div>
         </div>
         <img src={image} style={{ height: "50%" }} alt="" />
         <p className="my-5 border border-dark p-2">{description}</p>
