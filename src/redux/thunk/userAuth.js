@@ -209,11 +209,10 @@ export const updateUserProfile = ({photoURL,displayName,about,uid}) =>{
       })
       const data = await response.json();
       if (data.modifiedCount > 0 ) {
-        alert("Updated!!")
         dispatch(fetchUserUpdatedData(uid))
       }
     } catch (error) {
-      
+      console.log(error);
     }
   }
 }

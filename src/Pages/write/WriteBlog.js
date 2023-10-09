@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addBlogPost } from "../../redux/thunk/blogs";
@@ -10,6 +10,7 @@ const WriteBlog = () => {
   const createdBlogId = useSelector((state) => state?.blogs?.createdBlogId);
   const authorImage = useSelector((state) => state?.user?.user?.photoURL);
   const author = useSelector((state) => state?.user?.user?.displayName);
+  const [isLoading,setIsLoading] = useState(false)
   console.log(createdBlogId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const WriteBlog = () => {
     const imageData = data.image[0];
     const formData = new FormData();
     formData.append("image", imageData);
+    setIsLoading(true)
     fetch(
       "https://api.imgbb.com/1/upload?&key=78c93d71ed75d250027e69675b3934bb",
       {
@@ -41,6 +43,7 @@ const WriteBlog = () => {
             date:Date(),
           };
           dispatch(addBlogPost(postDetails))
+         setIsLoading(false)
           navigate('/profile')
           
         }
@@ -82,19 +85,43 @@ const WriteBlog = () => {
             className="mb-5"
             {...register("image")}
           />
-          <input
-            type="submit"
-            style={{
-              backgroundColor: "black",
-              borderRadius: "20px",
-              padding: "10px 20px",
-              fontFamily: "'Roboto Slab', serif",
-              color: "white",
-              border: "none",
-            }}
-            className="btn btn-sm"
-            required
-          />
+          {
+            isLoading ? <div className="flex m-3 items-center">
+            <div className="animate-spin mr-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-arrow-clockwise"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M9.646 1.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L10 3.707V7.5a.5.5 0 0 1-1 0V2a.5.5 0 0 1 .5-.5z"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M2.5 8a.5.5 0 0 1 .5.5V13a.5.5 0 0 1-1 0V9.293l-2.146 2.147a.5.5 0 0 1-.708-.708l3-3a.5.5 0 0 1 .708 0z"
+                />
+              </svg>
+            </div>
+            Uploading...
+          </div>:
+             <input
+             type="submit"
+             style={{
+               backgroundColor: "black",
+               borderRadius: "20px",
+               padding: "10px 20px",
+               fontFamily: "'Roboto Slab', serif",
+               color: "white",
+               border: "none",
+             }}
+             className="btn btn-sm"
+             required
+           />
+          }
         </div>
       </form>
     </div>
