@@ -8,12 +8,14 @@ import { FiUser } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../../redux/thunk/userAuth";
+import Loader from "../../loading/Loader";
 
 const UserHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const userEmail = useSelector((state) => state?.user?.user?.email);
-  const userImage = useSelector((state) => state?.user?.user?.photoURL);
-  // const name = useSelector((state) => state?.user?.user?.displayName);
+  const userDetails= useSelector((state) => state?.user?.userData)
+  const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
+  
+ 
   const dispatch = useDispatch();
 
   const handleToggle = () => {
@@ -26,6 +28,12 @@ const UserHeader = () => {
 
   const {pathname} = useLocation();
   const isWriterBlogPage = pathname === "/writeBlog"
+
+  if (!userDetails || isUpdateLoading) {
+    return <Loader/>
+  }
+
+  const {profilePic} = userDetails;
 
   return (
     <div className="w-full flex items-center justify-between ps-0 pr-3 md:px-4">
@@ -51,7 +59,7 @@ const UserHeader = () => {
             className="flex text-gray-600 hover:text-gray-800 focus:outline-none"
           >
             <img
-              src={userImage}
+              src={profilePic}
               alt=""
               className="w-8 h-8 rounded-full cursor-pointer"
             />

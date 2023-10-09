@@ -1,11 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../../../redux/thunk/userAuth";
 
 const ProfilePicModal = () => {
   const { handleSubmit, register } = useForm();
   const dispatch = useDispatch();
+  const uid = useSelector((state) => state?.user?.user?.uid);
 
   const submit = (data) => {
     const imageData = data.profilePic[0];
@@ -23,7 +24,7 @@ const ProfilePicModal = () => {
         if (imgData.success) {
           const imageUrl = imgData.data.url;
           // dispatch(updateUserProfile(imageUrl))
-          dispatch(updateUserProfile({photoURL:imageUrl}))
+          dispatch(updateUserProfile({photoURL:imageUrl,uid:uid}))
           alert('image uploaded successfully!')
         }
       });

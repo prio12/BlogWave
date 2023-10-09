@@ -1,13 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../../../redux/thunk/userAuth";
 
 const UserNameModal = () => {
     const dispatch = useDispatch();
+    const uid = useSelector((state) => state?.user?.user?.uid);
     const {handleSubmit,register} = useForm();
     const submit = (data) =>{
-       dispatch(updateUserProfile({displayName:data.name})) 
+       dispatch(updateUserProfile({displayName:data.name,uid:uid})) 
     }
   return (
     <div>

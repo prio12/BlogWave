@@ -1,22 +1,24 @@
 import {
   AUTH_STATUS_OBSERVER,
   CREATE_USER_WITH_EMAIL_PASS,
+  FETCH_UPDATED_USER_DATA,
   LOGIN_FAILURE,
   SIGN_IN_WITH_EMAIL_PASS,
   SIGN_IN_WITH_GITHUB,
   SIGN_IN_WITH_GOOGLE,
   SIGN_OUT,
   START_LOADING,
+  START_LOADING_UPDATE_USER,
   STOP_LOADING,
-  UPDATE_USER_ABOUT,
-  UPDATE_USER_NAME,
-  UPDATE_USER_PHOTOURL,
+  STOP_LOADING_UPDATE_USER,
 } from "../actionTypes/actionTypes";
 
 const initialState = {
   user: null,
   isLoading: false,
   errorMessage: {}, 
+  userData:null,
+  isUpdateLoading:false,
 };
 
 export const createUserReducer = (state = initialState, action) => {
@@ -30,6 +32,16 @@ export const createUserReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+      };
+      case START_LOADING_UPDATE_USER:
+      return {
+        ...state,
+        isUpdateLoading: true,
+      };
+    case STOP_LOADING_UPDATE_USER:
+      return {
+        ...state,
+        isUpdateLoading: false,
       };
     case CREATE_USER_WITH_EMAIL_PASS:
       return {
@@ -56,30 +68,6 @@ export const createUserReducer = (state = initialState, action) => {
             ...state,
             user:action.payload,
         }
-      case UPDATE_USER_PHOTOURL:
-        return {
-            ...state,
-            user:{
-              ...state.user,
-              photoURL: action.payload,
-            }
-        }
-        case UPDATE_USER_NAME:
-          return {
-            ...state,
-            user:{
-              ...state.user,
-              displayName:action.payload
-            }
-          }
-        case UPDATE_USER_ABOUT:
-          return {
-            ...state,
-            user:{
-              ...state.user,
-              about:action.payload
-            }
-          }
     case SIGN_OUT:
       return {
         ...state,
@@ -90,6 +78,11 @@ export const createUserReducer = (state = initialState, action) => {
         ...state,
         errorMessage:action.payload, // Reset user state when signing out
       };
+      case FETCH_UPDATED_USER_DATA:
+        return {
+          ...state,
+          userData:action.payload,
+        }
 
     default:
       return state;

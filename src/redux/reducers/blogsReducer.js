@@ -11,7 +11,7 @@ const initialState = {
   blogs: [],
   createdBlogId: null,
   isLoading: false,
-  selectedBlog:null
+  selectedBlog:null,
 };
 
 export const blogReducer = (state = initialState, action) => {

@@ -19,10 +19,9 @@ import {
   signInWithEmail,
   startLoading,
   stopLoading,
-  updateUserAbout,
-  updateUserName,
-  updateUserPic,
+  updateUserDetails,
 } from "../actions/userAuthActions";
+import { START_LOADING_UPDATE_USER, STOP_LOADING_UPDATE_USER } from "../actionTypes/actionTypes";
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
@@ -178,7 +177,7 @@ export const signInWithGithubProvider = () => {
   };
 };
 
-export const updateUserProfile = ({photoURL,displayName,about}) =>{
+export const updateUserProfile = ({photoURL,displayName,about,uid}) =>{
   // console.log(imageUrl);
   return async (dispatch) =>{
     try {
@@ -211,19 +210,26 @@ export const updateUserProfile = ({photoURL,displayName,about}) =>{
       const data = await response.json();
       if (data.modifiedCount > 0 ) {
         alert("Updated!!")
-      }
-
-      if (photoURL) {
-        dispatch(updateUserPic(photoURL))
-      }
-      if (displayName) {
-        dispatch(updateUserName(displayName))
-      }
-      if (about) {
-        dispatch(updateUserAbout(about))
+        dispatch(fetchUserUpdatedData(uid))
       }
     } catch (error) {
       
+    }
+  }
+}
+
+export const fetchUserUpdatedData = (uid) =>{
+  return async (dispatch) =>{
+    try {
+      dispatch({type:START_LOADING_UPDATE_USER})
+      const response = await fetch(`http://localhost:5000/users/${uid}`);
+      const data = await response.json();
+      if (data) {
+        dispatch({type:STOP_LOADING_UPDATE_USER})
+        dispatch(updateUserDetails(data))
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 }

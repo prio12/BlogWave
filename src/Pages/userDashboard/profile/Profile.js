@@ -1,13 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import ProfilePicModal from "../modal/ProfilePicModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserNameModal from "../modal/UserNameModal";
 import UserAbout from "./UserAbout";
+import Loader from "../../../loading/Loader";
+import { fetchUserUpdatedData } from "../../../redux/thunk/userAuth";
 
 const Profile = () => {
-  const image = useSelector((state) => state?.user?.user?.photoURL);
-  const name = useSelector((state) => state?.user?.user?.displayName);
+  const userDetails= useSelector((state) => state?.user?.userData)
+  const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
+  const userUid = useSelector((state) => state?.user?.user?.uid);
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+    dispatch(fetchUserUpdatedData(userUid))
+  },[dispatch,userUid])
+
   const [activeContent,setActiveContent] = useState('home')
   const textareaRef = useRef();
 
@@ -22,6 +31,12 @@ const Profile = () => {
   const openNameModal = () =>{
     document.getElementById("user_name").showModal();
   }
+  if (!userDetails || isUpdateLoading) {
+    return <Loader/>
+  }
+
+  const {profilePic,name} = userDetails;
+
   return (
     <div className=" flex md:flex-row flex-col-reverse  gap-3 p-5 md:px-12 ">
       <div className="w-3/4">
@@ -57,13 +72,13 @@ const Profile = () => {
             onClick={openImageModal}
             title="Tap on to change your profile pic!"
             alt=""
-            className="w-16 h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
-            src={image}
+            className="w-16 h-16 border cursor-pointer rounded-full dark:bg-gray-500 dark:border-gray-700"
+            src={profilePic}
           />
         </div>
         <div className="flex gap-2 items-center">
           <p className="font-bold">{name}</p>
-          < MdEdit  onClick={openNameModal}/>
+          < MdEdit className="cursor-pointer"  onClick={openNameModal}/>
         </div>
         <ProfilePicModal />
         <UserNameModal/>

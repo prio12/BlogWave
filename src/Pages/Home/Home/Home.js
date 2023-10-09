@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "../Banner/Banner";
 import Blogs from "../../../components/blog/Blogs";
 import Trending from "../Trending/Trending";
@@ -6,13 +6,20 @@ import BlogTopics from "../BlogTopics/BlogTopics";
 import SearchBar from "../usersHomePage/searchBar/SearchBar";
 import UserTopics from "../userTopics/UserTopics";
 import StaffPicks from "../usersHomePage/staffPicksBlogs/StaffPicks";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../loading/Loader";
 import UsersHome from "../usersHomePage/usersHomePage/UsersHome";
+import { fetchUserUpdatedData } from "../../../redux/thunk/userAuth";
 
 const Home = () => {
     const user = useSelector((state) => state?.user?.user?.uid);
   const loading = useSelector((state) => state?.user?.isLoading);
+  const dispatch = useDispatch()
+  useEffect(() =>{
+    dispatch(fetchUserUpdatedData(user))
+  },[dispatch,user])
+
+ 
   return (
     <div>
       {

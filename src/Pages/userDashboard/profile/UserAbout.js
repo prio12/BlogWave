@@ -8,11 +8,12 @@ const UserAbout = () => {
   const { handleSubmit } = useForm();
   const dispatch = useDispatch();
   const about = useSelector((state) => state?.user?.user?.about)
+  const uid = useSelector((state) => state?.user?.user?.uid);
   
 
   const submit = () => {
     const textAreaValue = textareaRef.current.value;
-        dispatch(updateUserProfile({about:textAreaValue}))
+        dispatch(updateUserProfile({about:textAreaValue,uid:uid}))
   };
 
   return (
