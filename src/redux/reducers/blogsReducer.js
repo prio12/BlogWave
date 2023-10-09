@@ -1,5 +1,6 @@
 import {
   CREATE_BLOG_SUCCESS,
+  FETCH_USER_BLOGS,
   LOAD_BLOGS,
   POST_BLOGS,
   SELECT_BLOG,
@@ -12,6 +13,7 @@ const initialState = {
   createdBlogId: null,
   isLoading: false,
   selectedBlog:null,
+  userBlogs:[],
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -46,6 +48,11 @@ export const blogReducer = (state = initialState, action) => {
           ...state,
           selectedBlog:action.payload
         }
+        case FETCH_USER_BLOGS:
+          return {
+            ...state,
+            userBlogs:action.payload
+          }
     
 
     default:

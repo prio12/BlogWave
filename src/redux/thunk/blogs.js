@@ -1,4 +1,4 @@
-import {  createBlogStatus, loadBlogs, postBlog, selectedBlogData, startLoadingBlogs, stopLoadingBlogs } from "../actions/blogActions"
+import {  createBlogStatus, getUserBlogs, loadBlogs, postBlog, selectedBlogData, startLoadingBlogs, stopLoadingBlogs } from "../actions/blogActions"
 import { startLoading, stopLoading } from "../actions/userAuthActions"
 
 export const addBlogPost = (post) =>{
@@ -54,6 +54,22 @@ export const fetchSelectedBLogData = (_id) =>{
             }
         } catch (error) {
             console.log(error);
+        }
+    }
+}
+
+export const fetchUserAllBlogs = (_id) =>{
+    return async (dispatch) =>{
+        dispatch(startLoadingBlogs())
+        try {
+            const response = await fetch(`http://localhost:5000/blogs/myBlogs/${_id}`);
+            const data = await response.json();
+            if (data) {
+                dispatch(stopLoadingBlogs())
+                dispatch(getUserBlogs(data))
+            }
+        } catch (error) {
+            
         }
     }
 }

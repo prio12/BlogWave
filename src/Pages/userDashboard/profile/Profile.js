@@ -6,15 +6,25 @@ import UserNameModal from "../modal/UserNameModal";
 import UserAbout from "./UserAbout";
 import Loader from "../../../loading/Loader";
 import { fetchUserUpdatedData } from "../../../redux/thunk/userAuth";
+import { CgProfile } from "react-icons/cg";
+import { fetchUserAllBlogs } from "../../../redux/thunk/blogs";
+import { Link } from "react-router-dom";
+import Blogs from "../../../components/blog/Blogs";
 
 const Profile = () => {
   const userDetails= useSelector((state) => state?.user?.userData)
   const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
   const userUid = useSelector((state) => state?.user?.user?.uid);
+  const userBLogs = useSelector((state) =>state?.blogs?.userBlogs)
+  const isLoading = useSelector((state) => state?.blogs?.isLoading)
   const dispatch = useDispatch();
 
   useEffect(() =>{
     dispatch(fetchUserUpdatedData(userUid))
+  },[dispatch,userUid])
+
+  useEffect(() =>{
+    dispatch(fetchUserAllBlogs(userUid))
   },[dispatch,userUid])
 
   const [activeContent,setActiveContent] = useState('home')
@@ -31,11 +41,33 @@ const Profile = () => {
   const openNameModal = () =>{
     document.getElementById("user_name").showModal();
   }
+
+  let content;
+
+  if (!userBLogs.length) {
+    content = <div className="text-center">
+      <p>You have not written any blog!</p>
+      <Link to='/write' style={{fontSize:"12px"}} className="text-[#1A8917] ">Write now?</Link>
+    </div>
+  }
+
+  if (isLoading) {
+    content = <Loader/>
+  }
+
+  if (userBLogs.length) {
+    content = userBLogs.map((blog) =>(
+      <Blogs key={blog?._id} blog={blog}></Blogs>
+    ))
+  }
+
   if (!userDetails || isUpdateLoading) {
     return <Loader/>
   }
 
   const {profilePic,name} = userDetails;
+
+
 
   return (
     <div className=" flex md:flex-row flex-col-reverse  gap-3 p-5 md:px-12 ">
@@ -53,7 +85,7 @@ const Profile = () => {
             {
                 activeContent === 'home' && (
                     <div>
-
+                      {content}
                     </div>
                 )
             }
@@ -68,13 +100,18 @@ const Profile = () => {
       </div>
       <div className="flex md:block gap-3 items-center">
         <div className="mb-3 flex items-center">
-          <img
+          {profilePic? <img
             onClick={openImageModal}
             title="Tap on to change your profile pic!"
             alt=""
             className="w-16 h-16 border cursor-pointer rounded-full dark:bg-gray-500 dark:border-gray-700"
             src={profilePic}
+          />: 
+          <CgProfile onClick={openImageModal}
+          title="Tap on to change your profile pic!"
+          className="w-16 h-16 cursor-pointer"
           />
+          }
         </div>
         <div className="flex gap-2 items-center">
           <p className="font-bold">{name}</p>

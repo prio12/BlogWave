@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   signInWithEmailPass,
   signInWithGithubProvider,
@@ -14,13 +14,10 @@ import { useEffect } from "react";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const {
-    handleSubmit,
-    register,
-  } = useForm();
+  const { handleSubmit, register } = useForm();
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.user?.uid);
-  const error = useSelector((state) => state?.user?.errorMessage?.signIn)
+  const error = useSelector((state) => state?.user?.errorMessage?.signIn);
 
   console.log(user);
 
@@ -79,9 +76,14 @@ const SignIn = () => {
           <button className="p-2 w-full md:w-2/4 my-8 rounded-full bg-black text-white">
             Sign In
           </button>
-          {
-            error && <p className="text-red-500 my-2"><small>{error}</small></p>
-          }
+          {error && (
+            <p className="text-red-500 my-2">
+              <small>{error}</small>
+            </p>
+          )}
+          <p style={{fontSize:"12px"}}>
+            New to BlogWave? <Link to="/signUpMethods" className="text-[#1A8917] font-bold">SignUp</Link>
+          </p>
         </form>
         <div className="flex  justify-center">
           <button

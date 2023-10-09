@@ -9,6 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../../redux/thunk/userAuth";
 import Loader from "../../loading/Loader";
+import {CgProfile} from "react-icons/cg"
 
 const UserHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,11 +59,14 @@ const UserHeader = () => {
             onClick={handleToggle}
             className="flex text-gray-600 hover:text-gray-800 focus:outline-none"
           >
-            <img
+            {
+              profilePic? <img
               src={profilePic}
               alt=""
               className="w-8 h-8 rounded-full cursor-pointer"
-            />
+            />: 
+            <CgProfile className="w-8 h-8"/>
+            }
           </button>
           {isOpen && (
             // </div>

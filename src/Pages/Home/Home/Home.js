@@ -16,7 +16,6 @@ const Home = () => {
     const user = useSelector((state) => state?.user?.user?.uid);
   const loading = useSelector((state) => state?.user?.isLoading);
   const blogs = useSelector((state) => state?.blogs?.blogs)
-  console.log(blogs);
   const dispatch = useDispatch()
   useEffect(() =>{
     dispatch(fetchUserUpdatedData(user))

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Blogs = ({ blog }) => {
   const user = useSelector((state) => state?.user?.user?.uid);
@@ -10,21 +10,25 @@ const Blogs = ({ blog }) => {
       navigate("/signUpMethods")
     }
   }
+
+  const {pathname} = useLocation();
  
   return (
     <div onClick={handleGuestUser} className="cursor-pointer">
       <div className="flex flex-row justify-between gap-3 mb-5 items-center">
       {/* blog details div */}
       <div className="mb-4 md:mb-0 md:w-2/3 pr-6">
-        <div className="flex items-center gap-2">
-          {/* avatar */}
-          <img
-            alt=""
-            className="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-700"
-            src={blog?.authorImage}
-          />
-          <h5 style={{ fontSize: "12px" }}>{blog?.author}</h5>
-        </div>
+       {
+        !pathname === "/profile" &&  <div className="flex items-center gap-2">
+        {/* avatar */}
+        <img
+          alt=""
+          className="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-700"
+          src={blog?.authorImage}
+        />
+        <h5 style={{ fontSize: "12px" }}>{blog?.author}</h5>
+      </div>
+       }
         <Link  to={`/blogDetails/${blog?._id}`}>
         <h4 className="font-bold mt-2">{blog?.title}</h4>
         <p style={{ fontSize: "12px" }}>{blog?.description?.slice(0,200)+"..."}</p>
