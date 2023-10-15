@@ -18,8 +18,10 @@ const WriteBlog = () => {
     // console.log(data);
     const textAreaValue = textareaRef.current.value;
     const imageData = data.image[0];
+    console.log(imageData);
     const formData = new FormData();
     formData.append("image", imageData);
+    console.log(formData);
     setIsLoading(true)
     fetch(
       "https://api.imgbb.com/1/upload?&key=78c93d71ed75d250027e69675b3934bb",

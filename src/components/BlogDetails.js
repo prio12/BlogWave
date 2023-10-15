@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { GrLinkPrevious } from "react-icons/gr";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { fetchUserUpdatedData } from "../redux/thunk/userAuth";
+import EditBlogStory from "./blog/editBlog/EditBlogStory";
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -27,12 +28,12 @@ const BlogDetails = () => {
   const handleMoreOptionModal = (data) => {
     setIsOpen(!isOpen);
   };
-  console.log(isOpen);
   const navigate = useNavigate();
   if (!selectedBlogData || isLoading) {
     return <Loader />;
   }
   const {
+    _id,
     author,
     authorImage,
     title,
@@ -66,15 +67,17 @@ const BlogDetails = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-            {/* Sidebar content here */}
+          {/* <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             <li>
               <a>Sidebar Item 1</a>
             </li>
             <li>
               <a>Sidebar Item 2</a>
             </li>
-          </ul>
+          </ul> */}
+          <div className="menu p-4 w-3/4 md:w-2/4 min-h-full bg-base-100 ">
+            <EditBlogStory image={image} _id={_id} description={description} title={title}></EditBlogStory>
+          </div>
         </div>
       </div>
       {/* sideBar */}

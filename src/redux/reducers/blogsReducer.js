@@ -6,14 +6,15 @@ import {
   SELECT_BLOG,
   START_LOADING_FOR_BLOGS,
   STOP_LOADING_FOR_BLOGS,
+  UPDATE_BLOG_SUCCESS,
 } from "../actionTypes/actionTypes";
 
 const initialState = {
   blogs: [],
   createdBlogId: null,
   isLoading: false,
-  selectedBlog:null,
-  userBlogs:[],
+  selectedBlog: null,
+  userBlogs: [],
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -43,17 +44,24 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         blogs: action.payload,
       };
-      case SELECT_BLOG:
-        return {
-          ...state,
-          selectedBlog:action.payload
-        }
-        case FETCH_USER_BLOGS:
-          return {
-            ...state,
-            userBlogs:action.payload
-          }
-    
+    case SELECT_BLOG:
+      return {
+        ...state,
+        selectedBlog: action.payload,
+      };
+    case FETCH_USER_BLOGS:
+      return {
+        ...state,
+        userBlogs: action.payload,
+      };
+    case UPDATE_BLOG_SUCCESS:
+      const updatedIndex = state.blogs.findIndex((blog) => blog._id === action.payload._id);
+      const updatedBlogs = [...state.blogs];
+      updatedBlogs[updatedIndex] = action.payload
+      return {
+        ...state,
+        blogs:updatedBlogs
+      };
 
     default:
       return state;
