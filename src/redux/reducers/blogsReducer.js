@@ -4,6 +4,7 @@ import {
   LOAD_BLOGS,
   POST_BLOGS,
   SELECT_BLOG,
+  SET_UPDATE_SUCCESS_FLAG,
   START_LOADING_FOR_BLOGS,
   STOP_LOADING_FOR_BLOGS,
   UPDATE_BLOG_SUCCESS,
@@ -15,6 +16,7 @@ const initialState = {
   isLoading: false,
   selectedBlog: null,
   userBlogs: [],
+  updateSuccess:false,
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -60,7 +62,13 @@ export const blogReducer = (state = initialState, action) => {
       updatedBlogs[updatedIndex] = action.payload
       return {
         ...state,
-        blogs:updatedBlogs
+        blogs:updatedBlogs,
+        updateSuccess:true,
+      };
+      case SET_UPDATE_SUCCESS_FLAG: // Reducer case to reset the flag if needed
+      return {
+        ...state,
+        updateSuccess: action.payload,
       };
 
     default:

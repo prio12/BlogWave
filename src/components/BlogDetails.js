@@ -10,9 +10,12 @@ import { GrLinkPrevious } from "react-icons/gr";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { fetchUserUpdatedData } from "../redux/thunk/userAuth";
 import EditBlogStory from "./blog/editBlog/EditBlogStory";
+import { SET_UPDATE_SUCCESS_FLAG } from "../redux/actionTypes/actionTypes";
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { id } = useParams();
   useEffect(() => {
     dispatch(fetchSelectedBLogData(id));
@@ -21,14 +24,20 @@ const BlogDetails = () => {
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
   const user = useSelector((state) => state?.user?.user?.uid);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
+  const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(user));
   }, [dispatch, user]);
+  useEffect(() =>{
+    if (updateSuccess) {
+      navigate('/profile')
+      dispatch({type:SET_UPDATE_SUCCESS_FLAG, payload:false})
+    }
+  },[dispatch,navigate,updateSuccess])
   const [isOpen, setIsOpen] = useState(false);
   const handleMoreOptionModal = (data) => {
     setIsOpen(!isOpen);
   };
-  const navigate = useNavigate();
   if (!selectedBlogData || isLoading) {
     return <Loader />;
   }
@@ -46,6 +55,8 @@ const BlogDetails = () => {
   const handleNavigate = () => {
     navigate(-1);
   };
+
+
 
   return (
     <div className="p-5">
@@ -76,7 +87,7 @@ const BlogDetails = () => {
             </li>
           </ul> */}
           <div className="menu p-4 w-3/4 md:w-2/4 min-h-full bg-base-100 ">
-            <EditBlogStory image={image} _id={_id} description={description} title={title}></EditBlogStory>
+            <EditBlogStory selectedBlogData={selectedBlogData}></EditBlogStory>
           </div>
         </div>
       </div>

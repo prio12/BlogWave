@@ -6,6 +6,7 @@ import {
   selectedBlogData,
   startLoadingBlogs,
   stopLoadingBlogs,
+  updatedBlog,
 } from "../actions/blogActions";
 import { startLoading, stopLoading } from "../actions/userAuthActions";
 
@@ -84,7 +85,7 @@ export const fetchUserAllBlogs = (_id) => {
 };
 
 export const updateABlog = (data) => {
-//   console.log(data);
+  //   console.log(data);
   return async (dispatch) => {
     dispatch(startLoadingBlogs());
     try {
@@ -93,12 +94,16 @@ export const updateABlog = (data) => {
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body:JSON.stringify(data)
+          body: JSON.stringify(data),
         }
       );
       const responseData = await response.json();
-      dispatch(stopLoadingBlogs())
-      console.log(responseData);
-    } catch (error) {}
+      if (responseData) {
+        dispatch(stopLoadingBlogs());
+        dispatch(updatedBlog(data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
