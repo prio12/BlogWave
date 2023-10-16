@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSelectedBLogData } from "../redux/thunk/blogs";
+import { addClapping, fetchSelectedBLogData } from "../redux/thunk/blogs";
 import Loader from "../loading/Loader";
 import { PiHandsClappingLight } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa";
@@ -25,6 +25,7 @@ const BlogDetails = () => {
   const user = useSelector((state) => state?.user?.user?.uid);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
+  const claps = useSelector((state) => state?.blogs?.claps);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(user));
   }, [dispatch, user]);
@@ -56,7 +57,9 @@ const BlogDetails = () => {
     navigate(-1);
   };
 
-
+const handleClap = () =>{
+  dispatch(addClapping())
+}
 
   return (
     <div className="p-5">
@@ -110,8 +113,8 @@ const BlogDetails = () => {
           <div className="flex text-xs items-center gap-5">
             {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
             <div className="flex  items-center gap-1">
-              <PiHandsClappingLight className="cursor-pointer text-xl" title="Clap!" />
-              <span>143</span>
+              <PiHandsClappingLight className="cursor-pointer text-xl" title="Clap!" onClick={handleClap} />
+              <span>{claps}</span>
             </div>
             {/* <FaRegComment/><span>5</span> */}
             <div className="flex items-center gap-1">

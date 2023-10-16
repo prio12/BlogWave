@@ -1,4 +1,5 @@
 import {
+  ADD_CLAPS,
   CREATE_BLOG_SUCCESS,
   FETCH_USER_BLOGS,
   LOAD_BLOGS,
@@ -17,6 +18,7 @@ const initialState = {
   selectedBlog: null,
   userBlogs: [],
   updateSuccess:false,
+  claps: 0,
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -70,7 +72,11 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         updateSuccess: action.payload,
       };
-
+      case ADD_CLAPS:
+        return {
+          ...state,
+          claps:state.claps + 1,
+        }
     default:
       return state;
   }

@@ -1,4 +1,5 @@
 import {
+  clapToPost,
   createBlogStatus,
   getUserBlogs,
   loadBlogs,
@@ -107,3 +108,9 @@ export const updateABlog = (data) => {
     }
   };
 };
+
+export const addClapping = () =>{
+  return async (dispatch) =>{
+    dispatch(clapToPost())
+  }
+} 

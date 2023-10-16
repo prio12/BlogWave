@@ -1,4 +1,4 @@
-import { CREATE_BLOG_SUCCESS,LOAD_BLOGS, POST_BLOGS, START_LOADING_FOR_BLOGS, STOP_LOADING_FOR_BLOGS,SELECT_BLOG, FETCH_USER_BLOGS, UPDATE_BLOG_SUCCESS } from "../actionTypes/actionTypes"
+import { CREATE_BLOG_SUCCESS,LOAD_BLOGS, POST_BLOGS, START_LOADING_FOR_BLOGS, STOP_LOADING_FOR_BLOGS,SELECT_BLOG, FETCH_USER_BLOGS, UPDATE_BLOG_SUCCESS, ADD_CLAPS } from "../actionTypes/actionTypes"
 
 export const postBlog = (post) =>{
     return {
@@ -50,6 +50,12 @@ export const updatedBlog = (blog) =>{
     return {
         type:UPDATE_BLOG_SUCCESS,
         payload:blog,
+    }
+}
+
+export const clapToPost = () =>{
+    return {
+        type:ADD_CLAPS,
     }
 }
 
