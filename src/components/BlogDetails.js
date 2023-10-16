@@ -110,12 +110,12 @@ const BlogDetails = () => {
           <div className="flex text-xs items-center gap-5">
             {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
             <div className="flex  items-center gap-1">
-              <PiHandsClappingLight className="cursor-pointer" />
+              <PiHandsClappingLight className="cursor-pointer text-xl" title="Clap!" />
               <span>143</span>
             </div>
             {/* <FaRegComment/><span>5</span> */}
             <div className="flex items-center gap-1">
-              <FaRegComment className="cursor-pointer" />
+              <FaRegComment className="cursor-pointer text-xl" title="Response.."/>
               <span>5</span>
             </div>
           </div>
@@ -125,7 +125,7 @@ const BlogDetails = () => {
                 <FiMoreHorizontal
                   onClick={handleMoreOptionModal}
                   title="More"
-                  className="cursor-pointer"
+                  className="cursor-pointer text-xl"
                 />
               )}
               {isOpen && (
