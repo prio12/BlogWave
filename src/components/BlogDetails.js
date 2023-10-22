@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addClapping, fetchSelectedBLogData } from "../redux/thunk/blogs";
+import { addClapping, deleteABLog, fetchSelectedBLogData } from "../redux/thunk/blogs";
 import Loader from "../loading/Loader";
 import { PiHandsClappingLight } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa";
@@ -10,7 +10,7 @@ import { GrLinkPrevious } from "react-icons/gr";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { fetchUserUpdatedData } from "../redux/thunk/userAuth";
 import EditBlogStory from "./blog/editBlog/EditBlogStory";
-import { SET_UPDATE_SUCCESS_FLAG } from "../redux/actionTypes/actionTypes";
+import { DELETE_A_BLOG, DELETE_BLOG_FLAG, SET_UPDATE_SUCCESS_FLAG } from "../redux/actionTypes/actionTypes";
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -26,6 +26,8 @@ const BlogDetails = () => {
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
   const claps = useSelector((state) => state?.blogs?.claps);
+  const isDeleted = useSelector((state) => state?.blogs?.isDeleted)
+  console.log(isDeleted);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(user));
   }, [dispatch, user]);
@@ -35,6 +37,13 @@ const BlogDetails = () => {
       dispatch({type:SET_UPDATE_SUCCESS_FLAG, payload:false})
     }
   },[dispatch,navigate,updateSuccess])
+
+  useEffect(() =>{
+     if (isDeleted) {
+    navigate('/profile')
+    dispatch({type:DELETE_BLOG_FLAG, payload:false})
+  }
+  },[dispatch,isDeleted,navigate])
   const [isOpen, setIsOpen] = useState(false);
   const handleMoreOptionModal = (data) => {
     setIsOpen(!isOpen);
@@ -56,6 +65,9 @@ const BlogDetails = () => {
   const handleNavigate = () => {
     navigate(-1);
   };
+
+ 
+ 
 
 const handleClap = () =>{
   dispatch(addClapping())
@@ -144,6 +156,7 @@ const handleClap = () =>{
                     Edit Story
                   </label>
                   <button
+                    onClick={() => dispatch(deleteABLog(_id))}
                     style={{ fontSize: "10px" }}
                     className="btn btn-sm my-2"
                   >

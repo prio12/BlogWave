@@ -1,6 +1,8 @@
 import {
   ADD_CLAPS,
   CREATE_BLOG_SUCCESS,
+  DELETE_A_BLOG,
+  DELETE_BLOG_FLAG,
   FETCH_USER_BLOGS,
   LOAD_BLOGS,
   POST_BLOGS,
@@ -19,6 +21,7 @@ const initialState = {
   userBlogs: [],
   updateSuccess:false,
   claps: 0,
+  isDeleted:false,
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -77,6 +80,17 @@ export const blogReducer = (state = initialState, action) => {
           ...state,
           claps:state.claps + 1,
         }
+        case DELETE_A_BLOG:
+          return {
+            ...state,
+            blogs:state.blogs.filter((blog) => blog._id !== action.payload._id),
+            isDeleted:true,
+          }
+          case DELETE_BLOG_FLAG:
+            return {
+              ...state,
+              isDeleted:action.payload,
+            }
     default:
       return state;
   }

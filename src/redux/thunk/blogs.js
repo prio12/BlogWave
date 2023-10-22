@@ -1,6 +1,7 @@
 import {
   clapToPost,
   createBlogStatus,
+  deleteBlog,
   getUserBlogs,
   loadBlogs,
   postBlog,
@@ -114,3 +115,20 @@ export const addClapping = () =>{
     dispatch(clapToPost())
   }
 } 
+
+export const deleteABLog = (_id) =>{
+  return async (dispatch) =>{
+    try {
+      const response = await fetch(`http://localhost:5000/delete/${_id}`, {
+        method:"DELETE",
+      })
+      const result = await response.json();
+      console.log(result);
+      if (result) {
+        dispatch(deleteBlog(_id))
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
