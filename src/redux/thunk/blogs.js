@@ -1,5 +1,4 @@
 import {
-  clapToPost,
   createBlogStatus,
   deleteBlog,
   getUserBlogs,
@@ -110,11 +109,6 @@ export const updateABlog = (data) => {
   };
 };
 
-export const addClapping = () =>{
-  return async (dispatch) =>{
-    dispatch(clapToPost())
-  }
-} 
 
 export const deleteABLog = (_id) =>{
   return async (dispatch) =>{

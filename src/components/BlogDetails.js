@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addClapping, deleteABLog, fetchSelectedBLogData } from "../redux/thunk/blogs";
+import { deleteABLog, fetchSelectedBLogData } from "../redux/thunk/blogs";
 import Loader from "../loading/Loader";
 import { PiHandsClappingLight } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa";
@@ -10,7 +10,10 @@ import { GrLinkPrevious } from "react-icons/gr";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { fetchUserUpdatedData } from "../redux/thunk/userAuth";
 import EditBlogStory from "./blog/editBlog/EditBlogStory";
-import { DELETE_A_BLOG, DELETE_BLOG_FLAG, SET_UPDATE_SUCCESS_FLAG } from "../redux/actionTypes/actionTypes";
+import {
+  DELETE_BLOG_FLAG,
+  SET_UPDATE_SUCCESS_FLAG,
+} from "../redux/actionTypes/actionTypes";
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -26,24 +29,24 @@ const BlogDetails = () => {
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
   const claps = useSelector((state) => state?.blogs?.claps);
-  const isDeleted = useSelector((state) => state?.blogs?.isDeleted)
+  const isDeleted = useSelector((state) => state?.blogs?.isDeleted);
   console.log(isDeleted);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(user));
   }, [dispatch, user]);
-  useEffect(() =>{
+  useEffect(() => {
     if (updateSuccess) {
-      navigate('/profile')
-      dispatch({type:SET_UPDATE_SUCCESS_FLAG, payload:false})
+      navigate("/profile");
+      dispatch({ type: SET_UPDATE_SUCCESS_FLAG, payload: false });
     }
-  },[dispatch,navigate,updateSuccess])
+  }, [dispatch, navigate, updateSuccess]);
 
-  useEffect(() =>{
-     if (isDeleted) {
-    navigate('/profile')
-    dispatch({type:DELETE_BLOG_FLAG, payload:false})
-  }
-  },[dispatch,isDeleted,navigate])
+  useEffect(() => {
+    if (isDeleted) {
+      navigate("/profile");
+      dispatch({ type: DELETE_BLOG_FLAG, payload: false });
+    }
+  }, [dispatch, isDeleted, navigate]);
   const [isOpen, setIsOpen] = useState(false);
   const handleMoreOptionModal = (data) => {
     setIsOpen(!isOpen);
@@ -66,12 +69,6 @@ const BlogDetails = () => {
     navigate(-1);
   };
 
- 
- 
-
-const handleClap = () =>{
-  dispatch(addClapping())
-}
 
   return (
     <div className="p-5">
@@ -125,12 +122,18 @@ const handleClap = () =>{
           <div className="flex text-xs items-center gap-5">
             {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
             <div className="flex  items-center gap-1">
-              <PiHandsClappingLight className="cursor-pointer text-xl" title="Clap!" onClick={handleClap} />
+              <PiHandsClappingLight
+                className="cursor-pointer text-xl"
+                title="Clap!"
+              />
               <span>{claps}</span>
             </div>
             {/* <FaRegComment/><span>5</span> */}
             <div className="flex items-center gap-1">
-              <FaRegComment className="cursor-pointer text-xl" title="Response.."/>
+              <FaRegComment
+                className="cursor-pointer text-xl"
+                title="Response.."
+              />
               <span>5</span>
             </div>
           </div>

@@ -1,5 +1,4 @@
 import {
-  ADD_CLAPS,
   CREATE_BLOG_SUCCESS,
   DELETE_A_BLOG,
   DELETE_BLOG_FLAG,
@@ -75,11 +74,6 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         updateSuccess: action.payload,
       };
-      case ADD_CLAPS:
-        return {
-          ...state,
-          claps:state.claps + 1,
-        }
         case DELETE_A_BLOG:
           return {
             ...state,
