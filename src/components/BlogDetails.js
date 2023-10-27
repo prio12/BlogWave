@@ -70,6 +70,7 @@ const BlogDetails = () => {
     navigate(-1);
   };
 
+  console.log(user,userUid);
 
   return (
     <div className="p-5">
@@ -123,11 +124,17 @@ const BlogDetails = () => {
           <div className="flex text-xs items-center gap-5">
             {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
             <div className="flex  items-center gap-1">
-              <PiHandsClappingLight
+              {
+               user === userUid ? <PiHandsClappingLight
+               className="cursor-pointer text-xl"
+               title="Clap!"
+             />: 
+               <PiHandsClappingLight
                 className="cursor-pointer text-xl"
                 title="Clap!"
                 onClick={() => dispatch(updateClapsCount(_id))}
               />
+              }
               <span>{claps}</span>
             </div>
             {/* <FaRegComment/><span>5</span> */}
