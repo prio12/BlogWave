@@ -47,7 +47,7 @@ const Profile = () => {
   if (!userBLogs.length) {
     content = <div className="text-center">
       <p>You have not written any blog!</p>
-      <Link to='/write' style={{fontSize:"12px"}} className="text-[#1A8917] ">Write now?</Link>
+      <Link to='/writeBlog' style={{fontSize:"12px"}} className="text-[#1A8917] ">Write now?</Link>
     </div>
   }
 

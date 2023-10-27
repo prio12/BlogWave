@@ -42,6 +42,7 @@ const WriteBlog = () => {
             image:imgData.data.url,
             author,
             authorImage,
+            claps:0,
             date:Date(),
           };
           dispatch(addBlogPost(postDetails))

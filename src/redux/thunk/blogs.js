@@ -7,6 +7,7 @@ import {
   selectedBlogData,
   startLoadingBlogs,
   stopLoadingBlogs,
+  updateClaps,
   updatedBlog,
 } from "../actions/blogActions";
 import { startLoading, stopLoading } from "../actions/userAuthActions";
@@ -109,6 +110,23 @@ export const updateABlog = (data) => {
   };
 };
 
+export const updateClapsCount = (_id) =>{
+  return async (dispatch) =>{
+    try {
+      const response = await fetch(`http://localhost:5000/blogs/blogDetails/likes/${_id}`,{
+        method:"PUT",
+        headers: { "Content-Type": "application/json" },
+      })
+
+      const responseData = await response.json();
+      if (responseData) {
+        dispatch(selectedBlogData(responseData))
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
 
 export const deleteABLog = (_id) =>{
   return async (dispatch) =>{

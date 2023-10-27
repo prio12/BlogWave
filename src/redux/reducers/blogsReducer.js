@@ -19,7 +19,6 @@ const initialState = {
   selectedBlog: null,
   userBlogs: [],
   updateSuccess:false,
-  claps: 0,
   isDeleted:false,
 };
 

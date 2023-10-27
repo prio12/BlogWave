@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteABLog, fetchSelectedBLogData } from "../redux/thunk/blogs";
+import { deleteABLog, fetchSelectedBLogData, updateClapsCount } from "../redux/thunk/blogs";
 import Loader from "../loading/Loader";
 import { PiHandsClappingLight } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa";
@@ -28,7 +28,7 @@ const BlogDetails = () => {
   const user = useSelector((state) => state?.user?.user?.uid);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
-  const claps = useSelector((state) => state?.blogs?.claps);
+  // const claps = useSelector((state) => state?.blogs?.claps);
   const isDeleted = useSelector((state) => state?.blogs?.isDeleted);
   console.log(isDeleted);
   useEffect(() => {
@@ -64,6 +64,7 @@ const BlogDetails = () => {
     date,
     image,
     userUid,
+    claps,
   } = selectedBlogData;
   const handleNavigate = () => {
     navigate(-1);
@@ -125,6 +126,7 @@ const BlogDetails = () => {
               <PiHandsClappingLight
                 className="cursor-pointer text-xl"
                 title="Clap!"
+                onClick={() => dispatch(updateClapsCount(_id))}
               />
               <span>{claps}</span>
             </div>
