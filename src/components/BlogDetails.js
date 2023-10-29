@@ -20,6 +20,7 @@ import {
   DELETE_BLOG_FLAG,
   SET_UPDATE_SUCCESS_FLAG,
 } from "../redux/actionTypes/actionTypes";
+import ResponseField from "./blog/responses/ResponseField";
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,6 @@ const BlogDetails = () => {
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
   // const claps = useSelector((state) => state?.blogs?.claps);
   const isDeleted = useSelector((state) => state?.blogs?.isDeleted);
-  console.log(isDeleted);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(user));
   }, [dispatch, user]);
@@ -78,7 +78,6 @@ const BlogDetails = () => {
     navigate(-1);
   };
 
-  console.log(likedBy);
 
   return (
     <div className="p-5">
@@ -110,6 +109,7 @@ const BlogDetails = () => {
                 <RxCross1 />
               </label>
             </div>
+            <ResponseField/>
           </div>
         </div>
       </div>
