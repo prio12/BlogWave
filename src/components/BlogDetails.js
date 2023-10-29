@@ -14,6 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { GrLinkPrevious } from "react-icons/gr";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { fetchUserUpdatedData } from "../redux/thunk/userAuth";
+import { RxCross1 } from "react-icons/rx";
 import EditBlogStory from "./blog/editBlog/EditBlogStory";
 import {
   DELETE_BLOG_FLAG,
@@ -86,12 +87,7 @@ const BlogDetails = () => {
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content"></div>
         <div className="drawer-side">
-          <label
-            htmlFor="my-drawer-4"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <div className="menu p-4 w-3/4 md:w-2/4 min-h-full bg-base-100 ">
+          <div className="menu p-4 w-3/4 md:w-1/3 min-h-full bg-base-100 ">
             <EditBlogStory selectedBlogData={selectedBlogData}></EditBlogStory>
           </div>
         </div>
@@ -99,26 +95,22 @@ const BlogDetails = () => {
       {/* sideBar */}
 
       {/* responseSideBar */}
-      <div className="drawer ">
+      <div className="drawer drawer-end ">
         <input id="response-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {/* Page content here */}
-        </div>
+        <div className="drawer-content">{/* Page content here */}</div>
         <div className="drawer-side">
-          <label
-            htmlFor="response-drawer"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-            {/* Sidebar content here */}
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
-          </ul>
+          <div className="menu p-6 w-3/4 z-30 md:w-1/3 min-h-full  bg-base-100">
+            <div className="flex items-center justify-between">
+              <h4 className="font-bold ">Responses (46)</h4>
+              <label
+                htmlFor="response-drawer"
+                aria-label="close sidebar"
+                className="drawer-overlay cursor-pointer"
+              >
+                <RxCross1 />
+              </label>
+            </div>
+          </div>
         </div>
       </div>
       {/* responseSideBar */}
@@ -217,5 +209,3 @@ const BlogDetails = () => {
 };
 
 export default BlogDetails;
-
-
