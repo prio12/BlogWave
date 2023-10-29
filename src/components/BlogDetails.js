@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteABLog, fetchSelectedBLogData, updateClapsCount } from "../redux/thunk/blogs";
+import {
+  deleteABLog,
+  fetchSelectedBLogData,
+  updateClapsCount,
+} from "../redux/thunk/blogs";
 import Loader from "../loading/Loader";
 import { PiHandsClappingLight } from "react-icons/pi";
-import { FaRegComment, } from "react-icons/fa";
-import {FaHandsClapping} from "react-icons/fa6"
+import { FaRegComment } from "react-icons/fa";
+import { FaHandsClapping } from "react-icons/fa6";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { GrLinkPrevious } from "react-icons/gr";
@@ -49,6 +53,7 @@ const BlogDetails = () => {
     }
   }, [dispatch, isDeleted, navigate]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isResponseBarOpen, setIsResponseSideBarOpen] = useState(false);
   const handleMoreOptionModal = (data) => {
     setIsOpen(!isOpen);
   };
@@ -77,37 +82,46 @@ const BlogDetails = () => {
   return (
     <div className="p-5">
       {/* sidebar */}
-      <div className="drawer drawer-end">
+      <div className="drawer ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {/* Page content here */}
-          {/* <label
-            htmlFor="my-drawer-4"
-            className="drawer-button btn btn-primary"
-          >
-            Open drawer
-          </label> */}
-        </div>
+        <div className="drawer-content"></div>
         <div className="drawer-side">
           <label
             htmlFor="my-drawer-4"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          {/* <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
-          </ul> */}
           <div className="menu p-4 w-3/4 md:w-2/4 min-h-full bg-base-100 ">
             <EditBlogStory selectedBlogData={selectedBlogData}></EditBlogStory>
           </div>
         </div>
       </div>
       {/* sideBar */}
+
+      {/* responseSideBar */}
+      <div className="drawer ">
+        <input id="response-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content">
+          {/* Page content here */}
+        </div>
+        <div className="drawer-side">
+          <label
+            htmlFor="response-drawer"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+            {/* Sidebar content here */}
+            <li>
+              <a>Sidebar Item 1</a>
+            </li>
+            <li>
+              <a>Sidebar Item 2</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {/* responseSideBar */}
       <div className="w-full md:w-1/2 mx-auto">
         <h2 className="text-4xl font-extrabold my-3">{title}</h2>
         <div className="flex gap-2 items-center my-3">
@@ -126,27 +140,30 @@ const BlogDetails = () => {
           <div className="flex text-xs items-center gap-5">
             {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
             <div className="flex  items-center gap-1">
-              {
-               user === userUid ? <FaHandsClapping
-               className="cursor-pointer text-xl"
-             />: likedBy.find((us) => us === userUid)? <FaHandsClapping
-             className="cursor-pointer text-xl"
-             title="Already Clapped!"
-           />:
-               <PiHandsClappingLight
-                className="cursor-pointer text-xl"
-                title="Clap!"
-                onClick={() => dispatch(updateClapsCount(_id,userUid))}
-              />
-              }
+              {user === userUid ? (
+                <FaHandsClapping className="cursor-pointer text-xl" />
+              ) : likedBy.find((us) => us === userUid) ? (
+                <FaHandsClapping
+                  className="cursor-pointer text-xl"
+                  title="Already Clapped!"
+                />
+              ) : (
+                <PiHandsClappingLight
+                  className="cursor-pointer text-xl"
+                  title="Clap!"
+                  onClick={() => dispatch(updateClapsCount(_id, userUid))}
+                />
+              )}
               <span>{claps}</span>
             </div>
             {/* <FaRegComment/><span>5</span> */}
             <div className="flex items-center gap-1">
-              <FaRegComment
-                className="cursor-pointer text-xl"
-                title="Response.."
-              />
+              <label htmlFor="response-drawer" className="drawer-button">
+                <FaRegComment
+                  className="cursor-pointer text-xl"
+                  title="Response.."
+                />
+              </label>
               <span>5</span>
             </div>
           </div>
@@ -200,3 +217,5 @@ const BlogDetails = () => {
 };
 
 export default BlogDetails;
+
+
