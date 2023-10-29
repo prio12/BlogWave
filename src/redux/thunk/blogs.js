@@ -110,12 +110,14 @@ export const updateABlog = (data) => {
   };
 };
 
-export const updateClapsCount = (_id) =>{
+export const updateClapsCount = (_id,userUid) =>{
+  console.log(_id,userUid);
   return async (dispatch) =>{
     try {
-      const response = await fetch(`http://localhost:5000/blogs/blogDetails/likes/${_id}`,{
+      const response = await fetch(`http://localhost:5000/blogs/blogDetails/likes/${_id}/${userUid}`,{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
+        
       })
 
       const responseData = await response.json();

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteABLog, fetchSelectedBLogData, updateClapsCount } from "../redux/thunk/blogs";
 import Loader from "../loading/Loader";
 import { PiHandsClappingLight } from "react-icons/pi";
-import { FaRegComment } from "react-icons/fa";
+import { FaRegComment, } from "react-icons/fa";
+import {FaHandsClapping} from "react-icons/fa6"
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { GrLinkPrevious } from "react-icons/gr";
@@ -65,12 +66,13 @@ const BlogDetails = () => {
     image,
     userUid,
     claps,
+    likedBy,
   } = selectedBlogData;
   const handleNavigate = () => {
     navigate(-1);
   };
 
-  console.log(user,userUid);
+  console.log(likedBy);
 
   return (
     <div className="p-5">
@@ -125,14 +127,16 @@ const BlogDetails = () => {
             {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
             <div className="flex  items-center gap-1">
               {
-               user === userUid ? <PiHandsClappingLight
+               user === userUid ? <FaHandsClapping
                className="cursor-pointer text-xl"
-               title="Clap!"
-             />: 
+             />: likedBy.find((us) => us === userUid)? <FaHandsClapping
+             className="cursor-pointer text-xl"
+             title="Already Clapped!"
+           />:
                <PiHandsClappingLight
                 className="cursor-pointer text-xl"
                 title="Clap!"
-                onClick={() => dispatch(updateClapsCount(_id))}
+                onClick={() => dispatch(updateClapsCount(_id,userUid))}
               />
               }
               <span>{claps}</span>

@@ -44,6 +44,7 @@ const WriteBlog = () => {
             authorImage,
             claps:0,
             date:Date(),
+            likedBy:[],
           };
           dispatch(addBlogPost(postDetails))
          setIsLoading(false)
