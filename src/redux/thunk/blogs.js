@@ -1,4 +1,5 @@
 import {
+  addToBookMark,
   createBlogStatus,
   deleteBlog,
   getUserBlogs,
@@ -149,7 +150,7 @@ export const deleteABLog = (_id) =>{
 
 //bookmarks
 export const saveAsBookmarks = (selectedBlogData,userUid) =>{
-  return async () =>{
+  return async (dispatch) =>{
     try {
       const response = await fetch(`http://localhost:5000/users/${userUid?.userUid}`,{
         method:"PUT",
@@ -157,7 +158,9 @@ export const saveAsBookmarks = (selectedBlogData,userUid) =>{
         body:JSON.stringify(selectedBlogData)
       })
       const responseData = await response.json();
-      console.log(response);
+      if (responseData) {
+        dispatch(addToBookMark(selectedBlogData))
+      }
     } catch (error) {
       console.log(error);
     }

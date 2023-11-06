@@ -61,6 +61,7 @@ const BlogDetails = () => {
   };
   const handleBookmarks = () =>{
     dispatch(saveAsBookmarks({selectedBlogData:selectedBlogData},{userUid:user}))
+    alert("Added to Bookmarks!")
   }
   if (!selectedBlogData || isLoading) {
     return <Loader />;
