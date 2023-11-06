@@ -146,3 +146,20 @@ export const deleteABLog = (_id) =>{
     }
   }
 }
+
+//bookmarks
+export const saveAsBookmarks = (selectedBlogData,userUid) =>{
+  return async () =>{
+    try {
+      const response = await fetch(`http://localhost:5000/users/${userUid?.userUid}`,{
+        method:"PUT",
+        headers: { "Content-Type": "application/json" },
+        body:JSON.stringify(selectedBlogData)
+      })
+      const responseData = await response.json();
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}

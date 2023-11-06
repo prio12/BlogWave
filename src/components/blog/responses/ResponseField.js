@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 
 const ResponseField = () => {
   const userDetails = useSelector((state) => state?.user?.userData);
-  const { displayName, photoURL } = userDetails;
-  const { profilePic, name } = userDetails;
+  // const { profilePic, name } = userDetails;
   const textAreaRef = useRef();
   
 
@@ -16,10 +15,10 @@ const ResponseField = () => {
   return (
     <div className="p-2 my-5">
       <div className="flex items-center gap-3 ">
-        <img src={profilePic} alt="" className="h-8 w-8" />
+        {/* <img src={profilePic} alt="" className="h-8 w-8" />
         <p>
           <small>{name}</small>
-        </p>
+        </p> */}
       </div>
       <form onSubmit={handleSubmit} className="my-5">
         <textarea

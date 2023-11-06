@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteABLog,
   fetchSelectedBLogData,
+  saveAsBookmarks,
   updateClapsCount,
 } from "../redux/thunk/blogs";
 import Loader from "../loading/Loader";
@@ -33,6 +34,7 @@ const BlogDetails = () => {
 
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
   const user = useSelector((state) => state?.user?.user?.uid);
+  console.log(user);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
   // const claps = useSelector((state) => state?.blogs?.claps);
@@ -54,10 +56,12 @@ const BlogDetails = () => {
     }
   }, [dispatch, isDeleted, navigate]);
   const [isOpen, setIsOpen] = useState(false);
-  const [isResponseBarOpen, setIsResponseSideBarOpen] = useState(false);
   const handleMoreOptionModal = (data) => {
     setIsOpen(!isOpen);
   };
+  const handleBookmarks = () =>{
+    dispatch(saveAsBookmarks({selectedBlogData:selectedBlogData},{userUid:user}))
+  }
   if (!selectedBlogData || isLoading) {
     return <Loader />;
   }
@@ -176,23 +180,29 @@ const BlogDetails = () => {
                   <label
                     style={{ fontSize: "10px" }}
                     htmlFor="my-drawer-4"
-                    className="drawer-button btn btn-sm"
+                    className="drawer-button cursor-pointer"
                   >
                     Edit Story
                   </label>
-                  <button
+                  {/* <button
                     onClick={() => dispatch(deleteABLog(_id))}
                     style={{ fontSize: "10px" }}
                     className="btn btn-sm my-2"
                   >
                     Delete
-                  </button>
+                  </button> */}
+                  <div onClick={() => dispatch(deleteABLog(_id))}
+                    style={{ fontSize: "10px" }}
+                    className="my-2 cursor-pointer">
+                    <p>Delete</p>
+                  </div>
                 </div>
               )}
             </div>
             <MdOutlineBookmarkAdd
               title="Add to bookmark"
               className="cursor-pointer"
+              onClick={handleBookmarks}
             />
           </div>
         </div>
@@ -209,3 +219,4 @@ const BlogDetails = () => {
 };
 
 export default BlogDetails;
+

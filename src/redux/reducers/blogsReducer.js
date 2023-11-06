@@ -1,4 +1,5 @@
 import {
+  ADD_BOOKMARK,
   CREATE_BLOG_SUCCESS,
   DELETE_A_BLOG,
   DELETE_BLOG_FLAG,
@@ -20,6 +21,7 @@ const initialState = {
   userBlogs: [],
   updateSuccess:false,
   isDeleted:false,
+  bookmarks:[],
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -84,6 +86,12 @@ export const blogReducer = (state = initialState, action) => {
               ...state,
               isDeleted:action.payload,
             }
+            case ADD_BOOKMARK:
+              return {
+                ...state,
+                bookmarks:action.payload,
+              }
+
     default:
       return state;
   }
