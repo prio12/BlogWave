@@ -9,6 +9,7 @@ import WriteBlog from "../Pages/write/WriteBlog";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../Pages/userDashboard/profile/Profile";
 import BlogDetails from "../components/BlogDetails";
+import Library from "../Pages/userDashboard/library/Library";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><Profile/></PrivateRoute>,
       },
       {
+        path: "/library",
+        element: <PrivateRoute><Library/></PrivateRoute>,
+      },
+      {
         path: "/blogDetails/:id",
         element: <PrivateRoute><BlogDetails/></PrivateRoute>,
       },
@@ -49,4 +54,5 @@ export const router = createBrowserRouter([
     path: "/signIn",
     element: <SignIn />,
   },
+ 
 ]);

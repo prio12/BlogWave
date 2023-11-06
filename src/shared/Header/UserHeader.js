@@ -80,9 +80,11 @@ const UserHeader = () => {
                 </Link>
                 <Link className="flex mb-3 items-center gap-3">
                   <PiBookmarksLight />
+                  <Link to='/library'>
                   <p>
                     <small>Library</small>
                   </p>
+                  </Link>
                 </Link>
                 <div onClick={handleLogout} className="flex cursor-pointer gap-3 items-center">
                   <PiSignOutThin />
