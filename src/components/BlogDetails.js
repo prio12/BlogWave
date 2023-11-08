@@ -16,6 +16,7 @@ import { GrLinkPrevious } from "react-icons/gr";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { fetchUserUpdatedData } from "../redux/thunk/userAuth";
 import { RxCross1 } from "react-icons/rx";
+import {BsFillBookmarkCheckFill} from "react-icons/bs"
 import EditBlogStory from "./blog/editBlog/EditBlogStory";
 import {
   DELETE_BLOG_FLAG,
@@ -33,6 +34,8 @@ const BlogDetails = () => {
   }, [dispatch, id]);
 
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
+  const userData = useSelector((state) => state?.user?.userData);
+  const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
   const user = useSelector((state) => state?.user?.user?.uid);
   console.log(user);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
@@ -59,13 +62,28 @@ const BlogDetails = () => {
   const handleMoreOptionModal = (data) => {
     setIsOpen(!isOpen);
   };
-  const handleBookmarks = () =>{
-    dispatch(saveAsBookmarks({selectedBlogData:selectedBlogData},{userUid:user}))
-    alert("Added to Bookmarks!")
+  const handleBookmarks = () => {
+    dispatch(
+      saveAsBookmarks({ selectedBlogData: selectedBlogData }, { userUid: user })
+    );
+    alert("Added to Bookmarks!");
+  };
+
+  if (!userData || isUpdateLoading) {
+    return <Loader/>
   }
+  const bookmarks = userData?.bookmarks;
+
   if (!selectedBlogData || isLoading) {
     return <Loader />;
   }
+
+  if (isLoading) {
+    return <Loader/>
+  }
+
+  
+
   const {
     _id,
     author,
@@ -82,8 +100,6 @@ const BlogDetails = () => {
   const handleNavigate = () => {
     navigate(-1);
   };
-
-
   return (
     <div className="p-5">
       {/* sidebar */}
@@ -114,7 +130,7 @@ const BlogDetails = () => {
                 <RxCross1 />
               </label>
             </div>
-            <ResponseField/>
+            <ResponseField />
           </div>
         </div>
       </div>
@@ -192,19 +208,32 @@ const BlogDetails = () => {
                   >
                     Delete
                   </button> */}
-                  <div onClick={() => dispatch(deleteABLog(_id))}
+                  <div
+                    onClick={() => dispatch(deleteABLog(_id))}
                     style={{ fontSize: "10px" }}
-                    className="my-2 cursor-pointer">
+                    className="my-2 cursor-pointer"
+                  >
                     <p>Delete</p>
                   </div>
                 </div>
               )}
             </div>
-            <MdOutlineBookmarkAdd
-              title="Add to bookmark"
-              className="cursor-pointer"
-              onClick={handleBookmarks}
-            />
+            <div>
+              {bookmarks.find((blog) => blog._id === _id) ? (
+                <div>
+                  <BsFillBookmarkCheckFill
+                  title="Already Bookmarked!"
+                  className="cursor-not-allowed"
+                  />
+                </div>
+              ) : (
+                <MdOutlineBookmarkAdd
+                  title="Add to bookmark"
+                  className="cursor-pointer"
+                  onClick={handleBookmarks}
+                />
+              )}
+            </div>
           </div>
         </div>
         <img src={image} style={{ height: "50%" }} alt="" />
@@ -220,4 +249,3 @@ const BlogDetails = () => {
 };
 
 export default BlogDetails;
-
