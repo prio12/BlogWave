@@ -152,6 +152,7 @@ export const deleteABLog = (_id) =>{
 export const saveAsBookmarks = (selectedBlogData,userUid) =>{
   return async (dispatch) =>{
     try {
+      dispatch(startLoading())
       const response = await fetch(`http://localhost:5000/users/${userUid?.userUid}`,{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
@@ -160,6 +161,7 @@ export const saveAsBookmarks = (selectedBlogData,userUid) =>{
       const responseData = await response.json();
       if (responseData) {
         dispatch(addToBookMark(selectedBlogData))
+        dispatch(stopLoading())
       }
     } catch (error) {
       console.log(error);
