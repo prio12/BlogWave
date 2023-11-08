@@ -13,7 +13,7 @@ const Library = () => {
   const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
 
 
-  const {bookmarks} = userData;
+  
 
   const dispatch = useDispatch();
   const [activeContent, setActiveContent] = useState("bookmarks");
@@ -29,7 +29,14 @@ const Library = () => {
 
   let content;
 
-  if (!bookmarks.length) {
+  if (!userData || isUpdateLoading) {
+    content = <Loader/>
+  }
+
+  const bookmarks = userData?.bookmarks;
+
+
+  if (!bookmarks || !bookmarks.length) {
     content = <p>You have not bookmarked any post!</p>
   }
 
@@ -37,13 +44,11 @@ const Library = () => {
     content = <Loader/>
   }
 
-  if (bookmarks.length) {
+  if (bookmarks?.length) {
     content = bookmarks.map((blog) => <Blogs blog={blog} key={blog._id}></Blogs>)
   }
 
-  if (!userData || isUpdateLoading) {
-    content = <Loader/>
-  }
+  
 
   return (
     <div className="px-8  md:px-12 grid grid-cols-1 md:grid-cols-3 gap-5">
