@@ -78,7 +78,11 @@ const Profile = () => {
         </h3>
         </div>
         <div style={{ fontSize: "12px" }} className="flex my-7 gap-7">
-          <p style={{ cursor: 'pointer' }} className={` ${activeContent === "home" ? 'underline' : 'margin-top-class'}`} onClick={() => toggleContent("home")}>Home</p>
+          <p style={{ cursor: 'pointer' }} className={` ${
+                  activeContent === "home"
+                    && "underline"
+                     
+                }`} onClick={() => toggleContent("home")}>Home</p>
           <p className={`${activeContent==="about" && 'underline'}`} style={{ cursor: 'pointer' }} onClick={() => toggleContent("about")}>About</p>
         </div>
         <div>
