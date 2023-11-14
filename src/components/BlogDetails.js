@@ -118,8 +118,8 @@ const BlogDetails = () => {
       <div className="drawer drawer-end ">
         <input id="response-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">{/* Page content here */}</div>
-        <div className="drawer-side">
-          <div className="menu p-6 w-3/4 z-30 md:w-1/3 min-h-full  bg-base-100">
+        <div className="drawer-side ">
+          <div className="menu p-6 w-3/4  md:w-1/3 min-h-full  bg-slate-100 ">
             <div className="flex items-center justify-between">
               {/* <h4 className="font-bold ">Responses ({responses?.length})</h4> */}
               {
@@ -136,7 +136,9 @@ const BlogDetails = () => {
                 <RxCross1 />
               </label>
             </div>
-            <ResponseField />
+           <div >
+           <ResponseField />
+           </div>
           </div>
         </div>
       </div>
@@ -161,7 +163,7 @@ const BlogDetails = () => {
             <div className="flex  items-center gap-1">
               {user === userUid ? (
                 <FaHandsClapping className="cursor-pointer text-xl" />
-              ) : likedBy.find((us) => us === userUid) ? (
+              ) : likedBy?.find((us) => us === userUid) ? (
                 <FaHandsClapping
                   className="cursor-pointer text-xl"
                   title="Already Clapped!"
@@ -176,7 +178,7 @@ const BlogDetails = () => {
               <span>{claps}</span>
             </div>
             {/* <FaRegComment/><span>5</span> */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 ">
               <label htmlFor="response-drawer" className="drawer-button">
                 <FaRegComment
                   className="cursor-pointer text-xl"
@@ -232,7 +234,7 @@ const BlogDetails = () => {
               )}
             </div>
             <div>
-              {bookmarks.find((blog) => blog._id === _id) ? (
+              {bookmarks?.find((blog) => blog._id === _id) ? (
                 <div>
                   <BsFillBookmarkCheckFill
                   title="Already Bookmarked!"
