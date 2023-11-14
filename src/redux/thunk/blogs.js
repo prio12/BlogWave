@@ -174,7 +174,7 @@ export const addResponse = (responseDetails) =>{
   const _id = responseDetails?.blogId;
   return async (dispatch) =>{
     try {
-      dispatch(startLoading())
+      // dispatch(startLoading())
       const response = await fetch(`http://localhost:5000/blogs/selectedBLog/responses/${_id}`,{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
@@ -183,7 +183,8 @@ export const addResponse = (responseDetails) =>{
       const responseData = await response.json();
       if (responseData) {
         console.log(responseData);
-        dispatch(stopLoading())
+        // dispatch(stopLoading())
+        dispatch(selectedBlogData(responseData))
       }
     } catch (error) {
       

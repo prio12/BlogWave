@@ -34,6 +34,7 @@ const BlogDetails = () => {
   }, [dispatch, id]);
 
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
+  const responses = selectedBlogData?.responses;
   const userData = useSelector((state) => state?.user?.userData);
   const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
   const user = useSelector((state) => state?.user?.user?.uid);
@@ -120,7 +121,13 @@ const BlogDetails = () => {
         <div className="drawer-side">
           <div className="menu p-6 w-3/4 z-30 md:w-1/3 min-h-full  bg-base-100">
             <div className="flex items-center justify-between">
-              <h4 className="font-bold ">Responses (46)</h4>
+              {/* <h4 className="font-bold ">Responses ({responses?.length})</h4> */}
+              {
+                responses &&  <h4 className="font-bold ">Responses ({responses?.length})</h4>
+              }
+              {
+                !responses &&  <h4 className="font-bold ">Responses (0)</h4>
+              }
               <label
                 htmlFor="response-drawer"
                 aria-label="close sidebar"

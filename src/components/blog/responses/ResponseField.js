@@ -1,10 +1,18 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addResponse } from "../../../redux/thunk/blogs";
+import Responses from "./Responses";
+import { IoIosArrowDown } from "react-icons/io";
 
 const ResponseField = () => {
   const userDetails = useSelector((state) => state?.user?.userData);
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
+  const [selectedFilter,setSelectedFilter] = useState("ALL COMMENTS")
+  const [isDropDown, setIsDropdown] = useState(false);
+  const handleDropdown = () =>{
+      setIsDropdown(!isDropDown)
+  }
+  const responses = selectedBlogData?.responses;
   const { profilePic, name } = userDetails;
   const textAreaRef = useRef();
   const dispatch = useDispatch();
@@ -13,15 +21,16 @@ const ResponseField = () => {
     event.preventDefault();
     const textAreaValue = textAreaRef.current.value;
     const response = {
-      blogId:selectedBlogData?._id,
+      blogId: selectedBlogData?._id,
       name,
       profilePic,
       response: textAreaValue,
     };
-    
-    dispatch(addResponse(response))
-   
+
+    dispatch(addResponse(response));
+    textAreaRef.current.value = ""
   };
+  
   return (
     <div className="p-2 my-5">
       <div className="flex items-center gap-3 ">
@@ -30,7 +39,7 @@ const ResponseField = () => {
           <small>{name}</small>
         </p>
       </div>
-      <form onSubmit={handleSubmit} className="my-5">
+      <form onSubmit={handleSubmit} className='border-b-2  border-black py-3'>
         <textarea
           ref={textAreaRef}
           className="focus:outline-none font-mono"
@@ -55,6 +64,19 @@ const ResponseField = () => {
           required
         />
       </form>
+      <div className='my-3 flex items-center gap-2 relative'>
+            <p className='font-bold' style={{fontSize:"12px"}}>{selectedFilter}</p> 
+            <IoIosArrowDown className='cursor-pointer' onClick={handleDropdown}/>
+            {
+                isDropDown && <div style={{fontSize:"10px"}} className='absolute top-8 font-bold p-5 w-32  bg-white z-50 '>
+                    <p className='cursor-pointer' onClick={() => setSelectedFilter("MOST RECENT")}>Most Recent</p>
+                    <p className='cursor-pointer' onClick={() => setSelectedFilter("ALL COMMENTS")}>All Comments</p>
+                </div>
+            }
+            </div>
+      {
+        responses?.map((response, index) => <Responses response={response} key={index}></Responses>)
+      }
     </div>
   );
 };
