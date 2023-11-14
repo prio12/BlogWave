@@ -1,24 +1,34 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addResponse } from "../../../redux/thunk/blogs";
 
 const ResponseField = () => {
   const userDetails = useSelector((state) => state?.user?.userData);
-  // const { profilePic, name } = userDetails;
+  const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
+  const { profilePic, name } = userDetails;
   const textAreaRef = useRef();
-  
+  const dispatch = useDispatch();
 
-  const handleSubmit = (event) =>{
+  const handleSubmit = (event) => {
     event.preventDefault();
     const textAreaValue = textAreaRef.current.value;
-    console.log(textAreaValue);
-  }
+    const response = {
+      blogId:selectedBlogData?._id,
+      name,
+      profilePic,
+      response: textAreaValue,
+    };
+    
+    dispatch(addResponse(response))
+   
+  };
   return (
     <div className="p-2 my-5">
       <div className="flex items-center gap-3 ">
-        {/* <img src={profilePic} alt="" className="h-8 w-8" />
+        <img src={profilePic} alt="" className="h-8 w-8" />
         <p>
           <small>{name}</small>
-        </p> */}
+        </p>
       </div>
       <form onSubmit={handleSubmit} className="my-5">
         <textarea
@@ -32,18 +42,18 @@ const ResponseField = () => {
           rows="10"
         ></textarea>
         <input
-             type="submit"
-             style={{
-               backgroundColor: "black",
-               borderRadius: "20px",
-               padding: "10px 20px",
-               fontFamily: "'Roboto Slab', serif",
-               color: "white",
-               border: "none",
-             }}
-             className="btn btn-sm"
-             required
-           />
+          type="submit"
+          style={{
+            backgroundColor: "black",
+            borderRadius: "20px",
+            padding: "10px 20px",
+            fontFamily: "'Roboto Slab', serif",
+            color: "white",
+            border: "none",
+          }}
+          className="btn btn-sm"
+          required
+        />
       </form>
     </div>
   );

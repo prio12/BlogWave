@@ -37,7 +37,6 @@ const BlogDetails = () => {
   const userData = useSelector((state) => state?.user?.userData);
   const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
   const user = useSelector((state) => state?.user?.user?.uid);
-  console.log(user);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
   // const claps = useSelector((state) => state?.blogs?.claps);
