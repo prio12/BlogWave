@@ -183,7 +183,14 @@ const BlogDetails = () => {
                   title="Response.."
                 />
               </label>
-              <span>5</span>
+              <span>
+              {
+                responses &&  <h4 className="font-bold ">{responses?.length}</h4>
+              }
+              {
+                !responses &&  <h4 className="font-bold ">0</h4>
+              }
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-3">
