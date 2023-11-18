@@ -7,7 +7,8 @@ const UserAbout = () => {
   const textareaRef = useRef();
   const { handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const about = useSelector((state) => state?.user?.user?.about)
+  const about = useSelector((state) => state?.user?.userData?.about);
+  console.log(about);
   const uid = useSelector((state) => state?.user?.user?.uid);
   
 

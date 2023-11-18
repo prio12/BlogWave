@@ -11,7 +11,6 @@ const WriteBlog = () => {
   const authorImage = useSelector((state) => state?.user?.user?.photoURL);
   const author = useSelector((state) => state?.user?.user?.displayName);
   const [isLoading,setIsLoading] = useState(false)
-  console.log(createdBlogId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const submit = (data) => {
@@ -33,7 +32,6 @@ const WriteBlog = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          console.log(imgData);
           const postDetails = {
             userUid:userUid,
             title: data.title,
