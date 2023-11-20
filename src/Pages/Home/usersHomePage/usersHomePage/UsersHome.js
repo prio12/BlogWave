@@ -19,12 +19,13 @@ const UsersHome = ({ category }) => {
     content = <Loader />;
   } else {
     if (blogs.length) {
-      if (category) {
+      if (category && category !=="For you") {
         // Filter and map if category is provided
         content = blogs
           .filter((filteredBlog) => filteredBlog.category === category)
           .map((blog) => <Blogs key={blog._id} blog={blog}></Blogs>);
-      } else {
+      }
+      else {
         // Map all blogs if no category is provided
         content = blogs.map((blog) => (
           <Blogs key={blog._id} blog={blog}></Blogs>
