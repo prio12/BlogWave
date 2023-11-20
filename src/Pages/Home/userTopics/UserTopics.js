@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const UserTopics = () => {
+const UserTopics = ({handleDisplayedContent,selectedTopic}) => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
   const allTopics = blogs.map((blog) => blog.category); // Filter out undefined values
   const [startIndex, setStartIndex] = useState(0);
@@ -56,6 +56,9 @@ const UserTopics = () => {
     // };
   };
 
+  //handle content
+ 
+
   const visibleTopics = allTopics.slice(startIndex, startIndex + topicsPerPage);
   return (
     <div className=" relative flex mb-5 items-center gap-2">
@@ -68,7 +71,7 @@ const UserTopics = () => {
       <div>
         <div className="topics flex gap-5">
           {visibleTopics.map((topic, index) => (
-            <div style={{ fontSize: "12px" }} className="topic" key={index}>
+            <div style={{ fontSize: "12px" }} className={`topic cursor-pointer ${topic === selectedTopic && "underline"}`} onClick={() => handleDisplayedContent(topic)} key={index}>
               {topic}
             </div>
           ))}

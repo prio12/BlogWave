@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../Banner/Banner";
 import Blogs from "../../../components/blog/Blogs";
 import Trending from "../Trending/Trending";
@@ -16,6 +16,12 @@ const Home = () => {
     const user = useSelector((state) => state?.user?.user?.uid);
   const loading = useSelector((state) => state?.user?.isLoading);
   const blogs = useSelector((state) => state?.blogs?.blogs)
+  const [category,setCategory] = useState('');
+  const [selectedTopic,setSelectedTopic] = useState(null);
+  const handleDisplayedContent = (topic) =>{
+   setCategory(topic)
+   setSelectedTopic(topic)
+  }
   const dispatch = useDispatch()
   useEffect(() =>{
     dispatch(fetchUserUpdatedData(user))
@@ -33,11 +39,11 @@ const Home = () => {
         <div className="col-span-2">
           <div className="grid grid-cols-1">
             <div>
-              <UserTopics />
+              <UserTopics  handleDisplayedContent={handleDisplayedContent}  selectedTopic={selectedTopic}/>
             </div>
             <div>
               {/* <Blogs /> */}
-              <UsersHome/>
+              <UsersHome category={category}/>
             </div>
           </div>
         </div>

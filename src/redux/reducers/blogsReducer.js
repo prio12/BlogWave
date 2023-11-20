@@ -91,7 +91,6 @@ export const blogReducer = (state = initialState, action) => {
                 ...state,
                 bookmarks:action.payload,
               }
-
     default:
       return state;
   }
