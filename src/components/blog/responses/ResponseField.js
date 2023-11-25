@@ -7,7 +7,7 @@ import { IoIosArrowDown } from "react-icons/io";
 const ResponseField = () => {
   const userDetails = useSelector((state) => state?.user?.userData);
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
-  const [selectedFilter,setSelectedFilter] = useState("ALL COMMENTS")
+  const [selectedFilter,setSelectedFilter] = useState("MOST RECENT")
   const [isDropDown, setIsDropdown] = useState(false);
   const handleDropdown = () =>{
       setIsDropdown(!isDropDown)
@@ -16,6 +16,7 @@ const ResponseField = () => {
   const { profilePic, name } = userDetails;
   const textAreaRef = useRef();
   const dispatch = useDispatch();
+  const createdAt = new Date();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,6 +26,7 @@ const ResponseField = () => {
       name,
       profilePic,
       response: textAreaValue,
+      createdAt,
     };
 
     dispatch(addResponse(response));
@@ -75,7 +77,14 @@ const ResponseField = () => {
             }
             </div>
       {
-        responses?.map((response, index) => <Responses response={response} key={index}></Responses>)
+        selectedFilter === "MOST RECENT" && responses
+        ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .map((response, index) => <Responses response={response} key={index}></Responses>)
+      }
+      {
+        selectedFilter === "ALL COMMENTS" && responses
+        ?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+        .map((response, index) => <Responses response={response} key={index}></Responses>)
       }
     </div>
   );

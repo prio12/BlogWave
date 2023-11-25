@@ -22,7 +22,7 @@ const EditBlogStory = ({ selectedBlogData }) => {
 
     setIsLoading(true);
     fetch(
-      "https://api.imgbb.com/1/upload?expiration=600&key=a0add477bb3aea1e07516557d1748e8c",
+      "https://api.imgbb.com/1/upload?&key=a0add477bb3aea1e07516557d1748e8c",
       {
         method: "POST",
         body: formData,

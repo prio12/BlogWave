@@ -15,7 +15,7 @@ const Responses = ({response}) => {
                <div style={{fontSize:"10px"}} className='p-2'>
                 {
                    seeMoreStatus && <p>
-                   {response.response.slice(0, 2)}
+                   {response.response.slice(0, 200)}
                    <p className='text-green-500 cursor-pointer font-bold' onClick={() => setSeeMoreStatus(false)}>See More</p>
                </p>
                 }
