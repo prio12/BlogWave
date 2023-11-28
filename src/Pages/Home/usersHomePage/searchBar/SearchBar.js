@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import "./SearchBar.css";
+import { useDispatch } from "react-redux";
+import { searchBlogs } from "../../../../redux/actions/blogActions";
 
 const SearchBar = () => {
-  const [query, setQuery] = useState('');
-  console.log(query);
-  const handleSearch = () =>{
-    console.log(query)
-  }
+  const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
+  const handleSearch = () => {
+    dispatch(searchBlogs(query));
+  };
 
-  const handleKeyPress = (e) =>{
+  const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      handleSearch()
+      handleSearch();
     }
-  }
+  };
   return (
     <div>
       <div className="flex gap-2 items-center">
@@ -27,8 +29,6 @@ const SearchBar = () => {
         />
       </div>
     </div>
-
-    
   );
 };
 

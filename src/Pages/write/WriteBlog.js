@@ -8,8 +8,10 @@ const WriteBlog = () => {
   const textareaRef = useRef();
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const createdBlogId = useSelector((state) => state?.blogs?.createdBlogId);
-  const authorImage = useSelector((state) => state?.user?.user?.photoURL);
-  const author = useSelector((state) => state?.user?.user?.displayName);
+  // const authorImage = useSelector((state) => state?.user?.user?.photoURL);
+  // const author = useSelector((state) => state?.user?.user?.displayName);
+  const author = useSelector((state) => state?.user?.userData?.name);
+  const authorImage = useSelector((state) => state?.user?.userData?.profilePic);
   const [isLoading,setIsLoading] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();

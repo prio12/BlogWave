@@ -6,6 +6,7 @@ import {
   FETCH_USER_BLOGS,
   LOAD_BLOGS,
   POST_BLOGS,
+  SEARCH_BLOGS,
   SELECT_BLOG,
   SET_UPDATE_SUCCESS_FLAG,
   START_LOADING_FOR_BLOGS,
@@ -19,9 +20,11 @@ const initialState = {
   isLoading: false,
   selectedBlog: null,
   userBlogs: [],
-  updateSuccess:false,
-  isDeleted:false,
-  bookmarks:[],
+  updateSuccess: false,
+  isDeleted: false,
+  bookmarks: [],
+  searchResults: [],
+  searchPeopleResults:[],
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -62,35 +65,53 @@ export const blogReducer = (state = initialState, action) => {
         userBlogs: action.payload,
       };
     case UPDATE_BLOG_SUCCESS:
-      const updatedIndex = state.blogs.findIndex((blog) => blog._id === action.payload._id);
+      const updatedIndex = state.blogs.findIndex(
+        (blog) => blog._id === action.payload._id
+      );
       const updatedBlogs = [...state.blogs];
-      updatedBlogs[updatedIndex] = action.payload
+      updatedBlogs[updatedIndex] = action.payload;
       return {
         ...state,
-        blogs:updatedBlogs,
-        updateSuccess:true,
+        blogs: updatedBlogs,
+        updateSuccess: true,
       };
-      case SET_UPDATE_SUCCESS_FLAG: // Reducer case to reset the flag if needed
+    case SET_UPDATE_SUCCESS_FLAG: // Reducer case to reset the flag if needed
       return {
         ...state,
         updateSuccess: action.payload,
       };
-        case DELETE_A_BLOG:
-          return {
-            ...state,
-            blogs:state.blogs.filter((blog) => blog._id !== action.payload._id),
-            isDeleted:true,
-          }
-          case DELETE_BLOG_FLAG:
-            return {
-              ...state,
-              isDeleted:action.payload,
-            }
-            case ADD_BOOKMARK:
-              return {
-                ...state,
-                bookmarks:action.payload,
-              }
+    case DELETE_A_BLOG:
+      return {
+        ...state,
+        blogs: state.blogs.filter((blog) => blog._id !== action.payload._id),
+        isDeleted: true,
+      };
+    case DELETE_BLOG_FLAG:
+      return {
+        ...state,
+        isDeleted: action.payload,
+      };
+    case ADD_BOOKMARK:
+      return {
+        ...state,
+        bookmarks: action.payload,
+      };
+    case SEARCH_BLOGS:
+      const query = action.payload.toLowerCase();
+      const searchResults = state.blogs.filter((blog) =>
+        blog.title?.toLowerCase().includes(query) 
+        // blog.author?.toLowerCase().includes(query)
+      );
+      // console.log("Search Results:", searchResults);
+      const searchPeopleResults = state.blogs.filter((blog) =>
+        blog.author?.toLowerCase().includes(query)
+      );
+      // console.log("People Results:", searchPeopleResults);
+      return {
+        ...state,
+        searchResults,
+        searchPeopleResults,
+      };
     default:
       return state;
   }
