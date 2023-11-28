@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import Profile from "../Pages/userDashboard/profile/Profile";
 import BlogDetails from "../components/BlogDetails";
 import Library from "../Pages/userDashboard/library/Library";
+import SearchResults from "../Pages/searchResults/SearchResults";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/writeBlog",
         element: <PrivateRoute><WriteBlog/></PrivateRoute>,
+      },
+      {
+        path: "/searchResults",
+        element: <PrivateRoute><SearchResults/></PrivateRoute>,
       },
       {
         path: "/profile",

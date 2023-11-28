@@ -3,12 +3,15 @@ import { BsSearch } from "react-icons/bs";
 import "./SearchBar.css";
 import { useDispatch } from "react-redux";
 import { searchBlogs } from "../../../../redux/actions/blogActions";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSearch = () => {
     dispatch(searchBlogs(query));
+    navigate("/searchResults")
   };
 
   const handleKeyPress = (e) => {
