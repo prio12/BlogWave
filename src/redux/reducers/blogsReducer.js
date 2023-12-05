@@ -13,6 +13,7 @@ import {
   STOP_LOADING_FOR_BLOGS,
   UPDATE_BLOG_SUCCESS,
 } from "../actionTypes/actionTypes";
+import { startLoading, stopLoading } from "../actions/userAuthActions";
 
 const initialState = {
   blogs: [],
@@ -98,15 +99,16 @@ export const blogReducer = (state = initialState, action) => {
       };
     case SEARCH_BLOGS:
       const query = action.payload.toLowerCase();
+      console.log(query,action);
       const searchResults = state.blogs.filter((blog) =>
         blog.title?.toLowerCase().includes(query) 
         // blog.author?.toLowerCase().includes(query)
       );
-      // console.log("Search Results:", searchResults);
+      console.log("Search Results:", searchResults);
       const searchPeopleResults = state.blogs.filter((blog) =>
         blog.author?.toLowerCase().includes(query)
       );
-      // console.log("People Results:", searchPeopleResults);
+      console.log("People Results:", searchPeopleResults);
       return {
         ...state,
         searchResults,

@@ -1,17 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserUpdatedData } from '../../redux/thunk/userAuth';
+import Blogs from '../../components/blog/Blogs';
+import Loader from '../../loading/Loader';
+import { fetchAllBlogs } from '../../redux/thunk/blogs';
 
 const SearchResults = () => {
     const [selectedResult,setSelectedResult] = useState("stories")
     const searchBlogs = useSelector((state) => state?.blogs?.searchResults)
     const searchedUsers = useSelector((state) => state?.blogs?.searchPeopleResults)
     const userUid = useSelector((state) => state?.user?.user?.uid);
+    const isLoading = useSelector((state) => state?.blogs?.isLoading)
     const dispatch = useDispatch()
     useEffect(() =>{
         dispatch(fetchUserUpdatedData(userUid))
       },[dispatch,userUid])
-    console.log(searchBlogs);
+      useEffect(() =>{
+        dispatch(fetchAllBlogs())
+    },[dispatch])
+
+      let content;
+
+      if (searchBlogs && searchBlogs.length) {
+        content = searchBlogs.map((blog) => <Blogs key={blog._id} blog={blog}></Blogs>)
+      }
+
+      if (isLoading) {
+        content = <Loader/>
+      }
+
+      if (searchBlogs && !searchBlogs.length) {
+        content = <div className='text-center py-5'><p>Ooops! Nothing Found!</p></div>
+      }
     return (
         <div className='p-5 md:px-12'>
            <h1 className='text-4xl font-bold'><span className='text-slate-400'>Results for</span> full</h1>
@@ -22,7 +42,7 @@ const SearchResults = () => {
            {
             selectedResult === "stories"? 
             <div>
-            <p>Stories</p>
+            {content}
            </div> :
            <div>
            <p>people</p>
