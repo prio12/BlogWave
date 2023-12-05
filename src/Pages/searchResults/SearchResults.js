@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserUpdatedData } from '../../redux/thunk/userAuth';
 
 const SearchResults = () => {
     const [selectedResult,setSelectedResult] = useState("stories")
-    console.log(selectedResult);
+    const searchBlogs = useSelector((state) => state?.blogs?.searchResults)
+    const searchedUsers = useSelector((state) => state?.blogs?.searchPeopleResults)
+    const userUid = useSelector((state) => state?.user?.user?.uid);
+    const dispatch = useDispatch()
+    useEffect(() =>{
+        dispatch(fetchUserUpdatedData(userUid))
+      },[dispatch,userUid])
+    console.log(searchBlogs);
     return (
         <div className='p-5 md:px-12'>
            <h1 className='text-4xl font-bold'><span className='text-slate-400'>Results for</span> full</h1>
