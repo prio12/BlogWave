@@ -4,13 +4,13 @@ import { fetchUserUpdatedData } from '../../redux/thunk/userAuth';
 import Blogs from '../../components/blog/Blogs';
 import Loader from '../../loading/Loader';
 import { fetchAllBlogs } from '../../redux/thunk/blogs';
+import StaffPicks from '../Home/usersHomePage/staffPicksBlogs/StaffPicks';
 
 const SearchResults = () => {
     const [selectedResult,setSelectedResult] = useState("stories")
-    const [searchBlogs,setSearchBlogs] = useState([]);
-    const [searchQuery,setSearchQuery] = useState("");
-    // const searchBlogs = useSelector((state) => state?.blogs?.searchResults)
-    // const searchedUsers = useSelector((state) => state?.blogs?.searchPeopleResults)
+    const [searchedBlogs,setSearchBlogs] = useState([]);
+    const [searchedQuery,setSearchQuery] = useState("");
+    const [searchedPeople,setSearchPeople] = useState([]);
     const query = useSelector((state) => state?.blogs?.query);
     const userUid = useSelector((state) => state?.user?.user?.uid);
     const isLoading = useSelector((state) => state?.blogs?.isLoading)
@@ -25,25 +25,28 @@ const SearchResults = () => {
       useEffect(() =>{
         const storedSearchBlogs = JSON.parse(sessionStorage.getItem("searchBlogs"));
         const storedSearchQuery = JSON.parse(sessionStorage.getItem("query"));
+        const storedSearchedPeople = JSON.parse(sessionStorage.getItem("searchPeopleResults"));
         setSearchBlogs(storedSearchBlogs)
+        setSearchPeople(storedSearchedPeople)
         setSearchQuery(storedSearchQuery)
       },[query])
       let content;
 
-      if (searchBlogs && searchBlogs.length) {
-        content = searchBlogs.map((blog) => <Blogs key={blog._id} blog={blog}></Blogs>)
+      if (searchedBlogs && searchedBlogs.length) {
+        content = searchedBlogs.map((blog) => <Blogs key={blog._id} blog={blog}></Blogs>)
       }
 
       if (isLoading) {
         content = <Loader/>
       }
 
-      if (searchBlogs && !searchBlogs.length) {
+      if (searchedBlogs && !searchedBlogs.length) {
         content = <div className='text-center py-5'><p>Ooops! Nothing Found!</p></div>
       }
     return (
-        <div className='p-5 md:px-12'>
-           <h1 className='text-4xl font-bold'><span className='text-slate-600'>Results for</span> {searchQuery}</h1>
+        <div className='p-5 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-5'>
+           <div className='md:col-span-2'>
+           <h1 className='text-4xl font-bold'><span className='text-slate-600'>Results for</span> {searchedQuery}</h1>
            <div className='flex gap-3 items-center text-xs font-semibold my-5 cursor-pointer'>
             <p onClick={() => setSelectedResult("stories")} className={`${selectedResult === "stories" && "underline"}`}>Stories</p>
             <p onClick={() => setSelectedResult("people")} className={`${selectedResult === "people" && "underline"}`}>People</p>
@@ -57,6 +60,10 @@ const SearchResults = () => {
            <p>people</p>
           </div>
            }
+           </div>
+           <div className="md:block hidden col-span-1 ">
+            <StaffPicks/>
+           </div>
         </div>
     );
 };
