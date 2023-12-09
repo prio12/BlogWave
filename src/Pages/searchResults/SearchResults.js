@@ -5,6 +5,7 @@ import Blogs from '../../components/blog/Blogs';
 import Loader from '../../loading/Loader';
 import { fetchAllBlogs } from '../../redux/thunk/blogs';
 import StaffPicks from '../Home/usersHomePage/staffPicksBlogs/StaffPicks';
+import SearchedUsers from './SearchedUsers';
 
 const SearchResults = () => {
     const [selectedResult,setSelectedResult] = useState("stories")
@@ -41,7 +42,7 @@ const SearchResults = () => {
       }
 
       if (searchedBlogs && !searchedBlogs.length) {
-        content = <div className='text-center py-5'><p>Ooops! Nothing Found!</p></div>
+        content = <div className='text-center text-xs py-5'><p>Ooops! Nothing Found!</p></div>
       }
     return (
         <div className='p-5 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-5'>
@@ -57,7 +58,9 @@ const SearchResults = () => {
             {content}
            </div> :
            <div>
-           <p>people</p>
+           {
+            searchedPeople && searchedPeople.length? searchedPeople.map((user) => <SearchedUsers key={user._id} user={user}/>): <div><p className='text-xs text-center py-5'>Ooops! Nothing Found!</p></div>
+           }
           </div>
            }
            </div>
