@@ -24,8 +24,6 @@ const initialState = {
   updateSuccess: false,
   isDeleted: false,
   bookmarks: [],
-  searchResults: [],
-  searchPeopleResults:[],
   query:'',
 };
 
@@ -100,20 +98,9 @@ export const blogReducer = (state = initialState, action) => {
       };
     case SEARCH_BLOGS:
       const query = action.payload.toLowerCase();
-      // console.log(query,action);
-      const searchResults = state.blogs.filter((blog) =>
-        blog.title?.toLowerCase().includes(query) 
-        // blog.author?.toLowerCase().includes(query)
-      );
-      // console.log("Search Results:", searchResults);
-      const searchPeopleResults = state.blogs.filter((blog) =>
-        blog.author?.toLowerCase().includes(query)
-      );
-      // console.log("People Results:", searchPeopleResults);
+      console.log(query);
       return {
         ...state,
-        searchResults,
-        searchPeopleResults,
         query:query,
       };
     default:

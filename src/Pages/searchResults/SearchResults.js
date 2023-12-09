@@ -7,11 +7,13 @@ import { fetchAllBlogs } from '../../redux/thunk/blogs';
 
 const SearchResults = () => {
     const [selectedResult,setSelectedResult] = useState("stories")
-    const searchBlogs = useSelector((state) => state?.blogs?.searchResults)
-    const searchedUsers = useSelector((state) => state?.blogs?.searchPeopleResults)
+    const [searchBlogs,setSearchBlogs] = useState([]);
+    const [searchQuery,setSearchQuery] = useState("");
+    // const searchBlogs = useSelector((state) => state?.blogs?.searchResults)
+    // const searchedUsers = useSelector((state) => state?.blogs?.searchPeopleResults)
+    const query = useSelector((state) => state?.blogs?.query);
     const userUid = useSelector((state) => state?.user?.user?.uid);
     const isLoading = useSelector((state) => state?.blogs?.isLoading)
-    const query = useSelector((state) => state?.blogs?.query);
     const dispatch = useDispatch()
     useEffect(() =>{
         dispatch(fetchUserUpdatedData(userUid))
@@ -20,6 +22,12 @@ const SearchResults = () => {
         dispatch(fetchAllBlogs())
     },[dispatch])
 
+      useEffect(() =>{
+        const storedSearchBlogs = JSON.parse(sessionStorage.getItem("searchBlogs"));
+        const storedSearchQuery = JSON.parse(sessionStorage.getItem("query"));
+        setSearchBlogs(storedSearchBlogs)
+        setSearchQuery(storedSearchQuery)
+      },[query])
       let content;
 
       if (searchBlogs && searchBlogs.length) {
@@ -35,7 +43,7 @@ const SearchResults = () => {
       }
     return (
         <div className='p-5 md:px-12'>
-           <h1 className='text-4xl font-bold'><span className='text-slate-600'>Results for</span> {query}</h1>
+           <h1 className='text-4xl font-bold'><span className='text-slate-600'>Results for</span> {searchQuery}</h1>
            <div className='flex gap-3 items-center text-xs font-semibold my-5 cursor-pointer'>
             <p onClick={() => setSelectedResult("stories")} className={`${selectedResult === "stories" && "underline"}`}>Stories</p>
             <p onClick={() => setSelectedResult("people")} className={`${selectedResult === "people" && "underline"}`}>People</p>
