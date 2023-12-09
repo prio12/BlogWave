@@ -11,6 +11,7 @@ const SearchResults = () => {
     const searchedUsers = useSelector((state) => state?.blogs?.searchPeopleResults)
     const userUid = useSelector((state) => state?.user?.user?.uid);
     const isLoading = useSelector((state) => state?.blogs?.isLoading)
+    const query = useSelector((state) => state?.blogs?.query);
     const dispatch = useDispatch()
     useEffect(() =>{
         dispatch(fetchUserUpdatedData(userUid))
@@ -34,7 +35,7 @@ const SearchResults = () => {
       }
     return (
         <div className='p-5 md:px-12'>
-           <h1 className='text-4xl font-bold'><span className='text-slate-400'>Results for</span> full</h1>
+           <h1 className='text-4xl font-bold'><span className='text-slate-600'>Results for</span> {query}</h1>
            <div className='flex gap-3 items-center text-xs font-semibold my-5 cursor-pointer'>
             <p onClick={() => setSelectedResult("stories")} className={`${selectedResult === "stories" && "underline"}`}>Stories</p>
             <p onClick={() => setSelectedResult("people")} className={`${selectedResult === "people" && "underline"}`}>People</p>

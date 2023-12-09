@@ -37,7 +37,7 @@ const UserHeader = () => {
   const {profilePic} = userDetails;
 
   return (
-    <div className="w-full flex items-center justify-between ps-0 pr-3 md:px-4">
+    <div style={{borderBottom:"1px solid #F2F2F2"}} className="w-full flex items-center justify-between ps-0 pr-3 md:px-4">
       <div className="flex gap-3 items-center">
         <Link to='/'><img className="w-32 " src={Logo} alt="" /></Link>
         <div className="hidden md:flex">
