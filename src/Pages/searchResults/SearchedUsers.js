@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { visitProfile } from "../../redux/actions/userAuthActions";
 import { fetchUserAllBlogs } from "../../redux/thunk/blogs";
 
 const SearchedUsers = ({ user }) => {
@@ -9,8 +8,7 @@ const SearchedUsers = ({ user }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleVisitProfile = () =>{
-    dispatch(visitProfile(user))
-    dispatch(fetchUserAllBlogs(user?.uid))
+    // dispatch(fetchUserAllBlogs(user?.uid))
     sessionStorage.setItem('user',JSON.stringify(user))
       navigate(`/visitProfile/${user?.uid}`)
   }
