@@ -11,6 +11,7 @@ import Profile from "../Pages/userDashboard/profile/Profile";
 import BlogDetails from "../components/BlogDetails";
 import Library from "../Pages/userDashboard/library/Library";
 import SearchResults from "../Pages/searchResults/SearchResults";
+import VisitProfile from "../components/visitProfile/VisitProfile";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/blogDetails/:id",
         element: <PrivateRoute><BlogDetails/></PrivateRoute>,
+      },
+      {
+        path: "/visitProfile/:id",
+        element: <PrivateRoute><VisitProfile/></PrivateRoute>,
       },
     ],
   },

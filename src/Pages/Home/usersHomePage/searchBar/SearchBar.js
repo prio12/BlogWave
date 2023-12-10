@@ -10,7 +10,6 @@ const SearchBar = () => {
   const searchQuery = useSelector((state) => state?.blogs?.query);
   const blogs = useSelector((state) => state?.blogs?.blogs);
   const users = useSelector((state) => state?.user?.allUsers);
-  console.log(users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSearch = () => {

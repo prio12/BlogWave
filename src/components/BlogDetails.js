@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addPostToClap,
   deleteABLog,
+  fetchAllBlogs,
   fetchSelectedBLogData,
   saveAsBookmarks,
   updateClapsCount,
@@ -15,7 +16,7 @@ import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { GrLinkPrevious } from "react-icons/gr";
 import { FiMoreHorizontal } from "react-icons/fi";
-import { fetchUserUpdatedData } from "../redux/thunk/userAuth";
+import { fetchUserUpdatedData, getAllUsers } from "../redux/thunk/userAuth";
 import { RxCross1 } from "react-icons/rx";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import EditBlogStory from "./blog/editBlog/EditBlogStory";
@@ -28,6 +29,14 @@ import ResponseField from "./blog/responses/ResponseField";
 const BlogDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() =>{
+    dispatch(fetchAllBlogs())
+  },[dispatch])
+  
+  useEffect(() =>{
+    dispatch(getAllUsers())
+  },[dispatch])
 
   const { id } = useParams();
   useEffect(() => {

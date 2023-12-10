@@ -1,17 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { visitProfile } from "../../redux/actions/userAuthActions";
+import { fetchUserAllBlogs } from "../../redux/thunk/blogs";
 
 const SearchedUsers = ({ user }) => {
-  console.log(user);
+  console.log(user?.uid);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleVisitProfile = () =>{
+    dispatch(visitProfile(user))
+    dispatch(fetchUserAllBlogs(user?.uid))
+    sessionStorage.setItem('user',JSON.stringify(user))
+      navigate(`/visitProfile/${user?.uid}`)
+  }
   return (
     <div className="flex justify-between my-5 md:pr-12 items-center">
+       <Link onClick={handleVisitProfile}>
        <div className="md:flex lg:flex items-center gap-5">
        <img src={user?.profilePic} className="h-16 w-16" alt="" />
        <div className="my-3 md:my-0">
       <p className="text-xs font-bold">{user?.name}</p>
-        <p className="text-xs">{user?.about.slice(0,100)}...</p>
+        {
+          user.about && <p className="text-xs">{user.about.slice(0,100)}...</p>
+        }
       </div>
        </div>
+       </Link>
       
       <Link>
       <button

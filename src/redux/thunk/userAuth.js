@@ -252,9 +252,7 @@ export const getAllUsers = () =>{
     // dispatch(startLoading())
     try {
       const response = await fetch("http://localhost:5000/users");
-      console.log(response);
       const data = await response.json();
-      console.log(data);
 
       if (data) {
         dispatch(fetchAllUsers(data))

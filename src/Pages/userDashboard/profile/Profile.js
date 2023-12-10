@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UserNameModal from "../modal/UserNameModal";
 import UserAbout from "./UserAbout";
 import Loader from "../../../loading/Loader";
-import { fetchUserUpdatedData } from "../../../redux/thunk/userAuth";
+import { fetchUserUpdatedData, getAllUsers } from "../../../redux/thunk/userAuth";
 import { CgProfile } from "react-icons/cg";
 import { fetchUserAllBlogs } from "../../../redux/thunk/blogs";
 import { Link } from "react-router-dom";
@@ -25,12 +25,16 @@ const Profile = () => {
   },[dispatch,userUid])
 
   useEffect(() =>{
+    dispatch(getAllUsers())
+  },[dispatch])
+
+  useEffect(() =>{
     dispatch(fetchUserAllBlogs(userUid))
   },[dispatch,userUid])
 
-  useEffect(() =>{
-    dispatch(fetchAllUsers())
-  },[dispatch])
+  // useEffect(() =>{
+  //   dispatch(fetchAllUsers())
+  // },[dispatch])
 
   const [activeContent,setActiveContent] = useState('home')
   const textareaRef = useRef();

@@ -12,6 +12,7 @@ import {
   START_LOADING_UPDATE_USER,
   STOP_LOADING,
   STOP_LOADING_UPDATE_USER,
+  VISIT_PROFILE,
 } from "../actionTypes/actionTypes";
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   userData:null,
   isUpdateLoading:false,
   allUsers:[],
+  selectedProfile:null,
 };
 
 export const createUserReducer = (state = initialState, action) => {
@@ -91,6 +93,11 @@ export const createUserReducer = (state = initialState, action) => {
             ...state,
             allUsers:action.payload
           }
+          case VISIT_PROFILE:
+            return {
+              ...state,
+              selectedProfile:action.payload,
+            }
 
     default:
       return state;
