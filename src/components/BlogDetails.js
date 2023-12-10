@@ -53,7 +53,7 @@ const BlogDetails = () => {
   // const claps = useSelector((state) => state?.blogs?.claps);
   const isDeleted = useSelector((state) => state?.blogs?.isDeleted);
   const [responseBarStatus,setResponseBarStatus] = useState(false);
-  console.log(responseBarStatus);
+  // console.log(responseBarStatus);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(user));
   }, [dispatch, user]);

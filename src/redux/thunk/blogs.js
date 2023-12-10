@@ -113,7 +113,7 @@ export const updateABlog = (data) => {
 };
 
 export const updateClapsCount = (_id,userUid) =>{
-  console.log(_id,userUid);
+  // console.log(_id,userUid);
   return async (dispatch) =>{
     try {
       const response = await fetch(`http://localhost:5000/blogs/blogDetails/likes/${_id}/${userUid}`,{
@@ -183,7 +183,7 @@ export const addResponse = (responseDetails) =>{
       })
       const responseData = await response.json();
       if (responseData) {
-        console.log(responseData);
+        // console.log(responseData);
         // dispatch(stopLoading())
         dispatch(selectedBlogData(responseData))
       }
@@ -194,7 +194,7 @@ export const addResponse = (responseDetails) =>{
 }
 
 export const addPostToClap = (blog,userUid) =>{
-  console.log(userUid);
+  // console.log(userUid);
   return async (dispatch) =>{
     try {
       // dispatch(startLoading())
@@ -205,7 +205,7 @@ export const addPostToClap = (blog,userUid) =>{
       })
       const responseData = await response.json();
       if (responseData) {
-        console.log(responseData);
+        // console.log(responseData);
         dispatch(addToClap(blog))
       }
     } catch (error) {

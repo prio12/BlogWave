@@ -22,31 +22,33 @@ import {
   stopLoading,
   updateUserDetails,
 } from "../actions/userAuthActions";
-import { START_LOADING_UPDATE_USER, STOP_LOADING_UPDATE_USER } from "../actionTypes/actionTypes";
+import {
+  START_LOADING_UPDATE_USER,
+  STOP_LOADING_UPDATE_USER,
+} from "../actionTypes/actionTypes";
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 //Sending useDetails to the database using this function
 
-const postUserDetails = async (userDetails) =>{
+const postUserDetails = async (userDetails) => {
   try {
     const response = await fetch("http://localhost:5000/users", {
-    method: "POST",
-    body: JSON.stringify(userDetails),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const result = await response.json();
-  console.log(result);
+      method: "POST",
+      body: JSON.stringify(userDetails),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    console.log(result);
   } catch (error) {
     // console.log(error);
   }
-}
+};
 
 export const createUserWithEmailAndPass = (user) => {
-  
   return async (dispatch) => {
     const inputName = user.name;
     try {
@@ -58,20 +60,20 @@ export const createUserWithEmailAndPass = (user) => {
         user.password
       );
       //useDetails for database
-        
+
       // console.log("stopLoading by observer");
       dispatch(stopLoading());
       if (userCredential) {
         const user = userCredential.user;
         const userDetails = {
           name: inputName,
-          email:user.email,
-          profilePic:null,
-          uid:user.uid,
-        }
+          email: user.email,
+          profilePic: null,
+          uid: user.uid,
+        };
         console.log(user);
         dispatch(createUserWithEmailPass(user));
-        postUserDetails(userDetails)
+        postUserDetails(userDetails);
         alert("User Created!!");
       }
     } catch (error) {
@@ -105,8 +107,7 @@ export const signInWithEmailPass = (user) => {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         user.email,
-        user.password,
-        
+        user.password
       );
       dispatch(stopLoading());
       if (userCredential) {
@@ -132,14 +133,14 @@ export const signInWithGoogleProvider = () => {
         const user = credential.user;
         //userDetails for database
         const useDetails = {
-          name:user.displayName,
-          email:user.email,
-          profilePic:user.photoURL,
-          uid:user.uid
-        }
+          name: user.displayName,
+          email: user.email,
+          profilePic: user.photoURL,
+          uid: user.uid,
+        };
         console.log(user);
         dispatch(logInWithGoogle(user));
-        postUserDetails(useDetails)
+        postUserDetails(useDetails);
         alert("userCreated!");
       }
     } catch (error) {
@@ -162,11 +163,11 @@ export const signInWithGithubProvider = () => {
         //userDetails for database
         const userDetails = {
           name: user.displayName,
-          email:user.email,
-          profilePic:user.photoURL,
-          uid:user.uid,
-        }
-        postUserDetails(userDetails)
+          email: user.email,
+          profilePic: user.photoURL,
+          uid: user.uid,
+        };
+        postUserDetails(userDetails);
         dispatch(logInWithGithub(user));
         alert("UserCreated!");
       }
@@ -178,9 +179,9 @@ export const signInWithGithubProvider = () => {
   };
 };
 
-export const updateUserProfile = ({photoURL,displayName,about,uid}) =>{
+export const updateUserProfile = ({ photoURL, displayName, about, uid }) => {
   // console.log(imageUrl);
-  return async (dispatch) =>{
+  return async (dispatch) => {
     try {
       const profileUpdateData = {};
 
@@ -193,46 +194,65 @@ export const updateUserProfile = ({photoURL,displayName,about,uid}) =>{
       if (about) {
         profileUpdateData.about = about;
       }
-      
+
       await updateProfile(auth.currentUser, {
-        profileUpdateData
-      })
+        profileUpdateData,
+      });
 
       const userId = auth.currentUser.uid;
       //updating the Name and photo of the user in db
 
-      const response = await fetch(`http://localhost:5000/users/${userId}`,{
-        method:"PUT",
-        body:JSON.stringify(profileUpdateData),
+      const response = await fetch(`http://localhost:5000/users/${userId}`, {
+        method: "PUT",
+        body: JSON.stringify(profileUpdateData),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
-      })
+      });
       const data = await response.json();
-      if (data.modifiedCount > 0 ) {
-        dispatch(fetchUserUpdatedData(uid))
+      if (data?.result?.modifiedCount > 0) {
+        dispatch(fetchUserUpdatedData(uid));
       }
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
-export const fetchUserUpdatedData = (uid) =>{
-  return async (dispatch) =>{
+//adding followers
+
+export const follow = (relationshipInfo) => {
+  const { uid } = relationshipInfo?.following;
+  return async () => {
     try {
-      dispatch({type:START_LOADING_UPDATE_USER})
+      const response = await fetch(`http://localhost:5000/users/${uid}`, {
+        method: "PUT",
+        body: JSON.stringify(relationshipInfo),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      const responseData = await response.json();
+      // console.log(responseData);
+    } catch (error) {}
+  };
+};
+
+export const fetchUserUpdatedData = (uid) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: START_LOADING_UPDATE_USER });
       const response = await fetch(`http://localhost:5000/users/${uid}`);
       const data = await response.json();
       if (data) {
-        dispatch({type:STOP_LOADING_UPDATE_USER})
-        dispatch(updateUserDetails(data))
+        dispatch({ type: STOP_LOADING_UPDATE_USER });
+        dispatch(updateUserDetails(data));
       }
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
 export const signOutUser = () => {
   return async (dispatch) => {
@@ -247,19 +267,21 @@ export const signOutUser = () => {
 
 //fetch ALL users
 
-export const getAllUsers = () =>{
-  return async (dispatch) =>{
+export const getAllUsers = () => {
+  return async (dispatch) => {
     // dispatch(startLoading())
     try {
       const response = await fetch("http://localhost:5000/users");
       const data = await response.json();
 
       if (data) {
-        dispatch(fetchAllUsers(data))
+        dispatch(fetchAllUsers(data));
         // dispatch(stopLoading())
       }
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
+
+

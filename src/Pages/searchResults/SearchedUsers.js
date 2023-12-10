@@ -1,33 +1,56 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchUserAllBlogs } from "../../redux/thunk/blogs";
+import { follow } from "../../redux/thunk/userAuth";
 
 const SearchedUsers = ({ user }) => {
-  console.log(user?.uid);
+  const currentUser = useSelector((state) => state?.user?.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleVisitProfile = () =>{
+  const handleVisitProfile = () => {
     // dispatch(fetchUserAllBlogs(user?.uid))
-    sessionStorage.setItem('user',JSON.stringify(user))
-      navigate(`/visitProfile/${user?.uid}`)
+    sessionStorage.setItem("user", JSON.stringify(user));
+    navigate(`/visitProfile/${user?.uid}`);
+  };
+
+  const handleFollowBtn = () =>{
+    const following = {
+      profilePic:currentUser?.profilePic,
+      name:currentUser?.name,
+      uid:currentUser?.uid,
+      about:currentUser?.about,
+
+    };
+    const follower = {
+      profilePic:user?.profilePic,
+      name:user?.name,
+      uid:user?.uid,
+      about:user?.about,
+    }
+    const relationshipInfo  = {
+      following,
+      follower,
+    }
+
+    dispatch(follow(relationshipInfo))
   }
   return (
     <div className="flex justify-between my-5 md:pr-12 items-center">
-       <Link onClick={handleVisitProfile}>
-       <div className="md:flex lg:flex items-center gap-5">
-       <img src={user?.profilePic} className="h-16 w-16" alt="" />
-       <div className="my-3 md:my-0">
-      <p className="text-xs font-bold">{user?.name}</p>
-        {
-          user.about && <p className="text-xs">{user.about.slice(0,100)}...</p>
-        }
-      </div>
-       </div>
-       </Link>
-      
-      <Link>
+      <Link onClick={handleVisitProfile}>
+        <div className="md:flex lg:flex items-center gap-5">
+          <img src={user?.profilePic} className="h-16 w-16" alt="" />
+          <div className="my-3 md:my-0">
+            <p className="text-xs font-bold">{user?.name}</p>
+            {user.about && (
+              <p className="text-xs">{user.about.slice(0, 100)}...</p>
+            )}
+          </div>
+        </div>
+      </Link>
+
       <button
+        onClick={handleFollowBtn}
         className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
         style={{
           backgroundColor: "#1A8917",
@@ -41,7 +64,6 @@ const SearchedUsers = ({ user }) => {
       >
         Follow
       </button>
-      </Link>
     </div>
   );
 };
