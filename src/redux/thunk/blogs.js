@@ -1,5 +1,6 @@
 import {
   addToBookMark,
+  addToClap,
   createBlogStatus,
   deleteBlog,
   getUserBlogs,
@@ -188,6 +189,27 @@ export const addResponse = (responseDetails) =>{
       }
     } catch (error) {
       
+    }
+  }
+}
+
+export const addPostToClap = (blog,userUid) =>{
+  console.log(userUid);
+  return async (dispatch) =>{
+    try {
+      // dispatch(startLoading())
+      const response = await fetch(`http://localhost:5000/users/${userUid?.userUid}`,{
+        method:"PUT",
+        headers: { "Content-Type": "application/json" },
+        body:JSON.stringify(blog)
+      })
+      const responseData = await response.json();
+      if (responseData) {
+        console.log(responseData);
+        dispatch(addToClap(blog))
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 }

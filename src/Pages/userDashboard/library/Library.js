@@ -9,6 +9,8 @@ import UserAbout from "../profile/UserAbout";
 const Library = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const userData = useSelector((state) => state?.user?.userData)
+  const clapped = userData?.clapped;
+  console.log(clapped);
   const isLoading = useSelector((state) => state?.blogs?.isLoading)
   const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
 
@@ -28,6 +30,7 @@ const Library = () => {
   }, [dispatch, userUid]);
 
   let content;
+  let clappedContent;
 
   if (!userData || isUpdateLoading) {
     content = <Loader/>
@@ -37,7 +40,7 @@ const Library = () => {
 
 
   if (!bookmarks || !bookmarks.length) {
-    content = <p>You have not bookmarked any post!</p>
+    content = <p className="text-xs text-center py-5">You have not bookmarked any post!</p>
   }
 
   if (isLoading) {
@@ -48,7 +51,13 @@ const Library = () => {
     content = bookmarks.map((blog) => <Blogs blog={blog} key={blog._id}></Blogs>)
   }
 
-  
+  if (!clapped || !clapped.length) {
+    clappedContent = <p className="text-xs text-center py-5">You have not clapped any post!</p>
+  }
+
+  if (clapped && clapped.length) {
+    clappedContent = clapped.map((blog) => <Blogs blog={blog} key={blog._id}></Blogs>)
+  }
 
   return (
     <div className="px-8  md:px-12 grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -90,7 +99,7 @@ const Library = () => {
             {
                 activeContent === 'clapped' && (
                     <div>
-                        <UserAbout/>
+                        {clappedContent}
                     </div>
                 )
             }

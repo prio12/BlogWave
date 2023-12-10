@@ -7,25 +7,30 @@ import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const searchQuery = useSelector((state) => state?.blogs?.query)
-  const blogs = useSelector((state) => state?.blogs?.blogs)
+  const searchQuery = useSelector((state) => state?.blogs?.query);
+  const blogs = useSelector((state) => state?.blogs?.blogs);
+  const users = useSelector((state) => state?.user?.allUsers);
+  console.log(users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSearch = () => {
     dispatch(searchBlogs(query));
     const searchResults = blogs.filter((blog) =>
-        blog.title?.toLowerCase().includes(query) 
-      );
-      const searchPeopleResults = blogs.filter((blog) =>
-        blog.author?.toLowerCase().includes(query)
-      );
+      blog.title?.toLowerCase().includes(query)
+    );
+    const searchPeopleResults = users.filter((user) =>
+      user.name?.toLowerCase().includes(query)
+    );
 
-      // console.log("searchResults", searchResults);
-      // console.log("searchPeopleResults", searchPeopleResults);
-      sessionStorage.setItem("searchBlogs", JSON.stringify(searchResults));
-      sessionStorage.setItem("searchPeopleResults",JSON.stringify(searchPeopleResults))
-      sessionStorage.setItem("query",JSON.stringify(query))
-    navigate("/searchResults")
+    // console.log("searchResults", searchResults);
+    // console.log("searchPeopleResults", searchPeopleResults);
+    sessionStorage.setItem("searchBlogs", JSON.stringify(searchResults));
+    sessionStorage.setItem(
+      "searchPeopleResults",
+      JSON.stringify(searchPeopleResults)
+    );
+    sessionStorage.setItem("query", JSON.stringify(query));
+    navigate("/searchResults");
   };
 
   const handleKeyPress = (e) => {
@@ -38,7 +43,7 @@ const SearchBar = () => {
       <div className="flex gap-2 items-center">
         <BsSearch />
         <input
-          className="text-sm font-semibold focus:outline-none"
+          className="text-xs font-normal focus:outline-none"
           type="text"
           placeholder="Search BlogWave"
           onChange={(e) => setQuery(e.target.value.toLowerCase())}

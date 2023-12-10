@@ -1,4 +1,4 @@
-import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, FETCH_UPDATED_USER_DATA, LOGIN_FAILURE, SIGN_IN_WITH_EMAIL_PASS, SIGN_IN_WITH_GITHUB, SIGN_IN_WITH_GOOGLE, SIGN_IN_WITH_TWITTER, SIGN_OUT, START_LOADING, STOP_LOADING,} from "../actionTypes/actionTypes"
+import { AUTH_STATUS_OBSERVER, CREATE_USER_WITH_EMAIL_PASS, FETCH_ALL_USERS, FETCH_UPDATED_USER_DATA, LOGIN_FAILURE, SIGN_IN_WITH_EMAIL_PASS, SIGN_IN_WITH_GITHUB, SIGN_IN_WITH_GOOGLE, SIGN_IN_WITH_TWITTER, SIGN_OUT, START_LOADING, STOP_LOADING,} from "../actionTypes/actionTypes"
 
 
 export const startLoading = () =>{
@@ -62,6 +62,13 @@ export const logInError = (errorMessage) =>{
 export const updateUserDetails = (data) =>{
     return {
         type:FETCH_UPDATED_USER_DATA,
+        payload:data,
+    }
+}
+
+export const fetchAllUsers = (data) =>{
+    return {
+        type:FETCH_ALL_USERS,
         payload:data,
     }
 }

@@ -1,4 +1,4 @@
-import { CREATE_BLOG_SUCCESS,LOAD_BLOGS, POST_BLOGS, START_LOADING_FOR_BLOGS, STOP_LOADING_FOR_BLOGS,SELECT_BLOG, FETCH_USER_BLOGS, UPDATE_BLOG_SUCCESS, DELETE_A_BLOG, ADD_BOOKMARK, SEARCH_BLOGS,  } from "../actionTypes/actionTypes"
+import { CREATE_BLOG_SUCCESS,LOAD_BLOGS, POST_BLOGS, START_LOADING_FOR_BLOGS, STOP_LOADING_FOR_BLOGS,SELECT_BLOG, FETCH_USER_BLOGS, UPDATE_BLOG_SUCCESS, DELETE_A_BLOG, ADD_BOOKMARK, SEARCH_BLOGS, ADD_TO_CLAP,  } from "../actionTypes/actionTypes"
 
 export const postBlog = (post) =>{
     return {
@@ -71,6 +71,13 @@ export const searchBlogs = (query) =>{
     return {
         type:SEARCH_BLOGS,
         payload:query,
+    }
+}
+
+export const addToClap = (blog) =>{
+    return {
+        type:ADD_TO_CLAP,
+        payload:blog,
     }
 }
 

@@ -1,6 +1,7 @@
 import {
   AUTH_STATUS_OBSERVER,
   CREATE_USER_WITH_EMAIL_PASS,
+  FETCH_ALL_USERS,
   FETCH_UPDATED_USER_DATA,
   LOGIN_FAILURE,
   SIGN_IN_WITH_EMAIL_PASS,
@@ -19,6 +20,7 @@ const initialState = {
   errorMessage: {}, 
   userData:null,
   isUpdateLoading:false,
+  allUsers:[],
 };
 
 export const createUserReducer = (state = initialState, action) => {
@@ -83,6 +85,12 @@ export const createUserReducer = (state = initialState, action) => {
           ...state,
           userData:action.payload,
         }
+
+        case FETCH_ALL_USERS:
+          return {
+            ...state,
+            allUsers:action.payload
+          }
 
     default:
       return state;

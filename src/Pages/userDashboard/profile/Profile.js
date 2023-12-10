@@ -10,6 +10,7 @@ import { CgProfile } from "react-icons/cg";
 import { fetchUserAllBlogs } from "../../../redux/thunk/blogs";
 import { Link } from "react-router-dom";
 import Blogs from "../../../components/blog/Blogs";
+import { fetchAllUsers } from "../../../redux/actions/userAuthActions";
 
 const Profile = () => {
   const userDetails= useSelector((state) => state?.user?.userData)
@@ -26,6 +27,10 @@ const Profile = () => {
   useEffect(() =>{
     dispatch(fetchUserAllBlogs(userUid))
   },[dispatch,userUid])
+
+  useEffect(() =>{
+    dispatch(fetchAllUsers())
+  },[dispatch])
 
   const [activeContent,setActiveContent] = useState('home')
   const textareaRef = useRef();

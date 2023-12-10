@@ -11,6 +11,7 @@ import {
 import { auth } from "../../firebase/firebase.config";
 import {
   createUserWithEmailPass,
+  fetchAllUsers,
   logInError,
   logInWithGithub,
   logInWithGoogle,
@@ -243,3 +244,24 @@ export const signOutUser = () => {
     }
   };
 };
+
+//fetch ALL users
+
+export const getAllUsers = () =>{
+  return async (dispatch) =>{
+    // dispatch(startLoading())
+    try {
+      const response = await fetch("http://localhost:5000/users");
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+
+      if (data) {
+        dispatch(fetchAllUsers(data))
+        // dispatch(stopLoading())
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}

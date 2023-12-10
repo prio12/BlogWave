@@ -9,7 +9,7 @@ import StaffPicks from "../usersHomePage/staffPicksBlogs/StaffPicks";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../loading/Loader";
 import UsersHome from "../usersHomePage/usersHomePage/UsersHome";
-import { fetchUserUpdatedData } from "../../../redux/thunk/userAuth";
+import { fetchUserUpdatedData, getAllUsers } from "../../../redux/thunk/userAuth";
 import { fetchAllBlogs } from "../../../redux/thunk/blogs";
 
 const Home = () => {
@@ -29,6 +29,10 @@ const Home = () => {
 
   useEffect(() =>{
     dispatch(fetchAllBlogs())
+},[dispatch])
+
+useEffect(() =>{
+  dispatch(getAllUsers())
 },[dispatch])
 
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserUpdatedData } from '../../redux/thunk/userAuth';
+import { fetchUserUpdatedData, getAllUsers } from '../../redux/thunk/userAuth';
 import Blogs from '../../components/blog/Blogs';
 import Loader from '../../loading/Loader';
 import { fetchAllBlogs } from '../../redux/thunk/blogs';
@@ -21,6 +21,10 @@ const SearchResults = () => {
       },[dispatch,userUid])
       useEffect(() =>{
         dispatch(fetchAllBlogs())
+    },[dispatch])
+
+    useEffect(() =>{
+      dispatch(getAllUsers())
     },[dispatch])
 
       useEffect(() =>{

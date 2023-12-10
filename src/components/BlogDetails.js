@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addPostToClap,
   deleteABLog,
   fetchSelectedBLogData,
   saveAsBookmarks,
@@ -16,7 +17,7 @@ import { GrLinkPrevious } from "react-icons/gr";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { fetchUserUpdatedData } from "../redux/thunk/userAuth";
 import { RxCross1 } from "react-icons/rx";
-import {BsFillBookmarkCheckFill} from "react-icons/bs"
+import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import EditBlogStory from "./blog/editBlog/EditBlogStory";
 import {
   DELETE_BLOG_FLAG,
@@ -36,12 +37,14 @@ const BlogDetails = () => {
   const selectedBlogData = useSelector((state) => state?.blogs?.selectedBlog);
   const responses = selectedBlogData?.responses;
   const userData = useSelector((state) => state?.user?.userData);
-  const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
+  const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading);
   const user = useSelector((state) => state?.user?.user?.uid);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
   // const claps = useSelector((state) => state?.blogs?.claps);
   const isDeleted = useSelector((state) => state?.blogs?.isDeleted);
+  const [responseBarStatus,setResponseBarStatus] = useState(false);
+  console.log(responseBarStatus);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(user));
   }, [dispatch, user]);
@@ -69,8 +72,14 @@ const BlogDetails = () => {
     alert("Added to Bookmarks!");
   };
 
+  const handleClap = () => {
+    // onClick={() => dispatch(updateClapsCount(_id, userUid))}
+    dispatch(updateClapsCount(_id, user));
+    dispatch(addPostToClap({ blog: selectedBlogData }, { userUid: user }));
+  };
+
   if (!userData || isUpdateLoading) {
-    return <Loader/>
+    return <Loader />;
   }
   const bookmarks = userData?.bookmarks;
 
@@ -79,10 +88,8 @@ const BlogDetails = () => {
   }
 
   if (isLoading) {
-    return <Loader/>
+    return <Loader />;
   }
-
-  
 
   const {
     _id,
@@ -100,8 +107,9 @@ const BlogDetails = () => {
   const handleNavigate = () => {
     navigate(-1);
   };
+  // console.log(user, userUid);
   return (
-    <div className="p-5">
+    <div className="p-5 ">
       {/* sidebar */}
       <div className="drawer ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -115,30 +123,29 @@ const BlogDetails = () => {
       {/* sideBar */}
 
       {/* responseSideBar */}
-      <div className="drawer drawer-end ">
+      <div className="drawer drawer-end  ">
         <input id="response-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">{/* Page content here */}</div>
         <div className="drawer-side ">
-          <div className="menu p-6 w-3/4  md:w-1/3 min-h-full  bg-slate-100 ">
+          <div className="menu p-6 w-3/4  md:w-1/3 min-h-full bg-base-100 ">
             <div className="flex items-center justify-between">
               {/* <h4 className="font-bold ">Responses ({responses?.length})</h4> */}
-              {
-                responses &&  <h4 className="font-bold ">Responses ({responses?.length})</h4>
-              }
-              {
-                !responses &&  <h4 className="font-bold ">Responses (0)</h4>
-              }
+              {responses && (
+                <h4 className="font-bold ">Responses ({responses?.length})</h4>
+              )}
+              {!responses && <h4 className="font-bold ">Responses (0)</h4>}
               <label
                 htmlFor="response-drawer"
                 aria-label="close sidebar"
                 className="drawer-overlay cursor-pointer"
+                onClick={() =>setResponseBarStatus(false)}
               >
                 <RxCross1 />
               </label>
             </div>
-           <div >
-           <ResponseField />
-           </div>
+            <div>
+              <ResponseField />
+            </div>
           </div>
         </div>
       </div>
@@ -161,7 +168,7 @@ const BlogDetails = () => {
           <div className="flex text-xs items-center gap-5">
             {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
             <div className="flex  items-center gap-1">
-              {user === userUid ? (
+              {/* {user === userUid ? (
                 <FaHandsClapping className="cursor-pointer text-xl" />
               ) : likedBy?.find((us) => us === userUid) ? (
                 <FaHandsClapping
@@ -172,26 +179,43 @@ const BlogDetails = () => {
                 <PiHandsClappingLight
                   className="cursor-pointer text-xl"
                   title="Clap!"
-                  onClick={() => dispatch(updateClapsCount(_id, userUid))}
+                  onClick={handleClap}
+                />
+              )} */}
+              {/* new Logic */}
+              {user === userUid ? (
+                <FaHandsClapping
+                  className="cursor-pointer text-xl"
+                  title="You can't clap your own post!"
+                />
+              ) : likedBy?.find((us) => us === user) ? (
+                <FaHandsClapping
+                  className="cursor-pointer text-xl"
+                  title="Already Clapped!"
+                />
+              ) : (
+                <PiHandsClappingLight
+                  className="cursor-pointer text-xl"
+                  title="Clap!"
+                  onClick={handleClap}
                 />
               )}
+
               <span>{claps}</span>
             </div>
             {/* <FaRegComment/><span>5</span> */}
             <div className="flex items-center gap-1 ">
-              <label htmlFor="response-drawer" className="drawer-button">
+              <label htmlFor="response-drawer" onClick={() => setResponseBarStatus(true)} className="drawer-button">
                 <FaRegComment
                   className="cursor-pointer text-xl"
                   title="Response.."
                 />
               </label>
               <span>
-              {
-                responses &&  <h4 className="font-bold ">{responses?.length}</h4>
-              }
-              {
-                !responses &&  <h4 className="font-bold ">0</h4>
-              }
+                {responses && (
+                  <h4 className="font-bold ">{responses?.length}</h4>
+                )}
+                {!responses && <h4 className="font-bold ">0</h4>}
               </span>
             </div>
           </div>
@@ -201,13 +225,13 @@ const BlogDetails = () => {
                 <FiMoreHorizontal
                   onClick={handleMoreOptionModal}
                   title="More"
-                  className="cursor-pointer text-xl"
+                  className={`cursor-pointer text-xl ${responseBarStatus && "hidden"}`}
                 />
               )}
               {isOpen && (
                 <div
                   style={{ fontSize: "10px" }}
-                  className="absolute z-10 right-5 bg-white border shadow-lg  p-5 w-32"
+                  className={`absolute z-10 right-5 bg-white border shadow-lg  p-5 w-32}`}
                 >
                   <label
                     style={{ fontSize: "10px" }}
@@ -237,14 +261,14 @@ const BlogDetails = () => {
               {bookmarks?.find((blog) => blog._id === _id) ? (
                 <div>
                   <BsFillBookmarkCheckFill
-                  title="Already Bookmarked!"
-                  className="cursor-not-allowed"
+                    title="Already Bookmarked!"
+                    className="cursor-not-allowed"
                   />
                 </div>
               ) : (
                 <MdOutlineBookmarkAdd
                   title="Add to bookmark"
-                  className="cursor-pointer"
+                  className={`cursor-pointer  ${responseBarStatus && "hidden"}`}
                   onClick={handleBookmarks}
                 />
               )}

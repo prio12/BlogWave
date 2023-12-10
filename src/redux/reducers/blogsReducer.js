@@ -1,5 +1,6 @@
 import {
   ADD_BOOKMARK,
+  ADD_TO_CLAP,
   CREATE_BLOG_SUCCESS,
   DELETE_A_BLOG,
   DELETE_BLOG_FLAG,
@@ -25,6 +26,7 @@ const initialState = {
   isDeleted: false,
   bookmarks: [],
   query:'',
+  clapped:[],
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -98,11 +100,15 @@ export const blogReducer = (state = initialState, action) => {
       };
     case SEARCH_BLOGS:
       const query = action.payload.toLowerCase();
-      console.log(query);
       return {
         ...state,
         query:query,
       };
+      case ADD_TO_CLAP:
+        return {
+          ...state,
+          clapped:action.payload,
+        }
     default:
       return state;
   }
