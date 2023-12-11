@@ -12,6 +12,7 @@ import BlogDetails from "../components/BlogDetails";
 import Library from "../Pages/userDashboard/library/Library";
 import SearchResults from "../Pages/searchResults/SearchResults";
 import VisitProfile from "../components/visitProfile/VisitProfile";
+import Followers from "../Pages/followers/Followers";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/visitProfile/:id",
         element: <PrivateRoute><VisitProfile/></PrivateRoute>,
+      },
+      {
+        path: "/followers",
+        element: <PrivateRoute><Followers/></PrivateRoute>,
       },
     ],
   },

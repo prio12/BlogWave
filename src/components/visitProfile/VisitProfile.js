@@ -119,6 +119,11 @@ const VisitProfile = () => {
         <div className="mb-3 ">
           <img src={user?.profilePic} className="w-16 h-16" alt="" />
         </div>
+        {
+          user?.followers?.length && <Link to="/followers">
+          <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">{ user?.followers?.length} Followers</p>
+          </Link>
+        }
         <div className="flex gap-2 items-center">
           <p className="font-bold">{user?.name}</p>
         </div>
