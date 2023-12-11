@@ -20,6 +20,7 @@ import {
   signInWithEmail,
   startLoading,
   stopLoading,
+  stopLoadingUpdatedUser,
   updateUserDetails,
 } from "../actions/userAuthActions";
 import {
@@ -223,7 +224,7 @@ export const updateUserProfile = ({ photoURL, displayName, about, uid }) => {
 
 export const follow = (relationshipInfo) => {
   const { uid } = relationshipInfo?.following;
-  return async () => {
+  return async (dispatch) => {
     try {
       const response = await fetch(`http://localhost:5000/users/${uid}`, {
         method: "PUT",
@@ -233,7 +234,9 @@ export const follow = (relationshipInfo) => {
         },
       });
       const responseData = await response.json();
-      // console.log(responseData);
+    if (responseData?.targetedResult?.modifiedCount > 0) {
+      dispatch(fetchUserUpdatedData(uid))
+    }
     } catch (error) {}
   };
 };
