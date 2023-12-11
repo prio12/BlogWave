@@ -6,6 +6,7 @@ import { follow } from "../../redux/thunk/userAuth";
 
 const SearchedUsers = ({ user }) => {
   const currentUser = useSelector((state) => state?.user?.userData);
+  console.log(currentUser?.following);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleVisitProfile = () => {
@@ -14,27 +15,26 @@ const SearchedUsers = ({ user }) => {
     navigate(`/visitProfile/${user?.uid}`);
   };
 
-  const handleFollowBtn = () =>{
+  const handleFollowBtn = () => {
     const following = {
-      profilePic:currentUser?.profilePic,
-      name:currentUser?.name,
-      uid:currentUser?.uid,
-      about:currentUser?.about,
-
+      profilePic: currentUser?.profilePic,
+      name: currentUser?.name,
+      uid: currentUser?.uid,
+      about: currentUser?.about,
     };
     const follower = {
-      profilePic:user?.profilePic,
-      name:user?.name,
-      uid:user?.uid,
-      about:user?.about,
-    }
-    const relationshipInfo  = {
+      profilePic: user?.profilePic,
+      name: user?.name,
+      uid: user?.uid,
+      about: user?.about,
+    };
+    const relationshipInfo = {
       following,
       follower,
-    }
+    };
 
-    dispatch(follow(relationshipInfo))
-  }
+    dispatch(follow(relationshipInfo));
+  };
   return (
     <div className="flex justify-between my-5 md:pr-12 items-center">
       <Link onClick={handleVisitProfile}>
@@ -49,21 +49,38 @@ const SearchedUsers = ({ user }) => {
         </div>
       </Link>
 
-      <button
-        onClick={handleFollowBtn}
-        className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
-        style={{
-          backgroundColor: "#1A8917",
-          color: "white",
-          textTransform: "none",
-          "&:hover": {
-            backgroundColor: "#1A8917",
+      {currentUser?.following?.find(
+        (followingId) => followingId.uid === user?.uid
+      ) ? (
+        <button
+          // onClick={handleUnfollowBtn}
+          className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+          style={{
+            backgroundColor: "transparent", // Set background to transparent
+            color: "#1A8917", // Set text color to red
+            border: "1px solid #1A8917", // Add a red border
             textTransform: "none",
-          },
-        }}
-      >
-        Follow
-      </button>
+          }}
+        >
+          Unfollow
+        </button>
+      ) : (
+        <button
+          onClick={handleFollowBtn}
+          className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+          style={{
+            backgroundColor: "#1A8917",
+            color: "white",
+            textTransform: "none",
+            "&:hover": {
+              backgroundColor: "#1A8917",
+              textTransform: "none",
+            },
+          }}
+        >
+          Follow
+        </button>
+      )}
     </div>
   );
 };
