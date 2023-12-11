@@ -74,7 +74,7 @@ const Profile = () => {
     return <Loader/>
   }
 
-  const {profilePic,name} = userDetails;
+  const {profilePic,name,followers} = userDetails;
 
 
 
@@ -111,7 +111,7 @@ const Profile = () => {
             }
         </div>
       </div>
-      <div className="flex md:block gap-3 items-center">
+      <div className="flex md:block gap-3  items-center">
         <div className="mb-3 flex items-center">
           {profilePic? <img
             onClick={openImageModal}
@@ -126,6 +126,9 @@ const Profile = () => {
           />
           }
         </div>
+        {
+          followers?.length && <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">{followers.length} Followers</p>
+        }
         <div className="flex gap-2 items-center">
           <p className="font-bold">{name}</p>
           < MdEdit className="cursor-pointer"  onClick={openNameModal}/>
