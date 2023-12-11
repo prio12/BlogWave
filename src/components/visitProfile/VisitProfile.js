@@ -120,7 +120,7 @@ const VisitProfile = () => {
           <img src={user?.profilePic} className="w-16 h-16" alt="" />
         </div>
         {
-          user?.followers?.length && <Link to="/followers">
+          user?.followers?.length > 0 && <Link to="/followers">
           <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">{ user?.followers?.length} Followers</p>
           </Link>
         }

@@ -41,6 +41,7 @@ const [user,setUser] = useState(null)
         setUser(storedUser)
     }
   },[previousPage,currentUser])
+//   console.log(user);
   return (
     <div className="p-5 md:px-12 grid grid-cols-1 gap-5 md:grid-cols-3">
         <div className="md:col-span-2">
@@ -57,7 +58,9 @@ const [user,setUser] = useState(null)
                 </div>
                 </div>
                 {
-                    currentUser?.following?.find((following) => following?.uid === follower?.uid) ? (
+                    user?.followers.find((follower) => follower.uid === currentUser.uid) ? (
+                        null
+                    ) : currentUser?.following?.find((following) => following?.uid === follower?.uid) ? (
                         <button
                 //   onClick={handleUnfollowBtn}
                   className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
