@@ -6,13 +6,19 @@ import { follow } from "../../redux/thunk/userAuth";
 
 const SearchedUsers = ({ user }) => {
   const currentUser = useSelector((state) => state?.user?.userData);
-  console.log(currentUser?.following);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleVisitProfile = () => {
     // dispatch(fetchUserAllBlogs(user?.uid))
     sessionStorage.setItem("user", JSON.stringify(user));
-    navigate(`/visitProfile/${user?.uid}`);
+    if (currentUser.uid === user.uid) {
+     navigate('/profile')
+    }
+
+    else if (currentUser.uid !== user.uid) {
+      navigate(`/visitProfile/${user?.uid}`);
+    }
+    
   };
 
   const handleFollowBtn = () => {
@@ -71,39 +77,44 @@ const SearchedUsers = ({ user }) => {
           </div>
         </div>
       </Link>
+      {
+        currentUser.uid === user.uid ? (
+          null
 
-      {currentUser?.following?.find(
-        (followingId) => followingId.uid === user?.uid
-      ) ? (
-        <button
-        onClick={handleUnfollowBtn}
-        className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
-          style={{
-            backgroundColor: "transparent", // Set background to transparent
-            color: "#1A8917", // Set text color to red
-            border: "1px solid #1A8917", // Add a red border
-            textTransform: "none",
-          }}
-        >
-          Unfollow
-        </button>
-      ) : (
-        <button
-          onClick={handleFollowBtn}
+        ) :
+        currentUser?.following?.find(
+          (followingId) => followingId.uid === user?.uid
+        ) ? (
+          <button
+          onClick={handleUnfollowBtn}
           className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
-          style={{
-            backgroundColor: "#1A8917",
-            color: "white",
-            textTransform: "none",
-            "&:hover": {
-              backgroundColor: "#1A8917",
+            style={{
+              backgroundColor: "transparent", // Set background to transparent
+              color: "#1A8917", // Set text color to red
+              border: "1px solid #1A8917", // Add a red border
               textTransform: "none",
-            },
-          }}
-        >
-          Follow
-        </button>
-      )}
+            }}
+          >
+            Unfollow
+          </button>
+        ) : (
+          <button
+            onClick={handleFollowBtn}
+            className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+            style={{
+              backgroundColor: "#1A8917",
+              color: "white",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#1A8917",
+                textTransform: "none",
+              },
+            }}
+          >
+            Follow
+          </button>
+        )
+      }
     </div>
   );
 };

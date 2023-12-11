@@ -177,20 +177,6 @@ const BlogDetails = () => {
           <div className="flex text-xs items-center gap-5">
             {/* <PiHandsClappingLight className="cursor:pointer "/><span>143</span> */}
             <div className="flex  items-center gap-1">
-              {/* {user === userUid ? (
-                <FaHandsClapping className="cursor-pointer text-xl" />
-              ) : likedBy?.find((us) => us === userUid) ? (
-                <FaHandsClapping
-                  className="cursor-pointer text-xl"
-                  title="Already Clapped!"
-                />
-              ) : (
-                <PiHandsClappingLight
-                  className="cursor-pointer text-xl"
-                  title="Clap!"
-                  onClick={handleClap}
-                />
-              )} */}
               {/* new Logic */}
               {user === userUid ? (
                 <FaHandsClapping
