@@ -235,6 +235,7 @@ export const follow = (relationshipInfo) => {
       });
       const responseData = await response.json();
     if (responseData?.targetedResult?.modifiedCount > 0) {
+      console.log(responseData);
       dispatch(fetchUserUpdatedData(uid))
     }
     } catch (error) {}

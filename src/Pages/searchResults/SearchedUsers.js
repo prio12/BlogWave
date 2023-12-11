@@ -31,10 +31,33 @@ const SearchedUsers = ({ user }) => {
     const relationshipInfo = {
       following,
       follower,
+      action:"follow"
     };
 
     dispatch(follow(relationshipInfo));
   };
+
+  const handleUnfollowBtn = () =>{
+    const following = {
+      profilePic: currentUser?.profilePic,
+      name: currentUser?.name,
+      uid: currentUser?.uid,
+      about: currentUser?.about,
+    };
+    const follower = {
+      profilePic: user?.profilePic,
+      name: user?.name,
+      uid: user?.uid,
+      about: user?.about,
+    };
+    const relationshipInfo = {
+      following,
+      follower,
+      action:"unFollow"
+    };
+
+    dispatch(follow(relationshipInfo))
+  }
   return (
     <div className="flex justify-between my-5 md:pr-12 items-center">
       <Link onClick={handleVisitProfile}>
@@ -53,8 +76,8 @@ const SearchedUsers = ({ user }) => {
         (followingId) => followingId.uid === user?.uid
       ) ? (
         <button
-          // onClick={handleUnfollowBtn}
-          className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+        onClick={handleUnfollowBtn}
+        className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
           style={{
             backgroundColor: "transparent", // Set background to transparent
             color: "#1A8917", // Set text color to red
