@@ -13,7 +13,6 @@ import { CgProfile } from "react-icons/cg";
 import { fetchUserAllBlogs } from "../../../redux/thunk/blogs";
 import { Link, useNavigate } from "react-router-dom";
 import Blogs from "../../../components/blog/Blogs";
-import { fetchAllUsers } from "../../../redux/actions/userAuthActions";
 
 const Profile = () => {
   const userDetails = useSelector((state) => state?.user?.userData);
@@ -36,16 +35,14 @@ const Profile = () => {
     dispatch(fetchUserAllBlogs(userUid));
   }, [dispatch, userUid]);
 
-  // useEffect(() =>{
-  //   dispatch(fetchAllUsers())
-  // },[dispatch])
-
-  const handleNavigateToFollowers = () => {
-    navigate('/followers', {state:{from:"/profile"}})
+  const handleNavigateToFollowers = (event) => {
+    event.stopPropagation();
+    console.log("Navigating with state");
+    navigate("/followers", { state: { from: "/profile" } });
   };
 
   const [activeContent, setActiveContent] = useState("home");
-  const textareaRef = useRef();
+  // const textareaRef = useRef();
 
   const toggleContent = (content) => {
     setActiveContent(content);
@@ -141,10 +138,13 @@ const Profile = () => {
             />
           )}
         </div>
-        {followers?.length && (
-          <p onClick={handleNavigateToFollowers} className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">
-            {followers.length} Followers
-          </p>
+        {followers?.length > 0 && (
+          <p
+          onClick={handleNavigateToFollowers}
+          className="text-xs text-[#6b6b6b] font-semibold cursor-pointer"
+        >
+          {followers?.length} Followers
+        </p>
         )}
         <div className="flex gap-2 items-center">
           <p className="font-bold">{name}</p>

@@ -100,11 +100,16 @@ const VisitProfile = () => {
           {activeContent === "about" && (
             <div className="border-b-2 border-black">
               <div className=" md:border-r-2 text-justify pr-2 text-xs border-r-0 w-full">
-                {user?.about ? <p className="font-semibold">{user?.about}</p> : 
-                    <div>
+                {user?.about ? (
+                  <p className="font-semibold">{user?.about}</p>
+                ) : (
+                  <div>
                     <FaRegFaceSadTear className="text-5xl my-2" />
-                     <p className="text-xs font-semibold">Sorry! {user?.name} has not shared anything about him!</p>
-                    </div>}
+                    <p className="text-xs font-semibold">
+                      Sorry! {user?.name} has not shared anything about him!
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="text-xs text-[#1A8917] cursor-pointer flex gap-5 my-5">
                 <p>204K Followers</p>
@@ -121,8 +126,10 @@ const VisitProfile = () => {
         </div>
         {
           user?.followers?.length > 0 && <Link to="/followers">
-          <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">{ user?.followers?.length} Followers</p>
-          </Link>
+          <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">
+            {user?.followers?.length} Followers
+          </p>
+        </Link>
         }
         <div className="flex gap-2 items-center">
           <p className="font-bold">{user?.name}</p>

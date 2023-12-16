@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
+import { fetchUserUpdatedData, follow, getAllUsers } from "../../redux/thunk/userAuth";
 import { fetchAllBlogs } from "../../redux/thunk/blogs";
 import StaffPicks from "../Home/usersHomePage/staffPicksBlogs/StaffPicks";
 
 const Followers = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const currentUser = useSelector((state) => state?.user?.userData);
-  //   console.log(currentUser?.followers);
   const [visitProfile, setVisitProfile] = useState(null);
-
   const [previousPage, setPreviousPage] = useState("");
   const location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
-    const previousPage = location.state?.from;
-    setPreviousPage(previousPage);
-  }, [location.state?.from]);
-
+    console.log(location);
+    const storedPreviousPage = location.state?.from;
+    console.log(storedPreviousPage,"inside useEffect block");
+    setPreviousPage(storedPreviousPage);
+  }, [location]);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(userUid));
   }, [dispatch, userUid]);
@@ -36,11 +35,57 @@ const Followers = () => {
     setVisitProfile(storedUser);
   }, []);
 
+  const handleFollowBtn = (followerInfo) => {
+    const following = {
+      profilePic: currentUser?.profilePic,
+      name: currentUser?.name,
+      uid: currentUser?.uid,
+      about: currentUser?.about,
+    };
+    const follower = {
+      profilePic: followerInfo?.profilePic,
+      name: followerInfo?.name,
+      uid: followerInfo?.uid,
+      about: followerInfo?.about,
+    };
+    const relationshipInfo = {
+      following,
+      follower,
+      action:"follow"
+    };
+
+    dispatch(follow(relationshipInfo));
+    console.log("clicked");
+  };
+
+  const handleUnfollowBtn = (followerInfo) => {
+    const following = {
+      profilePic: currentUser?.profilePic,
+      name: currentUser?.name,
+      uid: currentUser?.uid,
+      about: currentUser?.about,
+    };
+    const follower = {
+      profilePic: followerInfo?.profilePic,
+      name: followerInfo?.name,
+      uid: followerInfo?.uid,
+      about: followerInfo?.about,
+    };
+    const relationshipInfo = {
+      following,
+      follower,
+      action:"unFollow"
+    };
+
+    dispatch(follow(relationshipInfo));
+    console.log("clicked");
+  };
+
   let content;
 
-  if (previousPage === "/profile") {
-    content = currentUser?.followers.map((follower) => (
-      <div className="flex justify-between my-5 md:pr-12 items-center ">
+  if (previousPage === "/profile" && currentUser) {
+    content = currentUser?.followers?.map((follower) => (
+      <div key={follower._id} className="flex justify-between my-5 md:pr-12 items-center ">
         <div className="md:flex lg:flex items-center gap-5">
           <img src={follower?.profilePic} className="h-16 w-16" alt="" />
           <div className="my-3 md:my-0">
@@ -56,6 +101,7 @@ const Followers = () => {
             (following) => following?.uid === follower.uid
           ) ? (
           <button
+           onClick={() =>handleUnfollowBtn(follower)}
             className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
             style={{
               backgroundColor: "transparent", // Set background to transparent
@@ -68,6 +114,7 @@ const Followers = () => {
           </button>
         ) : (
           <button
+          onClick={() =>handleFollowBtn(follower)}
             className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
             style={{
               backgroundColor: "#1A8917",
@@ -85,8 +132,8 @@ const Followers = () => {
       </div>
     ));
   } else {
-    content = visitProfile?.followers.map((follower) => (
-      <div className="flex justify-between my-5 md:pr-12 items-center ">
+    content = visitProfile?.followers?.map((follower) => (
+      <div key={follower._id} className="flex justify-between my-5 md:pr-12 items-center ">
         <div className="md:flex lg:flex items-center gap-5">
           <img src={follower?.profilePic} className="h-16 w-16" alt="" />
           <div className="my-3 md:my-0">
@@ -98,9 +145,10 @@ const Followers = () => {
         </div>
         {currentUser?.uid ===
         follower.uid ? null : currentUser?.following?.find(
-            (following) => following?.uid === follower.uid
+            (following) => following?.uid === follower?.uid
           ) ? (
           <button
+          onClick={() =>handleUnfollowBtn(follower)}
             className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
             style={{
               backgroundColor: "transparent", // Set background to transparent
@@ -113,6 +161,7 @@ const Followers = () => {
           </button>
         ) : (
           <button
+          onClick={() =>handleFollowBtn(follower)}
             className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
             style={{
               backgroundColor: "#1A8917",
