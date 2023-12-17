@@ -36,11 +36,14 @@ const Profile = () => {
   }, [dispatch, userUid]);
 
   const handleNavigateToFollowers = (event) => {
-    event.stopPropagation();
+    // event.stopPropagation();
     console.log("Navigating with state");
     navigate(`/followers/${userDetails?.uid}`, { state: { from: "/profile" } });
   };
 
+  const handleNavigateToFollowing = () => {
+    navigate(`/following/${userDetails?.uid}`, { state: { from: "/profile" } });
+  };
   const [activeContent, setActiveContent] = useState("home");
   // const textareaRef = useRef();
 
@@ -87,7 +90,7 @@ const Profile = () => {
     return <Loader />;
   }
 
-  const { profilePic, name, followers } = userDetails;
+  const { profilePic, name, followers, following } = userDetails;
 
   return (
     <div className=" flex md:flex-row flex-col-reverse  gap-3 p-5 md:px-12 ">
@@ -138,14 +141,31 @@ const Profile = () => {
             />
           )}
         </div>
-        {followers?.length > 0 && (
-          <p
-          onClick={handleNavigateToFollowers}
-          className="text-xs text-[#6b6b6b] font-semibold cursor-pointer"
-        >
-          {followers?.length} Followers
-        </p>
-        )}
+        <div className="flex items-center gap-2">
+          {followers?.length ? (
+            <p  onClick={handleNavigateToFollowers} className="text-[#6b6b6b] font-semibold cursor-pointer" style={{fontSize:"10px"}}>
+             
+              {followers?.length} Follower
+              <span className={`${followers?.length > 1 ? "block" : "hidden"}`}>
+                s
+              </span>
+            </p>
+          ) : (
+            <p style={{fontSize:"10px"}} className="text-[#6b6b6b] font-semibold cursor-not-allowed" >0 Followers</p>
+          )}
+          <p>|</p>
+          {following?.length ? (
+            <p  onClick={handleNavigateToFollowing} className="text-[#6b6b6b] font-semibold cursor-pointer" style={{fontSize:"10px"}}>
+             
+              {following?.length} Following
+              <span className={`${following?.length > 1 ? "block" : "hidden"}`}>
+                s
+              </span>
+            </p>
+          ) : (
+            <p style={{fontSize:"10px"}} className="text-[#6b6b6b] font-semibold cursor-not-allowed" >0 Following</p>
+          )}
+        </div>
         <div className="flex gap-2 items-center">
           <p className="font-bold">{name}</p>
           <MdEdit className="cursor-pointer" onClick={openNameModal} />

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { fetchUserUpdatedData, follow, getAllUsers } from "../../redux/thunk/userAuth";
-import { fetchAllBlogs } from "../../redux/thunk/blogs";
-import StaffPicks from "../Home/usersHomePage/staffPicksBlogs/StaffPicks";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { fetchUserUpdatedData, follow, getAllUsers } from '../../../redux/thunk/userAuth';
+import { fetchAllBlogs } from '../../../redux/thunk/blogs';
+import StaffPicks from '../../Home/usersHomePage/staffPicksBlogs/StaffPicks';
 
-const Followers = () => {
-  const userUid = useSelector((state) => state?.user?.user?.uid);
+const Followings = () => {
+    const userUid = useSelector((state) => state?.user?.user?.uid);
   const currentUser = useSelector((state) => state?.user?.userData);
   const allUser = useSelector((state) => state?.user?.allUsers);
   const [visitProfile, setVisitProfile] = useState(null);
@@ -55,7 +55,7 @@ const Followers = () => {
     };
 
     dispatch(follow(relationshipInfo));
-    console.log("clicked");
+    console.log(relationshipInfo);
   };
 
   const handleUnfollowBtn = (followerInfo) => {
@@ -78,7 +78,6 @@ const Followers = () => {
     };
 
     dispatch(follow(relationshipInfo));
-    console.log("clicked");
   };
 
   const handleVisitProfile = (follower) => {
@@ -94,18 +93,30 @@ const Followers = () => {
   let content;
 
   if (previousPage === "/profile" && currentUser) {
-    content = currentUser?.followers?.map((follower) => (
-      <div key={follower.uid} className="flex justify-between my-5 md:pr-12 items-center ">
-        <div onClick={() => handleVisitProfile(follower)} className="md:flex cursor-pointer lg:flex items-center gap-5">
-          <img src={follower?.profilePic} className="h-16 w-16" alt="" />
+    content = currentUser?.following?.map((myFollowing) => (
+      <div key={myFollowing.uid} className="flex justify-between my-5 md:pr-12 items-center ">
+        <div onClick={() => handleVisitProfile(myFollowing)} className="md:flex cursor-pointer lg:flex items-center gap-5">
+          <img src={myFollowing?.profilePic} className="h-16 w-16" alt="" />
           <div className="my-3 md:my-0">
-            <p className="text-xs font-bold">{follower?.name}</p>
-            {follower.about && (
-              <p className="text-xs">{follower.about.slice(0, 100)}...</p>
+            <p className="text-xs font-bold">{myFollowing?.name}</p>
+            {myFollowing.about && (
+              <p className="text-xs">{myFollowing.about.slice(0, 100)}...</p>
             )}
           </div>
         </div>
-        {currentUser?.uid === follower.uid ? (
+        <button
+           onClick={() =>handleUnfollowBtn(myFollowing)}
+            className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+            style={{
+              backgroundColor: "transparent", // Set background to transparent
+              color: "#1A8917", // Set text color to red
+              border: "1px solid #1A8917", // Add a red border
+              textTransform: "none",
+            }}
+          >
+            Unfollow
+          </button>
+        {/* {currentUser?.uid === follower.uid ? (
           <p>I can't follow myself</p>
         ) : currentUser?.following?.find(
             (following) => following?.uid === follower.uid
@@ -138,27 +149,27 @@ const Followers = () => {
           >
             Follow
           </button>
-        )}
+        )} */}
       </div>
     ));
   } else {
-    content = visitProfile?.followers?.map((follower) => (
-      <div key={follower.uid} className="flex justify-between my-5 md:pr-12 items-center ">
-        <div onClick={() => handleVisitProfile(follower)} className="md:flex lg:flex cursor-pointer items-center gap-5">
-          <img src={follower?.profilePic} className="h-16 w-16" alt="" />
+    content = visitProfile?.following?.map((visitUserFollowing) => (
+      <div key={visitUserFollowing.uid} className="flex justify-between my-5 md:pr-12 items-center ">
+        <div onClick={() => handleVisitProfile(visitUserFollowing)} className="md:flex lg:flex cursor-pointer items-center gap-5">
+          <img src={visitUserFollowing?.profilePic} className="h-16 w-16" alt="" />
           <div className="my-3 md:my-0">
-            <p className="text-xs font-bold">{follower?.name}</p>
-            {follower.about && (
-              <p className="text-xs">{follower.about.slice(0, 100)}...</p>
+            <p className="text-xs font-bold">{visitUserFollowing?.name}</p>
+            {visitUserFollowing.about && (
+              <p className="text-xs">{visitUserFollowing.about.slice(0, 100)}...</p>
             )}
           </div>
         </div>
         {currentUser?.uid ===
-        follower.uid ? null : currentUser?.following?.find(
-            (following) => following?.uid === follower?.uid
+        visitUserFollowing.uid ? null : currentUser?.following?.find(
+            (following) => following?.uid === visitUserFollowing?.uid
           ) ? (
           <button
-          onClick={() =>handleUnfollowBtn(follower)}
+          onClick={() =>handleUnfollowBtn(visitUserFollowing)}
             className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
             style={{
               backgroundColor: "transparent", // Set background to transparent
@@ -171,7 +182,7 @@ const Followers = () => {
           </button>
         ) : (
           <button
-          onClick={() =>handleFollowBtn(follower)}
+          onClick={() =>handleFollowBtn(visitUserFollowing)}
             className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
             style={{
               backgroundColor: "#1A8917",
@@ -200,4 +211,4 @@ const Followers = () => {
   );
 };
 
-export default Followers;
+export default Followings;

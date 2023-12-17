@@ -13,6 +13,7 @@ import Library from "../Pages/userDashboard/library/Library";
 import SearchResults from "../Pages/searchResults/SearchResults";
 import VisitProfile from "../components/visitProfile/VisitProfile";
 import Followers from "../Pages/followers/Followers";
+import Followings from "../Pages/followers/followings/Followings";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/followers/:id",
         element: <PrivateRoute><Followers/></PrivateRoute>,
+      },
+      {
+        path: "/following/:id",
+        element: <PrivateRoute><Followings/></PrivateRoute>,
       },
     ],
   },

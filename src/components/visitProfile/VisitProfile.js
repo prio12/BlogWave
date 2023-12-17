@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
 import { FaRegFaceSadTear } from "react-icons/fa6";
 import { fetchAllBlogs, fetchUserAllBlogs } from "../../redux/thunk/blogs";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../loading/Loader";
 import Blogs from "../blog/Blogs";
 
@@ -17,16 +17,14 @@ const VisitProfile = () => {
   const location = useLocation();
   console.log(location?.state?.from);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
   const [activeContent, setActiveContent] = useState("home");
 
   useEffect(() => {
-    // const storedUser = JSON.parse(sessionStorage.getItem("user"));
-    // setUser(storedUser);
-    setUser(allUser?.find((userDetails) => userDetails?.uid === id))
-    
-  }, [selectedProfile,location,allUser,id]);
+    setUser(allUser?.find((userDetails) => userDetails?.uid === id));
+  }, [selectedProfile, location, allUser, id]);
 
   useEffect(() => {
     dispatch(fetchUserUpdatedData(userUid));
@@ -44,12 +42,20 @@ const VisitProfile = () => {
     setActiveContent(content);
   };
 
-
   let content;
 
   useEffect(() => {
     dispatch(fetchUserAllBlogs(id));
   }, [dispatch, id]);
+
+
+  const handleVisitProfileFromFollowers = () =>{
+    navigate(`/followers/${user?.uid}`)
+  }
+
+  const handleVisitProfileFromFollowing = () =>{
+    navigate(`/following/${user?.uid}`)
+  }
 
   if (!userBLogs.length) {
     content = (
@@ -115,12 +121,28 @@ const VisitProfile = () => {
                 )}
               </div>
               <div className="text-xs text-[#1A8917] cursor-pointer flex gap-5 my-5">
-                {/* <p>204K Followers</p>
+                {user?.followers?.length ? (
+                  <p onClick={handleVisitProfileFromFollowers}>
+                    {user?.followers?.length} Follower
+                    <span
+                      className={`${
+                        user?.followers?.length > 1 ? "block" : "hidden"
+                      }`}
+                    >
+                      s
+                    </span>
+                  </p>
+                ) : (
+                  <p>0 Followers</p>
+                )}
                 <p className="text-black">.</p>
-                <p>204K Followers</p> */}
-               {user?.followers?.length && 
-                <p>{user?.followers?.length} followers!</p>
-               }
+                {user?.following?.length ? (
+                  <p onClick={handleVisitProfileFromFollowing}>
+                    {user?.following?.length} Following
+                  </p>
+                ) : (
+                  <p>0 Followings</p>
+                )}
               </div>
             </div>
           )}
@@ -130,13 +152,13 @@ const VisitProfile = () => {
         <div className="mb-3 ">
           <img src={user?.profilePic} className="w-16 h-16" alt="" />
         </div>
-        {
-          user?.followers?.length > 0 && <Link to={`/followers/${user?.uid}`}>
-          <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">
-            {user?.followers?.length} Followers
-          </p>
-        </Link>
-        }
+        {user?.followers?.length > 0 && (
+          <Link to={`/followers/${user?.uid}`}>
+            <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">
+              {user?.followers?.length} Followers
+            </p>
+          </Link>
+        )}
         <div className="flex gap-2 items-center">
           <p className="font-bold">{user?.name}</p>
         </div>
