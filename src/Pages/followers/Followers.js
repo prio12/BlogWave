@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchUserUpdatedData, follow, getAllUsers } from "../../redux/thunk/userAuth";
 import { fetchAllBlogs } from "../../redux/thunk/blogs";
 import StaffPicks from "../Home/usersHomePage/staffPicksBlogs/StaffPicks";
@@ -8,14 +8,15 @@ import StaffPicks from "../Home/usersHomePage/staffPicksBlogs/StaffPicks";
 const Followers = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const currentUser = useSelector((state) => state?.user?.userData);
+  const allUser = useSelector((state) => state?.user?.allUsers);
   const [visitProfile, setVisitProfile] = useState(null);
   const [previousPage, setPreviousPage] = useState("");
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
   useEffect(() => {
-    console.log(location);
     const storedPreviousPage = location.state?.from;
-    console.log(storedPreviousPage,"inside useEffect block");
     setPreviousPage(storedPreviousPage);
   }, [location]);
   useEffect(() => {
@@ -31,9 +32,10 @@ const Followers = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const storedUser = JSON.parse(sessionStorage.getItem("user"));
-    setVisitProfile(storedUser);
-  }, []);
+    setVisitProfile(allUser?.find((userDetails) => userDetails?.uid === id))
+    // const storedUser = JSON.parse(sessionStorage.getItem("user"));
+    // setVisitProfile(storedUser);
+  }, [allUser,id]);
 
   const handleFollowBtn = (followerInfo) => {
     const following = {
@@ -81,12 +83,22 @@ const Followers = () => {
     console.log("clicked");
   };
 
+  const handleVisitProfile = (follower) => {
+    if (currentUser?.uid === follower?.uid) {
+      navigate('/profile')
+    }
+
+    else if (currentUser?.uid !== follower?.uid) {
+    navigate(`/visitProfile/${follower?.uid}`,{ state: { from: "/followers" } })
+    }
+  }
+
   let content;
 
   if (previousPage === "/profile" && currentUser) {
     content = currentUser?.followers?.map((follower) => (
-      <div key={follower._id} className="flex justify-between my-5 md:pr-12 items-center ">
-        <div className="md:flex lg:flex items-center gap-5">
+      <div key={follower.uid} className="flex justify-between my-5 md:pr-12 items-center ">
+        <div onClick={() => handleVisitProfile(follower)} className="md:flex cursor-pointer lg:flex items-center gap-5">
           <img src={follower?.profilePic} className="h-16 w-16" alt="" />
           <div className="my-3 md:my-0">
             <p className="text-xs font-bold">{follower?.name}</p>
@@ -133,8 +145,8 @@ const Followers = () => {
     ));
   } else {
     content = visitProfile?.followers?.map((follower) => (
-      <div key={follower._id} className="flex justify-between my-5 md:pr-12 items-center ">
-        <div className="md:flex lg:flex items-center gap-5">
+      <div key={follower.uid} className="flex justify-between my-5 md:pr-12 items-center ">
+        <div onClick={() => handleVisitProfile(follower)} className="md:flex lg:flex cursor-pointer items-center gap-5">
           <img src={follower?.profilePic} className="h-16 w-16" alt="" />
           <div className="my-3 md:my-0">
             <p className="text-xs font-bold">{follower?.name}</p>

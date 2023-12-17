@@ -38,7 +38,7 @@ const Profile = () => {
   const handleNavigateToFollowers = (event) => {
     event.stopPropagation();
     console.log("Navigating with state");
-    navigate("/followers", { state: { from: "/profile" } });
+    navigate(`/followers/${userDetails?.uid}`, { state: { from: "/profile" } });
   };
 
   const [activeContent, setActiveContent] = useState("home");

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
 import { FaRegFaceSadTear } from "react-icons/fa6";
 import { fetchAllBlogs, fetchUserAllBlogs } from "../../redux/thunk/blogs";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Loader from "../../loading/Loader";
 import Blogs from "../blog/Blogs";
 
@@ -12,20 +12,23 @@ const VisitProfile = () => {
   const selectedProfile = useSelector((state) => state?.user?.selectedProfile);
   const userBLogs = useSelector((state) => state?.blogs?.userBlogs);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
+  const allUser = useSelector((state) => state?.user?.allUsers);
+  console.log(allUser);
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location?.state?.from);
   const { id } = useParams();
-  console.log(id);
 
   const [user, setUser] = useState(null);
   const [activeContent, setActiveContent] = useState("home");
 
   useEffect(() => {
-    const storedUser = JSON.parse(sessionStorage.getItem("user"));
-    // console.log(storedUser);
-    setUser(storedUser);
-  }, [selectedProfile]);
+    // const storedUser = JSON.parse(sessionStorage.getItem("user"));
+    // setUser(storedUser);
+    setUser(allUser?.find((userDetails) => userDetails?.uid === id))
+    
+  }, [selectedProfile,location,allUser,id]);
 
-  //   console.log("user",user);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(userUid));
   }, [dispatch, userUid]);
@@ -41,6 +44,8 @@ const VisitProfile = () => {
   const toggleContent = (content) => {
     setActiveContent(content);
   };
+
+  console.log(user);
 
   let content;
 
@@ -125,7 +130,7 @@ const VisitProfile = () => {
           <img src={user?.profilePic} className="w-16 h-16" alt="" />
         </div>
         {
-          user?.followers?.length > 0 && <Link to="/followers">
+          user?.followers?.length > 0 && <Link to={`/followers/${user?.uid}`}>
           <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">
             {user?.followers?.length} Followers
           </p>

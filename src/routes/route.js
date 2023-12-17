@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><VisitProfile/></PrivateRoute>,
       },
       {
-        path: "/followers",
+        path: "/followers/:id",
         element: <PrivateRoute><Followers/></PrivateRoute>,
       },
     ],
