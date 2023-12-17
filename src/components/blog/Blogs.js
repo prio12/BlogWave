@@ -49,7 +49,7 @@ const Blogs = ({ blog }) => {
       {/* blog image div */}
       <div className="w-full md:w-1/3">
         <img
-          style={{ width: "100%", height:"120px" }}
+          style={{ width: "100%", height:"220px" }}
           src={blog?.image}
           alt=""
         />

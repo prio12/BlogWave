@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { addBlogPost } from "../../redux/thunk/blogs";
+import { addBlogPost, fetchAllBlogs } from "../../redux/thunk/blogs";
 import { useNavigate } from "react-router-dom";
+import { fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
 const WriteBlog = () => {
   const { handleSubmit, register } = useForm();
   const textareaRef = useRef();
@@ -15,6 +16,17 @@ const WriteBlog = () => {
   const [isLoading,setIsLoading] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(fetchUserUpdatedData(userUid));
+  }, [dispatch, userUid]);
+
+  useEffect(() => {
+    dispatch(fetchAllBlogs());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
   const submit = (data) => {
     // console.log(data);
     const textAreaValue = textareaRef.current.value;

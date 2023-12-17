@@ -13,7 +13,6 @@ const VisitProfile = () => {
   const userBLogs = useSelector((state) => state?.blogs?.userBlogs);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const allUser = useSelector((state) => state?.user?.allUsers);
-  console.log(allUser);
   const dispatch = useDispatch();
   const location = useLocation();
   console.log(location?.state?.from);
@@ -45,7 +44,6 @@ const VisitProfile = () => {
     setActiveContent(content);
   };
 
-  console.log(user);
 
   let content;
 
@@ -117,9 +115,12 @@ const VisitProfile = () => {
                 )}
               </div>
               <div className="text-xs text-[#1A8917] cursor-pointer flex gap-5 my-5">
-                <p>204K Followers</p>
+                {/* <p>204K Followers</p>
                 <p className="text-black">.</p>
-                <p>204K Followers</p>
+                <p>204K Followers</p> */}
+               {user?.followers?.length && 
+                <p>{user?.followers?.length} followers!</p>
+               }
               </div>
             </div>
           )}

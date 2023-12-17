@@ -30,13 +30,13 @@ const BlogDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() =>{
-    dispatch(fetchAllBlogs())
-  },[dispatch])
-  
-  useEffect(() =>{
-    dispatch(getAllUsers())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(fetchAllBlogs());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
 
   const { id } = useParams();
   useEffect(() => {
@@ -52,7 +52,7 @@ const BlogDetails = () => {
   const updateSuccess = useSelector((state) => state?.blogs?.updateSuccess);
   // const claps = useSelector((state) => state?.blogs?.claps);
   const isDeleted = useSelector((state) => state?.blogs?.isDeleted);
-  const [responseBarStatus,setResponseBarStatus] = useState(false);
+  const [responseBarStatus, setResponseBarStatus] = useState(false);
   // console.log(responseBarStatus);
   useEffect(() => {
     dispatch(fetchUserUpdatedData(user));
@@ -85,6 +85,15 @@ const BlogDetails = () => {
     // onClick={() => dispatch(updateClapsCount(_id, userUid))}
     dispatch(updateClapsCount(_id, user));
     dispatch(addPostToClap({ blog: selectedBlogData }, { userUid: user }));
+  };
+
+  const handleVisitProfile = () => {
+    // comparing currently loggedIn user.uid to selecedBlog author Uid
+    if (user === userUid) {
+      navigate("/profile");
+    } else if (user !== userUid) {
+      navigate(`/visitProfile/${userUid}`);
+    }
   };
 
   if (!userData || isUpdateLoading) {
@@ -147,7 +156,7 @@ const BlogDetails = () => {
                 htmlFor="response-drawer"
                 aria-label="close sidebar"
                 className="drawer-overlay cursor-pointer"
-                onClick={() =>setResponseBarStatus(false)}
+                onClick={() => setResponseBarStatus(false)}
               >
                 <RxCross1 />
               </label>
@@ -162,9 +171,18 @@ const BlogDetails = () => {
       <div className="w-full md:w-1/2 mx-auto">
         <h2 className="text-4xl font-extrabold my-3">{title}</h2>
         <div className="flex gap-2 items-center my-3">
-          <img src={authorImage} className="h-12 w-12" alt="" />
+          <img
+            onClick={handleVisitProfile}
+            src={authorImage}
+            className="h-12 cursor-pointer w-12"
+            alt=""
+          />
           <div>
-            <h5 style={{ fontSize: "12px" }} className="font-semibold">
+            <h5
+              onClick={handleVisitProfile}
+              style={{ fontSize: "12px" }}
+              className="font-semibold cursor-pointer"
+            >
               {author}
             </h5>
             <small style={{ fontSize: "10px" }} className="mr-3">
@@ -200,7 +218,11 @@ const BlogDetails = () => {
             </div>
             {/* <FaRegComment/><span>5</span> */}
             <div className="flex items-center gap-1 ">
-              <label htmlFor="response-drawer" onClick={() => setResponseBarStatus(true)} className="drawer-button">
+              <label
+                htmlFor="response-drawer"
+                onClick={() => setResponseBarStatus(true)}
+                className="drawer-button"
+              >
                 <FaRegComment
                   className="cursor-pointer text-xl"
                   title="Response.."
@@ -220,7 +242,9 @@ const BlogDetails = () => {
                 <FiMoreHorizontal
                   onClick={handleMoreOptionModal}
                   title="More"
-                  className={`cursor-pointer text-xl ${responseBarStatus && "hidden"}`}
+                  className={`cursor-pointer text-xl ${
+                    responseBarStatus && "hidden"
+                  }`}
                 />
               )}
               {isOpen && (
