@@ -48,14 +48,13 @@ const VisitProfile = () => {
     dispatch(fetchUserAllBlogs(id));
   }, [dispatch, id]);
 
+  const handleVisitProfileFromFollowers = () => {
+    navigate(`/followers/${user?.uid}`);
+  };
 
-  const handleVisitProfileFromFollowers = () =>{
-    navigate(`/followers/${user?.uid}`)
-  }
-
-  const handleVisitProfileFromFollowing = () =>{
-    navigate(`/following/${user?.uid}`)
-  }
+  const handleVisitProfileFromFollowing = () => {
+    navigate(`/following/${user?.uid}`);
+  };
 
   if (!userBLogs.length) {
     content = (
@@ -122,26 +121,48 @@ const VisitProfile = () => {
               </div>
               <div className="text-xs text-[#1A8917] cursor-pointer flex gap-5 my-5">
                 {user?.followers?.length ? (
-                  <p onClick={handleVisitProfileFromFollowers}>
-                    {user?.followers?.length} Follower
-                    <span
-                      className={`${
-                        user?.followers?.length > 1 ? "block" : "hidden"
-                      }`}
-                    >
-                      s
-                    </span>
-                  </p>
+                  <div>
+                    {user?.followers?.length > 1 ? (
+                      <p
+                        onClick={handleVisitProfileFromFollowers}
+                        className=" cursor-pointer"
+                      >
+                        {" "}
+                        {user?.followers?.length} Followers
+                      </p>
+                    ) : (
+                      <p
+                        onClick={handleVisitProfileFromFollowers}
+                        className="cursor-pointer"
+                      >
+                        {user?.followers?.length} Follower
+                      </p>
+                    )}
+                  </div>
                 ) : (
-                  <p>0 Followers</p>
+                  <div>
+                    <p
+                      style={{ fontSize: "10px" }}
+                      className="cursor-not-allowed"
+                    >
+                      0 Followers
+                    </p>
+                  </div>
                 )}
-                <p className="text-black">.</p>
+                <p className="text-black">|</p>
                 {user?.following?.length ? (
-                  <p onClick={handleVisitProfileFromFollowing}>
+                  <p
+                    onClick={handleVisitProfileFromFollowing}
+                    className="cursor-pointer"
+                  >
                     {user?.following?.length} Following
                   </p>
                 ) : (
-                  <p>0 Followings</p>
+                  <p
+                    className=" cursor-not-allowed"
+                  >
+                    0 Following
+                  </p>
                 )}
               </div>
             </div>
@@ -152,13 +173,63 @@ const VisitProfile = () => {
         <div className="mb-3 ">
           <img src={user?.profilePic} className="w-16 h-16" alt="" />
         </div>
-        {user?.followers?.length > 0 && (
+        {/* {user?.followers?.length > 0 && (
           <Link to={`/followers/${user?.uid}`}>
             <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">
               {user?.followers?.length} Followers
             </p>
           </Link>
-        )}
+        )} */}
+        <div className="flex items-center gap-2">
+          {user?.followers?.length ? (
+            <div>
+              {user?.followers?.length > 1 ? (
+                <p
+                  onClick={handleVisitProfileFromFollowers}
+                  style={{ fontSize: "10px" }}
+                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                >
+                  {" "}
+                  {user?.followers?.length} Followers
+                </p>
+              ) : (
+                <p
+                  onClick={handleVisitProfileFromFollowers}
+                  style={{ fontSize: "10px" }}
+                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                >
+                  {user?.followers?.length} Follower
+                </p>
+              )}
+            </div>
+          ) : (
+            <div>
+              <p
+                style={{ fontSize: "10px" }}
+                className="text-[#6b6b6b] font-semibold cursor-not-allowed"
+              >
+                0 Followers
+              </p>
+            </div>
+          )}
+          <p>|</p>
+          {user?.following?.length ? (
+            <p
+              onClick={handleVisitProfileFromFollowing}
+              className="text-[#6b6b6b] font-semibold cursor-pointer"
+              style={{ fontSize: "10px" }}
+            >
+              {user?.following?.length} Following
+            </p>
+          ) : (
+            <p
+              style={{ fontSize: "10px" }}
+              className="text-[#6b6b6b] font-semibold cursor-not-allowed"
+            >
+              0 Following
+            </p>
+          )}
+        </div>
         <div className="flex gap-2 items-center">
           <p className="font-bold">{user?.name}</p>
         </div>

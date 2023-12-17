@@ -143,27 +143,52 @@ const Profile = () => {
         </div>
         <div className="flex items-center gap-2">
           {followers?.length ? (
-            <p  onClick={handleNavigateToFollowers} className="text-[#6b6b6b] font-semibold cursor-pointer" style={{fontSize:"10px"}}>
-             
-              {followers?.length} Follower
-              <span className={`${followers?.length > 1 ? "block" : "hidden"}`}>
-                s
-              </span>
-            </p>
+            <div>
+              {followers?.length > 1 ? (
+                <p
+                  onClick={handleNavigateToFollowers}
+                  style={{ fontSize: "10px" }}
+                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                >
+                  {" "}
+                  {followers?.length} Followers
+                </p>
+              ) : (
+                <p
+                  onClick={handleNavigateToFollowers}
+                  style={{ fontSize: "10px" }}
+                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                >
+                  {followers?.length} Follower
+                </p>
+              )}
+            </div>
           ) : (
-            <p style={{fontSize:"10px"}} className="text-[#6b6b6b] font-semibold cursor-not-allowed" >0 Followers</p>
+            <div>
+              <p
+                style={{ fontSize: "10px" }}
+                className="text-[#6b6b6b] font-semibold cursor-not-allowed"
+              >
+                0 Followers
+              </p>
+            </div>
           )}
           <p>|</p>
           {following?.length ? (
-            <p  onClick={handleNavigateToFollowing} className="text-[#6b6b6b] font-semibold cursor-pointer" style={{fontSize:"10px"}}>
-             
+            <p
+              onClick={handleNavigateToFollowing}
+              className="text-[#6b6b6b] font-semibold cursor-pointer"
+              style={{ fontSize: "10px" }}
+            >
               {following?.length} Following
-              <span className={`${following?.length > 1 ? "block" : "hidden"}`}>
-                s
-              </span>
             </p>
           ) : (
-            <p style={{fontSize:"10px"}} className="text-[#6b6b6b] font-semibold cursor-not-allowed" >0 Following</p>
+            <p
+              style={{ fontSize: "10px" }}
+              className="text-[#6b6b6b] font-semibold cursor-not-allowed"
+            >
+              0 Following
+            </p>
           )}
         </div>
         <div className="flex gap-2 items-center">

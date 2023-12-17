@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { fetchUserUpdatedData, follow, getAllUsers } from '../../../redux/thunk/userAuth';
 import { fetchAllBlogs } from '../../../redux/thunk/blogs';
 import StaffPicks from '../../Home/usersHomePage/staffPicksBlogs/StaffPicks';
+import { LiaGreaterThanSolid } from 'react-icons/lia';
 
 const Followings = () => {
     const userUid = useSelector((state) => state?.user?.user?.uid);
@@ -116,40 +117,6 @@ const Followings = () => {
           >
             Unfollow
           </button>
-        {/* {currentUser?.uid === follower.uid ? (
-          <p>I can't follow myself</p>
-        ) : currentUser?.following?.find(
-            (following) => following?.uid === follower.uid
-          ) ? (
-          <button
-           onClick={() =>handleUnfollowBtn(follower)}
-            className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
-            style={{
-              backgroundColor: "transparent", // Set background to transparent
-              color: "#1A8917", // Set text color to red
-              border: "1px solid #1A8917", // Add a red border
-              textTransform: "none",
-            }}
-          >
-            Unfollow
-          </button>
-        ) : (
-          <button
-          onClick={() =>handleFollowBtn(follower)}
-            className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
-            style={{
-              backgroundColor: "#1A8917",
-              color: "white",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: "#1A8917",
-                textTransform: "none",
-              },
-            }}
-          >
-            Follow
-          </button>
-        )} */}
       </div>
     ));
   } else {
@@ -203,7 +170,34 @@ const Followings = () => {
 
   return (
     <div className="p-5 md:px-12 grid grid-cols-1 gap-5 md:grid-cols-3">
-      <div className="md:col-span-2">{content}</div>
+      <div className="md:col-span-2">
+      <div
+          className="flex items-center gap-2 my-5"
+          style={{ fontSize: "12px" }}
+        >
+          {previousPage === "/profile" ? (
+            <p>{currentUser?.name}</p>
+          ) : (
+            <p>{visitProfile?.name}</p>
+          )}
+          <LiaGreaterThanSolid />
+          <p>Following</p>
+        </div>
+        {previousPage === "/profile" ? (
+          <div>
+            <h3 className="text-3xl font-bold ">
+                {currentUser?.following?.length} Following
+              </h3>
+          </div>
+        ) : (
+          <div>
+             <h3 className="text-3xl font-bold">
+                {visitProfile?.following?.length} Following
+              </h3>
+          </div>
+        )}
+        <div>{content}</div>
+      </div>
       <div className="md:block hidden col-span-1 ">
         <StaffPicks />
       </div>
