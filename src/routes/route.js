@@ -15,6 +15,7 @@ import VisitProfile from "../components/visitProfile/VisitProfile";
 import Followers from "../Pages/followers/Followers";
 import Followings from "../Pages/followers/followings/Followings";
 import StaffPicksBlogs from "../Pages/stafPickBlogs/StaffPicksBlogs";
+import SmallSearchBar from "../Pages/Home/usersHomePage/searchBar/SmallSearchBar";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/searchResults",
         element: <PrivateRoute><SearchResults/></PrivateRoute>,
+      },
+      {
+        path: "/smallSearchBar",
+        element: <PrivateRoute><SmallSearchBar/></PrivateRoute>,
       },
       {
         path: "/profile",

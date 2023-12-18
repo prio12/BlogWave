@@ -6,6 +6,7 @@ import Loader from '../../loading/Loader';
 import { fetchAllBlogs } from '../../redux/thunk/blogs';
 import StaffPicks from '../Home/usersHomePage/staffPicksBlogs/StaffPicks';
 import SearchedUsers from './SearchedUsers';
+import SearchBar from '../Home/usersHomePage/searchBar/SearchBar';
 
 const SearchResults = () => {
     const [selectedResult,setSelectedResult] = useState("stories")
@@ -51,6 +52,9 @@ const SearchResults = () => {
     return (
         <div className='p-5 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-5'>
            <div className='md:col-span-2'>
+            <div className='block md:hidden my-5'>
+            <SearchBar/>
+            </div>
            <h1 className='text-4xl font-bold'><span className='text-slate-600'>Results for</span> {searchedQuery}</h1>
            <div className='flex gap-3 items-center text-xs font-semibold my-5 cursor-pointer'>
             <p onClick={() => setSelectedResult("stories")} className={`${selectedResult === "stories" && "underline"}`}>Stories</p>

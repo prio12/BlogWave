@@ -43,7 +43,9 @@ const UserHeader = () => {
         <div className="hidden md:flex">
           <SearchBar />
         </div>
+        <Link to='/smallSearchBar'>
         <AiOutlineSearch className="flex items-center md:hidden" />
+        </Link>
       </div>
       <div className="flex items-center gap-3">
         {
