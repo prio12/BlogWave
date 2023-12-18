@@ -14,6 +14,7 @@ import SearchResults from "../Pages/searchResults/SearchResults";
 import VisitProfile from "../components/visitProfile/VisitProfile";
 import Followers from "../Pages/followers/Followers";
 import Followings from "../Pages/followers/followings/Followings";
+import StaffPicksBlogs from "../Pages/stafPickBlogs/StaffPicksBlogs";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/writeBlog",
         element: <PrivateRoute><WriteBlog/></PrivateRoute>,
+      },
+      {
+        path: "/staffPicksBlogs",
+        element: <PrivateRoute><StaffPicksBlogs/></PrivateRoute>,
       },
       {
         path: "/searchResults",
