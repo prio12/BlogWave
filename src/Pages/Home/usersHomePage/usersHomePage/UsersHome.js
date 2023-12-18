@@ -25,17 +25,7 @@ const UsersHome = ({ category }) => {
           .filter((filteredBlog) => filteredBlog.category === category)
           .map((blog) => <Blogs key={blog._id} blog={blog}></Blogs>);
       }
-
-      // {
-      //   selectedFilter === "MOST RECENT" && responses
-      //   ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      //   .map((response, index) => <Responses response={response} key={index}></Responses>)
-      // }
       else {
-        // Map all blogs if no category is provided
-        // content = blogs.map((blog) => (
-        //   <Blogs key={blog._id} blog={blog}></Blogs>
-        // ));
         content = blogs.sort((a,b) => new Date(b.date) - new Date(a.date))
         .map((blog) => <Blogs key={blog._id} blog={blog}></Blogs>)
       }

@@ -39,7 +39,7 @@ useEffect(() =>{
     <div>
       {
         loading? <Loader/> : 
-        user? <div className="md:px-16 px-5 w-full grid gap-5 grid-cols-1 md:grid-cols-3">
+        user? <div className="md:px-16 px-5 w-full grid gap-12 grid-cols-1 md:grid-cols-3">
         <div className="col-span-2">
           <div className="grid grid-cols-1">
             <div>
