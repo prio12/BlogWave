@@ -3,9 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const UserTopics = ({handleDisplayedContent,selectedTopic}) => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
-  // const topics = blogs.map((blog) => blog.category); // Filter out undefined values
-  // const allTopics = ["For you",...topics];
- 
   const [startIndex, setStartIndex] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const topicsPerPageLarge = 6;

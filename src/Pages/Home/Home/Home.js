@@ -17,7 +17,7 @@ const Home = () => {
   const loading = useSelector((state) => state?.user?.isLoading);
   const blogs = useSelector((state) => state?.blogs?.blogs)
   const [category,setCategory] = useState('');
-  const [selectedTopic,setSelectedTopic] = useState(null);
+  const [selectedTopic,setSelectedTopic] = useState("For you");
   const handleDisplayedContent = (topic) =>{
    setCategory(topic)
    setSelectedTopic(topic)
