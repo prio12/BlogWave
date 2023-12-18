@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Loader from "../../../../loading/Loader";
 
 const Recommended = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
@@ -10,6 +9,10 @@ const Recommended = () => {
 
   if (blogs && blogs.length) {
     blogs.forEach((blog) => uniqueCategory.add(blog?.category));
+  }
+
+  const handleNavigate = (category) =>{
+    console.log(category);
   }
 
   return (
@@ -21,7 +24,7 @@ const Recommended = () => {
         {Array.from(uniqueCategory)
         .slice(0,6)
         .map((category) => (
-          <p key={category}>{category}</p>
+          <p className="cursor-pointer" key={category} onClick={() => handleNavigate(category)}>{category}</p>
         ))}
       </div>
       <p style={{ color: "rgb(44, 148, 44)" }} className=" font-semibold">
