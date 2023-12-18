@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Recommended from "../RecommendedTopics/Recommended";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -8,6 +8,9 @@ const StaffPicks = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
   const currentUser = useSelector((state) => state?.user?.userData);
   const navigate = useNavigate();
+  const location = useLocation();
+  const {pathname} = location;
+  console.log(pathname);
   const handleVisitProfile = (authorUid) => {
     if (currentUser?.uid === authorUid) {
       navigate("/profile");
@@ -19,14 +22,14 @@ const StaffPicks = () => {
   };
   return (
     <div>
-      <h4 style={{ fontSize: "12px" }} className="font-bold mb-3">
+      <h4 style={{ fontSize: "12px" }} className={`font-bold mb-3 ${pathname === "/staffPicksBlogs" ? "hidden" : "block"}`}>
         Staff Picks
       </h4>
       {blogs
         ?.filter((blog) => blog?.claps > 3)
         .slice(0, 3)
         .map((blog) => (
-          <div className="mb-5">
+          <div className={`mb-5 ${pathname === "/staffPicksBlogs" ? "hidden" : "block"}`} key={blog?._id}>
             <div onClick={() => handleVisitProfile(blog?.userUid)} className="flex cursor-pointer  items-center gap-2">
               <img
                 alt=""
@@ -42,7 +45,7 @@ const StaffPicks = () => {
             </Link>
           </div>
         ))}
-      <p style={{ color: "rgb(44, 148, 44)" }} className=" font-bold text-xs mb-5">
+      <p style={{ color: "rgb(44, 148, 44)" }} className={`mb-5 font-bold text-xs ${pathname === "/staffPicksBlogs" ? "hidden" : "block"}`}>
         <Link to="/staffPicksBlogs">
           <small>See the full list</small>
         </Link>
