@@ -99,6 +99,7 @@ const WriteBlog = () => {
             type="file"
             id="file-input"
             className="mb-5"
+            required
             {...register("image")}
           />
           {
