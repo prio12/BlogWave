@@ -40,7 +40,7 @@ const StaffPicksBlogs = () => {
         <div>
         <h2 className="text-3xl font-bold">Staff Picks</h2>
         <p className="text-[#6B6B6B]">
-          Stories from across Medium, hand-selected by our team.
+          Stories from across BlogWave, hand-selected by our team.
         </p>
         <div className="mt-2">
             {content}
