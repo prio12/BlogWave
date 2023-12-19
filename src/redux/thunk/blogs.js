@@ -13,6 +13,7 @@ import {
   updatedBlog,
 } from "../actions/blogActions";
 import { startLoading, stopLoading } from "../actions/userAuthActions";
+import { getAllUsers } from "./userAuth";
 
 export const addBlogPost = (post) => {
   return async (dispatch) => {
@@ -111,6 +112,29 @@ export const updateABlog = (data) => {
     }
   };
 };
+
+export const updateAuthorData = (data) =>{
+  console.log(data);
+  return async (dispatch) =>{
+    dispatch(startLoadingBlogs());
+    try {
+      const response = await fetch("http://localhost:5000/blogs/updateAuthorInfo",{
+        method:"PUT",
+        headers: { "Content-Type": "application/json" },
+        body:JSON.stringify(data)
+      })
+
+      const responseData = await response.json();
+      if (responseData) {
+        dispatch(stopLoadingBlogs());
+        dispatch(fetchAllBlogs());
+        dispatch(getAllUsers())
+      }
+    } catch (error) {
+      
+    }
+  }
+}
 
 export const updateClapsCount = (_id,userUid) =>{
   // console.log(_id,userUid);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../../../redux/thunk/userAuth";
+import { updateABlog, updateAuthorData } from "../../../redux/thunk/blogs";
 
 const ProfilePicModal = () => {
   const { handleSubmit, register } = useForm();
@@ -27,6 +28,12 @@ const ProfilePicModal = () => {
           const imageUrl = imgData.data.url;
           // dispatch(updateUserProfile(imageUrl))
           dispatch(updateUserProfile({photoURL:imageUrl,uid:uid}))
+          //updatedBlogAuthorData
+          const updatedAuthorInfo = {
+            userUid:uid,
+           photoURL:imageUrl
+          }
+          dispatch(updateAuthorData(updatedAuthorInfo))
           setIsLoading(false)
         }
       });

@@ -2,13 +2,19 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../../../redux/thunk/userAuth";
+import { updateAuthorData } from "../../../redux/thunk/blogs";
 
 const UserNameModal = () => {
     const dispatch = useDispatch();
     const uid = useSelector((state) => state?.user?.user?.uid);
     const {handleSubmit,register} = useForm();
     const submit = (data) =>{
-       dispatch(updateUserProfile({displayName:data.name,uid:uid})) 
+       dispatch(updateUserProfile({displayName:data.name,uid:uid}))
+       const updatedAuthorInfo = {
+        userUid:uid,
+       author:data.name
+      } 
+      dispatch(updateAuthorData(updatedAuthorInfo))
     }
   return (
     <div>
@@ -24,7 +30,7 @@ const UserNameModal = () => {
           <form onSubmit={handleSubmit(submit)} action="">
             <input {...register("name")} type="text" className="focus:outline-none font-mono" placeholder="Enter your name" required />
             <input
-            className="block my-5"
+            className="block cursor-pointer my-5"
               style={{
                 backgroundColor: "black",
                 borderRadius: "20px",

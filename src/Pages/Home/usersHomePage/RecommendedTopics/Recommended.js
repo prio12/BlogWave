@@ -23,9 +23,9 @@ const Recommended = () => {
       <h5 style={{ fontSize: "13px" }} className="font-bold mb-4">
         Recommended topics
       </h5>
-      <div className="text-xs grid grid-cols-3 gap-4 ">
+      <div className="text-xs grid grid-cols-3 gap-2 ">
         {Array.from(uniqueCategory)
-        .slice(0,6)
+        .slice(0,9)
         .map((category) => (
           <p className="cursor-pointer" key={category} onClick={() => handleNavigate(category)}>{category}</p>
         ))}
