@@ -16,6 +16,7 @@ import Followers from "../Pages/followers/Followers";
 import Followings from "../Pages/followers/followings/Followings";
 import StaffPicksBlogs from "../Pages/stafPickBlogs/StaffPicksBlogs";
 import SmallSearchBar from "../Pages/Home/usersHomePage/searchBar/SmallSearchBar";
+import Topics from "../Pages/allTopics/Topics";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
       {
         path: "/library",
         element: <PrivateRoute><Library/></PrivateRoute>,
+      },
+      {
+        path: "/topics",
+        element: <PrivateRoute><Topics/></PrivateRoute>,
       },
       {
         path: "/blogDetails/:id",

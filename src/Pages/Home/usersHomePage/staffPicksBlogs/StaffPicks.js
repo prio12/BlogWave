@@ -10,7 +10,6 @@ const StaffPicks = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const {pathname} = location;
-  console.log(pathname);
   const handleVisitProfile = (authorUid) => {
     if (currentUser?.uid === authorUid) {
       navigate("/profile");
@@ -26,7 +25,7 @@ const StaffPicks = () => {
         Staff Picks
       </h4>
       {blogs
-        ?.filter((blog) => blog?.claps > 3)
+        ?.filter((blog) => blog?.claps > 5)
         .slice(0, 3)
         .map((blog) => (
           <div className={`mb-5 ${pathname === "/staffPicksBlogs" ? "hidden" : "block"}`} key={blog?._id}>

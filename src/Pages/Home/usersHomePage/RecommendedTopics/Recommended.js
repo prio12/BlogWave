@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Recommended = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
+  const location = useLocation();
+  const {pathname} = location;
 
   const uniqueCategory = new Set();
 
@@ -16,7 +18,7 @@ const Recommended = () => {
   }
 
   return (
-    <div>
+    <div className={`${pathname === "/topics" ? "hidden" : "block"}`}>
       <h5 style={{ fontSize: "13px" }} className="font-bold mb-4">
         Recommended topics
       </h5>
@@ -27,9 +29,9 @@ const Recommended = () => {
           <p className="cursor-pointer" key={category} onClick={() => handleNavigate(category)}>{category}</p>
         ))}
       </div>
-      <p style={{ color: "rgb(44, 148, 44)" }} className=" font-semibold">
-        <Link>
-          <small>See more Topics</small>
+      <p style={{ color: "rgb(44, 148, 44)",fontSize:"12px" }} className=" font-bold">
+        <Link to='/topics'>
+          <small >See more Topics</small>
         </Link>
       </p>
     </div>
