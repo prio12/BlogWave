@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserUpdatedData, getAllUsers } from '../../redux/thunk/userAuth';
 import { fetchAllBlogs } from '../../redux/thunk/blogs';
 import Loader from '../../loading/Loader';
+import { useNavigate } from 'react-router-dom';
 
 
 const Topics = () => {
@@ -11,6 +12,7 @@ const Topics = () => {
     const userUid = useSelector((state) => state?.user?.user?.uid);
     const loading = useSelector((state) => state?.user?.isLoading);
     const uniqueCategory = new Set();
+    const navigate = useNavigate();
     let content;
 
     const dispatch = useDispatch();
@@ -27,7 +29,7 @@ const Topics = () => {
       }, [dispatch]);
 
       const handleNavigate = (category) => {
-        console.log(category);
+        navigate(`/categoryBlogs/${category}`)
       }
 
       if (blogs && blogs.length) {

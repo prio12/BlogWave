@@ -17,6 +17,7 @@ import Followings from "../Pages/followers/followings/Followings";
 import StaffPicksBlogs from "../Pages/stafPickBlogs/StaffPicksBlogs";
 import SmallSearchBar from "../Pages/Home/usersHomePage/searchBar/SmallSearchBar";
 import Topics from "../Pages/allTopics/Topics";
+import CategoryBlogs from "../Pages/Home/BlogTopics/CategoryBlogs";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/topics",
         element: <PrivateRoute><Topics/></PrivateRoute>,
+      },
+      {
+        path: "/categoryBlogs/:category",
+        element: <PrivateRoute><CategoryBlogs/></PrivateRoute>,
       },
       {
         path: "/blogDetails/:id",

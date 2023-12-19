@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Recommended from "../RecommendedTopics/Recommended";
 import { BsBookmarkPlus } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllBlogs } from "../../../../redux/thunk/blogs";
+import { getAllUsers } from "../../../../redux/thunk/userAuth";
 
 const StaffPicks = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
@@ -10,6 +12,15 @@ const StaffPicks = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const {pathname} = location;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAllBlogs());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
+
   const handleVisitProfile = (authorUid) => {
     if (currentUser?.uid === authorUid) {
       navigate("/profile");
@@ -49,7 +60,9 @@ const StaffPicks = () => {
           <small>See the full list</small>
         </Link>
       </p>
-      <Recommended />
+     <div className="my-8">
+     <Recommended />
+     </div>
       <div>
         <h5 style={{ fontSize: "13px" }} className="font-bold mt-8 mb-3">
           Reading list

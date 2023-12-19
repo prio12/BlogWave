@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Recommended = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
   const location = useLocation();
   const {pathname} = location;
+  const navigate = useNavigate();
 
   const uniqueCategory = new Set();
 
@@ -13,8 +14,8 @@ const Recommended = () => {
     blogs.forEach((blog) => uniqueCategory.add(blog?.category));
   }
 
-  const handleNavigate = (category) =>{
-    console.log(category);
+  const handleNavigate = (category) => {
+    navigate(`/categoryBlogs/${category}`)
   }
 
   return (
