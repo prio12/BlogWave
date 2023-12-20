@@ -47,14 +47,14 @@ const Blogs = ({ blog }) => {
         </Link>
       </div>
       {/* blog image div */}
-      <div className="w-full md:w-1/3">
-        <img
-          style={{ width: "100%", height:"120px" }}
-          src={blog?.image}
-          alt=""
-          className="object-cover"
-        />
-      </div>
+      <div className="w-full md:w-1/3 align-middle">
+  <img
+    src={blog?.image}
+    style={{height:"112px",width:"112px"}}
+    alt=""
+  />
+</div>
+
     </div>
     </div>
   );
