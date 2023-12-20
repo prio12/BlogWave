@@ -43,16 +43,16 @@ const Home = () => {
       {loading ? (
         <Loader />
       ) : user ? (
-        <div className="md:px-16 px-5 w-full grid gap-12 grid-cols-1 md:grid-cols-3">
+        <div className=" w-full grid gap-12 grid-cols-1 md:grid-cols-3">
           <div className="col-span-2">
             <div className="grid grid-cols-1">
-              <div>
+              <div className="md:px-10 px-3">
                 <UserTopics
                   handleDisplayedContent={handleDisplayedContent}
                   selectedTopic={selectedTopic}
                 />
               </div>
-              <div>
+              <div className="md:px-16 px-5">
                 {/* <Blogs /> */}
                 <UsersHome category={category} />
               </div>

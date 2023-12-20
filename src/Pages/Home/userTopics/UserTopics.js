@@ -1,97 +1,57 @@
+import { Box, Tab, Tabs, useMediaQuery } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const UserTopics = ({handleDisplayedContent,selectedTopic}) => {
+const UserTopics = ({ handleDisplayedContent, selectedTopic }) => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
-  const [startIndex, setStartIndex] = useState(0);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const topicsPerPageLarge = 6;
-  const topicsPerPageSmall = 3; // Number of topics to show at a time
   const uniqueCategory = new Set();
-  
+  const [value, setValue] = useState(0);
+
   if (blogs && blogs?.length) {
-    blogs?.map((blog) => uniqueCategory.add(blog?.category))
+    blogs?.map((blog) => uniqueCategory.add(blog?.category));
   }
 
   const uniqueCategoryArray = Array.from(uniqueCategory);
-  const allTopics = ["For you",...uniqueCategoryArray];
+  const allTopics = ["For you", ...uniqueCategoryArray];
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 768);
-    };
-
-    // Initial check
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const topicsPerPage = isSmallScreen ? topicsPerPageSmall : topicsPerPageLarge;
-
-  const goToNextSlide = () => {
-    setStartIndex(Math.min(startIndex + 1, allTopics.length - topicsPerPage));
-
-    // explanations for above line
-
-    // const goToNextSlide = () => {
-    //   // Calculate the index for the next slide
-    //   const nextIndex = startIndex + 1;
-    //   // Don't go past the end of the list
-    //   const maxIndex = allTopics.length - topicsPerPage;
-    //   // Set the index to either nextIndex or maxIndex (whichever is smaller)
-    //   setStartIndex(Math.min(nextIndex, maxIndex));
-    // };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    console.log(newValue);
   };
 
-  const goToPrevSlide = () => {
-    setStartIndex(Math.max(startIndex - 1, 0));
+  const isMobile = useMediaQuery("(max-width:600px)");
 
-    // explanations for above line
-
-    // const goToNextSlide = () => {
-    //   // Calculate the index for the next slide
-    //   const prvIndex = startIndex -1 ;
-    //   // Don't go past the end of the list
-    //   const minIndex = 0;
-    //   // Set the index to either nextIndex or maxIndex (whichever is smaller)
-    //   setStartIndex(Math.max(prvIndex, 0));
-    // };
-  };
-
-  //handle content
- 
-
-  const visibleTopics = allTopics.slice(startIndex, startIndex + topicsPerPage);
   return (
-    <div className=" relative flex mb-5 items-center gap-2">
-      <button
-        className={` ${startIndex === 0 ? "hidden" : ""}`}
-        onClick={goToPrevSlide}
-      >
-        &#8249;
-      </button>
-      <div>
-        <div className="topics flex gap-5">
-          {visibleTopics.map((topic, index) => (
-            <div style={{ fontSize: "12px" }} className={`topic cursor-pointer ${topic === selectedTopic && "underline"}`} onClick={() => handleDisplayedContent(topic)} key={index}>
-              {topic}
-            </div>
+    <div className="mb-5 px-n2">
+      <Box>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons
+          allowScrollButtonsMobile
+          aria-label="scrollable force tabs example"
+          TabIndicatorProps={{
+            style: {
+              backgroundColor: isMobile ? "black" : "black",
+            },
+          }}
+        >
+          {allTopics.map((category, index) => (
+            <Tab
+            onClick={() => handleDisplayedContent(category)}
+              key={index}
+              style={{
+                fontSize: "10px",
+                color: value === index ? "black" : "inherit",
+                fontWeight:value === index ? "bold" : "normal",
+                // Set the active tab color to red
+              }}
+              label={category}
+            />
           ))}
-        </div>
-      </div>
-      <button
-        className={`${
-          startIndex + topicsPerPage >= allTopics.length ? "hidden" : ""
-        }`}
-        onClick={goToNextSlide}
-      >
-        &#8250;
-      </button>
+        </Tabs>
+      </Box>
     </div>
   );
 };
