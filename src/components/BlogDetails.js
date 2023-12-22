@@ -76,10 +76,17 @@ const BlogDetails = () => {
   };
   const handleBookmarks = () => {
     dispatch(
-      saveAsBookmarks({ selectedBlogData: selectedBlogData }, { userUid: user })
+      saveAsBookmarks({ selectedBlogData: selectedBlogData }, { userUid: user },{action:"Bookmark"})
     );
     alert("Added to Bookmarks!");
   };
+
+  const handleRemoveBookmark = () =>{
+    dispatch(
+      saveAsBookmarks({ selectedBlogData: selectedBlogData }, { userUid: user },{action:"RemoveBookmark"})
+    );
+    alert("Added to Bookmarks!");
+  }
 
   const handleClap = () => {
     // onClick={() => dispatch(updateClapsCount(_id, userUid))}
@@ -280,8 +287,9 @@ const BlogDetails = () => {
               {bookmarks?.find((blog) => blog._id === _id) ? (
                 <div>
                   <BsFillBookmarkCheckFill
-                    title="Already Bookmarked!"
-                    className="cursor-not-allowed"
+                    title="Remove Bookmarked!"
+                    className="cursor-pointer"
+                    onClick={handleRemoveBookmark}
                   />
                 </div>
               ) : (

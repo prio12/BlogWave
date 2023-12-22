@@ -174,14 +174,14 @@ export const deleteABLog = (_id) =>{
 }
 
 //bookmarks
-export const saveAsBookmarks = (selectedBlogData,userUid) =>{
+export const saveAsBookmarks = (selectedBlogData,userUid,action) =>{
   return async (dispatch) =>{
     try {
       dispatch(startLoading())
       const response = await fetch(`http://localhost:5000/users/${userUid?.userUid}`,{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
-        body:JSON.stringify(selectedBlogData)
+        body:JSON.stringify({selectedBlogData,action})
       })
       const responseData = await response.json();
       if (responseData) {
