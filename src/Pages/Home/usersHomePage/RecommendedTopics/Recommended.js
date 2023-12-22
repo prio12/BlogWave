@@ -23,11 +23,11 @@ const Recommended = () => {
       <h5 style={{ fontSize: "13px" }} className="font-bold mb-4">
         Recommended topics
       </h5>
-      <div className="text-xs grid grid-cols-3 gap-2 ">
+      <div style={{fontSize:"11px"}} className=" grid grid-cols-3 gap-2 ">
         {Array.from(uniqueCategory)
         .slice(0,9)
         .map((category) => (
-          <p className="cursor-pointer" key={category} onClick={() => handleNavigate(category)}>{category}</p>
+          <p className="cursor-pointer text-center bg-base-200 t p-2 rounded-full" key={category} onClick={() => handleNavigate(category)}>{category}</p>
         ))}
       </div>
       <p style={{ color: "rgb(44, 148, 44)",fontSize:"12px" }} className=" font-bold">
