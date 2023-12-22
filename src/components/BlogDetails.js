@@ -5,6 +5,7 @@ import {
   deleteABLog,
   fetchAllBlogs,
   fetchSelectedBLogData,
+  removeBookmarked,
   saveAsBookmarks,
   updateClapsCount,
 } from "../redux/thunk/blogs";
@@ -93,6 +94,11 @@ const BlogDetails = () => {
     dispatch(updateClapsCount(_id, user));
     dispatch(addPostToClap({ blog: selectedBlogData }, { userUid: user }));
   };
+
+  const handleDeleteABLog = (_id) =>{
+    dispatch(deleteABLog(_id));
+    dispatch(removeBookmarked(_id))
+  }
 
   const handleVisitProfile = () => {
     // comparing currently loggedIn user.uid to selecedBlog author Uid
@@ -244,7 +250,7 @@ const BlogDetails = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="relative">
+            <div className="relative ">
               {user === userUid && (
                 <FiMoreHorizontal
                   onClick={handleMoreOptionModal}
@@ -264,7 +270,7 @@ const BlogDetails = () => {
                     htmlFor="my-drawer-4"
                     className="drawer-button cursor-pointer"
                   >
-                    Edit Story
+                    Edit
                   </label>
                   {/* <button
                     onClick={() => dispatch(deleteABLog(_id))}
@@ -274,9 +280,10 @@ const BlogDetails = () => {
                     Delete
                   </button> */}
                   <div
-                    onClick={() => dispatch(deleteABLog(_id))}
+                    // onClick={() => dispatch(deleteABLog(_id))}
+                    onClick={() => handleDeleteABLog(_id)}
                     style={{ fontSize: "10px" }}
-                    className="my-2 cursor-pointer"
+                    className="my-2 cursor-pointer "
                   >
                     <p>Delete</p>
                   </div>

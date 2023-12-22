@@ -10,7 +10,6 @@ const Library = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const userData = useSelector((state) => state?.user?.userData)
   const clapped = userData?.clapped;
-  console.log(clapped);
   const isLoading = useSelector((state) => state?.blogs?.isLoading)
   const isUpdateLoading = useSelector((state) => state?.user?.isUpdateLoading)
 

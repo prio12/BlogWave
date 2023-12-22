@@ -14,6 +14,7 @@ export const STOP_LOADING_UPDATE_USER = "STOP_LOADING_UPDATE_USER"
 export const FETCH_ALL_USERS = "FETCH_ALL_USERS";
 export const FOLLOW = "FOLLOW";
 
+
 //blogs action types
 
 export const POST_BLOGS = "POST_BLOGS";
@@ -32,4 +33,5 @@ export const ADD_BOOKMARK ="ADD_BOOKMARK";
 export const ADD_RESPONSE = "ADD_RESPONSE";
 export const SEARCH_BLOGS = "SEARCH_BLOGS";
 export const ADD_TO_CLAP = "ADD_TO_CLAP";
-export const UPDATE_AUTHOR_DATA = "UPDATE_AUTHOR_DATA"; 
+export const UPDATE_AUTHOR_DATA = "UPDATE_AUTHOR_DATA";
+export const REMOVE_BOOKMARKED = "REMOVE_BOOKMARKED"; 
