@@ -194,25 +194,6 @@ export const saveAsBookmarks = (selectedBlogData,userUid,action) =>{
   }
 }
 
-export const removeBookmarked = (_id) => {
-  console.log(_id);
-  return async () => {
-    try {
-      const response = await fetch("http://localhost:5000/removeBookmarked", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ _id }), // Wrap _id in an object
-      });
-
-      const responseData = await response.json();
-      console.log(responseData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
-
-
 //add response
 export const addResponse = (responseDetails) =>{
   const _id = responseDetails?.blogId;

@@ -5,7 +5,6 @@ import {
   deleteABLog,
   fetchAllBlogs,
   fetchSelectedBLogData,
-  removeBookmarked,
   saveAsBookmarks,
   updateClapsCount,
 } from "../redux/thunk/blogs";
@@ -97,7 +96,6 @@ const BlogDetails = () => {
 
   const handleDeleteABLog = (_id) =>{
     dispatch(deleteABLog(_id));
-    dispatch(removeBookmarked(_id))
   }
 
   const handleVisitProfile = () => {
