@@ -43,27 +43,33 @@ const Home = () => {
       {loading ? (
         <Loader />
       ) : user ? (
-        <div className=" w-full grid gap-12 grid-cols-1 md:grid-cols-3">
-          <div className="col-span-2">
-            <div className="grid grid-cols-1">
-              <div className="md:px-10 px-3">
-                <UserTopics
-                  handleDisplayedContent={handleDisplayedContent}
-                  selectedTopic={selectedTopic}
-                />
-              </div>
-              <div className="md:px-16 px-5">
-                {/* <Blogs /> */}
-                <UsersHome category={category} />
-              </div>
-            </div>
-          </div>
-          <div className="col-span-1">
-            <div className="hidden md:block">
-              <StaffPicks />
-            </div>
-          </div>
-        </div>
+        <div className="w-full grid gap-12 grid-cols-1 md:grid-cols-3">
+  <div className="col-span-2 left_side">
+    <div className="grid grid-cols-1">
+      <div 
+      style={{ position: 'sticky', top: '0' }}
+      className="md:px-10 px-3">
+        <UserTopics
+          handleDisplayedContent={handleDisplayedContent}
+          selectedTopic={selectedTopic}
+        />
+      </div>
+      <div className="md:px-16 px-5">
+        {/* <Blogs /> */}
+        <UsersHome category={category} />
+      </div>
+    </div>
+  </div>
+  <div className="col-span-1">
+    <div className="right_side" style={{ position: 'sticky', top: '0' }}>
+      <div className="hidden md:block">
+        <StaffPicks />
+      </div>
+    </div>
+  </div>
+</div>
+
+
       ) : (
         <div>
           <Banner />
@@ -82,39 +88,6 @@ const Home = () => {
           </div>
         </div>
       )}
-      {/* {
-      user? <div className="md:px-16 px-5 w-full grid grid-cols-1 md:grid-cols-3">
-      <div className="col-span-2">
-        <div className="grid grid-cols-1">
-          <div>
-            <UserTopics />
-          </div>
-          <div>
-            <Blogs />
-          </div>
-        </div>
-      </div>
-      <div className="col-span-1">
-        <div className="hidden md:block">
-          <StaffPicks />
-        </div>
-      </div>
-    </div>
-    
-     : 
-      <div>
-     <Banner />
-      <Trending />
-      <div className="flex md:flex-row flex-col-reverse gap-12 px-12 justify-between items-center">
-        <div className="md:w-2/4">
-          <Blogs />
-        </div>
-        <div className="md:w-1/3">
-          <BlogTopics />
-        </div>
-      </div>
-     </div>
-     } */}
     </div>
   );
 };

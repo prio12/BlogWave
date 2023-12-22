@@ -22,7 +22,7 @@ const UserTopics = ({ handleDisplayedContent, selectedTopic }) => {
   const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
-    <div className="mb-5 px-n2">
+    <div className="mb-5 md:pr-16">
       <Box>
         <Tabs
           value={value}
