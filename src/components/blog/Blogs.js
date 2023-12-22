@@ -15,11 +15,11 @@ const Blogs = ({ blog }) => {
  
   return (
     <div onClick={handleGuestUser} className="cursor-pointer">
-      <div className="flex flex-row justify-between gap-3 mb-5 items-center">
+      <div className="flex items-center mb-5">
       {/* blog details div */}
-      <div className="mb-4 md:mb-0 md:w-2/3 pr-6">
+      <div className="w-3/4">
        {
-        !pathname === "/profile" &&  <div className="flex items-center gap-2">
+        !pathname === "/profile" &&  <div className="flex items-center justify-between gap-2">
         {/* avatar */}
         <img
           alt=""
@@ -47,10 +47,10 @@ const Blogs = ({ blog }) => {
         </Link>
       </div>
       {/* blog image div */}
-      <div className="w-full md:w-1/3 align-middle">
+      <div className="w-1/4">
   <img
     src={blog?.image}
-    style={{height:"112px",width:"112px"}}
+    className="h-[75px] w-[75px]"
     alt=""
   />
 </div>
