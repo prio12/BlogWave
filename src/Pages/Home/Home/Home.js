@@ -48,7 +48,7 @@ const Home = () => {
     <div className="grid grid-cols-1">
       <div 
       style={{ position: 'sticky', top: '0' }}
-      className="md:px-10 px-3">
+      className="md:px-10 px-3 z-[100] bg-base-100">
         <UserTopics
           handleDisplayedContent={handleDisplayedContent}
           selectedTopic={selectedTopic}

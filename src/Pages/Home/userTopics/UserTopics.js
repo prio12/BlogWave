@@ -16,7 +16,6 @@ const UserTopics = ({ handleDisplayedContent, selectedTopic }) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log(newValue);
   };
 
   const isMobile = useMediaQuery("(max-width:600px)");
