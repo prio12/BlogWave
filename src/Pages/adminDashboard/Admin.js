@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
 import { fetchAllBlogs } from "../../redux/thunk/blogs";
+import Blogs from "../../components/blog/Blogs";
 
 const Admin = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
@@ -66,7 +67,11 @@ const Admin = () => {
             ))}
           </div>
         )}
-        {activeContent === "blogs" && <div className="my-5">blogs</div>}
+        {activeContent === "blogs" && (
+          <div className="my-5">
+            {allBlogs?.map((blog) => <Blogs blog={blog}></Blogs>)}
+          </div>
+        )}
       </div>
     </div>
   );

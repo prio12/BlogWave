@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Blogs = ({ blog }) => {
   const user = useSelector((state) => state?.user?.user?.uid);
+  
   const navigate = useNavigate();
   const handleGuestUser = () =>{
     if (!user) {
@@ -30,8 +31,16 @@ const Blogs = ({ blog }) => {
       </div>
        }
         <Link  to={`/blogDetails/${blog?._id}`}>
+        {
+          pathname === "/admin" && 
+          <div className="flex items-center gap-2">
+            <img src={blog?.authorImage} className="w-8 h-8" alt="" />
+            <p className="text-xs font-semibold">{blog?.author}</p>
+          </div>
+        }
         <h4 className="font-bold mt-2">{blog?.title}</h4>
         <p style={{ fontSize: "12px" }}>{blog?.description?.slice(0,200)+"..."}</p>
+        
         <p className="text-sm mt-2">
           <small>
             {blog
@@ -44,7 +53,25 @@ const Blogs = ({ blog }) => {
             · 7 min read . <span className="ms-5">{blog?.category}</span>
           </small>
         </p>
+        {
+          pathname === "/admin" && 
+          <button
+                  className="btn my-2 btn-sm md:mb-0 lg:mb-0"
+                  style={{
+                    backgroundColor: "red",
+                    color: "white",
+                    textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: "#1A8917",
+                      textTransform: "none",
+                    },
+                  }}
+                >
+                  Delete
+                </button>
+        }
         </Link>
+
       </div>
       {/* blog image div */}
       <div className="w-1/4">
