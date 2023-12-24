@@ -12,6 +12,7 @@ import Loader from "../../loading/Loader";
 import { CgProfile } from "react-icons/cg";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { RiAdminLine } from "react-icons/ri";
 
 const UserHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -137,6 +138,16 @@ const UserHeader = () => {
                     </p>
                   </Link>
                 </Link>
+                {
+                  userDetails?.role === "admin" && <Link className="flex mb-3 items-center gap-3">
+                  <RiAdminLine />
+                  <Link to="/admin">
+                    <p>
+                      <small>Admin</small>
+                    </p>
+                  </Link>
+                </Link>
+                }
                 <div
                   onClick={handleLogout}
                   className="flex cursor-pointer gap-3 items-center"

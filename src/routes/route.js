@@ -19,6 +19,7 @@ import SmallSearchBar from "../Pages/Home/usersHomePage/searchBar/SmallSearchBar
 import Topics from "../Pages/allTopics/Topics";
 import CategoryBlogs from "../Pages/Home/BlogTopics/CategoryBlogs";
 import Notifications from "../Pages/notifications/Notifications";
+import Admin from "../Pages/adminDashboard/Admin";
 
 export const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
       {
         path: "/following/:id",
         element: <PrivateRoute><Followings/></PrivateRoute>,
+      },
+      {
+        path: "/admin",
+        element: <PrivateRoute><Admin/></PrivateRoute>,
       },
     ],
   },

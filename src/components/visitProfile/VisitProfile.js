@@ -213,7 +213,7 @@ const VisitProfile = () => {
       {/* follow unFollow btn for mobile screen */}
       <div className="block  md:hidden">
             {
-              currentUser?.following.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
+              currentUser?.following?.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
                 <button
                 onClick={handleUnfollowBtn}
                 className="btn w-full  md:mb-0 lg:mb-0"
@@ -355,7 +355,7 @@ const VisitProfile = () => {
         </div>
         <div className="hidden md:block">
             {
-              currentUser?.following.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
+              currentUser?.following?.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
                 <button
                 onClick={handleUnfollowBtn}
                 className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
