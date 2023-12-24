@@ -123,6 +123,7 @@ const Profile = () => {
           )}
         </div>
       </div>
+      {/* right part */}
       <div className="flex md:block gap-3  items-center">
         <div className="mb-3 flex items-center">
           {profilePic ? (
@@ -141,12 +142,63 @@ const Profile = () => {
             />
           )}
         </div>
-        
+        <div>
         <div className="flex gap-2 items-center">
           <p className="font-bold">{name}</p>
           <MdEdit className="cursor-pointer" onClick={openNameModal} />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="md:hidden flex items-center gap-2">
+          {followers?.length ? (
+            <div>
+              {followers?.length > 1 ? (
+                <p
+                  onClick={handleNavigateToFollowers}
+                  style={{ fontSize: "10px" }}
+                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                >
+                  {" "}
+                  {followers?.length} Followers
+                </p>
+              ) : (
+                <p
+                  onClick={handleNavigateToFollowers}
+                  style={{ fontSize: "10px" }}
+                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                >
+                  {followers?.length} Follower
+                </p>
+              )}
+            </div>
+          ) : (
+            <div>
+              <p
+                style={{ fontSize: "10px" }}
+                className="text-[#6b6b6b] font-semibold cursor-not-allowed"
+              >
+                0 Followers
+              </p>
+            </div>
+          )}
+          <p>|</p>
+          {following?.length ? (
+            <p
+              onClick={handleNavigateToFollowing}
+              className="text-[#6b6b6b] font-semibold cursor-pointer"
+              style={{ fontSize: "10px" }}
+            >
+              {following?.length} Following
+            </p>
+          ) : (
+            <p
+              style={{ fontSize: "10px" }}
+              className="text-[#6b6b6b] font-semibold cursor-not-allowed"
+            >
+              0 Following
+            </p>
+          )}
+        </div>
+        </div>
+        <div className="md:flex hidden items-center gap-2">
           {followers?.length ? (
             <div>
               {followers?.length > 1 ? (
