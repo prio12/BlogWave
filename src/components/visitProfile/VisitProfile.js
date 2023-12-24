@@ -210,14 +210,49 @@ const VisitProfile = () => {
           )}
         </div>
       </div>
+      {/* follow unFollow btn for mobile screen */}
+      <div className="block  md:hidden">
+            {
+              currentUser?.following.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
+                <button
+                onClick={handleUnfollowBtn}
+                className="btn w-full  md:mb-0 lg:mb-0"
+                  style={{
+                    backgroundColor: "transparent", // Set background to transparent
+                    color: "#1A8917", // Set text color to red
+                    border: "1px solid #1A8917", // Add a red border
+                    textTransform: "none",
+                  }}
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button
+                onClick={handleFollowBtn}
+                className="btn w-full  md:mb-0 lg:mb-0"
+                style={{
+                  backgroundColor: "#1A8917",
+                  color: "white",
+                  textTransform: "none",
+                  "&:hover": {
+                    backgroundColor: "#1A8917",
+                    textTransform: "none",
+                  },
+                }}
+              >
+                Follow
+              </button>
+              )
+            }
+        </div>
+      {/* right part */}
       <div className="flex md:block gap-3 items-center">
         <div className="mb-3 ">
-          <img src={user?.profilePic} className="w-16 h-16" alt="" />
+          <img src={user?.profilePic} className="w-16 h-16 rounded-full" alt="" />
         </div>
-        <div className="flex gap-2 items-center">
-          <p className="font-bold">{user?.name}</p>
-        </div>
-        <div className="flex items-center gap-2">
+        <div>
+          <p className="font-bold text-xl md:text-sm">{user?.name}</p>
+          <div className="flex md:hidden items-center gap-2">
           {user?.followers?.length ? (
             <div>
               {user?.followers?.length > 1 ? (
@@ -267,7 +302,58 @@ const VisitProfile = () => {
             </p>
           )}
         </div>
-        <div>
+        </div>
+        <div className="md:flex hidden items-center gap-2">
+          {user?.followers?.length ? (
+            <div>
+              {user?.followers?.length > 1 ? (
+                <p
+                  onClick={handleVisitProfileFromFollowers}
+                  style={{ fontSize: "10px" }}
+                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                >
+                  {" "}
+                  {user?.followers?.length} Followers
+                </p>
+              ) : (
+                <p
+                  onClick={handleVisitProfileFromFollowers}
+                  style={{ fontSize: "10px" }}
+                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                >
+                  {user?.followers?.length} Follower
+                </p>
+              )}
+            </div>
+          ) : (
+            <div>
+              <p
+                style={{ fontSize: "10px" }}
+                className="text-[#6b6b6b] font-semibold cursor-not-allowed"
+              >
+                0 Followers
+              </p>
+            </div>
+          )}
+          <p>|</p>
+          {user?.following?.length ? (
+            <p
+              onClick={handleVisitProfileFromFollowing}
+              className="text-[#6b6b6b] font-semibold cursor-pointer"
+              style={{ fontSize: "10px" }}
+            >
+              {user?.following?.length} Following
+            </p>
+          ) : (
+            <p
+              style={{ fontSize: "10px" }}
+              className="text-[#6b6b6b] font-semibold cursor-not-allowed"
+            >
+              0 Following
+            </p>
+          )}
+        </div>
+        <div className="hidden md:block">
             {
               currentUser?.following.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
                 <button
@@ -302,6 +388,7 @@ const VisitProfile = () => {
             }
         </div>
       </div>
+      {/* for mobile screen */}
     </div>
   );
 };
