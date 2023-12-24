@@ -29,7 +29,7 @@ const Notifications = () => {
     userDetails?.notifications?.length > 0
   ) {
     content = userDetails?.notifications?.map((notification) => (
-      <Link className="mb-5">
+      <Link to={`/visitProfile/${notification?.uid}`} className="mb-5">
         <div className="flex gap-5 items-center">
           <img src={notification?.profilePic} className="w-12 h-12" alt="" />
           <div>
