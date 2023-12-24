@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
+import { fetchUserUpdatedData, follow, getAllUsers } from "../../redux/thunk/userAuth";
 import { FaRegFaceSadTear } from "react-icons/fa6";
 import { fetchAllBlogs, fetchUserAllBlogs } from "../../redux/thunk/blogs";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -9,13 +9,13 @@ import Blogs from "../blog/Blogs";
 
 const VisitProfile = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
+  const currentUser = useSelector((state) => state?.user?.userData);
   const selectedProfile = useSelector((state) => state?.user?.selectedProfile);
   const userBLogs = useSelector((state) => state?.blogs?.userBlogs);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const allUser = useSelector((state) => state?.user?.allUsers);
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location?.state?.from);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -55,6 +55,51 @@ const VisitProfile = () => {
   const handleVisitProfileFromFollowing = () => {
     navigate(`/following/${user?.uid}`);
   };
+
+  const handleFollowBtn = () => {
+    const following = {
+      profilePic: currentUser?.profilePic,
+      name: currentUser?.name,
+      uid: currentUser?.uid,
+      about: currentUser?.about,
+    };
+    const follower = {
+      profilePic: user?.profilePic,
+      name: user?.name,
+      uid: user?.uid,
+      about: user?.about,
+    };
+    const relationshipInfo = {
+      following,
+      follower,
+      action:"follow"
+    };
+   
+
+    dispatch(follow(relationshipInfo));
+  };
+
+  const handleUnfollowBtn = () =>{
+    const following = {
+      profilePic: currentUser?.profilePic,
+      name: currentUser?.name,
+      uid: currentUser?.uid,
+      about: currentUser?.about,
+    };
+    const follower = {
+      profilePic: user?.profilePic,
+      name: user?.name,
+      uid: user?.uid,
+      about: user?.about,
+    };
+    const relationshipInfo = {
+      following,
+      follower,
+      action:"unFollow"
+    };
+    console.log(relationshipInfo);
+    dispatch(follow(relationshipInfo))
+  }
 
   if (!userBLogs.length) {
     content = (
@@ -158,11 +203,7 @@ const VisitProfile = () => {
                     {user?.following?.length} Following
                   </p>
                 ) : (
-                  <p
-                    className=" cursor-not-allowed"
-                  >
-                    0 Following
-                  </p>
+                  <p className=" cursor-not-allowed">0 Following</p>
                 )}
               </div>
             </div>
@@ -173,13 +214,9 @@ const VisitProfile = () => {
         <div className="mb-3 ">
           <img src={user?.profilePic} className="w-16 h-16" alt="" />
         </div>
-        {/* {user?.followers?.length > 0 && (
-          <Link to={`/followers/${user?.uid}`}>
-            <p className="text-xs text-[#6b6b6b] font-semibold cursor-pointer">
-              {user?.followers?.length} Followers
-            </p>
-          </Link>
-        )} */}
+        <div className="flex gap-2 items-center">
+          <p className="font-bold">{user?.name}</p>
+        </div>
         <div className="flex items-center gap-2">
           {user?.followers?.length ? (
             <div>
@@ -230,8 +267,39 @@ const VisitProfile = () => {
             </p>
           )}
         </div>
-        <div className="flex gap-2 items-center">
-          <p className="font-bold">{user?.name}</p>
+        <div>
+            {
+              currentUser?.following.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
+                <button
+                onClick={handleUnfollowBtn}
+                className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+                  style={{
+                    backgroundColor: "transparent", // Set background to transparent
+                    color: "#1A8917", // Set text color to red
+                    border: "1px solid #1A8917", // Add a red border
+                    textTransform: "none",
+                  }}
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button
+                onClick={handleFollowBtn}
+                className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+                style={{
+                  backgroundColor: "#1A8917",
+                  color: "white",
+                  textTransform: "none",
+                  "&:hover": {
+                    backgroundColor: "#1A8917",
+                    textTransform: "none",
+                  },
+                }}
+              >
+                Follow
+              </button>
+              )
+            }
         </div>
       </div>
     </div>

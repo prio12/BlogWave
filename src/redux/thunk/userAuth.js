@@ -237,6 +237,7 @@ export const follow = (relationshipInfo) => {
     if (responseData?.targetedResult?.modifiedCount > 0) {
       console.log(responseData);
       dispatch(fetchUserUpdatedData(uid))
+      dispatch(getAllUsers())
     }
     } catch (error) {}
   };

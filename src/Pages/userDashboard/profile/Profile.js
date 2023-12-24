@@ -141,6 +141,11 @@ const Profile = () => {
             />
           )}
         </div>
+        
+        <div className="flex gap-2 items-center">
+          <p className="font-bold">{name}</p>
+          <MdEdit className="cursor-pointer" onClick={openNameModal} />
+        </div>
         <div className="flex items-center gap-2">
           {followers?.length ? (
             <div>
@@ -190,10 +195,6 @@ const Profile = () => {
               0 Following
             </p>
           )}
-        </div>
-        <div className="flex gap-2 items-center">
-          <p className="font-bold">{name}</p>
-          <MdEdit className="cursor-pointer" onClick={openNameModal} />
         </div>
         <ProfilePicModal />
         <UserNameModal />

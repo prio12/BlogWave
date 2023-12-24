@@ -29,8 +29,8 @@ const Notifications = () => {
     userDetails?.notifications?.length > 0
   ) {
     content = userDetails?.notifications?.map((notification) => (
-      <Link to={`/visitProfile/${notification?.uid}`} className="mb-5">
-        <div className="flex gap-5 items-center">
+      <Link to={`/visitProfile/${notification?.uid}`}>
+        <div className="flex gap-5 items-center mb-5">
           <img src={notification?.profilePic} className="w-12 h-12" alt="" />
           <div>
             <p className="text-xs"><span className="font-bold">{notification?.name}</span> started following you!</p>
