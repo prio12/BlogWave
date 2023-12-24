@@ -15,7 +15,7 @@ const Blogs = ({ blog }) => {
  
   return (
     <div onClick={handleGuestUser} className="cursor-pointer">
-      <div className="flex items-center mb-5">
+      <div className="flex items-center gap-5 md:gap-12 mb-5">
       {/* blog details div */}
       <div className="w-3/4">
        {
@@ -50,7 +50,7 @@ const Blogs = ({ blog }) => {
       <div className="w-1/4">
   <img
     src={blog?.image}
-    className="h-[75px] w-[75px]"
+    className="h-[85px] w-[85px]"
     alt=""
   />
 </div>

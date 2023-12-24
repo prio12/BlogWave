@@ -288,4 +288,26 @@ export const getAllUsers = () => {
   };
 };
 
+export const setNotificationStatus = (userUid) =>{
+  console.log(userUid);
+  return async (dispatch) =>{
+    try {
+      const response = await fetch("http://localhost:5000/user/notification", {
+        method:"PUT",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body:JSON.stringify({userUid})
+      })
+
+      const responseData = await response.json();
+      // if (responseData) {
+      //   dispatch(fetchUserUpdatedData(userUid))
+      // }
+    } catch (error) {
+      
+    }
+  }
+}
+
 
