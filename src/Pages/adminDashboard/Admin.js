@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUserAndBlogs, fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
 import { fetchAllBlogs } from "../../redux/thunk/blogs";
 import Blogs from "../../components/blog/Blogs";
+import Loader from "../../loading/Loader";
 
 const Admin = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const allUsers = useSelector((state) => state?.user?.allUsers);
+  const isLoading = useSelector((state) => state?.blogs?.isLoading);
   console.log(allUsers);
   const allBlogs = useSelector((state) => state?.blogs?.blogs);
   console.log(allBlogs);
@@ -24,6 +26,10 @@ const Admin = () => {
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
+
+  if (isLoading) {
+   return <Loader/> 
+  }
   return (
     <div className="p-5 md:px-12">
       <div className="flex gap-5 items-center cursor-pointer text-xs">

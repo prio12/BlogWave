@@ -27,6 +27,8 @@ import {
   START_LOADING_UPDATE_USER,
   STOP_LOADING_UPDATE_USER,
 } from "../actionTypes/actionTypes";
+import { fetchAllBlogs } from "./blogs";
+import { startLoadingBlogs, stopLoadingBlogs } from "../actions/blogActions";
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
@@ -313,7 +315,8 @@ export const setNotificationStatus = (userUid) =>{
 //deleting blog or user for admin
 export const deleteUserAndBlogs = (data) =>{
   
-  return async () =>{
+  return async (dispatch) =>{
+    dispatch(startLoadingBlogs());
     try {
       const response = await fetch("http://localhost:5000/adminDelete",{
         method:"DELETE",
@@ -323,7 +326,10 @@ export const deleteUserAndBlogs = (data) =>{
         body:JSON.stringify(data)
       })
       const responseData = await response.json();
-      console.log(responseData);
+      if (responseData) {
+        dispatch(stopLoadingBlogs());
+        dispatch(fetchAllBlogs())
+      }
     } catch (error) {
       
     }
