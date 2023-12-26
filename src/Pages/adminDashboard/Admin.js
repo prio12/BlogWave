@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
+import { deleteUserAndBlogs, fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
 import { fetchAllBlogs } from "../../redux/thunk/blogs";
 import Blogs from "../../components/blog/Blogs";
 
@@ -51,6 +51,7 @@ const Admin = () => {
                 </div>
                 <button
                   className="btn  btn-sm md:mb-0 lg:mb-0"
+                  onClick={() => dispatch(deleteUserAndBlogs({user,type:"user"}))}
                   style={{
                     backgroundColor: "red",
                     color: "white",

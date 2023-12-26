@@ -1,11 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { deleteUserAndBlogs } from "../../redux/thunk/userAuth";
 
 const Blogs = ({ blog }) => {
   const user = useSelector((state) => state?.user?.user?.uid);
   
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleGuestUser = () =>{
     if (!user) {
       navigate("/signUpMethods")
@@ -53,9 +55,10 @@ const Blogs = ({ blog }) => {
             · 7 min read . <span className="ms-5">{blog?.category}</span>
           </small>
         </p>
+        </Link>
         {
           pathname === "/admin" && 
-          <button
+          <button  onClick={() => dispatch(deleteUserAndBlogs({blog,type:"blog"}))}
                   className="btn my-2 btn-sm md:mb-0 lg:mb-0"
                   style={{
                     backgroundColor: "red",
@@ -70,7 +73,6 @@ const Blogs = ({ blog }) => {
                   Delete
                 </button>
         }
-        </Link>
 
       </div>
       {/* blog image div */}

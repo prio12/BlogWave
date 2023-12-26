@@ -310,5 +310,24 @@ export const setNotificationStatus = (userUid) =>{
     }
   }
 }
+//deleting blog or user for admin
+export const deleteUserAndBlogs = (data) =>{
+  
+  return async () =>{
+    try {
+      const response = await fetch("http://localhost:5000/adminDelete",{
+        method:"DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body:JSON.stringify(data)
+      })
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      
+    }
+  }
+}
 
 

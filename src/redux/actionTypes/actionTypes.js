@@ -35,3 +35,5 @@ export const ADD_RESPONSE = "ADD_RESPONSE";
 export const SEARCH_BLOGS = "SEARCH_BLOGS";
 export const ADD_TO_CLAP = "ADD_TO_CLAP";
 export const UPDATE_AUTHOR_DATA = "UPDATE_AUTHOR_DATA";
+//actionType for admin
+export const DELElTE_USER_AND_BLOGS = "DELElTE_USER_AND_BLOGS";
