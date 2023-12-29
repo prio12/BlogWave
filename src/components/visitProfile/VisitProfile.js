@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserUpdatedData, follow, getAllUsers } from "../../redux/thunk/userAuth";
+import {
+  fetchUserUpdatedData,
+  follow,
+  getAllUsers,
+} from "../../redux/thunk/userAuth";
 import { FaRegFaceSadTear } from "react-icons/fa6";
 import { fetchAllBlogs, fetchUserAllBlogs } from "../../redux/thunk/blogs";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../loading/Loader";
 import Blogs from "../blog/Blogs";
+import { CgProfile } from "react-icons/cg";
 
 const VisitProfile = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
@@ -72,14 +77,13 @@ const VisitProfile = () => {
     const relationshipInfo = {
       following,
       follower,
-      action:"follow"
+      action: "follow",
     };
-   
 
     dispatch(follow(relationshipInfo));
   };
 
-  const handleUnfollowBtn = () =>{
+  const handleUnfollowBtn = () => {
     const following = {
       profilePic: currentUser?.profilePic,
       name: currentUser?.name,
@@ -95,11 +99,11 @@ const VisitProfile = () => {
     const relationshipInfo = {
       following,
       follower,
-      action:"unFollow"
+      action: "unFollow",
     };
     console.log(relationshipInfo);
-    dispatch(follow(relationshipInfo))
-  }
+    dispatch(follow(relationshipInfo));
+  };
 
   if (!userBLogs.length) {
     content = (
@@ -115,10 +119,8 @@ const VisitProfile = () => {
 
   if (userBLogs.length) {
     content = userBLogs
-    .sort((a,b) => new Date(b.date) - new Date(a.date))
-    .map((blog) => (
-      <Blogs key={blog?._id} blog={blog}></Blogs>
-    ));
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .map((blog) => <Blogs key={blog?._id} blog={blog}></Blogs>);
   }
 
   return (
@@ -207,96 +209,106 @@ const VisitProfile = () => {
       </div>
       {/* follow unFollow btn for mobile screen */}
       <div className="block  md:hidden">
-            {
-              currentUser?.following?.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
-                <button
-                onClick={handleUnfollowBtn}
-                className="btn w-full  md:mb-0 lg:mb-0"
-                  style={{
-                    backgroundColor: "transparent", // Set background to transparent
-                    color: "#1A8917", // Set text color to red
-                    border: "1px solid #1A8917", // Add a red border
-                    textTransform: "none",
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                onClick={handleFollowBtn}
-                className="btn w-full  md:mb-0 lg:mb-0"
-                style={{
-                  backgroundColor: "#1A8917",
-                  color: "white",
-                  textTransform: "none",
-                  "&:hover": {
-                    backgroundColor: "#1A8917",
-                    textTransform: "none",
-                  },
-                }}
-              >
-                Follow
-              </button>
-              )
-            }
-        </div>
+        {currentUser?.following?.find(
+          (currentFollowing) => currentFollowing.uid === user?.uid
+        ) ? (
+          <button
+            onClick={handleUnfollowBtn}
+            className="btn w-full  md:mb-0 lg:mb-0"
+            style={{
+              backgroundColor: "transparent", // Set background to transparent
+              color: "#1A8917", // Set text color to red
+              border: "1px solid #1A8917", // Add a red border
+              textTransform: "none",
+            }}
+          >
+            Unfollow
+          </button>
+        ) : (
+          <button
+            onClick={handleFollowBtn}
+            className="btn w-full  md:mb-0 lg:mb-0"
+            style={{
+              backgroundColor: "#1A8917",
+              color: "white",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#1A8917",
+                textTransform: "none",
+              },
+            }}
+          >
+            Follow
+          </button>
+        )}
+      </div>
       {/* right part */}
       <div className="flex md:block gap-3 items-center">
         <div className="mb-3 ">
-          <img src={user?.profilePic} className="w-16 h-16 rounded-full" alt="" />
+          {user?.profilePic ? (
+            <img
+              src={user?.profilePic}
+              className="w-16 h-16 rounded-full"
+              alt=""
+            />
+          ) : (
+            <CgProfile
+              className="w-16 h-16 cursor-pointer"
+            />
+          )}
         </div>
         <div>
           <p className="font-bold text-xl md:text-sm">{user?.name}</p>
           <div className="flex md:hidden items-center gap-2">
-          {user?.followers?.length ? (
-            <div>
-              {user?.followers?.length > 1 ? (
+            {user?.followers?.length ? (
+              <div>
+                {user?.followers?.length > 1 ? (
+                  <p
+                    onClick={handleVisitProfileFromFollowers}
+                    style={{ fontSize: "10px" }}
+                    className="text-[#6b6b6b] font-semibold cursor-pointer"
+                  >
+                    {" "}
+                    {user?.followers?.length} Followers
+                  </p>
+                ) : (
+                  <p
+                    onClick={handleVisitProfileFromFollowers}
+                    style={{ fontSize: "10px" }}
+                    className="text-[#6b6b6b] font-semibold cursor-pointer"
+                  >
+                    {user?.followers?.length} Follower
+                  </p>
+                )}
+              </div>
+            ) : (
+              <div>
                 <p
-                  onClick={handleVisitProfileFromFollowers}
                   style={{ fontSize: "10px" }}
-                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                  className="text-[#6b6b6b] font-semibold cursor-not-allowed"
                 >
-                  {" "}
-                  {user?.followers?.length} Followers
+                  0 Followers
                 </p>
-              ) : (
-                <p
-                  onClick={handleVisitProfileFromFollowers}
-                  style={{ fontSize: "10px" }}
-                  className="text-[#6b6b6b] font-semibold cursor-pointer"
-                >
-                  {user?.followers?.length} Follower
-                </p>
-              )}
-            </div>
-          ) : (
-            <div>
+              </div>
+            )}
+            <p>|</p>
+            {user?.following?.length ? (
+              <p
+                onClick={handleVisitProfileFromFollowing}
+                className="text-[#6b6b6b] font-semibold cursor-pointer"
+                style={{ fontSize: "10px" }}
+              >
+                {user?.following?.length} Following
+              </p>
+            ) : (
               <p
                 style={{ fontSize: "10px" }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
-                0 Followers
+                0 Following
               </p>
-            </div>
-          )}
-          <p>|</p>
-          {user?.following?.length ? (
-            <p
-              onClick={handleVisitProfileFromFollowing}
-              className="text-[#6b6b6b] font-semibold cursor-pointer"
-              style={{ fontSize: "10px" }}
-            >
-              {user?.following?.length} Following
-            </p>
-          ) : (
-            <p
-              style={{ fontSize: "10px" }}
-              className="text-[#6b6b6b] font-semibold cursor-not-allowed"
-            >
-              0 Following
-            </p>
-          )}
-        </div>
+            )}
+          </div>
         </div>
         <div className="md:flex hidden items-center gap-2">
           {user?.followers?.length ? (
@@ -349,38 +361,38 @@ const VisitProfile = () => {
           )}
         </div>
         <div className="hidden md:block">
-            {
-              currentUser?.following?.find((currentFollowing) => currentFollowing.uid === user?.uid) ? (
-                <button
-                onClick={handleUnfollowBtn}
-                className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
-                  style={{
-                    backgroundColor: "transparent", // Set background to transparent
-                    color: "#1A8917", // Set text color to red
-                    border: "1px solid #1A8917", // Add a red border
-                    textTransform: "none",
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                onClick={handleFollowBtn}
-                className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
-                style={{
+          {currentUser?.following?.find(
+            (currentFollowing) => currentFollowing.uid === user?.uid
+          ) ? (
+            <button
+              onClick={handleUnfollowBtn}
+              className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+              style={{
+                backgroundColor: "transparent", // Set background to transparent
+                color: "#1A8917", // Set text color to red
+                border: "1px solid #1A8917", // Add a red border
+                textTransform: "none",
+              }}
+            >
+              Unfollow
+            </button>
+          ) : (
+            <button
+              onClick={handleFollowBtn}
+              className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
+              style={{
+                backgroundColor: "#1A8917",
+                color: "white",
+                textTransform: "none",
+                "&:hover": {
                   backgroundColor: "#1A8917",
-                  color: "white",
                   textTransform: "none",
-                  "&:hover": {
-                    backgroundColor: "#1A8917",
-                    textTransform: "none",
-                  },
-                }}
-              >
-                Follow
-              </button>
-              )
-            }
+                },
+              }}
+            >
+              Follow
+            </button>
+          )}
         </div>
       </div>
       {/* for mobile screen */}

@@ -26,6 +26,7 @@ import {
 } from "../redux/actionTypes/actionTypes";
 import ResponseField from "./blog/responses/ResponseField";
 import DOMPurify from "dompurify";
+import { CgProfile } from "react-icons/cg";
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -77,26 +78,34 @@ const BlogDetails = () => {
   };
   const handleBookmarks = () => {
     dispatch(
-      saveAsBookmarks({ selectedBlogData: selectedBlogData }, { userUid: user },{action:"Bookmark"})
+      saveAsBookmarks(
+        { selectedBlogData: selectedBlogData },
+        { userUid: user },
+        { action: "Bookmark" }
+      )
     );
     alert("Added to Bookmarks!");
   };
 
-  const handleRemoveBookmark = () =>{
+  const handleRemoveBookmark = () => {
     dispatch(
-      saveAsBookmarks({ selectedBlogData: selectedBlogData }, { userUid: user },{action:"RemoveBookmark"})
+      saveAsBookmarks(
+        { selectedBlogData: selectedBlogData },
+        { userUid: user },
+        { action: "RemoveBookmark" }
+      )
     );
     alert("Added to Bookmarks!");
-  }
+  };
 
   const handleClap = () => {
     dispatch(updateClapsCount(_id, user));
     dispatch(addPostToClap({ blog: selectedBlogData }, { userUid: user }));
   };
 
-  const handleDeleteABLog = (_id) =>{
+  const handleDeleteABLog = (_id) => {
     dispatch(deleteABLog(_id));
-  }
+  };
 
   const handleVisitProfile = () => {
     // comparing currently loggedIn user.uid to selecedBlog author Uid
@@ -184,12 +193,20 @@ const BlogDetails = () => {
       <div className="w-full md:w-3/4 mx-auto">
         <h2 className="text-4xl font-extrabold my-3">{title}</h2>
         <div className="flex gap-2 items-center my-5">
-          <img
-            onClick={handleVisitProfile}
-            src={authorImage}
-            className="h-12 cursor-pointer w-12"
-            alt=""
-          />
+          {authorImage ? (
+            <img
+              onClick={handleVisitProfile}
+              src={authorImage}
+              className="h-12 cursor-pointer w-12"
+              alt=""
+            />
+          ) : (
+            <CgProfile
+              onClick={handleVisitProfile}
+              title="Tap on to change your profile pic!"
+              className="w-12 h-12 cursor-pointer"
+            />
+          )}
           <div>
             <h5
               onClick={handleVisitProfile}
@@ -310,7 +327,10 @@ const BlogDetails = () => {
         </div>
         <img src={image} style={{ height: "30%" }} alt="" />
         {/* <p className="my-5 border border-dark p-2">{description}</p> */}
-        <div className="my-5 border border-dark p-2" dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
+        <div
+          className="my-5 border border-dark p-2"
+          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+        />
         <GrLinkPrevious
           className="cursor-pointer"
           onClick={handleNavigate}

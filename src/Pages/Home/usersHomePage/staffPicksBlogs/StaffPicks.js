@@ -5,6 +5,7 @@ import { BsBookmarkPlus } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBlogs } from "../../../../redux/thunk/blogs";
 import { getAllUsers } from "../../../../redux/thunk/userAuth";
+import { CgProfile } from "react-icons/cg";
 
 const StaffPicks = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
@@ -41,11 +42,19 @@ const StaffPicks = () => {
         .map((blog) => (
           <div className={`mb-5 ${pathname === "/staffPicksBlogs" ? "hidden" : "block"}`} key={blog?._id}>
             <div onClick={() => handleVisitProfile(blog?.userUid)} className="flex cursor-pointer  items-center gap-2">
-              <img
+              
+              {
+                blog?.authorImage ? <img
                 alt=""
                 className="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-700"
                 src={blog?.authorImage}
-              />
+              /> : 
+              <CgProfile
+              title="Tap on to change your profile pic!"
+              className="w-6 h-6 cursor-pointer"
+            />
+                
+              }
               <h5 style={{ fontSize: "12px" }}>{blog?.author}</h5>
             </div>
             <Link to={`/blogDetails/${blog?._id}`}>

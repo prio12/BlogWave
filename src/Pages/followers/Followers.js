@@ -9,6 +9,7 @@ import {
 import { fetchAllBlogs } from "../../redux/thunk/blogs";
 import StaffPicks from "../Home/usersHomePage/staffPicksBlogs/StaffPicks";
 import { LiaGreaterThanSolid } from "react-icons/lia";
+import { CgProfile } from "react-icons/cg";
 
 const Followers = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
@@ -108,7 +109,14 @@ const Followers = () => {
           onClick={() => handleVisitProfile(follower)}
           className="md:flex cursor-pointer lg:flex items-center gap-5"
         >
-          <img src={follower?.profilePic} className="h-16 w-16" alt="" />
+          {/* <img src={follower?.profilePic} className="h-16 w-16" alt="" /> */}
+          {
+            follower?.profilePic ? <img src={follower?.profilePic} className="h-16 w-16" alt="" />
+            :
+            <CgProfile
+             className="w-16 h-16 cursor-pointer"
+           />
+          }
           <div className="my-3 md:my-0">
             <p className="text-xs font-bold">{follower?.name}</p>
             {follower.about && (
@@ -162,7 +170,14 @@ const Followers = () => {
           onClick={() => handleVisitProfile(follower)}
           className="md:flex lg:flex cursor-pointer items-center gap-5"
         >
-          <img src={follower?.profilePic} className="h-16 w-16" alt="" />
+          {/* <img src={follower?.profilePic} className="h-16 w-16" alt="" /> */}
+          {
+            follower?.profilePic ? <img src={follower?.profilePic} className="h-16 w-16" alt="" />
+             : 
+             <CgProfile
+             className="w-16 h-16 cursor-pointer"
+           />
+          }
           <div className="my-3 md:my-0">
             <p className="text-xs font-bold">{follower?.name}</p>
             {follower.about && (

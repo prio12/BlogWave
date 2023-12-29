@@ -5,6 +5,7 @@ import { fetchUserUpdatedData, follow, getAllUsers } from '../../../redux/thunk/
 import { fetchAllBlogs } from '../../../redux/thunk/blogs';
 import StaffPicks from '../../Home/usersHomePage/staffPicksBlogs/StaffPicks';
 import { LiaGreaterThanSolid } from 'react-icons/lia';
+import { CgProfile } from 'react-icons/cg';
 
 const Followings = () => {
     const userUid = useSelector((state) => state?.user?.user?.uid);
@@ -98,7 +99,15 @@ const Followings = () => {
     content = currentUser?.following?.map((myFollowing) => (
       <div key={myFollowing.uid} className="flex justify-between my-5 md:pr-12 items-center ">
         <div onClick={() => handleVisitProfile(myFollowing)} className="md:flex cursor-pointer lg:flex items-center gap-5">
-          <img src={myFollowing?.profilePic} className="h-16 w-16" alt="" />
+          {/* <img src={myFollowing?.profilePic} className="h-16 w-16" alt="" /> */}
+          {
+            myFollowing?.profilePic ? <img src={myFollowing?.profilePic} className="h-16 w-16" alt="" />
+             :
+             <CgProfile
+             className="w-16 h-16 cursor-pointer"
+           />
+            
+          }
           <div className="my-3 md:my-0">
             <p className="text-xs font-bold">{myFollowing?.name}</p>
             {myFollowing.about && (
@@ -124,7 +133,13 @@ const Followings = () => {
     content = visitProfile?.following?.map((visitUserFollowing) => (
       <div key={visitUserFollowing.uid} className="flex justify-between my-5 md:pr-12 items-center ">
         <div onClick={() => handleVisitProfile(visitUserFollowing)} className="md:flex lg:flex cursor-pointer items-center gap-5">
-          <img src={visitUserFollowing?.profilePic} className="h-16 w-16" alt="" />
+          {/* <img src={visitUserFollowing?.profilePic} className="h-16 w-16" alt="" /> */}
+          {
+            visitUserFollowing?.profilePic ? <img src={visitUserFollowing?.profilePic} className="h-16 w-16" alt="" /> :
+            <CgProfile
+              className="w-16 h-16 cursor-pointer"
+            />
+          }
           <div className="my-3 md:my-0">
             <p className="text-xs font-bold">{visitUserFollowing?.name}</p>
             {visitUserFollowing.about && (
