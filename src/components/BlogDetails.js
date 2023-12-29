@@ -90,7 +90,6 @@ const BlogDetails = () => {
   }
 
   const handleClap = () => {
-    // onClick={() => dispatch(updateClapsCount(_id, userUid))}
     dispatch(updateClapsCount(_id, user));
     dispatch(addPostToClap({ blog: selectedBlogData }, { userUid: user }));
   };
@@ -182,9 +181,9 @@ const BlogDetails = () => {
         </div>
       </div>
       {/* responseSideBar */}
-      <div className="w-full md:w-1/2 mx-auto">
+      <div className="w-full md:w-3/4 mx-auto">
         <h2 className="text-4xl font-extrabold my-3">{title}</h2>
-        <div className="flex gap-2 items-center my-3">
+        <div className="flex gap-2 items-center my-5">
           <img
             onClick={handleVisitProfile}
             src={authorImage}
@@ -227,7 +226,6 @@ const BlogDetails = () => {
                   onClick={handleClap}
                 />
               )}
-
               <span>{claps}</span>
             </div>
             {/* <FaRegComment/><span>5</span> */}
@@ -310,7 +308,7 @@ const BlogDetails = () => {
             </div>
           </div>
         </div>
-        <img src={image} style={{ height: "50%" }} alt="" />
+        <img src={image} style={{ height: "30%" }} alt="" />
         {/* <p className="my-5 border border-dark p-2">{description}</p> */}
         <div className="my-5 border border-dark p-2" dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
         <GrLinkPrevious

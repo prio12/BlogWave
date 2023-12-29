@@ -17,6 +17,7 @@ const WriteBlog = () => {
   const authorImage = useSelector((state) => state?.user?.userData?.profilePic);
   const [isLoading, setIsLoading] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -30,6 +31,13 @@ const WriteBlog = () => {
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
+  const handleFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsInputFocused(false);
+  };
   const submit = (data) => {
     // console.log(data);
     const imageData = data.image[0];
@@ -101,8 +109,10 @@ const WriteBlog = () => {
           <input
             {...register("category")}
             type="text"
-            placeholder="Category"
+            placeholder={isInputFocused ? "Ex:Technology, Food.." : "Category"}
             className=" mb-3 font-mono focus:outline-none"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             required
           />
         </div>

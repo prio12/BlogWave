@@ -94,7 +94,7 @@ const Profile = () => {
 
   return (
     <div className=" flex md:flex-row flex-col-reverse  gap-3 p-5 md:px-12 ">
-      <div className="w-3/4">
+      <div className="md:w-3/4 w-full">
         <div>
           <h3 className="text-4xl hidden md:block font-bold">{name}</h3>
         </div>
