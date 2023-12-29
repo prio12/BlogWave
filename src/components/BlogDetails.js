@@ -25,6 +25,7 @@ import {
   SET_UPDATE_SUCCESS_FLAG,
 } from "../redux/actionTypes/actionTypes";
 import ResponseField from "./blog/responses/ResponseField";
+import DOMPurify from "dompurify";
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -137,6 +138,8 @@ const BlogDetails = () => {
     navigate(-1);
   };
   // console.log(user, userUid);
+  const sanitizedDescription = DOMPurify.sanitize(description);
+
   return (
     <div className="p-5 ">
       {/* sidebar */}
@@ -308,7 +311,8 @@ const BlogDetails = () => {
           </div>
         </div>
         <img src={image} style={{ height: "50%" }} alt="" />
-        <p className="my-5 border border-dark p-2">{description}</p>
+        {/* <p className="my-5 border border-dark p-2">{description}</p> */}
+        <div className="my-5 border border-dark p-2" dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
         <GrLinkPrevious
           className="cursor-pointer"
           onClick={handleNavigate}

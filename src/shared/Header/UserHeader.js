@@ -72,7 +72,7 @@ const UserHeader = () => {
         {!isWriterBlogPage && (
           <Link to="/writeBlog" className="flex items-center gap-3">
             <BsPencilSquare />
-            <p>
+            <p className="md:block hidden">
               <small>Write</small>
             </p>
           </Link>

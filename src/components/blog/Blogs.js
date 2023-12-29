@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { deleteUserAndBlogs } from "../../redux/thunk/userAuth";
+import DOMPurify from "dompurify";
 
 const Blogs = ({ blog }) => {
   const user = useSelector((state) => state?.user?.user?.uid);
@@ -15,6 +16,7 @@ const Blogs = ({ blog }) => {
   }
 
   const {pathname} = useLocation();
+  const sanitizedDescription = DOMPurify.sanitize(blog?.description);
  
   return (
     <div onClick={handleGuestUser} className="cursor-pointer">
@@ -41,7 +43,8 @@ const Blogs = ({ blog }) => {
           </div>
         }
         <h4 className="font-bold mt-2">{blog?.title}</h4>
-        <p style={{ fontSize: "12px" }}>{blog?.description?.slice(0,200)+"..."}</p>
+        {/* <p style={{ fontSize: "12px" }}>{blog?.description?.slice(0,200)+"..."}</p> */}
+        <div className="text-xs" dangerouslySetInnerHTML={{ __html: sanitizedDescription.slice(0,200)+"..." }} />
         
         <p className="text-sm mt-2">
           <small>

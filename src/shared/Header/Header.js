@@ -8,7 +8,7 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state?.user?.user?.uid)
+  const user = useSelector((state) => state?.user?.user?.uid);
   // console.log(user);
 
   // const toggleDropdown = () => {
@@ -37,7 +37,6 @@ const Header = () => {
     dispatch(signOutUser());
   };
 
-  
   return (
     <div>
       <nav
@@ -50,15 +49,21 @@ const Header = () => {
         }}
       >
         <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="font-serif inline-block no-underline    hover:scale-110 transition-transform duration-700">
-  <span className="text-2xl font-semibold  "><span></span>Blog</span>
-  <span className="text-2xl  font-semibold "><span className="text-5xl">W</span>ave</span>
-</Link>
+          <Link
+            to="/"
+            className="font-serif inline-block no-underline    hover:scale-110 transition-transform duration-700"
+          >
+            <span className="text-2xl font-semibold  ">
+              <span></span>Blog
+            </span>
+            <span className="text-2xl  font-semibold ">
+              <span className="text-5xl">W</span>ave
+            </span>
+          </Link>
 
           <div className="md:hidden ">
-            <Link>
-            </Link>
-          <Link to="/signUpMethods">
+            <Link></Link>
+            <Link to="/signUpMethods">
               <button className={scrolled ? "scrolled-button" : "nav-btn"}>
                 Get Started
               </button>
@@ -87,11 +92,14 @@ const Header = () => {
             <Link to="/signIn" className="text-sm font-semibold">
               Sign In
             </Link>
-            {
-              user && <button onClick={handleSignOut} className={scrolled ? "scrolled-button" : "nav-btn"}>
-              Log out
-            </button>
-            }
+            {user && (
+              <button
+                onClick={handleSignOut}
+                className={scrolled ? "scrolled-button" : "nav-btn"}
+              >
+                Log out
+              </button>
+            )}
             <Link to="/signUpMethods">
               <button className={scrolled ? "scrolled-button" : "nav-btn"}>
                 Get Started
