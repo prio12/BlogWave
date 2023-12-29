@@ -226,6 +226,7 @@ export const updateUserProfile = ({ photoURL, displayName, about, uid }) => {
 
 export const follow = (relationshipInfo) => {
   const { uid } = relationshipInfo?.following;
+  console.log(uid);
   return async (dispatch) => {
     try {
       const response = await fetch(`http://localhost:5000/users/${uid}`, {

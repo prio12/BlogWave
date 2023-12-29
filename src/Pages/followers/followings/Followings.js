@@ -77,6 +77,7 @@ const Followings = () => {
       follower,
       action:"unFollow"
     };
+    console.log(relationshipInfo);
 
     dispatch(follow(relationshipInfo));
   };

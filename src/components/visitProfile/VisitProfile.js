@@ -104,14 +104,7 @@ const VisitProfile = () => {
   if (!userBLogs.length) {
     content = (
       <div className="text-center">
-        <p>You have not written any blog!</p>
-        <Link
-          to="/writeBlog"
-          style={{ fontSize: "12px" }}
-          className="text-[#1A8917] "
-        >
-          Write now?
-        </Link>
+        <p className="text-xs font-bold">No Stories to read!</p>
       </div>
     );
   }
