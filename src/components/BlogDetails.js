@@ -301,7 +301,7 @@ const BlogDetails = () => {
               ) : (
                 <MdOutlineBookmarkAdd
                   title="Add to bookmark"
-                  className={`cursor-pointer  ${responseBarStatus && "hidden"}`}
+                  className={`cursor-pointer`}
                   onClick={handleBookmarks}
                 />
               )}

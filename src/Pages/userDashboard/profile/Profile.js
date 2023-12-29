@@ -81,7 +81,9 @@ const Profile = () => {
   }
 
   if (userBLogs.length) {
-    content = userBLogs.map((blog) => (
+    content = userBLogs
+    .sort((a,b) => new Date(b.date) - new Date(a.date))
+    .map((blog) => (
       <Blogs key={blog?._id} blog={blog}></Blogs>
     ));
   }

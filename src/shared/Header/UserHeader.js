@@ -122,7 +122,7 @@ const UserHeader = () => {
           </button>
           {isOpen && (
             // </div>
-            <div className="absolute w-48 p-5 mt-1 right-0 bg-base-100 z-50 border">
+            <div className="absolute w-48 p-5 mt-1 right-0 bg-base-100 z-[500] border">
               <div>
                 <Link to="/profile" className="flex mb-5 items-center gap-3">
                   <FiUser />
