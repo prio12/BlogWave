@@ -46,8 +46,30 @@ const Trending = () => {
               <h4 style={{ fontSize: "14px" }} className="font-extrabold mt-2">
                 {blog?.title}
               </h4>
-              <p className="text-sm mt-2">
-                <small>Aug 23 · 7 min read</small>
+              <p style={{fontSize:"10px"}} className=" mt-2">
+                {blog?.description?.length && (
+                  <>
+                    {blog.description.length < 1000 && (
+                      <span>· 2 min read .</span>
+                    )}
+                    {blog.description.length > 1000 &&
+                      blog.description.length < 1500 && (
+                        <span>· 3 min read .</span>
+                      )}
+                    {blog.description.length > 1500 &&
+                      blog.description.length < 2000 && (
+                        <span>· 5 min read .</span>
+                      )}
+                    {blog.description.length > 2000 &&
+                      blog.description.length < 3000 && (
+                        <span>· 7 min read .</span>
+                      )}
+                    {blog.description.length > 3000 &&
+                      blog.description.length < 5000 && (
+                        <span>· 10 min read .</span>
+                      )}
+                  </>
+                )}
               </p>
             </div>
           ))}

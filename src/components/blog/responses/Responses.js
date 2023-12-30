@@ -9,7 +9,7 @@ const Responses = ({response}) => {
             
             <div className='my-5'>
                <div className='flex items-center gap-3'>
-               <img src={response.profilePic} className='h-6 w-6' alt="" />
+               <img src={response.profilePic} className='h-6 w-6 rounded-full' alt="" />
                <p style={{fontSize:"10px"}} className='font-semibold'>{response.name}</p>
                </div>
                <div style={{fontSize:"10px"}} className='p-2'>

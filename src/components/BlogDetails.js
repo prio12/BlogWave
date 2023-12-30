@@ -216,7 +216,7 @@ const BlogDetails = () => {
             <img
               onClick={handleVisitProfile}
               src={authorImage}
-              className="h-12 cursor-pointer w-12"
+              className="h-12 cursor-pointer w-12 rounded"
               alt=""
             />
           ) : (

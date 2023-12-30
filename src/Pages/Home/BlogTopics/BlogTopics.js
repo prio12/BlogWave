@@ -16,7 +16,7 @@ const BlogTopics = () => {
         Discover more of what matters to you
       </h5>
       <Link to="/signUp">
-        <div style={{ fontSize: "12px" }} className="grid  grid-cols-3 ">
+        <div style={{ fontSize: "12px" }} className="grid gap-3 grid-cols-3 ">
           {uniqueCategory &&
             Array.from(uniqueCategory)
               .slice(0, 9)

@@ -59,7 +59,7 @@ const UserHeader = () => {
     >
       <div className="flex gap-3 items-center">
         <Link to="/">
-          <img className="w-32 " src={Logo} alt="" />
+          <img className="w-36 md:w-32 " src={Logo} alt="" />
         </Link>
         <div className="hidden md:flex">
           <SearchBar />

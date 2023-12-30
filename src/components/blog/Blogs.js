@@ -12,7 +12,6 @@ const Blogs = ({ blog }) => {
   const { pathname } = useLocation();
   const sanitizedDescription = DOMPurify.sanitize(blog?.description);
   const characterCount = sanitizedDescription.length;
-  console.log(characterCount);
   const handleGuestUser = () => {
     if (!user) {
       navigate("/signUpMethods");

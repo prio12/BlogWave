@@ -35,10 +35,10 @@ const Notifications = () => {
         <div className="flex gap-5 items-center mb-5">
           {/* <img src={notification?.profilePic} className="w-12 h-12" alt="" /> */}
           {
-            notification?.profilePic ?  <img src={notification?.profilePic} className="w-12 h-12" alt="" />
+            notification?.profilePic ?  <img src={notification?.profilePic} className="w-12 h-12 rounded-full" alt="" />
             :
             <CgProfile
-            className="w-16 h-16 cursor-pointer"
+            className="w-12 h-12 cursor-pointer "
           />
           }
           <div>
