@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../loading/Loader";
 import { fetchUserUpdatedData } from "../../redux/thunk/userAuth";
+import ErrorPage from "../errorPage/ErrorPage";
 
 const AdminChecker = ({ children }) => {
   const user = useSelector((state) => state?.user?.user?.uid);
@@ -23,7 +24,7 @@ const AdminChecker = ({ children }) => {
       return children;
     }
   } else {
-    return <div>nothing found</div>;
+    return <ErrorPage/>
   }
 };
 
