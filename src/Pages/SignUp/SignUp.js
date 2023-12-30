@@ -12,6 +12,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.user?.uid);
   const error = useSelector((state) => state?.user?.errorMessage?.signUp)
+  
   console.log(error);
 
 
@@ -36,6 +37,7 @@ const SignUp = () => {
   },[user,navigate])
 
   return (
+    
     <div className="mt-16 w-full py-24 relative md:w-1/2 md:mx-auto border-[1px]">
       <div className="absolute top-5 text-xl right-5">
         <RxCross2 className="cursor-pointer" onClick={handleCrossNavigate} />

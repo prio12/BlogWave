@@ -63,7 +63,7 @@ const Profile = () => {
 
   if (!userBLogs.length) {
     content = (
-      <div className="text-center">
+      <div className="text-center text-xs">
         <p>You have not written any blog!</p>
         <Link
           to="/writeBlog"

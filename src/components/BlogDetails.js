@@ -146,8 +146,26 @@ const BlogDetails = () => {
   const handleNavigate = () => {
     navigate(-1);
   };
-  // console.log(user, userUid);
   const sanitizedDescription = DOMPurify.sanitize(description);
+  const characterCount = sanitizedDescription.length;
+  let readingTime;
+
+  if ( characterCount < 1000) {
+    readingTime = <span>· 2 min read .</span>
+  }
+  else if ( characterCount > 1000 && characterCount <1500) {
+    readingTime = <span>· 3 min read .</span>
+  }
+  else if ( characterCount > 1500 && characterCount <2000) {
+    readingTime = <span>· 5 min read .</span>
+  }
+  else if ( characterCount > 2000  && characterCount <3000) {
+    readingTime = <span>· 7 min read .</span>
+  }
+  else if ( characterCount > 2000 && characterCount <5000) {
+    readingTime = <span>· 10 min read .</span>
+  }
+
 
   return (
     <div className="p-5 ">
@@ -217,7 +235,7 @@ const BlogDetails = () => {
               {author}
             </h5>
             <small style={{ fontSize: "10px" }} className="mr-3">
-              7 min read
+              {readingTime}
             </small>
             <small style={{ fontSize: "10px" }}>12th August</small>
           </div>
@@ -329,9 +347,9 @@ const BlogDetails = () => {
         <img src={image} style={{ height: "30%" }} alt="" />
         {/* <p className="my-5 border border-dark p-2">{description}</p> */}
         <div
-          className="my-5 border border-dark p-2"
-          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
-        />
+      className="my-5 border border-dark p-2 font-serif" // Use Tailwind font-serif class
+      dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+    />
         <GrLinkPrevious
           className="cursor-pointer"
           onClick={handleNavigate}

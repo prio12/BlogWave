@@ -8,6 +8,7 @@ const UsersHome = ({ category }) => {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state?.blogs?.blogs);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
+  
 
   useEffect(() => {
     dispatch(fetchAllBlogs());

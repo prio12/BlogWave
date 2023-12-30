@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
       {
         path: "/admin",
         // element: <PrivateRoute><Admin/></PrivateRoute>,
-        element:<AdminChecker><Admin/></AdminChecker>
+        element:<PrivateRoute><AdminChecker><Admin/></AdminChecker></PrivateRoute>
       },
     ],
   },

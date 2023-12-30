@@ -90,11 +90,12 @@ const WriteBlog = () => {
     toolbar: [
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike"],
-      [{ list: "ordered" }, { list: "bullet" }],
+      // Remove the list options
+      // [{ list: "ordered" }, { list: "bullet" }],
     ],
   };
+  
 
-  console.log(editorHtml);
   return (
     <div className="w-full md:w-1/2 p-5 m-auto">
       <form onSubmit={handleSubmit(submit)} className=" items-center">

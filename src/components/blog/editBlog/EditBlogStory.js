@@ -49,9 +49,9 @@ const EditBlogStory = ({ selectedBlogData }) => {
             image: imageData.data.url,
             date,
           };
-          // console.log(editedBlogData);
-          dispatch(updateABlog(editedBlogData));
-          setIsLoading(false);
+          console.log(description);
+          // dispatch(updateABlog(editedBlogData));
+          // setIsLoading(false);
         }
       })
       .catch((err) => {

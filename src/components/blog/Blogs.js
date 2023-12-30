@@ -11,11 +11,32 @@ const Blogs = ({ blog }) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const sanitizedDescription = DOMPurify.sanitize(blog?.description);
+  const characterCount = sanitizedDescription.length;
+  console.log(characterCount);
   const handleGuestUser = () => {
     if (!user) {
       navigate("/signUpMethods");
     }
   };
+
+  let readingTime;
+
+  if ( characterCount < 1000) {
+    readingTime = <span>· 2 min read .</span>
+  }
+  else if ( characterCount > 1000 && characterCount <1500) {
+    readingTime = <span>· 3 min read .</span>
+  }
+  else if ( characterCount > 1500 && characterCount <2000) {
+    readingTime = <span>· 5 min read .</span>
+  }
+  else if ( characterCount > 2000  && characterCount <3000) {
+    readingTime = <span>· 7 min read .</span>
+  }
+  else if ( characterCount > 2000 && characterCount <5000) {
+    readingTime = <span>· 10 min read .</span>
+  }
+
 
   return (
     <div onClick={handleGuestUser} className="cursor-pointer">
@@ -72,7 +93,7 @@ const Blogs = ({ blog }) => {
                       year: "numeric",
                     })
                   : ""}{" "}
-                · 7 min read . <span className="ms-5">{blog?.category}</span>
+                {readingTime} <span className="ms-5">{blog?.category}</span>
               </small>
             </p>
           </Link>
