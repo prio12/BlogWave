@@ -49,7 +49,8 @@ const Admin = () => {
       <div>
         {activeContent === "users" && (
           <div className="my-5">
-            {allUsers?.map((user) => (
+            {allUsers?.filter((user)=> user.uid !==userUid)
+            .map((user) => (
               <div className="flex items-center mb-5 justify-between">
                 <div className="flex items-center gap-5">
                   <img src={user?.profilePic} className="w-12 h-12" alt="" />
