@@ -86,10 +86,10 @@ const Header = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/story" className="text-sm font-semibold">
+            <Link style={{ fontSize: "10px" }} to="/story">
               Our Story
             </Link>
-            <Link to="/signIn" className="text-sm font-semibold">
+            <Link to="/signIn" style={{ fontSize: "10px" }}>
               Sign In
             </Link>
             {user && (
@@ -101,7 +101,9 @@ const Header = () => {
               </button>
             )}
             <Link to="/signUpMethods">
-              <button className={scrolled ? "scrolled-button" : "nav-btn"}>
+              <button
+                className={`${scrolled ? "scrolled-button" : "nav-btn"}`}
+              >
                 Get Started
               </button>
             </Link>
