@@ -9,6 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
+import toast, { Toaster } from 'react-hot-toast';
 import {
   createUserWithEmailPass,
   fetchAllUsers,
@@ -77,7 +78,7 @@ export const createUserWithEmailAndPass = (user) => {
         console.log(user);
         dispatch(createUserWithEmailPass(user));
         postUserDetails(userDetails);
-        alert("User Created!!");
+        toast.success("Welcome!!")
       }
     } catch (error) {
       // console.log(error);
@@ -116,7 +117,7 @@ export const signInWithEmailPass = (user) => {
       if (userCredential) {
         const user = userCredential.user;
         dispatch(signInWithEmail(user));
-        alert("Welcome Back!!");
+        toast.success("Welcome Back!!")
       }
     } catch (error) {
       dispatch(startLoading());
@@ -144,7 +145,7 @@ export const signInWithGoogleProvider = () => {
         console.log(user);
         dispatch(logInWithGoogle(user));
         postUserDetails(useDetails);
-        alert("userCreated!");
+        toast.success("Welcome!!")
       }
     } catch (error) {
       dispatch(startLoading());
@@ -172,7 +173,7 @@ export const signInWithGithubProvider = () => {
         };
         postUserDetails(userDetails);
         dispatch(logInWithGithub(user));
-        alert("UserCreated!");
+        toast.success("Welcome!!")
       }
     } catch (error) {
       dispatch(startLoading());

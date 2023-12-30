@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
 import { fetchAllBlogs } from "../../redux/thunk/blogs";
 import { Link } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
 
 const Notifications = () => {
   const userDetails = useSelector((state) => state?.user?.userData);
@@ -28,10 +29,18 @@ const Notifications = () => {
     userDetails?.notifications &&
     userDetails?.notifications?.length > 0
   ) {
-    content = userDetails?.notifications?.map((notification) => (
+    content = userDetails?.notifications?.sort((a,b) => new Date(b.date) - new Date(a.date))
+    .map((notification) => (
       <Link to={`/visitProfile/${notification?.uid}`}>
         <div className="flex gap-5 items-center mb-5">
-          <img src={notification?.profilePic} className="w-12 h-12" alt="" />
+          {/* <img src={notification?.profilePic} className="w-12 h-12" alt="" /> */}
+          {
+            notification?.profilePic ?  <img src={notification?.profilePic} className="w-12 h-12" alt="" />
+            :
+            <CgProfile
+            className="w-16 h-16 cursor-pointer"
+          />
+          }
           <div>
             <p className="text-xs"><span className="font-bold">{notification?.name}</span> started following you!</p>
             <p className="text-xs">

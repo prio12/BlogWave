@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <Provider store={store}>
+      <Provider store={store} >
         <RouterProvider router={router}></RouterProvider>
       </Provider>
     </div>
