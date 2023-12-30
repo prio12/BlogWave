@@ -93,7 +93,7 @@ const EditBlogStory = ({ selectedBlogData }) => {
         />
         <img
           src={image}
-          className="md:h-[400px] h-full w-full mt-5 mb-3"
+          className=" h-96 w-full mt-5 mb-3"
           alt=""
         />
         <input type="file" name="blogImage" {...register("blogImage")} />

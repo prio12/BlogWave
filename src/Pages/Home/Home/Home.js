@@ -54,7 +54,7 @@ const Home = () => {
           selectedTopic={selectedTopic}
         />
       </div>
-      <div className="md:px-16 px-5">
+      <div style={{ borderRight: "1px solid #F2F2F2" }} className="md:px-16 px-5">
         {/* <Blogs /> */}
         <UsersHome category={category} />
       </div>

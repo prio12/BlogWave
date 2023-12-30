@@ -46,16 +46,16 @@ const StaffPicks = () => {
               {
                 blog?.authorImage ? <img
                 alt=""
-                className="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-700"
+                className="w-5 h-5 border rounded-full dark:bg-gray-500 dark:border-gray-700"
                 src={blog?.authorImage}
               /> : 
               <CgProfile
               title="Tap on to change your profile pic!"
-              className="w-6 h-6 cursor-pointer"
+              className="w-5 h-5 cursor-pointer"
             />
                 
               }
-              <h5 style={{ fontSize: "12px" }}>{blog?.author}</h5>
+              <h5 style={{ fontSize: "10px" }} className="font-semibold">{blog?.author}</h5>
             </div>
             <Link to={`/blogDetails/${blog?._id}`}>
               <h4 style={{ fontSize: "13px" }} className="font-extrabold mt-2">

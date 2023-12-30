@@ -30,7 +30,7 @@ const Recommended = () => {
           <p className="cursor-pointer text-center bg-base-200  p-2 rounded-full" key={category} onClick={() => handleNavigate(category)}>{category}</p>
         ))}
       </div>
-      <p style={{ color: "rgb(44, 148, 44)",fontSize:"12px" }} className=" font-bold">
+      <p style={{ color: "rgb(44, 148, 44)",fontSize:"12px" }} className=" font-bold my-3">
         <Link to='/topics'>
           <small >See more Topics</small>
         </Link>

@@ -52,9 +52,9 @@ const SignUpMethods = () => {
             <span className="px-12">Sign Up With Email</span>
           </button>
         </Link>
-        <p className=" my-5 font-semibold">Already have an account? <Link className="text-[#1A8917] font-bold" to='/signIn'>Sign in</Link></p>
+        <p className=" my-5 font-semibold text-xs">Already have an account? <Link className="text-[#1A8917] font-bold" to='/signIn'>Sign in</Link></p>
 
-        <p className="text-sm text-center mt-16">
+        <p className="text-xs text-center mt-16">
           Click “Sign Up” to agree to BlogWave's Terms of Service and
           acknowledge <br />
           that BlogWave's Privacy Policy applies to you.
