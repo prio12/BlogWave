@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <div className="banner-background md:border-black  md:border-b-2 ">
-      <div className="card p-5 px-12 py-5 lg:card-side flex">
+      <div className="card  md:px-12 px-5 py-5 lg:card-side flex">
         <div className="card-body pt-12 p-0 flex-grow">
           <h1
             style={{ fontFamily: "'Roboto Slab', serif" }}

@@ -27,7 +27,7 @@ const Recommended = () => {
         {Array.from(uniqueCategory)
         .slice(0,9)
         .map((category) => (
-          <p className="cursor-pointer text-center bg-base-200 t p-2 rounded-full" key={category} onClick={() => handleNavigate(category)}>{category}</p>
+          <p className="cursor-pointer text-center bg-base-200  p-2 rounded-full" key={category} onClick={() => handleNavigate(category)}>{category}</p>
         ))}
       </div>
       <p style={{ color: "rgb(44, 148, 44)",fontSize:"12px" }} className=" font-bold">

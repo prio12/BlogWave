@@ -74,14 +74,14 @@ const Home = () => {
         <div>
           <Banner />
           <Trending />
-          <div className="flex md:flex-row flex-col-reverse gap-12 px-12 justify-between items-start">
+          <div className="flex md:flex-row flex-col-reverse gap-12 md:px-12 px-5 justify-between items-start">
             <div className="md:w-2/4">
               {/* Main blog content */}
               {blogs.map((blog) => (
                 <Blogs key={blog?._id} blog={blog} />
               ))}
             </div>
-            <div className="md:w-1/3">
+            <div  className="md:w-1/3 sticky top-auto md:top-20 lg:top-20 ">
               {/* Blog topics */}
               <BlogTopics />
             </div>

@@ -40,7 +40,7 @@ const Header = () => {
   return (
     <div>
       <nav
-        className={`navbar-container py-5 px-12 md:border-black shadow-md md:border-b-2 ${
+        className={`navbar-container py-5 md:px-12 px-5 md:border-black shadow-md md:border-b-2 ${
           scrolled ? "scrolled-navbar" : "banner-background"
         }`}
         style={{
