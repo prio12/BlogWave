@@ -20,6 +20,7 @@ import Topics from "../Pages/allTopics/Topics";
 import CategoryBlogs from "../Pages/Home/BlogTopics/CategoryBlogs";
 import Notifications from "../Pages/notifications/Notifications";
 import Admin from "../Pages/adminDashboard/Admin";
+import AdminChecker from "../Pages/adminChecker/AdminChecker";
 
 export const router = createBrowserRouter([
   {
@@ -88,7 +89,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <PrivateRoute><Admin/></PrivateRoute>,
+        // element: <PrivateRoute><Admin/></PrivateRoute>,
+        element:<AdminChecker><Admin/></AdminChecker>
       },
     ],
   },
