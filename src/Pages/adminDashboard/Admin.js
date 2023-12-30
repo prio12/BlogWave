@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserAndBlogs, fetchUserUpdatedData, getAllUsers } from "../../redux/thunk/userAuth";
+import {
+  deleteUserAndBlogs,
+  fetchUserUpdatedData,
+  getAllUsers,
+} from "../../redux/thunk/userAuth";
 import { fetchAllBlogs } from "../../redux/thunk/blogs";
 import Blogs from "../../components/blog/Blogs";
 import Loader from "../../loading/Loader";
+import { CgProfile } from "react-icons/cg";
 
 const Admin = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
@@ -28,7 +33,7 @@ const Admin = () => {
   }, [dispatch]);
 
   if (isLoading) {
-   return <Loader/> 
+    return <Loader />;
   }
   return (
     <div className="p-5 md:px-12">
@@ -49,35 +54,48 @@ const Admin = () => {
       <div>
         {activeContent === "users" && (
           <div className="my-5">
-            {allUsers?.filter((user)=> user.uid !==userUid)
-            .map((user) => (
-              <div className="flex items-center mb-5 justify-between">
-                <div className="flex items-center gap-5">
-                  <img src={user?.profilePic} className="w-12 h-12" alt="" />
-                  <p className="text-xs">{user?.name}</p>
-                </div>
-                <button
-                  className="btn  btn-sm md:mb-0 lg:mb-0"
-                  onClick={() => dispatch(deleteUserAndBlogs({user,type:"user"}))}
-                  style={{
-                    backgroundColor: "red",
-                    color: "white",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: "#1A8917",
+            {allUsers
+              ?.filter((user) => user.uid !== userUid)
+              .map((user) => (
+                <div className="flex items-center mb-5 justify-between">
+                  <div className="flex items-center gap-5">
+                    {user?.profilePic ? (
+                      <img
+                        src={user?.profilePic}
+                        className="w-12 h-12"
+                        alt=""
+                      />
+                    ) : (
+                      <CgProfile className="w-8 h-8 cursor-pointer" />
+                    )}
+                    <p className="text-xs">{user?.name}</p>
+                  </div>
+                  <button
+                    className="btn  btn-sm md:mb-0 lg:mb-0"
+                    onClick={() =>
+                      dispatch(deleteUserAndBlogs({ user, type: "user" }))
+                    }
+                    style={{
+                      backgroundColor: "red",
+                      color: "white",
                       textTransform: "none",
-                    },
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
+                      "&:hover": {
+                        backgroundColor: "#1A8917",
+                        textTransform: "none",
+                      },
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
           </div>
         )}
         {activeContent === "blogs" && (
           <div className="my-5">
-            {allBlogs?.map((blog) => <Blogs blog={blog}></Blogs>)}
+            {allBlogs?.map((blog) => (
+              <Blogs blog={blog}></Blogs>
+            ))}
           </div>
         )}
       </div>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { deleteUserAndBlogs } from "../../redux/thunk/userAuth";
 import DOMPurify from "dompurify";
+import { CgProfile } from "react-icons/cg";
 
 const Blogs = ({ blog }) => {
   const user = useSelector((state) => state?.user?.user?.uid);
@@ -24,18 +25,32 @@ const Blogs = ({ blog }) => {
           {!pathname === "/profile" && (
             <div className="flex items-center justify-between gap-2">
               {/* avatar */}
-              <img
+             
+              {
+                blog?.authorImage ?  <img
                 alt=""
                 className="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-700"
                 src={blog?.authorImage}
               />
+                :
+                <CgProfile
+              className="w-6 h-6 cursor-pointer"
+            />
+              }
               <h5 style={{ fontSize: "12px" }}>{blog?.author}</h5>
             </div>
           )}
           <Link to={`/blogDetails/${blog?._id}`}>
             {pathname === "/admin" && (
               <div className="flex items-center gap-2">
-                <img src={blog?.authorImage} className="w-8 h-8" alt="" />
+                
+                {
+                  blog?.authorImage ? <img src={blog?.authorImage} className="w-8 h-8" alt="" />
+                  :
+                  <CgProfile
+              className="w-8 h-8 cursor-pointer"
+            />
+                }
                 <p className="text-xs font-semibold">{blog?.author}</p>
               </div>
             )}

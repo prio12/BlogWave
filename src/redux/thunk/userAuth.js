@@ -330,6 +330,7 @@ export const deleteUserAndBlogs = (data) =>{
       const responseData = await response.json();
       if (responseData) {
         dispatch(stopLoadingBlogs());
+        dispatch(getAllUsers())
         dispatch(fetchAllBlogs())
       }
     } catch (error) {
