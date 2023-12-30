@@ -21,6 +21,7 @@ import CategoryBlogs from "../Pages/Home/BlogTopics/CategoryBlogs";
 import Notifications from "../Pages/notifications/Notifications";
 import Admin from "../Pages/adminDashboard/Admin";
 import AdminChecker from "../Pages/adminChecker/AdminChecker";
+import ErrorPage from "../Pages/errorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
   {
     path: "/signIn",
     element: <SignIn />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage/>
   },
  
 ]);
