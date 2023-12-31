@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBlogs } from "../../../../redux/thunk/blogs";
 import { getAllUsers } from "../../../../redux/thunk/userAuth";
 import { CgProfile } from "react-icons/cg";
+import ToFollow from "./toFollow/ToFollow";
 
 const StaffPicks = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
@@ -32,7 +33,7 @@ const StaffPicks = () => {
     }
   };
   return (
-    <div>
+    <div className="mb-5">
       <h4 style={{ fontSize: "12px" }} className={`font-bold mb-3 ${pathname === "/staffPicksBlogs" ? "hidden" : "block"}`}>
         Staff Picks
       </h4>
@@ -71,12 +72,13 @@ const StaffPicks = () => {
       </p>
      <div className="my-8">
      <Recommended />
+     <ToFollow/>
      </div>
-      <div>
-        <h5 style={{ fontSize: "13px" }} className="font-bold mt-8 mb-3">
+      <div className="mb-5">
+        <h5 style={{ fontSize: "12px" }} className="font-bold mt-8 mb-3">
           Reading list
         </h5>
-        <p style={{ fontSize: "12px" }}>
+        <p style={{ fontSize: "10px" }}>
           Click the <BsBookmarkPlus className="inline" /> on any story to easily
           add it to your reading list or a custom list that you can share.
         </p>

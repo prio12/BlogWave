@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchUserAllBlogs } from "../../redux/thunk/blogs";
 import { follow } from "../../redux/thunk/userAuth";
+import { CgProfile } from "react-icons/cg";
 
 const SearchedUsers = ({ user }) => {
   const currentUser = useSelector((state) => state?.user?.userData);
@@ -68,7 +69,12 @@ const SearchedUsers = ({ user }) => {
     <div className="flex justify-between my-5 md:pr-12 items-center">
       <Link onClick={handleVisitProfile}>
         <div className="md:flex lg:flex items-center gap-5">
-          <img src={user?.profilePic} className="h-16 w-16" alt="" />
+          
+          {
+            user?.profilePic ?  <img src={user?.profilePic} className="h-16 w-16 rounded" alt="" />
+            :
+            <CgProfile className="w-16 h-16 cursor-pointer" />
+          }
           <div className="my-3 md:my-0">
             <p className="text-xs font-bold">{user?.name}</p>
             {user.about && (
