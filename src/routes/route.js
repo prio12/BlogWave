@@ -22,6 +22,7 @@ import Notifications from "../Pages/notifications/Notifications";
 import Admin from "../Pages/adminDashboard/Admin";
 import AdminChecker from "../Pages/adminChecker/AdminChecker";
 import ErrorPage from "../Pages/errorPage/ErrorPage";
+import FollowingSuggestions from "../Pages/suggestions/FollowingSuggestions";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: "/following/:id",
         element: <PrivateRoute><Followings/></PrivateRoute>,
+      },
+      {
+        path: "/following/suggestions",
+        element: <PrivateRoute><FollowingSuggestions/></PrivateRoute>,
       },
       {
         path: "/admin",

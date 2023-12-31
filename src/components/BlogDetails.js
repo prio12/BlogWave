@@ -20,7 +20,6 @@ import { fetchUserUpdatedData, getAllUsers } from "../redux/thunk/userAuth";
 import { RxCross1 } from "react-icons/rx";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import EditBlogStory from "./blog/editBlog/EditBlogStory";
-import toast, { Toaster } from 'react-hot-toast';
 import {
   DELETE_BLOG_FLAG,
   SET_UPDATE_SUCCESS_FLAG,
@@ -85,7 +84,6 @@ const BlogDetails = () => {
         { action: "Bookmark" }
       )
     );
-    toast.success("Added To Bookmarks!!")
   };
 
   const handleRemoveBookmark = () => {
@@ -96,7 +94,6 @@ const BlogDetails = () => {
         { action: "RemoveBookmark" }
       )
     );
-    toast.remove("Removed from Bookmarks!!")
   };
 
   const handleClap = () => {
