@@ -111,7 +111,7 @@ const Followers = () => {
         >
           {/* <img src={follower?.profilePic} className="h-16 w-16" alt="" /> */}
           {
-            follower?.profilePic ? <img src={follower?.profilePic} className="h-16 w-16" alt="" />
+            follower?.profilePic ? <img src={follower?.profilePic} className="h-16 rouded-full w-16" alt="" />
             :
             <CgProfile
              className="w-16 h-16 cursor-pointer"
@@ -172,7 +172,7 @@ const Followers = () => {
         >
           {/* <img src={follower?.profilePic} className="h-16 w-16" alt="" /> */}
           {
-            follower?.profilePic ? <img src={follower?.profilePic} className="h-16 w-16" alt="" />
+            follower?.profilePic ? <img src={follower?.profilePic} className="h-16 rounded-full w-16" alt="" />
              : 
              <CgProfile
              className="w-16 h-16 cursor-pointer"

@@ -72,7 +72,9 @@ const StaffPicks = () => {
       </p>
      <div className="my-8">
      <Recommended />
-     <ToFollow/>
+    <div className={`${pathname === "/notifications" ? "hidden" : "block"}`}>
+    <ToFollow/>
+    </div>
      </div>
       <div className="mb-5">
         <h5 style={{ fontSize: "12px" }} className="font-bold mt-8 mb-3">

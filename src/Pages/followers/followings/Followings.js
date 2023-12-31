@@ -57,7 +57,6 @@ const Followings = () => {
     };
 
     dispatch(follow(relationshipInfo));
-    console.log(relationshipInfo);
   };
 
   const handleUnfollowBtn = (followerInfo) => {
@@ -78,7 +77,7 @@ const Followings = () => {
       follower,
       action:"unFollow"
     };
-    console.log(relationshipInfo);
+    
 
     dispatch(follow(relationshipInfo));
   };

@@ -37,7 +37,7 @@ const githubProvider = new GithubAuthProvider();
 
 const postUserDetails = async (userDetails) => {
   try {
-    const response = await fetch("http://localhost:5000/users", {
+    const response = await fetch("https://blog-wave-server-roan.vercel.app/users", {
       method: "POST",
       body: JSON.stringify(userDetails),
       headers: {
@@ -45,7 +45,6 @@ const postUserDetails = async (userDetails) => {
       },
     });
     const result = await response.json();
-    console.log(result);
   } catch (error) {
     // console.log(error);
   }
@@ -55,7 +54,6 @@ export const createUserWithEmailAndPass = (user) => {
   return async (dispatch) => {
     const inputName = user.name;
     try {
-      console.log("startLoading by observer");
       dispatch(startLoading());
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -74,7 +72,6 @@ export const createUserWithEmailAndPass = (user) => {
           profilePic: null,
           uid: user.uid,
         };
-        console.log(user);
         dispatch(createUserWithEmailPass(user));
         postUserDetails(userDetails);
       }
@@ -139,7 +136,6 @@ export const signInWithGoogleProvider = () => {
           profilePic: user.photoURL,
           uid: user.uid,
         };
-        console.log(user);
         dispatch(logInWithGoogle(user));
         postUserDetails(useDetails);
       }
@@ -159,7 +155,6 @@ export const signInWithGithubProvider = () => {
       dispatch(stopLoading());
       if (credential) {
         const user = credential.user;
-        console.log(user);
         //userDetails for database
         const userDetails = {
           name: user.displayName,
@@ -201,7 +196,7 @@ export const updateUserProfile = ({ photoURL, displayName, about, uid }) => {
       const userId = auth.currentUser.uid;
       //updating the Name and photo of the user in db
 
-      const response = await fetch(`http://localhost:5000/users/${userId}`, {
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/users/${userId}`, {
         method: "PUT",
         body: JSON.stringify(profileUpdateData),
         headers: {
@@ -222,10 +217,10 @@ export const updateUserProfile = ({ photoURL, displayName, about, uid }) => {
 
 export const follow = (relationshipInfo) => {
   const { uid } = relationshipInfo?.following;
-  console.log(uid);
   return async (dispatch) => {
+    dispatch({ type: START_LOADING_UPDATE_USER });
     try {
-      const response = await fetch(`http://localhost:5000/users/${uid}`, {
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/users/${uid}`, {
         method: "PUT",
         body: JSON.stringify(relationshipInfo),
         headers: {
@@ -234,7 +229,7 @@ export const follow = (relationshipInfo) => {
       });
       const responseData = await response.json();
     if (responseData?.targetedResult?.modifiedCount > 0) {
-      console.log(responseData);
+      dispatch({ type: STOP_LOADING_UPDATE_USER });
       dispatch(fetchUserUpdatedData(uid))
       dispatch(getAllUsers())
     }
@@ -246,7 +241,7 @@ export const fetchUserUpdatedData = (uid) => {
   return async (dispatch) => {
     try {
       dispatch({ type: START_LOADING_UPDATE_USER });
-      const response = await fetch(`http://localhost:5000/users/${uid}`);
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/users/${uid}`);
       const data = await response.json();
       if (data) {
         dispatch({ type: STOP_LOADING_UPDATE_USER });
@@ -275,7 +270,7 @@ export const getAllUsers = () => {
   return async (dispatch) => {
     // dispatch(startLoading())
     try {
-      const response = await fetch("http://localhost:5000/users");
+      const response = await fetch("https://blog-wave-server-roan.vercel.app/users");
       const data = await response.json();
 
       if (data) {
@@ -289,10 +284,9 @@ export const getAllUsers = () => {
 };
 
 export const setNotificationStatus = (userUid) =>{
-  console.log(userUid);
   return async (dispatch) =>{
     try {
-      const response = await fetch("http://localhost:5000/user/notification", {
+      const response = await fetch("https://blog-wave-server-roan.vercel.app/user/notification", {
         method:"PUT",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -315,7 +309,7 @@ export const deleteUserAndBlogs = (data) =>{
   return async (dispatch) =>{
     dispatch(startLoadingBlogs());
     try {
-      const response = await fetch("http://localhost:5000/adminDelete",{
+      const response = await fetch("https://blog-wave-server-roan.vercel.app/adminDelete",{
         method:"DELETE",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

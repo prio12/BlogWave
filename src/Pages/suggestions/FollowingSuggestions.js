@@ -28,7 +28,7 @@ const FollowingSuggestions = () => {
       (user) =>
         user?.uid !== null &&
         user?.uid !== userUid &&
-        !userDetails?.following.some((following) => following?.uid === user.uid)
+        !userDetails?.following?.some((following) => following?.uid === user.uid)
     );
     setToFollow(users)
   }, [allUsers, userUid, userDetails?.following]);
@@ -43,7 +43,7 @@ const FollowingSuggestions = () => {
           }
         </div>
       </div>
-      <div className="md:block hidden col-span-1 ">
+      <div className="md:block hidden col-span-1">
         <StaffPicks />
       </div>
     </div>

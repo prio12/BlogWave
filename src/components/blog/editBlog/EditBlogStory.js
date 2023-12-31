@@ -50,8 +50,8 @@ const EditBlogStory = ({ selectedBlogData }) => {
             date,
           };
           console.log(description);
-          // dispatch(updateABlog(editedBlogData));
-          // setIsLoading(false);
+          dispatch(updateABlog(editedBlogData));
+          setIsLoading(false);
         }
       })
       .catch((err) => {

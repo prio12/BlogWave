@@ -14,9 +14,7 @@ const Admin = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const allUsers = useSelector((state) => state?.user?.allUsers);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
-  console.log(allUsers);
   const allBlogs = useSelector((state) => state?.blogs?.blogs);
-  console.log(allBlogs);
   const [activeContent, setActiveContent] = useState("users");
 
   const dispatch = useDispatch();
@@ -57,7 +55,7 @@ const Admin = () => {
             {allUsers
               ?.filter((user) => user.uid !== userUid)
               .map((user) => (
-                <div className="flex items-center mb-5 justify-between">
+                <div key={user?._id} className="flex items-center mb-5 justify-between">
                   <div className="flex items-center gap-5">
                     {user?.profilePic ? (
                       <img

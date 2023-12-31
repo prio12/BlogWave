@@ -68,28 +68,13 @@ const Header = () => {
                 Get Started
               </button>
             </Link>
-            {/* <button className="text-white" onClick={toggleDropdown}>
-              <BiMenu className="mr-1 text-black text-3xl" />
-            </button>
-            {isDropdownOpen && (
-              <div className="absolute bg-white mt-2 p-5 font-semibold rounded shadow-md right-0">
-                <Link to="/story" className="block text-black mb-1">
-                  Our Story
-                </Link>
-                <Link to="/signUp">
-                  <button className={`${scrolled ? "scrolled-button" : "nav-btn"}`}>
-                    Get Started
-                  </button>
-                </Link>
-              </div>
-            )} */}
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Link style={{ fontSize: "10px" }} to="/story">
+            <Link style={{ fontSize: "12px" }} to="/story">
               Our Story
             </Link>
-            <Link to="/signIn" style={{ fontSize: "10px" }}>
+            <Link to="/signIn" style={{ fontSize: "12px" }}>
               Sign In
             </Link>
             {user && (

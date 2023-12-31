@@ -14,7 +14,6 @@ const AdminChecker = ({ children }) => {
   }, [user, dispatch]);
   const loading = useSelector((state) => state?.user?.isLoading);
   const userDetails = useSelector((state) => state?.user?.userData);
-  console.log(userDetails);
 
   if (loading) {
     return <Loader />;

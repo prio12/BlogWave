@@ -19,7 +19,7 @@ const ToFollow = () => {
       (user) =>
         user?.uid !== null &&
         user?.uid !== userUid &&
-        !userDetails?.following.some((following) => following?.uid === user.uid)
+        !userDetails?.following?.some((following) => following?.uid === user.uid)
     );
     setToFollow(users);
   }, [allUsers, userUid, userDetails?.following]);

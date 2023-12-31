@@ -41,7 +41,7 @@ const UserTopics = ({ handleDisplayedContent, selectedTopic }) => {
             onClick={() => handleDisplayedContent(category)}
               key={index}
               style={{
-                fontSize: "10px",
+                fontSize: "12px",
                 color: value === index ? "black" : "inherit",
                 fontWeight:value === index ? "bold" : "normal",
                 // Set the active tab color to red

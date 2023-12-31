@@ -265,7 +265,7 @@ const VisitProfile = () => {
                 {user?.followers?.length > 1 ? (
                   <p
                     onClick={handleVisitProfileFromFollowers}
-                    style={{ fontSize: "10px" }}
+                    style={{ fontSize: "12px" }}
                     className="text-[#6b6b6b] font-semibold cursor-pointer"
                   >
                     {" "}
@@ -274,7 +274,7 @@ const VisitProfile = () => {
                 ) : (
                   <p
                     onClick={handleVisitProfileFromFollowers}
-                    style={{ fontSize: "10px" }}
+                    style={{ fontSize: "12px" }}
                     className="text-[#6b6b6b] font-semibold cursor-pointer"
                   >
                     {user?.followers?.length} Follower
@@ -284,7 +284,7 @@ const VisitProfile = () => {
             ) : (
               <div>
                 <p
-                  style={{ fontSize: "10px" }}
+                  style={{ fontSize: "12px" }}
                   className="text-[#6b6b6b] font-semibold cursor-not-allowed"
                 >
                   0 Followers
@@ -296,13 +296,13 @@ const VisitProfile = () => {
               <p
                 onClick={handleVisitProfileFromFollowing}
                 className="text-[#6b6b6b] font-semibold cursor-pointer"
-                style={{ fontSize: "10px" }}
+                style={{ fontSize: "12px" }}
               >
                 {user?.following?.length} Following
               </p>
             ) : (
               <p
-                style={{ fontSize: "10px" }}
+                style={{ fontSize: "12px" }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
                 0 Following
@@ -316,7 +316,7 @@ const VisitProfile = () => {
               {user?.followers?.length > 1 ? (
                 <p
                   onClick={handleVisitProfileFromFollowers}
-                  style={{ fontSize: "10px" }}
+                  style={{ fontSize: "12px" }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
                   {" "}
@@ -325,7 +325,7 @@ const VisitProfile = () => {
               ) : (
                 <p
                   onClick={handleVisitProfileFromFollowers}
-                  style={{ fontSize: "10px" }}
+                  style={{ fontSize: "12px" }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
                   {user?.followers?.length} Follower
@@ -335,7 +335,7 @@ const VisitProfile = () => {
           ) : (
             <div>
               <p
-                style={{ fontSize: "10px" }}
+                style={{ fontSize: "12px" }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
                 0 Followers
@@ -347,13 +347,13 @@ const VisitProfile = () => {
             <p
               onClick={handleVisitProfileFromFollowing}
               className="text-[#6b6b6b] font-semibold cursor-pointer"
-              style={{ fontSize: "10px" }}
+              style={{ fontSize: "12px" }}
             >
               {user?.following?.length} Following
             </p>
           ) : (
             <p
-              style={{ fontSize: "10px" }}
+              style={{ fontSize: "12px" }}
               className="text-[#6b6b6b] font-semibold cursor-not-allowed"
             >
               0 Following

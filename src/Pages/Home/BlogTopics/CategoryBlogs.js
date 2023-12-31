@@ -16,7 +16,6 @@ const CategoryBlogs = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs)
   const dispatch = useDispatch();
   const { category } = useParams();
-  console.log(category);
   let content;
   useEffect(() => {
     dispatch(fetchUserUpdatedData(userUid));

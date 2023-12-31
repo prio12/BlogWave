@@ -71,7 +71,7 @@ const SearchedUsers = ({ user }) => {
         <div className="md:flex lg:flex items-center gap-5">
           
           {
-            user?.profilePic ?  <img src={user?.profilePic} className="h-16 w-16 rounded" alt="" />
+            user?.profilePic ?  <img src={user?.profilePic} className="h-16 w-16 rounded-full" alt="" />
             :
             <CgProfile className="w-16 h-16 cursor-pointer" />
           }

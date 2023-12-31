@@ -100,6 +100,7 @@ const WriteBlog = () => {
     <div className="w-full md:w-1/2 p-5 m-auto">
       <form onSubmit={handleSubmit(submit)} className=" items-center">
         <div>
+          <div className="mb-5">
           <input
             {...register("title")}
             type="text"
@@ -107,6 +108,7 @@ const WriteBlog = () => {
             placeholder="Title"
             required
           />
+          </div>
           <input
             {...register("category")}
             type="text"

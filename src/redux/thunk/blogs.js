@@ -19,7 +19,7 @@ export const addBlogPost = (post) => {
   return async (dispatch) => {
     try {
       dispatch(startLoading());
-      const response = await fetch("http://localhost:5000/blogs", {
+      const response = await fetch("https://blog-wave-server-roan.vercel.app/blogs", {
         method: "POST",
         body: JSON.stringify(post),
         headers: {
@@ -46,7 +46,7 @@ export const addBlogPost = (post) => {
 export const fetchAllBlogs = () => {
   return async (dispatch) => {
     dispatch(startLoadingBlogs());
-    const res = await fetch("http://localhost:5000/blogs");
+    const res = await fetch("https://blog-wave-server-roan.vercel.app/blogs");
     const data = await res.json();
     // dispatch(stopLoading())
 
@@ -61,7 +61,7 @@ export const fetchSelectedBLogData = (_id) => {
   return async (dispatch) => {
     try {
       dispatch(startLoadingBlogs());
-      const response = await fetch(`http://localhost:5000/blogs/${_id}`);
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/blogs/${_id}`);
       const data = await response.json();
       if (data) {
         dispatch(stopLoadingBlogs());
@@ -78,7 +78,7 @@ export const fetchUserAllBlogs = (_id) => {
     dispatch(startLoadingBlogs());
     try {
       const response = await fetch(
-        `http://localhost:5000/blogs/myBlogs/${_id}`
+        `https://blog-wave-server-roan.vercel.app/blogs/myBlogs/${_id}`
       );
       const data = await response.json();
       if (data) {
@@ -95,7 +95,7 @@ export const updateABlog = (data) => {
     dispatch(startLoadingBlogs());
     try {
       const response = await fetch(
-        `http://localhost:5000/blogs/myBlogs/edit/${data._id}`,
+        `https://blog-wave-server-roan.vercel.app/blogs/myBlogs/edit/${data._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -114,11 +114,10 @@ export const updateABlog = (data) => {
 };
 
 export const updateAuthorData = (data) =>{
-  console.log(data);
   return async (dispatch) =>{
     dispatch(startLoadingBlogs());
     try {
-      const response = await fetch("http://localhost:5000/blogs/updateAuthorInfo",{
+      const response = await fetch("https://blog-wave-server-roan.vercel.app/blogs/updateAuthorInfo",{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify(data)
@@ -140,7 +139,7 @@ export const updateClapsCount = (_id,userUid) =>{
   // console.log(_id,userUid);
   return async (dispatch) =>{
     try {
-      const response = await fetch(`http://localhost:5000/blogs/blogDetails/likes/${_id}/${userUid}`,{
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/blogs/blogDetails/likes/${_id}/${userUid}`,{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
         
@@ -159,11 +158,10 @@ export const updateClapsCount = (_id,userUid) =>{
 export const deleteABLog = (_id) =>{
   return async (dispatch) =>{
     try {
-      const response = await fetch(`http://localhost:5000/delete/${_id}`, {
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/delete/${_id}`, {
         method:"DELETE",
       })
       const result = await response.json();
-      console.log(result);
       if (result) {
         dispatch(deleteBlog(_id))
       }
@@ -178,7 +176,7 @@ export const saveAsBookmarks = (selectedBlogData,userUid,action) =>{
   return async (dispatch) =>{
     try {
       dispatch(startLoading())
-      const response = await fetch(`http://localhost:5000/users/${userUid?.userUid}`,{
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/users/${userUid?.userUid}`,{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify({selectedBlogData,action})
@@ -200,7 +198,7 @@ export const addResponse = (responseDetails) =>{
   return async (dispatch) =>{
     try {
       // dispatch(startLoading())
-      const response = await fetch(`http://localhost:5000/blogs/selectedBLog/responses/${_id}`,{
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/blogs/selectedBLog/responses/${_id}`,{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify(responseDetails)
@@ -222,7 +220,7 @@ export const addPostToClap = (blog,userUid) =>{
   return async (dispatch) =>{
     try {
       // dispatch(startLoading())
-      const response = await fetch(`http://localhost:5000/users/${userUid?.userUid}`,{
+      const response = await fetch(`https://blog-wave-server-roan.vercel.app/users/${userUid?.userUid}`,{
         method:"PUT",
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify(blog)

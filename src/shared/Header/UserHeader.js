@@ -44,7 +44,6 @@ const UserHeader = () => {
     }
   }, [userDetails]); // Only run the effect when userDetails changes
 
-  console.log(unRead);
 
   if (!userDetails || isUpdateLoading) {
     return <Loader />;

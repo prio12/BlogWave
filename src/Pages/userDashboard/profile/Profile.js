@@ -155,7 +155,7 @@ const Profile = () => {
               {followers?.length > 1 ? (
                 <p
                   onClick={handleNavigateToFollowers}
-                  style={{ fontSize: "10px" }}
+                  style={{ fontSize: "12px" }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
                   {" "}
@@ -164,7 +164,7 @@ const Profile = () => {
               ) : (
                 <p
                   onClick={handleNavigateToFollowers}
-                  style={{ fontSize: "10px" }}
+                  style={{ fontSize: "12px" }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
                   {followers?.length} Follower
@@ -174,7 +174,7 @@ const Profile = () => {
           ) : (
             <div>
               <p
-                style={{ fontSize: "10px" }}
+                style={{ fontSize: "12px" }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
                 0 Followers
@@ -186,13 +186,13 @@ const Profile = () => {
             <p
               onClick={handleNavigateToFollowing}
               className="text-[#6b6b6b] font-semibold cursor-pointer"
-              style={{ fontSize: "10px" }}
+              style={{ fontSize: "12px" }}
             >
               {following?.length} Following
             </p>
           ) : (
             <p
-              style={{ fontSize: "10px" }}
+              style={{ fontSize: "12px" }}
               className="text-[#6b6b6b] font-semibold cursor-not-allowed"
             >
               0 Following
@@ -206,7 +206,7 @@ const Profile = () => {
               {followers?.length > 1 ? (
                 <p
                   onClick={handleNavigateToFollowers}
-                  style={{ fontSize: "10px" }}
+                  style={{ fontSize: "12px" }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
                   {" "}
@@ -215,7 +215,7 @@ const Profile = () => {
               ) : (
                 <p
                   onClick={handleNavigateToFollowers}
-                  style={{ fontSize: "10px" }}
+                  style={{ fontSize: "12px" }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
                   {followers?.length} Follower
@@ -225,7 +225,7 @@ const Profile = () => {
           ) : (
             <div>
               <p
-                style={{ fontSize: "10px" }}
+                style={{ fontSize: "12px" }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
                 0 Followers
@@ -237,13 +237,13 @@ const Profile = () => {
             <p
               onClick={handleNavigateToFollowing}
               className="text-[#6b6b6b] font-semibold cursor-pointer"
-              style={{ fontSize: "10px" }}
+              style={{ fontSize: "12px" }}
             >
               {following?.length} Following
             </p>
           ) : (
             <p
-              style={{ fontSize: "10px" }}
+              style={{ fontSize: "12px" }}
               className="text-[#6b6b6b] font-semibold cursor-not-allowed"
             >
               0 Following
