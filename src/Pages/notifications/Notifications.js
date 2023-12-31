@@ -170,10 +170,10 @@ const Notifications = () => {
                   </div>
                   <div className="w-3/4">
                     <Link to={`/visitProfile/${user?.uid}`}>
-                      <h5 className="text-xs font-bold">{user?.name}</h5>
+                      <h5 className="mb-1 font-bold">{user?.name}</h5>
                     </Link>
                     {user?.about && (
-                      <p style={{ fontSize: "10px" }}>
+                      <p style={{ fontSize: "12px" }}>
                         {user?.about.slice(0, 100) + "..."}
                       </p>
                     )}

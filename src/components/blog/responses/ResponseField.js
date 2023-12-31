@@ -36,8 +36,8 @@ const ResponseField = () => {
   return (
     <div className="p-2 my-5">
       <div className="flex items-center gap-3 ">
-        <img src={profilePic} alt="" className="h-8 w-8" />
-        <p>
+        <img src={profilePic} alt="" className="h-8 rounded-full w-8" />
+        <p className="font-bold">
           <small>{name}</small>
         </p>
       </div>

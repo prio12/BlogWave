@@ -213,7 +213,7 @@ const BlogDetails = () => {
             <img
               onClick={handleVisitProfile}
               src={authorImage}
-              className="h-12 cursor-pointer w-12 rounded"
+              className="h-12 cursor-pointer w-12 rounded-full"
               alt=""
             />
           ) : (
@@ -227,7 +227,7 @@ const BlogDetails = () => {
             <h5
               onClick={handleVisitProfile}
               style={{ fontSize: "12px" }}
-              className="font-semibold cursor-pointer"
+              className="font-bold cursor-pointer"
             >
               {author}
             </h5>
@@ -298,9 +298,8 @@ const BlogDetails = () => {
                   className={`absolute z-10 right-5 bg-white border shadow-lg  p-5 w-32}`}
                 >
                   <label
-                    style={{ fontSize: "10px" }}
                     htmlFor="my-drawer-4"
-                    className="drawer-button cursor-pointer"
+                    className="drawer-button font-bold cursor-pointer"
                   >
                     Edit
                   </label>
@@ -314,8 +313,7 @@ const BlogDetails = () => {
                   <div
                     // onClick={() => dispatch(deleteABLog(_id))}
                     onClick={() => handleDeleteABLog(_id)}
-                    style={{ fontSize: "10px" }}
-                    className="my-2 cursor-pointer "
+                    className="my-3 cursor-pointer font-bold "
                   >
                     <p>Delete</p>
                   </div>

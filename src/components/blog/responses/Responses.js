@@ -10,9 +10,9 @@ const Responses = ({response}) => {
             <div className='my-5'>
                <div className='flex items-center gap-3'>
                <img src={response.profilePic} className='h-6 w-6 rounded-full' alt="" />
-               <p style={{fontSize:"10px"}} className='font-semibold'>{response.name}</p>
+               <p style={{fontSize:"12px"}} className='font-bold'>{response.name}</p>
                </div>
-               <div style={{fontSize:"10px"}} className='p-2'>
+               <div className='p-2 text-sm'>
                 {
                    seeMoreStatus && <p>
                    {response.response.slice(0, 200)}

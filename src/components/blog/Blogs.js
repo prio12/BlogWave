@@ -18,6 +18,15 @@ const Blogs = ({ blog }) => {
     }
   };
 
+  const handleNavigate = (userUid) =>{
+    if (userUid === user) {
+      navigate('/profile')
+    }
+    else if (userUid !== user) {
+      navigate(`/visitProfile/${userUid}`)
+    }
+  }
+
   let readingTime;
 
   if ( characterCount < 1000) {
@@ -43,7 +52,7 @@ const Blogs = ({ blog }) => {
         {/* blog details div */}
         <div className="w-3/4">
           {pathname !== "/profile" && (
-            <div className="flex items-center mb-3  gap-2">
+            <div onClick={() => handleNavigate(blog?.userUid)} className="flex items-center mb-3  gap-2">
               {/* avatar */}
              
               {
@@ -61,7 +70,7 @@ const Blogs = ({ blog }) => {
             </div>
           )}
           <Link to={`/blogDetails/${blog?._id}`}>
-            {pathname === "/admin" && (
+            {/* {pathname === "/admin" && (
               <div className="flex items-center gap-2">
                 
                 {
@@ -73,7 +82,7 @@ const Blogs = ({ blog }) => {
                 }
                 <p className="text-xs font-semibold">{blog?.author}</p>
               </div>
-            )}
+            )} */}
             <h4 className="font-extrabold  mb-3">{blog?.title}</h4>
             {/* <p style={{ fontSize: "12px" }}>{blog?.description?.slice(0,200)+"..."}</p> */}
             <div className="text-sm hidden md:block lg:block"

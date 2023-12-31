@@ -60,7 +60,7 @@ const Admin = () => {
                     {user?.profilePic ? (
                       <img
                         src={user?.profilePic}
-                        className="w-12 h-12"
+                        className="w-12 h-12 rounded-full"
                         alt=""
                       />
                     ) : (

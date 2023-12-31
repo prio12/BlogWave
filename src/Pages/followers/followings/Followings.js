@@ -100,7 +100,7 @@ const Followings = () => {
         <div onClick={() => handleVisitProfile(myFollowing)} className="md:flex cursor-pointer lg:flex items-center gap-5">
           {/* <img src={myFollowing?.profilePic} className="h-16 w-16" alt="" /> */}
           {
-            myFollowing?.profilePic ? <img src={myFollowing?.profilePic} className="h-16 w-16" alt="" />
+            myFollowing?.profilePic ? <img src={myFollowing?.profilePic} className="h-16 w-16 rounded-full" alt="" />
              :
              <CgProfile
              className="w-16 h-16 cursor-pointer"
@@ -108,7 +108,7 @@ const Followings = () => {
             
           }
           <div className="my-3 md:my-0">
-            <p className="text-xs font-bold">{myFollowing?.name}</p>
+            <p className="mb-1 font-bold">{myFollowing?.name}</p>
             {myFollowing.about && (
               <p className="text-xs">{myFollowing.about.slice(0, 100)}...</p>
             )}
@@ -134,13 +134,13 @@ const Followings = () => {
         <div onClick={() => handleVisitProfile(visitUserFollowing)} className="md:flex lg:flex cursor-pointer items-center gap-5">
           {/* <img src={visitUserFollowing?.profilePic} className="h-16 w-16" alt="" /> */}
           {
-            visitUserFollowing?.profilePic ? <img src={visitUserFollowing?.profilePic} className="h-16 w-16" alt="" /> :
+            visitUserFollowing?.profilePic ? <img src={visitUserFollowing?.profilePic} className="h-16 w-16 rounded-full" alt="" /> :
             <CgProfile
               className="w-16 h-16 cursor-pointer"
             />
           }
           <div className="my-3 md:my-0">
-            <p className="text-xs font-bold">{visitUserFollowing?.name}</p>
+            <p className="mb-1 font-bold ">{visitUserFollowing?.name}</p>
             {visitUserFollowing.about && (
               <p className="text-xs">{visitUserFollowing.about.slice(0, 100)}...</p>
             )}

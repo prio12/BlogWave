@@ -111,14 +111,14 @@ const Followers = () => {
         >
           {/* <img src={follower?.profilePic} className="h-16 w-16" alt="" /> */}
           {
-            follower?.profilePic ? <img src={follower?.profilePic} className="h-16 rouded-full w-16" alt="" />
+            follower?.profilePic ? <img src={follower?.profilePic} className="h-16 rounded-full w-16" alt="" />
             :
             <CgProfile
              className="w-16 h-16 cursor-pointer"
            />
           }
           <div className="my-3 md:my-0">
-            <p className="text-xs font-bold">{follower?.name}</p>
+            <p className="mb-1 font-bold">{follower?.name}</p>
             {follower.about && (
               <p className="text-xs">{follower.about.slice(0, 100)}...</p>
             )}
@@ -179,7 +179,7 @@ const Followers = () => {
            />
           }
           <div className="my-3 md:my-0">
-            <p className="text-xs font-bold">{follower?.name}</p>
+            <p className="mb-1 font-bold">{follower?.name}</p>
             {follower.about && (
               <p className="text-xs">{follower.about.slice(0, 100)}...</p>
             )}
