@@ -3,13 +3,19 @@ import { AiFillFire } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../../loading/Loader";
 const Trending = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
+  const isLoading = useSelector((state) => state?.blogs?.isLoading)
   const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate("/signUp");
   };
+
+  if (isLoading) {
+    return <Loader/>
+  }
 
   return (
     <div className="pt-10 mb-12 md:px-12 w-full px-5">
