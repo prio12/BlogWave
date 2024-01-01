@@ -32,7 +32,7 @@ Feel free to explore, contribute, and let's ride the BlogWave together! 🚀🌊
 
 ## Connect with Me
 
-Let's connect on LinkedIn! [Your LinkedIn Profile](https://www.linkedin.com/in/maksudur-rahman-full-stack-developer/)
+Let's connect on LinkedIn! [LinkedIn Profile](https://www.linkedin.com/in/maksudur-rahman-full-stack-developer/)
 
 ---
 
