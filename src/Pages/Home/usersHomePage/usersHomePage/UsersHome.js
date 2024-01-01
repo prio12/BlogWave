@@ -3,16 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import Blogs from "../../../../components/blog/Blogs";
 import Loader from "../../../../loading/Loader";
 import { fetchAllBlogs } from "../../../../redux/thunk/blogs";
+import { fetchUserUpdatedData } from "../../../../redux/thunk/userAuth";
 
 const UsersHome = ({ category }) => {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state?.blogs?.blogs);
   const isLoading = useSelector((state) => state?.blogs?.isLoading);
-  
-
+  const userUid = useSelector((state) => state?.user?.user?.uid);
   useEffect(() => {
     dispatch(fetchAllBlogs());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchUserUpdatedData(userUid));
+  }, [dispatch, userUid]);
 
   let content;
 
