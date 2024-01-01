@@ -156,7 +156,7 @@ const VisitProfile = () => {
                   <div>
                     <FaRegFaceSadTear className="text-5xl my-2" />
                     <p className="text-xs font-semibold">
-                      Sorry! {user?.name} has not shared anything about him!
+                      Sorry! {user?.name} has not shared anything!
                     </p>
                   </div>
                 )}
