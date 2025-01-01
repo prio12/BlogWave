@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
-import Logo from "../../Assests/Blogwave.png";
-import SearchBar from "../../Pages/Home/usersHomePage/searchBar/SearchBar";
-import { BsPencilSquare } from "react-icons/bs";
-import { AiOutlineSearch } from "react-icons/ai";
-import { PiBookmarksLight, PiSignOutThin } from "react-icons/pi";
-import { FiUser } from "react-icons/fi";
-import { Link, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setNotificationStatus, signOutUser } from "../../redux/thunk/userAuth";
-import Loader from "../../loading/Loader";
-import { CgProfile } from "react-icons/cg";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { IoNotificationsSharp } from "react-icons/io5";
-import { RiAdminLine } from "react-icons/ri";
+import React, { useEffect, useState } from 'react';
+import Logo from '../../Assests/Blogwave.png';
+import SearchBar from '../../Pages/Home/usersHomePage/searchBar/SearchBar';
+import { BsPencilSquare } from 'react-icons/bs';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { PiBookmarksLight, PiSignOutThin } from 'react-icons/pi';
+import { FiUser } from 'react-icons/fi';
+import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotificationStatus, signOutUser } from '../../redux/thunk/userAuth';
+import Loader from '../../loading/Loader';
+import { CgProfile } from 'react-icons/cg';
+import { IoNotificationsOutline } from 'react-icons/io5';
+import { IoNotificationsSharp } from 'react-icons/io5';
+import { RiAdminLine } from 'react-icons/ri';
+import SkeletonLoader from '../../loading/SkeletonLoader';
 
 const UserHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,27 +34,26 @@ const UserHeader = () => {
   };
 
   const { pathname } = useLocation();
-  const isWriterBlogPage = pathname === "/writeBlog";
+  const isWriterBlogPage = pathname === '/writeBlog';
 
   useEffect(() => {
     if (userDetails && userDetails?.notifications) {
       const unreadNotifications = userDetails?.notifications.filter(
-        (notification) => notification.status === "unread"
+        (notification) => notification.status === 'unread'
       );
       setUnRead(unreadNotifications);
     }
   }, [userDetails]); // Only run the effect when userDetails changes
 
-
   if (!userDetails || isUpdateLoading) {
-    return <Loader />;
+    return <SkeletonLoader count={3} />;
   }
 
   const { profilePic } = userDetails;
 
   return (
     <div
-      style={{ borderBottom: "1px solid #F2F2F2" }}
+      style={{ borderBottom: '1px solid #F2F2F2' }}
       className="w-full flex items-center justify-between ps-0 pr-3 md:px-4"
     >
       <div className="flex gap-3 items-center">
@@ -76,7 +76,7 @@ const UserHeader = () => {
             </p>
           </Link>
         )}
-        {pathname === "/notifications" ? (
+        {pathname === '/notifications' ? (
           <IoNotificationsSharp />
         ) : (
           // <Link  onClick={() => dispatch(setNotificationStatus(user))} to="/notifications">
@@ -86,8 +86,9 @@ const UserHeader = () => {
           <div>
             {unRead?.length ? (
               <Link
-              onClick={() => dispatch(setNotificationStatus(user))}
-              to="/notifications">
+                onClick={() => dispatch(setNotificationStatus(user))}
+                to="/notifications"
+              >
                 <div class="relative">
                   <IoNotificationsOutline className="h-6 w-6" />
                   <div class="absolute top-0 right-0 bg-[#1A8917] text-white rounded-full w-4 h-4 flex items-center justify-center text-xs font-bold">
@@ -96,9 +97,7 @@ const UserHeader = () => {
                 </div>
               </Link>
             ) : (
-              <Link
-                to="/notifications"
-              >
+              <Link to="/notifications">
                 <IoNotificationsOutline />
               </Link>
             )}
@@ -137,16 +136,16 @@ const UserHeader = () => {
                     </p>
                   </Link>
                 </Link>
-                {
-                  userDetails?.role === "admin" && <Link className="flex mb-3 items-center gap-3">
-                  <RiAdminLine />
-                  <Link to="/admin">
-                    <p>
-                      <small>Admin</small>
-                    </p>
+                {userDetails?.role === 'admin' && (
+                  <Link className="flex mb-3 items-center gap-3">
+                    <RiAdminLine />
+                    <Link to="/admin">
+                      <p>
+                        <small>Admin</small>
+                      </p>
+                    </Link>
                   </Link>
-                </Link>
-                }
+                )}
                 <div
                   onClick={handleLogout}
                   className="flex cursor-pointer gap-3 items-center"

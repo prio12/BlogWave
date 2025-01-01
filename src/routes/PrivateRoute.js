@@ -1,7 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Loader from "../loading/Loader";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Loader from '../loading/Loader';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import SkeletonLoader from '../loading/SkeletonLoader';
 
 const PrivateRoute = ({ children }) => {
   const user = useSelector((state) => state?.user?.user?.uid);
@@ -9,7 +10,7 @@ const PrivateRoute = ({ children }) => {
   const navigate = useNavigate(); // Get the navigate function
 
   if (loading) {
-    return <Loader />; // Render the Loader when loading is true
+    return <SkeletonLoader count={3} />; // Render the Loader when loading is true
   }
 
   if (user) {
@@ -17,10 +18,10 @@ const PrivateRoute = ({ children }) => {
   }
 
   // Use navigate to redirect the user to another page
-  navigate("/signIn"); // Redirect to the signIn page
+  navigate('/signIn'); // Redirect to the signIn page
 
   // You can also return null here to prevent rendering anything
-//   return null;
+  //   return null;
 };
 
 export default PrivateRoute;

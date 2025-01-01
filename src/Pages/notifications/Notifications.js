@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
-import StaffPicks from "../Home/usersHomePage/staffPicksBlogs/StaffPicks";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import StaffPicks from '../Home/usersHomePage/staffPicksBlogs/StaffPicks';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchUserUpdatedData,
   follow,
   getAllUsers,
-} from "../../redux/thunk/userAuth";
-import { fetchAllBlogs } from "../../redux/thunk/blogs";
-import { Link, useLocation } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
-import FollowingSuggestions from "../suggestions/FollowingSuggestions";
-import Loader from "../../loading/Loader";
+} from '../../redux/thunk/userAuth';
+import { fetchAllBlogs } from '../../redux/thunk/blogs';
+import { Link, useLocation } from 'react-router-dom';
+import { CgProfile } from 'react-icons/cg';
+import FollowingSuggestions from '../suggestions/FollowingSuggestions';
+import Loader from '../../loading/Loader';
+import SkeletonLoader from '../../loading/SkeletonLoader';
 
 const Notifications = () => {
   const userDetails = useSelector((state) => state?.user?.userData);
   const userUid = useSelector((state) => state?.user?.user?.uid);
   const allUsers = useSelector((state) => state?.user?.allUsers);
-  const isLoading = useSelector((state)=> state?.user?.isUpdateLoading);
+  const isLoading = useSelector((state) => state?.user?.isUpdateLoading);
   const dispatch = useDispatch();
-  const [activeContent, setActiveContent] = useState("notifications");
+  const [activeContent, setActiveContent] = useState('notifications');
   const [toFollow, setToFollow] = useState([]);
   const toggleContent = (content) => {
     setActiveContent(content);
@@ -43,7 +44,9 @@ const Notifications = () => {
       (user) =>
         user?.uid !== null &&
         user?.uid !== userUid &&
-        !userDetails?.following?.some((following) => following?.uid === user.uid)
+        !userDetails?.following?.some(
+          (following) => following?.uid === user.uid
+        )
     );
     setToFollow(users);
   }, [allUsers, userUid, userDetails?.following]);
@@ -65,7 +68,7 @@ const Notifications = () => {
     const relationshipInfo = {
       following,
       follower,
-      action: "follow",
+      action: 'follow',
     };
 
     dispatch(follow(relationshipInfo));
@@ -101,12 +104,12 @@ const Notifications = () => {
               <p className="text-xs">
                 <small>
                   {notification
-                    ? new Date(notification.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
+                    ? new Date(notification.date).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
                       })
-                    : ""}{" "}
+                    : ''}{' '}
                   ·
                 </small>
               </p>
@@ -123,36 +126,36 @@ const Notifications = () => {
   }
 
   if (isLoading) {
-    return <Loader/>
+    return <SkeletonLoader count={3} />;
   }
-  
+
   return (
     <div className="px-8 py-5 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-5">
       <div className="md:col-span-2">
         {/* {content} */}
         <div className="flex items-center mb-5 gap-5">
           <p
-            onClick={() => toggleContent("notifications")}
+            onClick={() => toggleContent('notifications')}
             className={`text-xs cursor-pointer ${
-              activeContent === "notifications" && "underline"
+              activeContent === 'notifications' && 'underline'
             }`}
           >
             Notifications
           </p>
           <p
-            onClick={() => toggleContent("Suggestions")}
+            onClick={() => toggleContent('Suggestions')}
             className={`text-xs cursor-pointer ${
-              activeContent === "Suggestions" && "underline"
+              activeContent === 'Suggestions' && 'underline'
             }`}
           >
             Suggestions
           </p>
         </div>
-        {activeContent === "notifications" && <div>{content}</div>}
-        {activeContent === "Suggestions" && (
+        {activeContent === 'notifications' && <div>{content}</div>}
+        {activeContent === 'Suggestions' && (
           <div>
             <div>
-            <h4 className="font-bold text-xs my-5">Who to follow</h4>
+              <h4 className="font-bold text-xs my-5">Who to follow</h4>
               {toFollow?.map((user) => (
                 <div className="my-5 flex items-center gap-3" key={user._id}>
                   <div>
@@ -173,8 +176,8 @@ const Notifications = () => {
                       <h5 className="mb-1 font-bold">{user?.name}</h5>
                     </Link>
                     {user?.about && (
-                      <p style={{ fontSize: "12px" }}>
-                        {user?.about.slice(0, 100) + "..."}
+                      <p style={{ fontSize: '12px' }}>
+                        {user?.about.slice(0, 100) + '...'}
                       </p>
                     )}
                   </div>
@@ -182,12 +185,12 @@ const Notifications = () => {
                     onClick={() => handleFollowBtn(user)}
                     className="btn btn-xs md:mb-0 lg:mb-0"
                     style={{
-                      backgroundColor: "#1A8917",
-                      color: "white",
-                      textTransform: "none",
-                      "&:hover": {
-                        backgroundColor: "#1A8917",
-                        textTransform: "none",
+                      backgroundColor: '#1A8917',
+                      color: 'white',
+                      textTransform: 'none',
+                      '&:hover': {
+                        backgroundColor: '#1A8917',
+                        textTransform: 'none',
                       },
                     }}
                   >

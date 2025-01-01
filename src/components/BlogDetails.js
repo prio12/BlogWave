@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addPostToClap,
   deleteABLog,
@@ -7,26 +7,27 @@ import {
   fetchSelectedBLogData,
   saveAsBookmarks,
   updateClapsCount,
-} from "../redux/thunk/blogs";
-import Loader from "../loading/Loader";
-import { PiHandsClappingLight } from "react-icons/pi";
-import { FaRegComment } from "react-icons/fa";
-import { FaHandsClapping } from "react-icons/fa6";
-import { MdOutlineBookmarkAdd } from "react-icons/md";
-import { useNavigate, useParams } from "react-router-dom";
-import { GrLinkPrevious } from "react-icons/gr";
-import { FiMoreHorizontal } from "react-icons/fi";
-import { fetchUserUpdatedData, getAllUsers } from "../redux/thunk/userAuth";
-import { RxCross1 } from "react-icons/rx";
-import { BsFillBookmarkCheckFill } from "react-icons/bs";
-import EditBlogStory from "./blog/editBlog/EditBlogStory";
+} from '../redux/thunk/blogs';
+import Loader from '../loading/Loader';
+import { PiHandsClappingLight } from 'react-icons/pi';
+import { FaRegComment } from 'react-icons/fa';
+import { FaHandsClapping } from 'react-icons/fa6';
+import { MdOutlineBookmarkAdd } from 'react-icons/md';
+import { useNavigate, useParams } from 'react-router-dom';
+import { GrLinkPrevious } from 'react-icons/gr';
+import { FiMoreHorizontal } from 'react-icons/fi';
+import { fetchUserUpdatedData, getAllUsers } from '../redux/thunk/userAuth';
+import { RxCross1 } from 'react-icons/rx';
+import { BsFillBookmarkCheckFill } from 'react-icons/bs';
+import EditBlogStory from './blog/editBlog/EditBlogStory';
 import {
   DELETE_BLOG_FLAG,
   SET_UPDATE_SUCCESS_FLAG,
-} from "../redux/actionTypes/actionTypes";
-import ResponseField from "./blog/responses/ResponseField";
-import DOMPurify from "dompurify";
-import { CgProfile } from "react-icons/cg";
+} from '../redux/actionTypes/actionTypes';
+import ResponseField from './blog/responses/ResponseField';
+import DOMPurify from 'dompurify';
+import { CgProfile } from 'react-icons/cg';
+import SkeletonLoader from '../loading/SkeletonLoader';
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -61,14 +62,14 @@ const BlogDetails = () => {
   }, [dispatch, user]);
   useEffect(() => {
     if (updateSuccess) {
-      navigate("/profile");
+      navigate('/profile');
       dispatch({ type: SET_UPDATE_SUCCESS_FLAG, payload: false });
     }
   }, [dispatch, navigate, updateSuccess]);
 
   useEffect(() => {
     if (isDeleted) {
-      navigate("/profile");
+      navigate('/profile');
       dispatch({ type: DELETE_BLOG_FLAG, payload: false });
     }
   }, [dispatch, isDeleted, navigate]);
@@ -81,7 +82,7 @@ const BlogDetails = () => {
       saveAsBookmarks(
         { selectedBlogData: selectedBlogData },
         { userUid: user },
-        { action: "Bookmark" }
+        { action: 'Bookmark' }
       )
     );
   };
@@ -91,7 +92,7 @@ const BlogDetails = () => {
       saveAsBookmarks(
         { selectedBlogData: selectedBlogData },
         { userUid: user },
-        { action: "RemoveBookmark" }
+        { action: 'RemoveBookmark' }
       )
     );
   };
@@ -108,23 +109,23 @@ const BlogDetails = () => {
   const handleVisitProfile = () => {
     // comparing currently loggedIn user.uid to selecedBlog author Uid
     if (user === userUid) {
-      navigate("/profile");
+      navigate('/profile');
     } else if (user !== userUid) {
       navigate(`/visitProfile/${userUid}`);
     }
   };
 
   if (!userData || isUpdateLoading) {
-    return <Loader />;
+    return <SkeletonLoader count={3} />;
   }
   const bookmarks = userData?.bookmarks;
 
   if (!selectedBlogData || isLoading) {
-    return <Loader />;
+    return <SkeletonLoader count={3} />;
   }
 
   if (isLoading) {
-    return <Loader />;
+    return <SkeletonLoader count={3} />;
   }
 
   const {
@@ -147,22 +148,17 @@ const BlogDetails = () => {
   const characterCount = sanitizedDescription.length;
   let readingTime;
 
-  if ( characterCount < 1000) {
-    readingTime = <span>· 2 min read .</span>
+  if (characterCount < 1000) {
+    readingTime = <span>· 2 min read .</span>;
+  } else if (characterCount > 1000 && characterCount < 1500) {
+    readingTime = <span>· 3 min read .</span>;
+  } else if (characterCount > 1500 && characterCount < 2000) {
+    readingTime = <span>· 5 min read .</span>;
+  } else if (characterCount > 2000 && characterCount < 3000) {
+    readingTime = <span>· 7 min read .</span>;
+  } else if (characterCount > 2000 && characterCount < 5000) {
+    readingTime = <span>· 10 min read .</span>;
   }
-  else if ( characterCount > 1000 && characterCount <1500) {
-    readingTime = <span>· 3 min read .</span>
-  }
-  else if ( characterCount > 1500 && characterCount <2000) {
-    readingTime = <span>· 5 min read .</span>
-  }
-  else if ( characterCount > 2000  && characterCount <3000) {
-    readingTime = <span>· 7 min read .</span>
-  }
-  else if ( characterCount > 2000 && characterCount <5000) {
-    readingTime = <span>· 10 min read .</span>
-  }
-
 
   return (
     <div className="p-5 ">
@@ -226,15 +222,15 @@ const BlogDetails = () => {
           <div>
             <h5
               onClick={handleVisitProfile}
-              style={{ fontSize: "12px" }}
+              style={{ fontSize: '12px' }}
               className="font-bold cursor-pointer"
             >
               {author}
             </h5>
-            <small style={{ fontSize: "10px" }} className="mr-3">
+            <small style={{ fontSize: '10px' }} className="mr-3">
               {readingTime}
             </small>
-            <small style={{ fontSize: "10px" }}>12th August</small>
+            <small style={{ fontSize: '10px' }}>12th August</small>
           </div>
         </div>
         <div className="flex my-3 justify-between items-center">
@@ -288,13 +284,13 @@ const BlogDetails = () => {
                   onClick={handleMoreOptionModal}
                   title="More"
                   className={`cursor-pointer text-xl ${
-                    responseBarStatus && "hidden"
+                    responseBarStatus && 'hidden'
                   }`}
                 />
               )}
               {isOpen && (
                 <div
-                  style={{ fontSize: "10px" }}
+                  style={{ fontSize: '10px' }}
                   className={`absolute z-10 right-5 bg-white border shadow-lg  p-5 w-32}`}
                 >
                   <label
@@ -339,12 +335,12 @@ const BlogDetails = () => {
             </div>
           </div>
         </div>
-        <img src={image} style={{ height: "30%" }} alt="" />
+        <img src={image} style={{ height: '30%' }} alt="" />
         {/* <p className="my-5 border border-dark p-2">{description}</p> */}
         <div
-      className="my-5 border border-dark p-2 font-serif" // Use Tailwind font-serif class
-      dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
-    />
+          className="my-5 border border-dark p-2 font-serif" // Use Tailwind font-serif class
+          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+        />
         <GrLinkPrevious
           className="cursor-pointer"
           onClick={handleNavigate}

@@ -1,26 +1,27 @@
-import React from "react";
-import { AiFillFire } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import Loader from "../../../loading/Loader";
+import React from 'react';
+import { AiFillFire } from 'react-icons/ai';
+import { CgProfile } from 'react-icons/cg';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../../../loading/Loader';
+import SkeletonLoader from '../../../loading/SkeletonLoader';
 const Trending = () => {
   const blogs = useSelector((state) => state?.blogs?.blogs);
-  const isLoading = useSelector((state) => state?.blogs?.isLoading)
+  const isLoading = useSelector((state) => state?.blogs?.isLoading);
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/signUp");
+    navigate('/signUp');
   };
 
   if (isLoading) {
-    return <Loader/>
+    return <SkeletonLoader count={3} />;
   }
 
   return (
     <div className="pt-10 mb-12 md:px-12 w-full px-5">
       <h5
-        style={{ fontSize: "16px" }}
+        style={{ fontSize: '16px' }}
         className="flex gap-1  font-bold items-center"
       >
         <AiFillFire /> Hottest Articles Now
@@ -45,14 +46,14 @@ const Trending = () => {
                 ) : (
                   <CgProfile className="w-6 h-6 border rounded-full cursor-pointer" />
                 )}
-                <h5 style={{ fontSize: "12px" }} className="font-bold">
+                <h5 style={{ fontSize: '12px' }} className="font-bold">
                   {blog?.author}
                 </h5>
               </div>
-              <h4 style={{ fontSize: "16px" }} className="font-extrabold mt-2">
+              <h4 style={{ fontSize: '16px' }} className="font-extrabold mt-2">
                 {blog?.title}
               </h4>
-              <p style={{fontSize:"10px"}} className=" mt-2">
+              <p style={{ fontSize: '10px' }} className=" mt-2">
                 {blog?.description?.length && (
                   <>
                     {blog.description.length < 1000 && (

@@ -1,18 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import { MdEdit } from "react-icons/md";
-import ProfilePicModal from "../modal/ProfilePicModal";
-import { useDispatch, useSelector } from "react-redux";
-import UserNameModal from "../modal/UserNameModal";
-import UserAbout from "./UserAbout";
-import Loader from "../../../loading/Loader";
+import React, { useEffect, useRef, useState } from 'react';
+import { MdEdit } from 'react-icons/md';
+import ProfilePicModal from '../modal/ProfilePicModal';
+import { useDispatch, useSelector } from 'react-redux';
+import UserNameModal from '../modal/UserNameModal';
+import UserAbout from './UserAbout';
+import Loader from '../../../loading/Loader';
 import {
   fetchUserUpdatedData,
   getAllUsers,
-} from "../../../redux/thunk/userAuth";
-import { CgProfile } from "react-icons/cg";
-import { fetchUserAllBlogs } from "../../../redux/thunk/blogs";
-import { Link, useNavigate } from "react-router-dom";
-import Blogs from "../../../components/blog/Blogs";
+} from '../../../redux/thunk/userAuth';
+import { CgProfile } from 'react-icons/cg';
+import { fetchUserAllBlogs } from '../../../redux/thunk/blogs';
+import { Link, useNavigate } from 'react-router-dom';
+import Blogs from '../../../components/blog/Blogs';
+import SkeletonLoader from '../../../loading/SkeletonLoader';
 
 const Profile = () => {
   const userDetails = useSelector((state) => state?.user?.userData);
@@ -37,14 +38,14 @@ const Profile = () => {
 
   const handleNavigateToFollowers = (event) => {
     // event.stopPropagation();
-    console.log("Navigating with state");
-    navigate(`/followers/${userDetails?.uid}`, { state: { from: "/profile" } });
+    console.log('Navigating with state');
+    navigate(`/followers/${userDetails?.uid}`, { state: { from: '/profile' } });
   };
 
   const handleNavigateToFollowing = () => {
-    navigate(`/following/${userDetails?.uid}`, { state: { from: "/profile" } });
+    navigate(`/following/${userDetails?.uid}`, { state: { from: '/profile' } });
   };
-  const [activeContent, setActiveContent] = useState("home");
+  const [activeContent, setActiveContent] = useState('home');
   // const textareaRef = useRef();
 
   const toggleContent = (content) => {
@@ -52,11 +53,11 @@ const Profile = () => {
   };
   // console.log(image);
   const openImageModal = () => {
-    document.getElementById("profile_pic_modal").showModal();
+    document.getElementById('profile_pic_modal').showModal();
   };
 
   const openNameModal = () => {
-    document.getElementById("user_name").showModal();
+    document.getElementById('user_name').showModal();
   };
 
   let content;
@@ -67,7 +68,7 @@ const Profile = () => {
         <p>You have not written any blog!</p>
         <Link
           to="/writeBlog"
-          style={{ fontSize: "12px" }}
+          style={{ fontSize: '12px' }}
           className="text-[#1A8917] "
         >
           Write now?
@@ -77,19 +78,17 @@ const Profile = () => {
   }
 
   if (isLoading) {
-    content = <Loader />;
+    content = <SkeletonLoader count={3} />;
   }
 
   if (userBLogs.length) {
     content = userBLogs
-    .sort((a,b) => new Date(b.date) - new Date(a.date))
-    .map((blog) => (
-      <Blogs key={blog?._id} blog={blog}></Blogs>
-    ));
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .map((blog) => <Blogs key={blog?._id} blog={blog}></Blogs>);
   }
 
   if (!userDetails || isUpdateLoading) {
-    return <Loader />;
+    return <SkeletonLoader count={3} />;
   }
 
   const { profilePic, name, followers, following } = userDetails;
@@ -100,25 +99,25 @@ const Profile = () => {
         <div>
           <h3 className="text-4xl hidden md:block font-bold">{name}</h3>
         </div>
-        <div style={{ fontSize: "12px" }} className="flex my-7 gap-7">
+        <div style={{ fontSize: '12px' }} className="flex my-7 gap-7">
           <p
-            style={{ cursor: "pointer" }}
-            className={` ${activeContent === "home" && "underline"}`}
-            onClick={() => toggleContent("home")}
+            style={{ cursor: 'pointer' }}
+            className={` ${activeContent === 'home' && 'underline'}`}
+            onClick={() => toggleContent('home')}
           >
             Home
           </p>
           <p
-            className={`${activeContent === "about" && "underline"}`}
-            style={{ cursor: "pointer" }}
-            onClick={() => toggleContent("about")}
+            className={`${activeContent === 'about' && 'underline'}`}
+            style={{ cursor: 'pointer' }}
+            onClick={() => toggleContent('about')}
           >
             About
           </p>
         </div>
         <div>
-          {activeContent === "home" && <div>{content}</div>}
-          {activeContent === "about" && (
+          {activeContent === 'home' && <div>{content}</div>}
+          {activeContent === 'about' && (
             <div>
               <UserAbout />
             </div>
@@ -145,60 +144,60 @@ const Profile = () => {
           )}
         </div>
         <div>
-        <div className="flex gap-2 items-center">
-          <p className="font-bold">{name}</p>
-          <MdEdit className="cursor-pointer" onClick={openNameModal} />
-        </div>
-        <div className="md:hidden flex items-center gap-2">
-          {followers?.length ? (
-            <div>
-              {followers?.length > 1 ? (
+          <div className="flex gap-2 items-center">
+            <p className="font-bold">{name}</p>
+            <MdEdit className="cursor-pointer" onClick={openNameModal} />
+          </div>
+          <div className="md:hidden flex items-center gap-2">
+            {followers?.length ? (
+              <div>
+                {followers?.length > 1 ? (
+                  <p
+                    onClick={handleNavigateToFollowers}
+                    style={{ fontSize: '12px' }}
+                    className="text-[#6b6b6b] font-semibold cursor-pointer"
+                  >
+                    {' '}
+                    {followers?.length} Followers
+                  </p>
+                ) : (
+                  <p
+                    onClick={handleNavigateToFollowers}
+                    style={{ fontSize: '12px' }}
+                    className="text-[#6b6b6b] font-semibold cursor-pointer"
+                  >
+                    {followers?.length} Follower
+                  </p>
+                )}
+              </div>
+            ) : (
+              <div>
                 <p
-                  onClick={handleNavigateToFollowers}
-                  style={{ fontSize: "12px" }}
-                  className="text-[#6b6b6b] font-semibold cursor-pointer"
+                  style={{ fontSize: '12px' }}
+                  className="text-[#6b6b6b] font-semibold cursor-not-allowed"
                 >
-                  {" "}
-                  {followers?.length} Followers
+                  0 Followers
                 </p>
-              ) : (
-                <p
-                  onClick={handleNavigateToFollowers}
-                  style={{ fontSize: "12px" }}
-                  className="text-[#6b6b6b] font-semibold cursor-pointer"
-                >
-                  {followers?.length} Follower
-                </p>
-              )}
-            </div>
-          ) : (
-            <div>
+              </div>
+            )}
+            <p>|</p>
+            {following?.length ? (
               <p
-                style={{ fontSize: "12px" }}
+                onClick={handleNavigateToFollowing}
+                className="text-[#6b6b6b] font-semibold cursor-pointer"
+                style={{ fontSize: '12px' }}
+              >
+                {following?.length} Following
+              </p>
+            ) : (
+              <p
+                style={{ fontSize: '12px' }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
-                0 Followers
+                0 Following
               </p>
-            </div>
-          )}
-          <p>|</p>
-          {following?.length ? (
-            <p
-              onClick={handleNavigateToFollowing}
-              className="text-[#6b6b6b] font-semibold cursor-pointer"
-              style={{ fontSize: "12px" }}
-            >
-              {following?.length} Following
-            </p>
-          ) : (
-            <p
-              style={{ fontSize: "12px" }}
-              className="text-[#6b6b6b] font-semibold cursor-not-allowed"
-            >
-              0 Following
-            </p>
-          )}
-        </div>
+            )}
+          </div>
         </div>
         <div className="md:flex hidden items-center gap-2">
           {followers?.length ? (
@@ -206,16 +205,16 @@ const Profile = () => {
               {followers?.length > 1 ? (
                 <p
                   onClick={handleNavigateToFollowers}
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: '12px' }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
-                  {" "}
+                  {' '}
                   {followers?.length} Followers
                 </p>
               ) : (
                 <p
                   onClick={handleNavigateToFollowers}
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: '12px' }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
                   {followers?.length} Follower
@@ -225,7 +224,7 @@ const Profile = () => {
           ) : (
             <div>
               <p
-                style={{ fontSize: "12px" }}
+                style={{ fontSize: '12px' }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
                 0 Followers
@@ -237,13 +236,13 @@ const Profile = () => {
             <p
               onClick={handleNavigateToFollowing}
               className="text-[#6b6b6b] font-semibold cursor-pointer"
-              style={{ fontSize: "12px" }}
+              style={{ fontSize: '12px' }}
             >
               {following?.length} Following
             </p>
           ) : (
             <p
-              style={{ fontSize: "12px" }}
+              style={{ fontSize: '12px' }}
               className="text-[#6b6b6b] font-semibold cursor-not-allowed"
             >
               0 Following

@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchUserUpdatedData,
   follow,
   getAllUsers,
-} from "../../redux/thunk/userAuth";
-import { FaRegFaceSadTear } from "react-icons/fa6";
-import { fetchAllBlogs, fetchUserAllBlogs } from "../../redux/thunk/blogs";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import Loader from "../../loading/Loader";
-import Blogs from "../blog/Blogs";
-import { CgProfile } from "react-icons/cg";
+} from '../../redux/thunk/userAuth';
+import { FaRegFaceSadTear } from 'react-icons/fa6';
+import { fetchAllBlogs, fetchUserAllBlogs } from '../../redux/thunk/blogs';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import Loader from '../../loading/Loader';
+import Blogs from '../blog/Blogs';
+import { CgProfile } from 'react-icons/cg';
+import SkeletonLoader from '../../loading/SkeletonLoader';
 
 const VisitProfile = () => {
   const userUid = useSelector((state) => state?.user?.user?.uid);
@@ -25,7 +26,7 @@ const VisitProfile = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
-  const [activeContent, setActiveContent] = useState("home");
+  const [activeContent, setActiveContent] = useState('home');
 
   useEffect(() => {
     setUser(allUser?.find((userDetails) => userDetails?.uid === id));
@@ -77,7 +78,7 @@ const VisitProfile = () => {
     const relationshipInfo = {
       following,
       follower,
-      action: "follow",
+      action: 'follow',
     };
 
     dispatch(follow(relationshipInfo));
@@ -99,9 +100,9 @@ const VisitProfile = () => {
     const relationshipInfo = {
       following,
       follower,
-      action: "unFollow",
+      action: 'unFollow',
     };
-    console.log(relationshipInfo);
+    // console.log(relationshipInfo);
     dispatch(follow(relationshipInfo));
   };
 
@@ -114,7 +115,7 @@ const VisitProfile = () => {
   }
 
   if (isLoading) {
-    content = <Loader />;
+    content = <SkeletonLoader count={3} />;
   }
 
   if (userBLogs.length) {
@@ -129,25 +130,25 @@ const VisitProfile = () => {
         <div>
           <h3 className="text-4xl hidden md:block font-bold">{user?.name}</h3>
         </div>
-        <div style={{ fontSize: "12px" }} className="flex my-7 gap-7">
+        <div style={{ fontSize: '12px' }} className="flex my-7 gap-7">
           <p
-            style={{ cursor: "pointer" }}
-            className={` ${activeContent === "home" && "underline"}`}
-            onClick={() => toggleContent("home")}
+            style={{ cursor: 'pointer' }}
+            className={` ${activeContent === 'home' && 'underline'}`}
+            onClick={() => toggleContent('home')}
           >
             Home
           </p>
           <p
-            className={`${activeContent === "about" && "underline"}`}
-            style={{ cursor: "pointer" }}
-            onClick={() => toggleContent("about")}
+            className={`${activeContent === 'about' && 'underline'}`}
+            style={{ cursor: 'pointer' }}
+            onClick={() => toggleContent('about')}
           >
             About
           </p>
         </div>
         <div>
-          {activeContent === "home" && <div>{content}</div>}
-          {activeContent === "about" && (
+          {activeContent === 'home' && <div>{content}</div>}
+          {activeContent === 'about' && (
             <div className="border-b-2 border-black">
               <div className=" md:border-r-2 text-justify pr-2 text-xs border-r-0 w-full">
                 {user?.about ? (
@@ -169,7 +170,7 @@ const VisitProfile = () => {
                         onClick={handleVisitProfileFromFollowers}
                         className=" cursor-pointer"
                       >
-                        {" "}
+                        {' '}
                         {user?.followers?.length} Followers
                       </p>
                     ) : (
@@ -184,7 +185,7 @@ const VisitProfile = () => {
                 ) : (
                   <div>
                     <p
-                      style={{ fontSize: "10px" }}
+                      style={{ fontSize: '10px' }}
                       className="cursor-not-allowed"
                     >
                       0 Followers
@@ -216,10 +217,10 @@ const VisitProfile = () => {
             onClick={handleUnfollowBtn}
             className="btn w-full  md:mb-0 lg:mb-0"
             style={{
-              backgroundColor: "transparent", // Set background to transparent
-              color: "#1A8917", // Set text color to red
-              border: "1px solid #1A8917", // Add a red border
-              textTransform: "none",
+              backgroundColor: 'transparent', // Set background to transparent
+              color: '#1A8917', // Set text color to red
+              border: '1px solid #1A8917', // Add a red border
+              textTransform: 'none',
             }}
           >
             Unfollow
@@ -229,12 +230,12 @@ const VisitProfile = () => {
             onClick={handleFollowBtn}
             className="btn w-full  md:mb-0 lg:mb-0"
             style={{
-              backgroundColor: "#1A8917",
-              color: "white",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: "#1A8917",
-                textTransform: "none",
+              backgroundColor: '#1A8917',
+              color: 'white',
+              textTransform: 'none',
+              '&:hover': {
+                backgroundColor: '#1A8917',
+                textTransform: 'none',
               },
             }}
           >
@@ -252,9 +253,7 @@ const VisitProfile = () => {
               alt=""
             />
           ) : (
-            <CgProfile
-              className="w-16 h-16 cursor-pointer"
-            />
+            <CgProfile className="w-16 h-16 cursor-pointer" />
           )}
         </div>
         <div>
@@ -265,16 +264,16 @@ const VisitProfile = () => {
                 {user?.followers?.length > 1 ? (
                   <p
                     onClick={handleVisitProfileFromFollowers}
-                    style={{ fontSize: "12px" }}
+                    style={{ fontSize: '12px' }}
                     className="text-[#6b6b6b] font-semibold cursor-pointer"
                   >
-                    {" "}
+                    {' '}
                     {user?.followers?.length} Followers
                   </p>
                 ) : (
                   <p
                     onClick={handleVisitProfileFromFollowers}
-                    style={{ fontSize: "12px" }}
+                    style={{ fontSize: '12px' }}
                     className="text-[#6b6b6b] font-semibold cursor-pointer"
                   >
                     {user?.followers?.length} Follower
@@ -284,7 +283,7 @@ const VisitProfile = () => {
             ) : (
               <div>
                 <p
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: '12px' }}
                   className="text-[#6b6b6b] font-semibold cursor-not-allowed"
                 >
                   0 Followers
@@ -296,13 +295,13 @@ const VisitProfile = () => {
               <p
                 onClick={handleVisitProfileFromFollowing}
                 className="text-[#6b6b6b] font-semibold cursor-pointer"
-                style={{ fontSize: "12px" }}
+                style={{ fontSize: '12px' }}
               >
                 {user?.following?.length} Following
               </p>
             ) : (
               <p
-                style={{ fontSize: "12px" }}
+                style={{ fontSize: '12px' }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
                 0 Following
@@ -316,16 +315,16 @@ const VisitProfile = () => {
               {user?.followers?.length > 1 ? (
                 <p
                   onClick={handleVisitProfileFromFollowers}
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: '12px' }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
-                  {" "}
+                  {' '}
                   {user?.followers?.length} Followers
                 </p>
               ) : (
                 <p
                   onClick={handleVisitProfileFromFollowers}
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: '12px' }}
                   className="text-[#6b6b6b] font-semibold cursor-pointer"
                 >
                   {user?.followers?.length} Follower
@@ -335,7 +334,7 @@ const VisitProfile = () => {
           ) : (
             <div>
               <p
-                style={{ fontSize: "12px" }}
+                style={{ fontSize: '12px' }}
                 className="text-[#6b6b6b] font-semibold cursor-not-allowed"
               >
                 0 Followers
@@ -347,13 +346,13 @@ const VisitProfile = () => {
             <p
               onClick={handleVisitProfileFromFollowing}
               className="text-[#6b6b6b] font-semibold cursor-pointer"
-              style={{ fontSize: "12px" }}
+              style={{ fontSize: '12px' }}
             >
               {user?.following?.length} Following
             </p>
           ) : (
             <p
-              style={{ fontSize: "12px" }}
+              style={{ fontSize: '12px' }}
               className="text-[#6b6b6b] font-semibold cursor-not-allowed"
             >
               0 Following
@@ -368,10 +367,10 @@ const VisitProfile = () => {
               onClick={handleUnfollowBtn}
               className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
               style={{
-                backgroundColor: "transparent", // Set background to transparent
-                color: "#1A8917", // Set text color to red
-                border: "1px solid #1A8917", // Add a red border
-                textTransform: "none",
+                backgroundColor: 'transparent', // Set background to transparent
+                color: '#1A8917', // Set text color to red
+                border: '1px solid #1A8917', // Add a red border
+                textTransform: 'none',
               }}
             >
               Unfollow
@@ -381,12 +380,12 @@ const VisitProfile = () => {
               onClick={handleFollowBtn}
               className="btn btn-xs mb-12 md:mb-0 lg:mb-0"
               style={{
-                backgroundColor: "#1A8917",
-                color: "white",
-                textTransform: "none",
-                "&:hover": {
-                  backgroundColor: "#1A8917",
-                  textTransform: "none",
+                backgroundColor: '#1A8917',
+                color: 'white',
+                textTransform: 'none',
+                '&:hover': {
+                  backgroundColor: '#1A8917',
+                  textTransform: 'none',
                 },
               }}
             >

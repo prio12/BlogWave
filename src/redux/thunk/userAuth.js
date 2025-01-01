@@ -7,8 +7,8 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-} from "firebase/auth";
-import { auth } from "../../firebase/firebase.config";
+} from 'firebase/auth';
+import { auth } from '../../firebase/firebase.config';
 import {
   createUserWithEmailPass,
   fetchAllUsers,
@@ -22,13 +22,13 @@ import {
   stopLoading,
   stopLoadingUpdatedUser,
   updateUserDetails,
-} from "../actions/userAuthActions";
+} from '../actions/userAuthActions';
 import {
   START_LOADING_UPDATE_USER,
   STOP_LOADING_UPDATE_USER,
-} from "../actionTypes/actionTypes";
-import { fetchAllBlogs } from "./blogs";
-import { startLoadingBlogs, stopLoadingBlogs } from "../actions/blogActions";
+} from '../actionTypes/actionTypes';
+import { fetchAllBlogs } from './blogs';
+import { startLoadingBlogs, stopLoadingBlogs } from '../actions/blogActions';
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
@@ -37,13 +37,16 @@ const githubProvider = new GithubAuthProvider();
 
 const postUserDetails = async (userDetails) => {
   try {
-    const response = await fetch("https://blog-wave-server-roan.vercel.app/users", {
-      method: "POST",
-      body: JSON.stringify(userDetails),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      'https://blog-wave-server-roan.vercel.app/users',
+      {
+        method: 'POST',
+        body: JSON.stringify(userDetails),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     const result = await response.json();
   } catch (error) {
     // console.log(error);
@@ -99,6 +102,7 @@ export const observeAuthState = () => {
   };
 };
 
+//
 export const signInWithEmailPass = (user) => {
   return async (dispatch) => {
     dispatch(startLoading());
@@ -196,13 +200,16 @@ export const updateUserProfile = ({ photoURL, displayName, about, uid }) => {
       const userId = auth.currentUser.uid;
       //updating the Name and photo of the user in db
 
-      const response = await fetch(`https://blog-wave-server-roan.vercel.app/users/${userId}`, {
-        method: "PUT",
-        body: JSON.stringify(profileUpdateData),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
+      const response = await fetch(
+        `https://blog-wave-server-roan.vercel.app/users/${userId}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify(profileUpdateData),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        }
+      );
       const data = await response.json();
       if (data?.result?.modifiedCount > 0) {
         dispatch(fetchUserUpdatedData(uid));
@@ -220,19 +227,22 @@ export const follow = (relationshipInfo) => {
   return async (dispatch) => {
     dispatch({ type: START_LOADING_UPDATE_USER });
     try {
-      const response = await fetch(`https://blog-wave-server-roan.vercel.app/users/${uid}`, {
-        method: "PUT",
-        body: JSON.stringify(relationshipInfo),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
+      const response = await fetch(
+        `https://blog-wave-server-roan.vercel.app/users/${uid}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify(relationshipInfo),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        }
+      );
       const responseData = await response.json();
-    if (responseData?.targetedResult?.modifiedCount > 0) {
-      dispatch({ type: STOP_LOADING_UPDATE_USER });
-      dispatch(fetchUserUpdatedData(uid))
-      dispatch(getAllUsers())
-    }
+      if (responseData?.targetedResult?.modifiedCount > 0) {
+        dispatch({ type: STOP_LOADING_UPDATE_USER });
+        dispatch(fetchUserUpdatedData(uid));
+        dispatch(getAllUsers());
+      }
     } catch (error) {}
   };
 };
@@ -241,7 +251,9 @@ export const fetchUserUpdatedData = (uid) => {
   return async (dispatch) => {
     try {
       dispatch({ type: START_LOADING_UPDATE_USER });
-      const response = await fetch(`https://blog-wave-server-roan.vercel.app/users/${uid}`);
+      const response = await fetch(
+        `https://blog-wave-server-roan.vercel.app/users/${uid}`
+      );
       const data = await response.json();
       if (data) {
         dispatch({ type: STOP_LOADING_UPDATE_USER });
@@ -270,7 +282,9 @@ export const getAllUsers = () => {
   return async (dispatch) => {
     // dispatch(startLoading())
     try {
-      const response = await fetch("https://blog-wave-server-roan.vercel.app/users");
+      const response = await fetch(
+        'https://blog-wave-server-roan.vercel.app/users'
+      );
       const data = await response.json();
 
       if (data) {
@@ -283,49 +297,48 @@ export const getAllUsers = () => {
   };
 };
 
-export const setNotificationStatus = (userUid) =>{
-  return async (dispatch) =>{
+export const setNotificationStatus = (userUid) => {
+  return async (dispatch) => {
     try {
-      const response = await fetch("https://blog-wave-server-roan.vercel.app/user/notification", {
-        method:"PUT",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        body:JSON.stringify({userUid})
-      })
+      const response = await fetch(
+        'https://blog-wave-server-roan.vercel.app/user/notification',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+          body: JSON.stringify({ userUid }),
+        }
+      );
 
       const responseData = await response.json();
       // if (responseData) {
       //   dispatch(fetchUserUpdatedData(userUid))
       // }
-    } catch (error) {
-      
-    }
-  }
-}
+    } catch (error) {}
+  };
+};
 //deleting blog or user for admin
-export const deleteUserAndBlogs = (data) =>{
-  
-  return async (dispatch) =>{
+export const deleteUserAndBlogs = (data) => {
+  return async (dispatch) => {
     dispatch(startLoadingBlogs());
     try {
-      const response = await fetch("https://blog-wave-server-roan.vercel.app/adminDelete",{
-        method:"DELETE",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        body:JSON.stringify(data)
-      })
+      const response = await fetch(
+        'https://blog-wave-server-roan.vercel.app/adminDelete',
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+          body: JSON.stringify(data),
+        }
+      );
       const responseData = await response.json();
       if (responseData) {
         dispatch(stopLoadingBlogs());
-        dispatch(getAllUsers())
-        dispatch(fetchAllBlogs())
+        dispatch(getAllUsers());
+        dispatch(fetchAllBlogs());
       }
-    } catch (error) {
-      
-    }
-  }
-}
-
-
+    } catch (error) {}
+  };
+};
