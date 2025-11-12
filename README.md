@@ -2,9 +2,6 @@
 
 **A full-stack social blogging platform with rich text editing, real-time engagement, and personalized content feeds**
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://blog-wave-3c534.web.app/)
-[![Frontend](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)](https://github.com/yourusername/blogwave-client)
-[![Backend](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)](https://github.com/yourusername/blogwave-server)
 
 > **Solo full-stack project** built from scratch to solve the challenge of fragmented blogging experiences by creating a unified platform that combines powerful content creation with meaningful community engagement.
 
