@@ -21,31 +21,36 @@
 ## ✨ Key Features
 
 ### 📝 Content Creation
-- **Rich Text Editor** with custom formatting controls and media embedding
-- **Draft Management** - Auto-save functionality (localStorage)
-- **Live Preview** - See your content as you write
+- **React Quill Editor** - Professional WYSIWYG with custom toolbar
+- **DOMPurify Integration** - XSS protection and content sanitization
+- **Draft Management** - Auto-save functionality with localStorage
+- **Live Preview** - Real-time content rendering
 - **Image Upload** - Seamless media integration
-- **Edit Anytime** - Update published blogs with version tracking
+- **Edit Anytime** - Update published blogs with instant updates
 
 ### 👥 Social Engagement
 - **Follow System** - Build your reading community
-- **Clap System** - Express appreciation (Medium-style likes)
-- **Real-time Notifications** - Stay updated on follower activity
+- **Clap System** - Express appreciation (Medium-style engagement)
+- **Real-time Notifications** - Stay updated with React Hot Toast
 - **Personalized Feed** - Content from followed authors
 - **Bookmarking** - Save articles for later reading
+- **Author Profiles** - Showcase work and build following
 
 ### 🎨 User Experience
-- **Responsive Design** - Optimized for all devices
-- **Dark/Light Mode** - Comfortable reading experience
+- **Responsive Design** - Mobile-first approach with Tailwind CSS
+- **DaisyUI Components** - Consistent, accessible UI elements
+- **Material-UI Integration** - Enhanced components for complex interactions
+- **Lottie Animations** - Smooth, performant loading states
+- **React Icons** - 10,000+ icons for rich visual experience
 - **Reading Time Estimates** - Plan your reading sessions
-- **Author Profiles** - Showcase your work and followers
-- **Search & Discovery** - Find content and creators
+- **Toast Notifications** - Beautiful feedback with React Hot Toast
 
 ### 🔐 User Management
-- **Firebase Authentication** - Secure Google sign-in
+- **Firebase Authentication** - Secure Google OAuth integration
+- **React Hook Form** - Performant form handling with validation
 - **Profile Customization** - Update avatar, bio, and display name
-- **Activity Dashboard** - Track your blogs, bookmarks, and claps
-- **Privacy Controls** - Manage your content visibility
+- **Activity Dashboard** - Track blogs, bookmarks, and engagement
+- **Protected Routes** - Role-based access control
 
 ---
 
@@ -53,12 +58,23 @@
 
 ### Frontend
 ```
-React 18          → Component-based UI architecture
-Redux Toolkit     → Centralized state management with Thunk middleware
-React Router v6   → Client-side routing
-Tailwind CSS      → Utility-first styling
-Firebase Auth     → Authentication & user management
-Axios             → HTTP client for API communication
+React 18.2           → Component-based UI architecture
+Redux 4.2 + Thunk    → Centralized state management with async middleware
+React Router v6      → Client-side routing & navigation
+React Quill          → Rich text WYSIWYG editor
+Tailwind CSS         → Utility-first styling framework
+DaisyUI              → Pre-built Tailwind components
+Material-UI          → Component library for enhanced UI elements
+Firebase 10.4        → Authentication & user management
+```
+
+### Key Libraries
+```
+React Hook Form      → Performant form validation
+React Hot Toast      → Beautiful notification system
+DOMPurify            → XSS protection for user content
+Lottie React         → Smooth animations
+React Icons          → Comprehensive icon library
 ```
 
 ### Backend
@@ -68,11 +84,13 @@ Express.js        → RESTful API framework
 MongoDB           → NoSQL database
 ```
 
-### Development Tools
+### Development & Testing
 ```
-Git & GitHub      → Version control
-Firebase Hosting  → Production deployment
-Vercel/Render     → Backend hosting
+React Scripts 5.0    → Build tooling and dev server
+Jest & RTL           → Unit and integration testing
+Redux DevTools       → State debugging
+Firebase Hosting     → Production deployment
+ESLint               → Code quality and consistency
 ```
 
 ---
@@ -80,16 +98,20 @@ Vercel/Render     → Backend hosting
 ## 🏗️ Architecture Highlights
 
 ### State Management Strategy
-- **Redux Toolkit** for global state (user, blogs, notifications)
+- **Redux 4.2** with vanilla setup (not Redux Toolkit)
+- **Redux Thunk 2.4** for asynchronous API operations
+- **Redux DevTools** integration for debugging
 - **Local State** for component-specific UI interactions
-- **Thunk Middleware** for asynchronous API calls
-- **Optimistic Updates** for instant UI feedback
+- **Optimistic Updates** for instant user feedback
+- **Normalized State Shape** for efficient data management
 
 ### Performance Optimizations
-- Lazy loading for route-based code splitting
-- Image optimization and lazy loading
-- Debounced search functionality
-- Memoized selectors to prevent unnecessary re-renders
+- **React 18** features for automatic batching
+- **Code Splitting** with React Router lazy loading
+- **Image Optimization** and lazy loading strategies
+- **Memoized Selectors** to prevent unnecessary re-renders
+- **DOMPurify** for safe HTML rendering without performance hits
+- **React Hook Form** for uncontrolled components (better performance)
 
 ### Code Organization
 ```
@@ -115,7 +137,7 @@ src/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/blogwave-client.git
+   git clone https://github.com/prio12/BlogWave.git
    cd blogwave-client
    ```
 
@@ -147,50 +169,31 @@ src/
    npm run build
    ```
 
----
 
-## 📸 Screenshots
 
-> **Note:** Add screenshots of key features here:
-> - Homepage with blog feed
-> - Rich text editor in action
-> - User profile page
-> - Notification system
-> - Mobile responsive views
 
----
 
 ## 🎓 Key Learnings & Challenges
 
 ### Technical Challenges Solved
-1. **State Management Complexity**: Implemented Redux Toolkit to manage complex state across user sessions, blog data, and real-time notifications
-2. **Real-time Updates**: Built notification system that updates UI instantly when users follow/unfollow
-3. **Rich Text Editing**: Integrated and customized a WYSIWYG editor with proper sanitization
-4. **Responsive Design**: Ensured seamless experience across devices using Tailwind's utility classes
+1. **Redux State Management**: Implemented vanilla Redux with Thunk middleware to manage complex application state without Redux Toolkit abstraction
+2. **XSS Prevention**: Integrated DOMPurify to sanitize user-generated HTML content from React Quill editor
+3. **Form Performance**: Used React Hook Form's uncontrolled components approach for better performance in complex forms
+4. **Real-time UI Updates**: Implemented optimistic updates with Redux and React Hot Toast for instant feedback
+5. **Rich Text Editing**: Customized React Quill toolbar and handled content sanitization for security
 
 ### Skills Demonstrated
-- ✅ Full-stack JavaScript development (MERN stack)
-- ✅ RESTful API design and integration
-- ✅ Advanced state management with Redux
-- ✅ Responsive UI/UX design
-- ✅ Authentication & authorization flows
-- ✅ Database schema design
-- ✅ Git workflow and version control
+- ✅ Full-stack MERN development
+- ✅ Redux state management (vanilla Redux + Thunk)
+- ✅ Firebase authentication & real-time features
+- ✅ Form handling with React Hook Form
+- ✅ Security-conscious development (XSS prevention)
+- ✅ Responsive design with Tailwind + DaisyUI
+- ✅ RESTful API integration
+- ✅ Component library integration (Material-UI)
+- ✅ Performance optimization techniques
 
----
 
-## 🔮 Future Enhancements
-
-- [ ] Add blog categories and tags for better discovery
-- [ ] Implement advanced search with filters
-- [ ] Add comment/reply threading system
-- [ ] Enable collaborative blog editing
-- [ ] Add analytics dashboard for authors
-- [ ] Implement email notifications
-- [ ] Add Markdown support alongside rich text
-- [ ] Enable draft sharing with private links
-
----
 
 ## 🤝 Contributing
 
@@ -210,22 +213,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 👨‍💻 About the Developer
 
-**Maksudur Rahman** - Full-Stack Developer
-
-Building modern web applications with a focus on clean code, user experience, and scalable architecture.
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/maksudur-rahman-full-stack-developer/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-FF5722?style=for-the-badge&logo=google-chrome)](https://your-portfolio-url.com)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/yourusername)
-
----
 
 ## 🔗 Related Repositories
 
-- **[BlogWave Server](https://github.com/yourusername/blogwave-server)** - Backend API with Node.js & Express
-- **[BlogWave Admin Panel](https://github.com/yourusername/blogwave-admin)** - Content moderation dashboard *(if applicable)*
+- **[BlogWave Server](https://github.com/prio12/blog_wave_server.git)** - Backend API with Node.js & Express
+
 
 ---
 
