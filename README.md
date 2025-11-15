@@ -5,8 +5,21 @@
 
 > **Solo full-stack project** built from scratch to solve the challenge of fragmented blogging experiences by creating a unified platform that combines powerful content creation with meaningful community engagement.
 
-### Demo Accounts (No signup required):
-- **User 1:** emily@gmail.com / 123456
+---
+
+## 🚀 Quick Start
+
+### Demo Accounts (No signup required)
+Test the full experience without creating an account:
+
+| User | Email | Password |
+|------|-------|----------|
+| Eren | `eren@gmail.com` | `123456` |
+| Mikasa | `mikasa@gmail.com` | `123456` |
+
+**Pro tip:** Open in two browsers to see real-time features in action! ⚡
+
+---
 
 
 ---
