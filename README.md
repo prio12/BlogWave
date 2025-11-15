@@ -5,6 +5,10 @@
 
 > **Solo full-stack project** built from scratch to solve the challenge of fragmented blogging experiences by creating a unified platform that combines powerful content creation with meaningful community engagement.
 
+### Demo Accounts (No signup required):
+- **User 1:** emily@gmail.com / 123456
+
+
 ---
 
 ## 🎯 The Problem & Solution
