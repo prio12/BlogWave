@@ -3,6 +3,11 @@
 **A full-stack social blogging platform with rich text editing, real-time engagement, and personalized content feeds**
 
 
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://blog-wave-3c534.web.app/)
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react)](https://react.dev)
+
+
+
 > **Solo full-stack project** built from scratch to solve the challenge of fragmented blogging experiences by creating a unified platform that combines powerful content creation with meaningful community engagement.
 
 ---
