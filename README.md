@@ -14,10 +14,8 @@ Test the full experience without creating an account:
 
 | User | Email | Password |
 |------|-------|----------|
-| Eren | `eren@gmail.com` | `123456` |
-| Mikasa | `mikasa@gmail.com` | `123456` |
+| Emily | `emily@gmail.com` | `123456` |
 
-**Pro tip:** Open in two browsers to see real-time features in action! ⚡
 
 ---
 
